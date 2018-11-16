@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
     double* brdf;
     reader.read_brdf("../datas/silver-metallic-paint2.binary", brdf);
 
+
     return 0;
 }
 

@@ -196,6 +196,7 @@ bool BRDFReader::read_brdf(const char *filename, double* &brdf)
         int dims[3];
         fread(dims, sizeof(int), 3, f);
         int n = dims[0] * dims[1] * dims[2];
+        std::cout << "n read : " << n << std::endl;
         if (n != BRDF_SAMPLING_RES_THETA_H *
                  BRDF_SAMPLING_RES_THETA_D *
                  BRDF_SAMPLING_RES_PHI_D / 2)
@@ -209,6 +210,8 @@ bool BRDFReader::read_brdf(const char *filename, double* &brdf)
         fread(brdf, sizeof(double), 3*n, f);
 
         fclose(f);
+
+        //TODO : split ici pour créééééer une matrice à partir de brdf
 
         n = 16;
         for (int i = 0; i < n; i++)
@@ -225,7 +228,9 @@ bool BRDFReader::read_brdf(const char *filename, double* &brdf)
                                         double phi_out = l * 2.0 * M_PI / (4*n);
                                         double red,green,blue;
                                         lookup_brdf_val(brdf, theta_in, phi_in, theta_out, phi_out, red, green, blue);
-                                        printf("%f %f %f\n", (float)red, (float)green, (float)blue);
+                                        if ( i+j+k+l == 0) {
+                                            printf("%f %f %f\n", (float)red, (float)green, (float)blue);
+                                        }
                                 }
                         }
             }

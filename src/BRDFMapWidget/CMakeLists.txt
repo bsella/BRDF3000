@@ -17,10 +17,9 @@ include_directories(
 add_definitions(${Qt5Widgets_DEFINITIONS})
 add_definitions(${Qt5OpenGL_DEFINITIONS})
 
-add_executable(BRDFMap
-	BRDFmap.h
-	BRDFmap.cpp
-	main.cpp
+add_library(BRDFMap
+	BRDFMapWidget.h
+	BRDFMapWidget.cpp
 	)
 
 qt5_use_modules(BRDFMap Widgets OpenGL)

@@ -6,19 +6,19 @@
 template <typename Scalar>
 class OptimisationSolver {
 public:
-    typedef Matrix<Scalar, Dynamic, Dynamic> OptiMatrix;
-    typedef Matrix<Scalar, Dynamic, 1> OptiVector;
-    typedef Matrix<Scalar, 1, Dynamic> OptiRowVector;
+    typedef Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic> OptiMatrix;
+    typedef Eigen::Matrix<Scalar, Eigen::Dynamic, 1> OptiVector;
+    typedef Eigen::Matrix<Scalar, 1, Eigen::Dynamic> OptiRowVector;
     
     struct OptiResult
     {
         OptiMatrix K; // Mapping matrix
         OptiMatrix K_minus1; // Inverse mapping matrix
         OptiVector X; // Latent variables vector
-    }
+    };
     
-	delete OptimisationSolver();
-	delete ~OptimisationSolver();
+	OptimisationSolver() = delete;
+	~OptimisationSolver() = delete;
     
     /**
 	 * @brief  Compute an optimised mapping from BRDFs space to a latent space
@@ -33,7 +33,7 @@ public:
 	static OptiResult computeOptimisation (
         const OptiMatrix& Z,
         const int dim,
-        float minStep) const;
+        float minStep);
     
 private:
 	static constexpr float reduceStep = .5f;
@@ -49,7 +49,7 @@ private:
         const Scalar& detK,
         const OptiMatrix& K_minus1,
         const OptiMatrix& Z,
-        const OptiMatrix& Zt) const;
+        const OptiMatrix& Zt);
 
 	/**
 	 * @brief  Modify the X vector to find a better solution
@@ -58,13 +58,13 @@ private:
      * Adds and substracts _reduceStep_ from each element
 	 * and reevaluate the cost function to check for better solutions
 	 */
-	static OptiResult computeExplorationDisplacement (const OptiResult& optiRes) const;
+	static OptiResult computeExplorationDisplacement (const OptiResult& optiRes);
 
 	/**
 	 * @brief Apply a previously calculated displacement to each element of X
 	 * @return New modified vector
 	 */
-	static OptiResult computeLearnDisplacement (const OptiResult& optiRes) const;
+	static OptiResult computeLearnDisplacement (const OptiResult& optiRes);
 };
 
 #endif // OPTIMISATIONSOLVER_H

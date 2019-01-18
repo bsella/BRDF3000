@@ -7,7 +7,7 @@ namespace ChefDevr
 {
     template<typename Scalar>
     using Matrix = Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic>;
-    
+
     template<typename Scalar>
     using Vector = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
     

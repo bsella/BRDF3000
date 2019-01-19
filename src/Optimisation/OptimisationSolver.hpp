@@ -1,4 +1,5 @@
 #include "OptimisationSolver.h"
+#include <cmath>
 
 namespace ChefDevr
 {
@@ -15,10 +16,19 @@ namespace ChefDevr
     Scalar OptimisationSolver<Scalar>::cost(
         const Scalar& detK,
         const Matrix<Scalar>& K_minus1,
-        const Matrix<Scalar>& Z,
-        const Matrix<Scalar>& Zt)
+        const Matrix<Scalar>& ZZt,
+        const unsigned int d
+                                           )
     {
-        return 0;
+        Scalar trace(0.0);
+        
+        // Compute trace of K_minus1 * ZZt
+        # pragma omp parallel for reduction(+:trace)
+        for (unsigned int i(0); i < ZZt.cols(); ++i){
+            trace += K_minus1.row(i).dot(ZZt.col(i));
+        }
+        
+        return Scalar(0.5) * d * std::log(detK) + Scalar(0.5) * trace;
     }
     
     template <typename Scalar>

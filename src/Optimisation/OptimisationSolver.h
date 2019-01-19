@@ -40,14 +40,14 @@ namespace ChefDevr
         * @brief Computes the cost of the inverse mapping defined by K_minus1
         * @param detK Determinant of the forward mapping matrix K
         * @param K_minus1 Inverse mapping matrix
-        * @param Z BRDFs data matrix
-        * @param Zt Z transposed
+        * @param ZZt Z*Ztransposed
+        * @param d The number of BRDFs in Z (Z.cols())
         */
         static Scalar cost(
             const Scalar& detK,
             const Matrix<Scalar>& K_minus1,
-            const Matrix<Scalar>& Z,
-            const Matrix<Scalar>& Zt);
+            const Matrix<Scalar>& ZZt,
+            const unsigned int d);
 
         /**
         * @brief  Modify the X vector to find a better solution

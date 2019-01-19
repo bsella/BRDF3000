@@ -20,7 +20,7 @@ namespace ChefDevr
         
         /**
         * @brief  Compute an optimised mapping from BRDFs space to a latent space
-        *         whose dimension is specified by dim
+        * whose dimension is specified by dim
         * @param  Z The BRDFs data matrix
         * @param  dim The dimension of latent space
         * @param  minStep Step beyond which convergence is considered being reached
@@ -65,5 +65,7 @@ namespace ChefDevr
         static OptiResult computeLearnDisplacement (const OptiResult& optiRes);
     };
 } // namespace ChefDevr
+
+#include "OptimisationSolver.hpp"
 
 #endif // OPTIMISATIONSOLVER_H

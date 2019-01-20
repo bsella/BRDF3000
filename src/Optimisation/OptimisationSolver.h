@@ -17,110 +17,85 @@ namespace ChefDevr
                 X(other.X),
                 cost(other.cost){}
                 
-            Matrix<Scalar> K; // Mapping matrix
-            Matrix<Scalar> K_minus1; // Inverse mapping matrix
+            Matrix<Scalar> K; // Variance covariance matrix of latent variables : Mapping matrix
+            Matrix<Scalar> K_minus1; // Inverse of K : Inverse mapping matrix
             Vector<Scalar> X; // Latent variables vector
             Scalar cost; // Value of the cost function for this solution
         };
         
-        OptimisationSolver() = delete;
-        ~OptimisationSolver() = delete;
+        OptimisationSolver(
+            Scalar minStep,
+            const Matrix<Scalar>& Z,
+            const unsigned int dim);
+        
+        ~OptimisationSolver(){}
         
         /**
-        * @brief  Compute an optimised mapping from BRDFs space to a latent space
-        * whose dimension is specified by dim
-        * @param  Z BRDFs data matrix
-        * @param  dim Dimension of latent space
-        * @param  minStep Step beyond which convergence is considered being reached
+        * @brief Compute an optimised mapping from BRDFs space to a latent space
         * @return Structure containing optimized mapping, inverse mapping and latent variables
         * 
         * Uses Hook & Jeeves method to solve the optimisation
         */
-        static OptiResult computeOptimisation (
-            const Matrix<Scalar>& Z,
-            const int dim,
-            float minStep);
+        OptiResult computeOptimisation ();
         
     private:
-        static constexpr Scalar reduceStep = .5f;
-        static constexpr Scalar mu = 0.0001f;
-        static constexpr Scalar l = 1.0f;
+        static constexpr Scalar reduceStep = .5f; /** Factor of step reduction */
+        static constexpr Scalar mu = 0.0001f; /** mu constant that helps interpolating data while keeping good solution */
+        static constexpr Scalar l = 1.0f; /** l constant defined in the research paper */
+        const Scalar minStep; /** Step below wich solution is considered optimal */
+        Scalar step; /** Value of the step for Hooke & Jeeves method */
+        
+        const unsigned int nb_data; /** Number of BRDFs in the Z matrix */
+        const Matrix<Scalar>& Z; /** BRDFs data matrix */
+        Matrix<Scalar> ZZt; /** Z*Ztransposed */
+        
+        unsigned int dim; /** Dimension of produced latent space */
+        Vector<Scalar> X; /** Latent variables vector */
+        Matrix<Scalar> K_minus1; /** Inverse of K : Inverse mapping matrix */
+        Scalar detK; /** Determinant of K */
+        Scalar costval; /** Value of the cost function for this solution */
         
         /**
-        * @brief Computes the cost of the inverse mapping defined by K_minus1
-        * @param detK Determinant of the forward mapping matrix K
-        * @param K_minus1 Inverse mapping matrix
-        * @param ZZt Z*Ztransposed
-        * @param nb_data The number of BRDFs in Z (Z.cols())
+        * @brief Computes the current cost of the solution
+        * @return Current cost of the solution
         */
-        static Scalar cost(
-            const Scalar& detK,
-            const Matrix<Scalar>& K_minus1,
-            const Matrix<Scalar>& ZZt,
-            const unsigned int nb_data);
+        Scalar cost ();
 
         /**
         * @brief Finds a displacement vector of X that improves the solution
-        * @return Displacement vector
-        * @param X Latent variables vector
-        * @param K_minus1 Inverse mapping matrix
-        * @param detK Determinant of the mapping matrix K
-        * @param cost Value of the cost function for this solution
-        * @param ZZt Z*Ztransposed
-        * @param step Step
-        * @param dim Latent space dimension
         * @return A displacement vector of X that improves the solution
         * 
         * Adds and substracts _reduceStep_ from each element
         * and reevaluate the cost function to check for better solutions
         */
-        static Vector<Scalar> computeExplorationDisplacement (
-            Vector<Scalar>& X,
-            Matrix<Scalar>& K_minus1,
-            Scalar& detK,
-            Scalar& cost,
-            const Matrix<Scalar>& ZZt,
-            const Scalar step,
-            const unsigned char dim,
-            const unsigned int nb_data);
+        Vector<Scalar> computeExplorationDisplacement ();
 
         /**
         * @brief Apply a previously computed displacement to each element of X
         * @return New modified vector
         */
-        static OptiResult computeLearnDisplacement (const OptiResult& optiRes);
+        OptiResult computeLearnDisplacement (const OptiResult& optiRes);
         
         /**
          * @brief Updates the inverse matrix K_minus1 with Sherman-Morisson formula
-         * @param K_minus1 Inverse mapping matrix
          * @param lv_num Number of the latent variable that has changed
          * @param cov_vector The column of K that has changed
          */
-        static Matrix<Scalar> updateInverse (
-            const Matrix<Scalar>& K_minus1,
-            unsigned int lv_num,
-            Vector<Scalar>& cov_vector);
+        Matrix<Scalar> updateInverse (unsigned int lv_num, Vector<Scalar>& cov_vector);
         
         /**
          * @brief Updates the determinant of the matrix K with Sherman-Morisson formula
-         * @param K_minus1 Inverse mapping matrix
          * @param lv_num Number of the latent variable that has changed
          * @param cov_vector The column of K that has changed
          */
-        static Matrix<Scalar> updateDeterminant (
-            const Matrix<Scalar>& K_minus1,
-            unsigned int lv_num,
-            Vector<Scalar>& cov_vector);
+        Matrix<Scalar> updateDeterminant (unsigned int lv_num, Vector<Scalar>& cov_vector);
         
         /**
-         * @brief Computes the covariance vector (usually stored in K)
+         * @brief Computes the covariance vector (that should be stored in K)
          * of the lv_num'th latent variable
-         * @param X Latent variables vector
          * @param lv_num Number of the latent variable for the cov vector to be computed
          */
-        static Vector<Scalar> computeCovVector (
-            const Vector<Scalar>& X,
-            unsigned int lv_num);
+        Vector<Scalar> computeCovVector (unsigned int lv_num);
         
         /**
          * @brief Covariance function given in the research paper :

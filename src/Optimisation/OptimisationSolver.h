@@ -76,7 +76,7 @@ namespace ChefDevr
         */
         static Vector<Scalar> computeExplorationDisplacement (
             Vector<Scalar>& X,
-            Matrix<Scalar>& K_minus1
+            Matrix<Scalar>& K_minus1,
             Scalar& detK,
             Scalar& cost,
             const Matrix<Scalar>& ZZt,
@@ -134,7 +134,7 @@ namespace ChefDevr
             const Scalar norm_x1_x2((x1-x2).norm());
             const Scalar exp_part(std::exp(-norm_x1_x2*norm_x1_x2/(Scalar(2)*l*l)));
             // dirac(x1-x2) <=> norm(x1-x2) == 0
-            return norm_x1_2 < 0.00001 ? mu + exp_part : exp_part;
+            return norm_x1_x2 < 0.00001 ? mu + exp_part : exp_part;
         }
     };
 } // namespace ChefDevr

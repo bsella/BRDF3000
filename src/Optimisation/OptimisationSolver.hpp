@@ -30,9 +30,9 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    typename Vector<Scalar> OptimisationSolver<Scalar>::computeExplorationDisplacement (
+    Vector<Scalar> OptimisationSolver<Scalar>::computeExplorationDisplacement (
         Vector<Scalar>& X,
-        Matrix<Scalar>& K_minus1
+        Matrix<Scalar>& K_minus1,
         Scalar& detK,
         Scalar& cost,
         const Matrix<Scalar>& ZZt,
@@ -40,8 +40,8 @@ namespace ChefDevr
         const unsigned char dim,
         const unsigned int nb_data)
     {
-        const auto& nbcoefs(optiRes.X.rows());
-        Scalar new_cost;
+        const auto& nbcoefs(X.rows());
+        Scalar new_cost, new_detK;
         Vector<Scalar> new_X(X);
         Vector<Scalar> cov_vector(X.rows()*0.5), new_cov_vector(X.rows()*0.5);
         Matrix<Scalar> new_K_minus1(K_minus1.rows(), K_minus1.cols());
@@ -53,7 +53,7 @@ namespace ChefDevr
             lv_num = i/dim;
             X_move[i] += step;
             new_X[i] += step;
-            new_cov_vector = computeCovarianceVector(newX, lv_num)
+            new_cov_vector = computeCovarianceVector(new_X, lv_num);
             
             // Update K_minus1 and detK with Sherman-Morisson formula
             new_K_minus1 = updateInverse(K_minus1, lv_num, new_cov_vector);
@@ -64,7 +64,7 @@ namespace ChefDevr
             if (new_cost > cost){
                 X_move[i] -= Scalar(2)*step;
                 new_X[i] -= Scalar(2)*step;
-                new_cov_vector = computeCovVector(newX, lv_num)
+                new_cov_vector = computeCovVector(new_X, lv_num);
                 
                 // Update K_minus1 and detK with Sherman-Morisson formula
                 new_K_minus1 = updateInverse(K_minus1, lv_num, new_cov_vector);
@@ -93,7 +93,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    typename Matrix<Scalar> updateInverse (
+    Matrix<Scalar> updateInverse (
         const Matrix<Scalar>& K_minus1,
         unsigned int lv_num,
         Vector<Scalar>& cov_vector)
@@ -102,7 +102,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    typename Matrix<Scalar> updateDeterminant (
+    Matrix<Scalar> updateDeterminant (
         const Matrix<Scalar>& K_minus1,
         unsigned int lv_num,
         Vector<Scalar>& cov_vector)

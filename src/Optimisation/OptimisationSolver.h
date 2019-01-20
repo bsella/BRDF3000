@@ -17,10 +17,10 @@ namespace ChefDevr
                 X(other.X),
                 cost(other.cost){}
                 
-            Matrix<Scalar> K; // Variance covariance matrix of latent variables : Mapping matrix
-            Matrix<Scalar> K_minus1; // Inverse of K : Inverse mapping matrix
-            Vector<Scalar> X; // Latent variables vector
-            Scalar cost; // Value of the cost function for this solution
+            Matrix<Scalar> K; /** Variance covariance matrix of latent variables : Mapping matrix */
+            Matrix<Scalar> K_minus1; /** Inverse of K : Inverse mapping matrix */
+            Vector<Scalar> X; /** Latent variables vector */
+            Scalar cost; /** Value of the cost function for this solution */
         };
         
         OptimisationSolver(
@@ -32,7 +32,7 @@ namespace ChefDevr
         
         /**
         * @brief Compute an optimised mapping from BRDFs space to a latent space
-        * @return Structure containing optimized mapping, inverse mapping and latent variables
+        * @return Optimisation result (cf OptiResult struct)
         * 
         * Uses Hook & Jeeves method to solve the optimisation
         */
@@ -51,7 +51,8 @@ namespace ChefDevr
         
         unsigned int dim; /** Dimension of produced latent space */
         Vector<Scalar> X; /** Latent variables vector */
-        Matrix<Scalar> K_minus1; /** Inverse of K : Inverse mapping matrix */
+        Matrix<Scalar> K_minus1; /** Inverse of K : Inverse mapping matrix
+        NB : We do not store K because the algorithm doesnt require it directly : we compute only columns of K when necessary instead -> covariance vectors */
         Scalar detK; /** Determinant of K */
         Scalar costval; /** Value of the cost function for this solution */
         
@@ -77,25 +78,27 @@ namespace ChefDevr
         OptiResult computeLearnDisplacement (const OptiResult& optiRes);
         
         /**
-         * @brief Updates the inverse matrix K_minus1 with Sherman-Morisson formula
+         * @brief Computes the inverse matrix K_minus1 with Sherman-Morisson formula
          * @param lv_num Number of the latent variable that has changed
          * @param cov_vector The column of K that has changed
+         * @return The new K_minus1
          */
-        Matrix<Scalar> updateInverse (unsigned int lv_num, Vector<Scalar>& cov_vector);
+        Matrix<Scalar> updateInverse (unsigned int lv_num, Vector<Scalar>& cov_vector) const;
         
         /**
-         * @brief Updates the determinant of the matrix K with Sherman-Morisson formula
+         * @brief Computes the determinant of the matrix K with Sherman-Morisson formula
          * @param lv_num Number of the latent variable that has changed
          * @param cov_vector The column of K that has changed
+         * @return The new determinant of K
          */
-        Matrix<Scalar> updateDeterminant (unsigned int lv_num, Vector<Scalar>& cov_vector);
+        Scalar computeDeterminant (unsigned int lv_num, Vector<Scalar>& cov_vector) const;
         
         /**
          * @brief Computes the covariance vector (that should be stored in K)
          * of the lv_num'th latent variable
          * @param lv_num Number of the latent variable for the cov vector to be computed
          */
-        Vector<Scalar> computeCovVector (unsigned int lv_num);
+        Vector<Scalar> computeCovVector (unsigned int lv_num) const;
         
         /**
          * @brief Covariance function given in the research paper :

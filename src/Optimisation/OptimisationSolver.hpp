@@ -101,7 +101,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    Vector<Scalar> OptimisationSolver<Scalar>::computeCovVector (unsigned int lv_num)
+    Vector<Scalar> OptimisationSolver<Scalar>::computeCovVector (unsigned int lv_num)const
     {
         auto X_reshaped(X.reshaped(dim, nb_data));
         auto latentRef(X_reshaped.col(lv_num)); // Latent variable that corresponds to the column of K 
@@ -116,13 +116,13 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    Matrix<Scalar> OptimisationSolver<Scalar>::updateInverse (unsigned int lv_num, Vector<Scalar>& cov_vector)
+    Matrix<Scalar> OptimisationSolver<Scalar>::computeInverse (unsigned int lv_num, Vector<Scalar>& cov_vector)const
     {
         return Matrix<Scalar>();
     }
     
     template <typename Scalar>
-    Matrix<Scalar> OptimisationSolver<Scalar>::updateDeterminant (unsigned int lv_num, Vector<Scalar>& cov_vector)
+    Scalar OptimisationSolver<Scalar>::computeDeterminant (unsigned int lv_num, Vector<Scalar>& cov_vector)const
     {
         return Matrix<Scalar>();
     }

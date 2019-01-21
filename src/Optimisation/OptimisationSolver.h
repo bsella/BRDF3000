@@ -83,7 +83,7 @@ namespace ChefDevr
          * @param cov_vector The column of K that has changed
          * @return The new K_minus1
          */
-        Matrix<Scalar> updateInverse (unsigned int lv_num, Vector<Scalar>& cov_vector) const;
+        Matrix<Scalar> computeInverse (unsigned int lv_num, Vector<Scalar>& cov_vector) const;
         
         /**
          * @brief Computes the determinant of the matrix K with Sherman-Morisson formula

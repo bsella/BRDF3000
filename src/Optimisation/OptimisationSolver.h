@@ -9,18 +9,24 @@ namespace ChefDevr
     template <typename Scalar>
     class OptimisationSolver {
     public:
-        struct OptiResult
-        {
+        struct OptiResult{
             OptiResult(const OptiResult& other):
                 K(other.K),
                 K_minus1(other.K_minus1),
                 X(other.X),
                 cost(other.cost){}
                 
-            Matrix<Scalar> K; /** Variance covariance matrix of latent variables : Mapping matrix */
-            Matrix<Scalar> K_minus1; /** Inverse of K : Inverse mapping matrix */
-            Vector<Scalar> X; /** Latent variables vector */
-            Scalar cost; /** Value of the cost function for this solution */
+            /** Variance covariance matrix of latent variables : Mapping matrix */
+            Matrix<Scalar> K;
+            
+            /** Inverse of K : Inverse mapping matrix */
+            Matrix<Scalar> K_minus1;
+            
+            /** Latent variables vector */
+            Vector<Scalar> X;
+            
+            /** Value of the cost function for this solution */
+            Scalar cost;
         };
         
         OptimisationSolver(
@@ -39,22 +45,47 @@ namespace ChefDevr
         OptiResult computeOptimisation ();
         
     private:
-        static constexpr Scalar reduceStep = .5f; /** Factor of step reduction */
-        static constexpr Scalar mu = 0.0001f; /** mu constant that helps interpolating data while keeping good solution */
-        static constexpr Scalar l = 1.0f; /** l constant defined in the research paper */
-        const Scalar minStep; /** Step below wich solution is considered optimal */
-        Scalar step; /** Value of the step for Hooke & Jeeves method */
+
+        /** Factor of step reduction */
+        static constexpr Scalar reduceStep = .5f
+
+        /** mu constant that helps interpolating data while keeping good solution */
+        static constexpr Scalar mu = 0.0001f
+
+        /** l constant defined in the research paper */
+        static constexpr Scalar l = 1.0f
+
+        /** Step below wich solution is considered optimal */
+        const Scalar minStep
+
+        /** Value of the step for Hooke & Jeeves method */
+        Scalar step
+
+        /** Number of BRDFs in the Z matrix */
+        const unsigned int nb_data
+
+        /** BRDFs data matrix */
+        const Matrix<Scalar>& Z
+
+        /** Z*Ztransposed */
+        Matrix<Scalar> ZZt
         
-        const unsigned int nb_data; /** Number of BRDFs in the Z matrix */
-        const Matrix<Scalar>& Z; /** BRDFs data matrix */
-        Matrix<Scalar> ZZt; /** Z*Ztransposed */
-        
-        unsigned int dim; /** Dimension of produced latent space */
-        Vector<Scalar> X; /** Latent variables vector */
-        Matrix<Scalar> K_minus1; /** Inverse of K : Inverse mapping matrix
+
+        /** Dimension of produced latent space */
+        unsigned int dim
+
+        /** Latent variables vector */
+        Vector<Scalar> X
+
+        /** Inverse of K : Inverse mapping matrix
+        Matrix<Scalar> K_minus1
         NB : We do not store K because the algorithm doesnt require it directly : we compute only columns of K when necessary instead -> covariance vectors */
-        Scalar detK; /** Determinant of K */
-        Scalar costval; /** Value of the cost function for this solution */
+
+        /** Determinant of K */
+        Scalar detK
+
+        /** Value of the cost function for this solution */
+        Scalar costval
         
         /**
         * @brief Computes the current cost of the solution
@@ -107,8 +138,7 @@ namespace ChefDevr
          * @param x2 second latent variable
          * @return Covariance value
          */
-        static inline Scalar covariance(Vector<Scalar>& x1, Vector<Scalar>& x2)
-        {
+        static inline Scalar covariance(Vector<Scalar>& x1, Vector<Scalar>& x2){
             const Scalar norm_x1_x2((x1-x2).norm());
             const Scalar exp_part(std::exp(-norm_x1_x2*norm_x1_x2/(Scalar(2)*l*l)));
             // dirac(x1-x2) <=> norm(x1-x2) == 0

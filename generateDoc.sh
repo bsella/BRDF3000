@@ -1,4 +1,4 @@
 #!/bin/sh
 
-mkdir doc
+mkdir doc 2> /dev/null
 doxygen

@@ -30,7 +30,7 @@ namespace ChefDevr
         // Compute K_minus1
         // Compute cost
         centerMat<Scalar>(Z);
-        costval = cost(K, detK);
+        costval = cost(K_minus1, detK);
         
         Vector<Scalar> new_X;
         

@@ -5,10 +5,13 @@
 
 namespace ChefDevr
 {
+    /**
+     * @brief Simple (red, green, blue) color structure
+     */
     struct Color
     {
         double r, g, b;
-    }
+    };
     
     /**
      * @brief Computes the albedo of a BRDF

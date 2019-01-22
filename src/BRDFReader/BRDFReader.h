@@ -5,8 +5,9 @@
 #include "math.h"
 #include <cstdio>
 #include <iostream>
+#include <vector>
 
-#include "../types.h"
+#include "../Parametrisation/types.h"
 
 namespace ChefDevr
 {
@@ -80,7 +81,7 @@ namespace ChefDevr
 		*
 		* If the file is not found, returns an error
 		*/
-	    Vector<Scalar> read_brdf(const char *filePath);
+	    Vector<Scalar> read_brdf(const char *filePath, double* &brdf);
 
 	};
 } // namespace ChefDevr

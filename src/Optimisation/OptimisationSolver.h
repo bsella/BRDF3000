@@ -1,14 +1,14 @@
 #ifndef OPTIMISATIONSOLVER_H
 #define OPTIMISATIONSOLVER_H
 
-#include "../types.h"
+#include "../Parametrisation/types.h"
 #include <cmath>
 
 namespace ChefDevr
 {
     /**
      * @brief Class that solves the optimisation problem defined in the research paper:
-     * A Versatile Parametrization for Measured Materials Manifold
+     * A Versatile Parametrisation for Measured Materials Manifold
      * Computes an optimised mapping from BRDFs space to a latent space
      */
     template <typename Scalar>
@@ -50,7 +50,7 @@ namespace ChefDevr
         ~OptimisationSolver(){}
         
         /**
-        * @brief Computes the optimized parametrization of the BRDFs manifold
+        * @brief Computes the optimized parametrisation of the BRDFs manifold
         * @return Optimisation result (cf OptiResult struct)
         * 
         * Uses Hook & Jeeves method to solve the optimisation
@@ -64,19 +64,7 @@ namespace ChefDevr
          */
         static constexpr Scalar reduceStep = .5f;
 
-        /**
-         * @brief constant that helps interpolating data while keeping good solution
-         */
-        static constexpr Scalar mu = 0.0001f;
-
-        /**
-         * @brief constant defined in the research paper
-         */
-        static constexpr Scalar l = 1.0f;
-
-        /**
-         * @brief Step below wich solution is considered optimal
-         */
+        /** @brief Step below wich solution is considered optimal */
         const Scalar minStep;
 
         /**
@@ -114,7 +102,7 @@ namespace ChefDevr
          * @brief Inverse of K : Inverse mapping matrix
          *
          * We do not store K because the algorithm doesnt require it directly :
-         * we compute only columns of K when necessary instead -> covariance vectors
+         * We compute only columns of K when necessary instead -> covariance vectors
         */
         Matrix<Scalar> K_minus1;
 
@@ -164,33 +152,6 @@ namespace ChefDevr
          * @return The new determinant of K
          */
         Scalar computeDeterminant (unsigned int lv_num, Vector<Scalar>& cov_vector) const;
-        
-        /**
-         * @brief Computes the covariance vector (that should be stored in K)
-         * of the lv_num'th latent variable
-         * @param lv_num Number of the latent variable for the cov vector to be computed
-         */
-        Vector<Scalar> computeCovVector (unsigned int lv_num) const;
-        
-        /**
-         * @brief Centers the Z BRDFs data matrix
-         * Modifies the Z member variable 
-         */
-        void centerZ();
-        
-        /**
-         * @brief Covariance function given in the research paper :
-         * A Versatile Parametrization for Measured Materials Manifold
-         * @param x1 first latent variable
-         * @param x2 second latent variable
-         * @return Covariance value
-         */
-        static inline Scalar covariance (Vector<Scalar>& x1, Vector<Scalar>& x2){
-            const Scalar norm_x1_x2((x1-x2).norm());
-            const Scalar exp_part(std::exp(-norm_x1_x2*norm_x1_x2/(Scalar(2)*l*l)));
-            // dirac(x1-x2) <=> norm(x1-x2) == 0
-            return norm_x1_x2 < 0.00001 ? mu + exp_part : exp_part;
-        }
     };
 } // namespace ChefDevr
 

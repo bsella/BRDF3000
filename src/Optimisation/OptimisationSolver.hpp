@@ -1,5 +1,6 @@
 #include "OptimisationSolver.h"
-#include "../PCA/PCASolver.h"
+#include "../Parametrisation/Parametrisation.h"
+
 #include <cmath>
 
 
@@ -23,12 +24,12 @@ namespace ChefDevr
     template <typename Scalar>
     typename OptimisationSolver<Scalar>::OptiResult OptimisationSolver<Scalar>::optimizeMapping ()
     {
-        X = PCASolver<Scalar>::computePCA(Z, dim);
+        X = computePCA<Scalar>(Z, dim);
         // Compute K
         // Compute detK
         // Compute K_minus1
         // Compute cost
-        centerZ();
+        centerMat<Scalar>(Z);
         costval = cost();
         
         // while ...
@@ -115,21 +116,6 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    Vector<Scalar> OptimisationSolver<Scalar>::computeCovVector (unsigned int lv_num)const
-    {
-        auto X_reshaped(X.reshaped(dim, nb_data));
-        auto latentRef(X_reshaped.col(lv_num)); // Latent variable that corresponds to the column of K 
-        Vector<Scalar> cov_vector(dim);
-        
-        # pragma omp parallel for 
-        for (unsigned int i(0); i < nb_data; ++i){
-            cov_vector[i] = covariance(latentRef, X_reshaped.col[i]);
-        }
-        
-        return cov_vector;
-    }
-    
-    template <typename Scalar>
     Matrix<Scalar> OptimisationSolver<Scalar>::computeInverse (unsigned int lv_num, Vector<Scalar>& cov_vector)const
     {
         return Matrix<Scalar>();
@@ -146,11 +132,4 @@ namespace ChefDevr
     {
         return OptiResult();
     }
-    
-    template <typename Scalar>
-    void OptimisationSolver<Scalar>::centerZ()
-    {
-        // TODO
-    }
-    
 } // namespace ChefDevr

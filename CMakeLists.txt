@@ -15,7 +15,7 @@ include_directories(
 )
 
 add_subdirectory(src/BRDFReader)
-add_subdirectory(src/PCA)
+add_subdirectory(src/Parametrisation)
 add_subdirectory(src/Optimisation)
 
 add_executable(${APPLICATION}
@@ -23,7 +23,7 @@ add_executable(${APPLICATION}
 )
 target_link_libraries(${APPLICATION}
 	BRDFReader
-	PCA
+	Parametrisation
 	Optimisation
 )
 

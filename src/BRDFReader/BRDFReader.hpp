@@ -1,5 +1,5 @@
 #include "BRDFReader.h"
-
+/*
 using namespace std;
 
 namespace ChefDevr
@@ -25,7 +25,6 @@ namespace ChefDevr
 	template <typename Scalar>
 	Vector<Scalar> BRDFReader<Scalar>::read_brdf(const char *filePath)
 	{
-		/*
 		const FILE *file = fopen(filePath, "rb");
 		if (!file) {
 			throw BRDFReaderError{string{"The file "} + filePath + " could not have been opened"};
@@ -50,7 +49,8 @@ namespace ChefDevr
 		fclose(file);
 
 		return brdf;
-		*/
 	}
 
 } // namespace ChefDevr
+
+*/

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(PCA)
+project(Parametrisation)
 
 # -std=c++11
 set(CMAKE_CXX_STANDARD 11)
@@ -18,7 +18,7 @@ file(GLOB HEADERS
 	*.h
 )
 
-add_library(PCA
+add_library(Parametrisation
 	${SOURCES}
 	${HEADERS}
 )

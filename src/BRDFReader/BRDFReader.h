@@ -5,7 +5,6 @@
 #include "math.h"
 #include <cstdio>
 #include <iostream>
-#include <vector>
 
 #include "../Parametrisation/types.h"
 
@@ -73,6 +72,8 @@ namespace ChefDevr
 		std::vector<std::string> brdf_filePaths;
 
 		/* ------------*/
+		/* Functions */
+		/* ------------*/
 
 		/**
 		* @brief Read a BRDF from a file
@@ -81,7 +82,36 @@ namespace ChefDevr
 		*
 		* If the file is not found, returns an error
 		*/
-	    Vector<Scalar> read_brdf(const char *filePath, double* &brdf);
+	    Vector<Scalar> read_brdf(const char *filePath);
+
+		/**
+		 * @brief Extracts a color in a BRDF from a pair of incoming and outgoing angles
+		 * @param[in] brdf the BRDF from which the color is extracted
+		 * @param[in] theta_in incoming angle of theta
+		 * @param[in] phi_in incoming angle of phi
+		 * @param[in] theta_out outgoing angle of theta
+		 * @param[in] phi_out outgoing angle of phi
+		 * @param[out] red_value red channel of the extracted color
+		 * @param[out] green_value green channel of the extracted color
+		 * @param[out] blue_value blue channel of the extracted color
+		 */
+		void lookup_brdf_val(const Vector<Scalar> &brdf, double theta_in, double phi_in,
+							 double theta_out, double phi_out,
+							 double& red_value,double& green_value,double& blue_value);
+
+		/**
+		 * @brief Converts standard coordinates to half vector/difference vector coordinates
+		 * @param[in] theta_in incoming angle of theta
+		 * @param[in] phi_in incoming angle of phi
+		 * @param[in] theta_out outgoing angle of theta
+		 * @param[in] phi_out outgoing angle of phi
+		 * @param[out] theta_half theta in half vector coordinates
+		 * @param[out] phi_half phi in half vector coordinates
+		 * @param[out] theta_diff theta in difference vector coordinates
+		 * @param[out] phi_diff phi in difference vector coordinates
+		 */
+		void std_coords_to_half_diff_coords(double theta_in, double phi_in, double theta_out, double phi_out,
+											double& theta_half,double& phi_half,double& theta_diff,double& phi_diff);
 
 	};
 } // namespace ChefDevr

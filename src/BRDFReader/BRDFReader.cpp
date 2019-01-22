@@ -1,7 +1,5 @@
 #include "BRDFReader.h"
-/*
-namespace ChefDevr
-{
+
 
 // cross product of two vectors
 void cross_product (double* v1, double* v2, double* out)
@@ -48,16 +46,25 @@ void rotate_vector(double* vector, double* axis, double angle, double* out)
 }
 
 
-// convert standard coordinates to half vector/difference vector coordinates
-void std_coords_to_half_diff_coords(double theta_in, double fi_in, double theta_out, double fi_out,
-                                                                double& theta_half,double& fi_half,double& theta_diff,double& fi_diff )
-{
+// Compute a direction from angles
+void compute_direction (double theta, double phi) {
+        double in_vec_z = cos(theta);
+        double proj_in_vec = sin(theta);
+        double in_vec_x = proj_in_vec * cos(phi);
+        double in_vec_y = proj_in_vec * sin(phi);
+        double in[3]= {in_vec_x,in_vec_y,in_vec_z};
+        normalize(in);
+}
 
+
+void std_coords_to_half_diff_coords(double theta_in, double phi_in, double theta_out, double phi_out,
+                                    double& theta_half,double& phi_half,double& theta_diff,double& phi_diff)
+{
         // compute in vector
         double in_vec_z = cos(theta_in);
         double proj_in_vec = sin(theta_in);
-        double in_vec_x = proj_in_vec*cos(fi_in);
-        double in_vec_y = proj_in_vec*sin(fi_in);
+        double in_vec_x = proj_in_vec*cos(phi_in);
+        double in_vec_y = proj_in_vec*sin(phi_in);
         double in[3]= {in_vec_x,in_vec_y,in_vec_z};
         normalize(in);
 
@@ -65,8 +72,8 @@ void std_coords_to_half_diff_coords(double theta_in, double fi_in, double theta_
         // compute out vector
         double out_vec_z = cos(theta_out);
         double proj_out_vec = sin(theta_out);
-        double out_vec_x = proj_out_vec*cos(fi_out);
-        double out_vec_y = proj_out_vec*sin(fi_out);
+        double out_vec_x = proj_out_vec*cos(phi_out);
+        double out_vec_y = proj_out_vec*sin(phi_out);
         double out[3]= {out_vec_x,out_vec_y,out_vec_z};
         normalize(out);
 
@@ -80,7 +87,7 @@ void std_coords_to_half_diff_coords(double theta_in, double fi_in, double theta_
 
         // compute  theta_half, fi_half
         theta_half = acos(half[2]);
-        fi_half = atan2(half[1], half[0]);
+        phi_half = atan2(half[1], half[0]);
 
 
         double bi_normal[3] = {0.0, 1.0, 0.0};
@@ -89,15 +96,14 @@ void std_coords_to_half_diff_coords(double theta_in, double fi_in, double theta_
         double diff[3];
 
         // compute diff vector
-        rotate_vector(in, normal , -fi_half, temp);
+        rotate_vector(in, normal , -phi_half, temp);
         rotate_vector(temp, bi_normal, -theta_half, diff);
 
         // compute  theta_diff, fi_diff
         theta_diff = acos(diff[2]);
-        fi_diff = atan2(diff[1], diff[0]);
+        phi_diff = atan2(diff[1], diff[0]);
 
 }
-
 
 
 // Lookup theta_half index
@@ -153,82 +159,3 @@ inline int phi_diff_index(double phi_diff)
                 return BRDF_SAMPLING_RES_PHI_D / 2 - 1;
 }
 
-
-// Given a pair of incoming/outgoing angles, look up the BRDF.
-void lookup_brdf_val(double* brdf, double theta_in, double fi_in,
-                          double theta_out, double fi_out,
-                          double& red_val,double& green_val,double& blue_val)
-{
-        // Convert to halfangle / difference angle coordinates
-        double theta_half, fi_half, theta_diff, fi_diff;
-
-        std_coords_to_half_diff_coords(theta_in, fi_in, theta_out, fi_out,
-                       theta_half, fi_half, theta_diff, fi_diff);
-
-
-        // Find index.
-        // Note that phi_half is ignored, since isotropic BRDFs are assumed
-        int ind = phi_diff_index(fi_diff) +
-                  theta_diff_index(theta_diff) * BRDF_SAMPLING_RES_PHI_D / 2 +
-                  theta_half_index(theta_half) * BRDF_SAMPLING_RES_PHI_D / 2 *
-                                                 BRDF_SAMPLING_RES_THETA_D;
-
-        red_val = brdf[ind] * RED_SCALE;
-        green_val = brdf[ind + BRDF_SAMPLING_RES_THETA_H*BRDF_SAMPLING_RES_THETA_D*BRDF_SAMPLING_RES_PHI_D/2] * GREEN_SCALE;
-        blue_val = brdf[ind + BRDF_SAMPLING_RES_THETA_H*BRDF_SAMPLING_RES_THETA_D*BRDF_SAMPLING_RES_PHI_D] * BLUE_SCALE;
-
-
-        if (red_val < 0.0 || green_val < 0.0 || blue_val < 0.0)
-                std::cerr << "Below horizon." << std::endl ;
-
-}
-
-
-// Read BRDF data
-template <typename Scalar>
-Vector<Scalar> BRDFReader<Scalar>::read_brdf(const char *filename, double* &brdf){
-	FILE *f = fopen(filename, "rb");
-	if (!f)return false;
-
-	int dims[3];
-	fread(dims, sizeof(int), 3, f);
-	int n = dims[0] * dims[1] * dims[2];
-	std::cout << "n read : " << n << std::endl;
-	if (n != BRDF_SAMPLING_RES_THETA_H *
-			 BRDF_SAMPLING_RES_THETA_D *
-			 BRDF_SAMPLING_RES_PHI_D / 2){
-			std::cerr << "Dimensions don't match" << std::endl ;
-			fclose(f);
-			return false;
-	}
-
-	brdf = (double*) malloc (sizeof(double)*3*n);
-	fread(brdf, sizeof(double), 3*n, f);
-
-	fclose(f);
-
-	//TODO : split ici pour créééééer une matrice à partir de brdf
-
-	n = 16;
-	for (int i = 0; i < n; i++){
-		double theta_in = i * 0.5 * M_PI / n;
-		for (int j = 0; j < 4*n; j++){
-			double phi_in = j * 2.0 * M_PI / (4*n);
-			for (int k = 0; k < n; k++){
-				double theta_out = k * 0.5 * M_PI / n;
-				for (int l = 0; l < 4*n; l++){
-					double phi_out = l * 2.0 * M_PI / (4*n);
-					double red,green,blue;
-					lookup_brdf_val(brdf, theta_in, phi_in, theta_out, phi_out, red, green, blue);
-					if ( i+j+k+l == 0)
-						printf("%f %f %f\n", (float)red, (float)green, (float)blue);
-				}
-			}
-		}
-	}
-
-	return Vector<Scalar>();
-}
-
-} // namespace ChefDevr
-*/

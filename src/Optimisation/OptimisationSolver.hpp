@@ -43,7 +43,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    Vector<Scalar> OptimisationSolver<Scalar>::computeExplorationDisplacement ()
+    Vector<Scalar> OptimisationSolver<Scalar>::exploratoryMove ()
     {
         const auto& nbcoefs(X.rows());
         Scalar new_costval, new_detK;
@@ -128,8 +128,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    typename OptimisationSolver<Scalar>::OptiResult OptimisationSolver<Scalar>::computeLearnDisplacement (
-        const OptiResult& optiRes)
+    Vector<Scalar> OptimisationSolver<Scalar>::patternMove ()
     {
         return OptiResult();
     }

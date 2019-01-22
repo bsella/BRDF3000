@@ -47,45 +47,47 @@ namespace ChefDevr
     private:
 
         /** Factor of step reduction */
-        static constexpr Scalar reduceStep = .5f
+        static constexpr Scalar reduceStep = .5f;
 
         /** mu constant that helps interpolating data while keeping good solution */
-        static constexpr Scalar mu = 0.0001f
+        static constexpr Scalar mu = 0.0001f;
 
         /** l constant defined in the research paper */
-        static constexpr Scalar l = 1.0f
+        static constexpr Scalar l = 1.0f;
 
         /** Step below wich solution is considered optimal */
-        const Scalar minStep
+        const Scalar minStep;
 
         /** Value of the step for Hooke & Jeeves method */
-        Scalar step
+        Scalar step;
 
         /** Number of BRDFs in the Z matrix */
-        const unsigned int nb_data
+        const unsigned int nb_data;
 
         /** BRDFs data matrix */
-        const Matrix<Scalar>& Z
+        const Matrix<Scalar>& Z;
 
         /** Z*Ztransposed */
-        Matrix<Scalar> ZZt
+        Matrix<Scalar> ZZt;
         
 
         /** Dimension of produced latent space */
-        unsigned int dim
+        unsigned int dim;
 
         /** Latent variables vector */
-        Vector<Scalar> X
+        Vector<Scalar> X;
 
         /** Inverse of K : Inverse mapping matrix
-        Matrix<Scalar> K_minus1
-        NB : We do not store K because the algorithm doesnt require it directly : we compute only columns of K when necessary instead -> covariance vectors */
+        NB : We do not store K because the algorithm doesnt require it directly : 
+        we compute only columns of K when necessary instead -> covariance vectors 
+        */
+        Matrix<Scalar> K_minus1;
 
         /** Determinant of K */
-        Scalar detK
+        Scalar detK;
 
         /** Value of the cost function for this solution */
-        Scalar costval
+        Scalar costval;
         
         /**
         * @brief Computes the current cost of the solution
@@ -100,13 +102,13 @@ namespace ChefDevr
         * Adds and substracts _reduceStep_ from each element
         * and reevaluate the cost function to check for better solutions
         */
-        Vector<Scalar> computeExplorationDisplacement ();
+        Vector<Scalar> exploratoryMove();
 
         /**
         * @brief Apply a previously computed displacement to each element of X
         * @return New modified vector
         */
-        OptiResult computeLearnDisplacement (const OptiResult& optiRes);
+        Vector<Scalar> patternMove ();
         
         /**
          * @brief Computes the inverse matrix K_minus1 with Sherman-Morisson formula

@@ -45,7 +45,7 @@ namespace ChefDevr
         OptimisationSolver(
             Scalar minStep,
             Matrix<Scalar>& Z,
-            unsigned int dim);
+            unsigned int latentDim);
         
         ~OptimisationSolver(){}
         
@@ -91,7 +91,7 @@ namespace ChefDevr
         /**
          * @brief Dimension of produced latent space
          */
-        unsigned int dim;
+        unsigned int latentDim;
 
         /**
          * @brief Latent variables vector
@@ -152,6 +152,16 @@ namespace ChefDevr
          * @return The new determinant of K
          */
         Scalar computeDeterminant (unsigned int lv_num, Vector<Scalar>& cov_vector) const;
+        
+        /**
+        * @brief Generate a column vector of latent coordinates by applying the PCA method
+        * on the Z matrix
+        * @return Column vector of latent coordinates in latent space defined by the PCA 
+        * 
+        * Uses the Matusik method found in the paper
+        * "A data-driven reflectance model"
+        */
+        Vector<Scalar> computePCA ();
     };
 } // namespace ChefDevr
 

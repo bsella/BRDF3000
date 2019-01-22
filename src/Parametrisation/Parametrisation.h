@@ -101,19 +101,6 @@ namespace ChefDevr
         const unsigned int lv_num,
         const unsigned int dim);
     
-    /**
-    * @brief Generate a column vector of latent coordinates by applying the PCA method
-    * on the Z matrix
-    * @param Z The matrix of the BRDFs data 
-    * @param latentDim Latent dimension (2 by default)
-    * @return A matrix "reduced" in latent dimension
-    * 
-    * Uses the Matusik method found in the paper
-    * "A data-driven reflectance model"
-    */
-    template <typename Scalar>
-    Vector<Scalar> computePCA (const Matrix<Scalar>& Z, const unsigned int latentDim);
-    
 } // ChefDevr
 
 #include "Parametrisation.hpp"

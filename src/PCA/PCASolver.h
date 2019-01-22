@@ -5,6 +5,10 @@
 
 namespace ChefDevr
 {
+    /**
+     * @brief This class is used to compute the PCA of the Z BRDFs data matrix
+     * and initialize the X latent variable column vector
+     */
     template <typename Scalar>
     class PCASolver{
     public:
@@ -18,6 +22,9 @@ namespace ChefDevr
         * @param Z The matrix of the BRDFs data 
         * @param latentDim Latent dimension (2 by default)
         * @return A matrix "reduced" in latent dimension
+        * 
+        * Uses the Matusik method found in the paper
+        * "A data-driven reflectance model"
         */
         static Vector<Scalar> computePCA (const Matrix<Scalar>& Z, unsigned char latentDim=2);
     };

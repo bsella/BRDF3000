@@ -21,23 +21,31 @@ namespace ChefDevr
                 X(other.X),
                 cost(other.cost){}
                 
-            /** Variance covariance matrix of latent variables : Mapping matrix */
+            /**
+             * @brief Variance covariance matrix of latent variables : Mapping matrix
+             */
             Matrix<Scalar> K;
             
-            /** Inverse of K : Inverse mapping matrix */
+            /**
+             * @brief Inverse of K : Inverse mapping matrix
+             */
             Matrix<Scalar> K_minus1;
             
-            /** Latent variables vector */
+            /**
+             * @brief Latent variables vector
+             */
             Vector<Scalar> X;
             
-            /** Value of the cost function for this solution */
+            /**
+             * @brief Value of the cost function for this solution
+             */
             Scalar cost;
         };
         
         OptimisationSolver(
             Scalar minStep,
             Matrix<Scalar>& Z,
-            const unsigned int dim);
+            unsigned int dim);
         
         ~OptimisationSolver(){}
         
@@ -51,47 +59,73 @@ namespace ChefDevr
         
     private:
 
-        /** Factor of step reduction */
+        /**
+         * @brief Factor of step reduction
+         */
         static constexpr Scalar reduceStep = .5f;
 
-        /** mu constant that helps interpolating data while keeping good solution */
+        /**
+         * @brief constant that helps interpolating data while keeping good solution
+         */
         static constexpr Scalar mu = 0.0001f;
 
-        /** l constant defined in the research paper */
+        /**
+         * @brief constant defined in the research paper
+         */
         static constexpr Scalar l = 1.0f;
 
-        /** Step below wich solution is considered optimal */
+        /**
+         * @brief Step below wich solution is considered optimal
+         */
         const Scalar minStep;
 
-        /** Value of the step for Hooke & Jeeves method */
+        /**
+         * @brief Value of the step for Hooke & Jeeves method
+         */
         Scalar step;
 
-        /** Number of BRDFs in the Z matrix */
+        /**
+         * @brief Number of BRDFs in the Z matrix
+         */
         const unsigned int nb_data;
 
-        /** BRDFs data matrix */
+        /**
+         * @brief BRDFs data matrix
+         */
         const Matrix<Scalar>& Z;
 
-        /** Z*Ztransposed */
+        /**
+         * @brief Z*Ztransposed
+         */
         Matrix<Scalar> ZZt;
         
 
-        /** Dimension of produced latent space */
+        /**
+         * @brief Dimension of produced latent space
+         */
         unsigned int dim;
 
-        /** Latent variables vector */
+        /**
+         * @brief Latent variables vector
+         */
         Vector<Scalar> X;
 
-        /** Inverse of K : Inverse mapping matrix
-        NB : We do not store K because the algorithm doesnt require it directly : 
-        we compute only columns of K when necessary instead -> covariance vectors 
+        /**
+         * @brief Inverse of K : Inverse mapping matrix
+         *
+         * We do not store K because the algorithm doesnt require it directly :
+         * we compute only columns of K when necessary instead -> covariance vectors
         */
         Matrix<Scalar> K_minus1;
 
-        /** Determinant of K */
+        /**
+         * @brief Determinant of K
+         */
         Scalar detK;
 
-        /** Value of the cost function for this solution */
+        /**
+         * @brief Value of the cost function for this solution
+         */
         Scalar costval;
         
         /**

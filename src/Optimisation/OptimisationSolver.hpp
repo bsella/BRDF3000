@@ -147,7 +147,7 @@ namespace ChefDevr
         return OptiResult();
     }
     
-    template <template Scalar>
+    template <typename Scalar>
     void OptimisationSolver<Scalar>::centerZ()
     {
         // TODO

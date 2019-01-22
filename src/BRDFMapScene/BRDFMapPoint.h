@@ -14,12 +14,12 @@ public:
 	~BRDFMapPoint () override;
 private:
 	/**
-	 * The name of the point
+	 * @brief The name of the point
 	 */
 	const std::string _name;
 
 	/**
-	 * Is point added manually by the user
+	 * @brief Is point added manually by the user
 	 */
 	bool userInput;
 	/**

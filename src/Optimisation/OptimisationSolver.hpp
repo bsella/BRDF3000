@@ -1,12 +1,14 @@
 #include "OptimisationSolver.h"
+#include "../PCA/PCASolver.h"
 #include <cmath>
+
 
 namespace ChefDevr
 {
     template <typename Scalar>
     OptimisationSolver<Scalar>::OptimisationSolver(
         Scalar _minStep,
-        const Matrix<Scalar>& _Z,
+        Matrix<Scalar>& _Z,
         const unsigned int _dim) :
         
         minStep(_minStep),
@@ -16,17 +18,29 @@ namespace ChefDevr
     {
         step = reduceStep;
         ZZt = Z*Z.transpose();
-        // X = ACP(Z);
     }
     
     template <typename Scalar>
     typename OptimisationSolver<Scalar>::OptiResult OptimisationSolver<Scalar>::computeOptimisation ()
     {
+        X = PCASolver<Scalar>::computePCA(Z, dim);
         // Compute K
         // Compute detK
         // Compute K_minus1
         // Compute cost
-        // ...
+        centerZ();
+        costval = cost();
+        
+        // while ...
+        do
+        {
+            X = exploratoryMove();
+            while(false)
+            {
+                X = patternMove();
+            }
+        }while(false/*change this of course*/);
+        
         return OptiResult();
     }
     

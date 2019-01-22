@@ -31,7 +31,7 @@ namespace ChefDevr
         
         OptimisationSolver(
             Scalar minStep,
-            const Matrix<Scalar>& Z,
+            Matrix<Scalar>& Z,
             const unsigned int dim);
         
         ~OptimisationSolver(){}
@@ -102,7 +102,7 @@ namespace ChefDevr
         * Adds and substracts _reduceStep_ from each element
         * and reevaluate the cost function to check for better solutions
         */
-        Vector<Scalar> exploratoryMove();
+        Vector<Scalar> exploratoryMove ();
 
         /**
         * @brief Apply a previously computed displacement to each element of X
@@ -140,12 +140,18 @@ namespace ChefDevr
          * @param x2 second latent variable
          * @return Covariance value
          */
-        static inline Scalar covariance(Vector<Scalar>& x1, Vector<Scalar>& x2){
+        static inline Scalar covariance (Vector<Scalar>& x1, Vector<Scalar>& x2){
             const Scalar norm_x1_x2((x1-x2).norm());
             const Scalar exp_part(std::exp(-norm_x1_x2*norm_x1_x2/(Scalar(2)*l*l)));
             // dirac(x1-x2) <=> norm(x1-x2) == 0
             return norm_x1_x2 < 0.00001 ? mu + exp_part : exp_part;
         }
+        
+        /**
+         * @brief Centers the Z BRDFs data matrix
+         * Modifies the Z member variable 
+         */
+        void centerZ();
     };
 } // namespace ChefDevr
 

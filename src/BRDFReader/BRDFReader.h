@@ -113,6 +113,54 @@ namespace ChefDevr
 		void std_coords_to_half_diff_coords(double theta_in, double phi_in, double theta_out, double phi_out,
 											double& theta_half,double& phi_half,double& theta_diff,double& phi_diff);
 
+        /**
+         * @brief Rotates a vector along an axis
+         * @param vector the vector to be rotated
+         * @param axis the axis along which the vector is rotated
+         * @param angle the angle of the rotation
+         * @return the rotated vector
+         */
+        Eigen::Vector3d rotate_vector(const Eigen::Vector3d &vector, const Eigen::Vector3d &axis, double angle);
+
+
+        /**
+         * @brief Computes a direction from angles
+         * @param theta the theta angle
+         * @param phi the phi angle
+         * @return the direction
+         */
+        Eigen::Vector3d compute_direction (double theta, double phi);
+
+
+		/**
+		 * @brief Lookup theta_half index
+		 * @param theta_half the angle corresponding to the index
+		 * @return the index
+		 * @pre theta_half is between 0 and PI / 2
+		 * @post the result is between 0 and 89
+		 *
+		 * This is a non-linear mapping!
+		 */
+		unsigned int theta_half_index(double theta_half);
+
+		/**
+		 * @brief Lookup theta_diff index
+		 * @param theta_diff the angle corresponding to the index
+		 * @return the index
+		 * @pre theta_diff is between 0 and PI / 2
+		 * @post the result is between 0 and 89
+		 */
+		unsigned int theta_diff_index(double theta_diff);
+
+		/**
+		 * @brief Lookup phi_diff index
+		 * @param phi_diff the angle corresponding to the index
+		 * @return the index
+		 * @pre phi_diff is between 0 and pi
+		 * @post the result is between 0 and 179
+		 */
+		unsigned int phi_diff_index(double phi_diff);
+
 	};
 } // namespace ChefDevr
 

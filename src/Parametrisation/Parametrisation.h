@@ -1,5 +1,6 @@
 #ifndef PARAMETRISATION__H
 #define PARAMETRISATION__H
+
 /**
  * @brief Functions and classes that are common to the Optimisation module and BRDF Explorer module
  */ 

@@ -11,8 +11,9 @@ namespace ChefDevr
 {
 
     /**
-    * @brief This class' purpose is to write the data needed for a BRDFs reconstruction from latent space
-    * and latent space representation
+    * @brief The purpose of this class is to write the data needed 
+    * for a BRDFs reconstruction from latent space
+    * and for a latent space representation
     */
     template <typename Scalar>
     class OptiDataWriter

@@ -1,9 +1,5 @@
-#include "brdfreader.h"
+#include "BRDFReader.h"
 
-BRDFReader::BRDFReader()
-{
-
-}
 
 // cross product of two vectors
 void cross_product (double* v1, double* v2, double* out)
@@ -100,6 +96,7 @@ void std_coords_to_half_diff_coords(double theta_in, double fi_in, double theta_
 
 }
 
+/*
 
 // Lookup theta_half index
 // This is a non-linear mapping!
@@ -187,7 +184,7 @@ void lookup_brdf_val(double* brdf, double theta_in, double fi_in,
 
 
 // Read BRDF data
-bool BRDFReader::read_brdf(const char *filename, double* &brdf){
+bool read_brdf(const char *filename, double* &brdf){
 	FILE *f = fopen(filename, "rb");
 	if (!f)return false;
 
@@ -230,3 +227,5 @@ bool BRDFReader::read_brdf(const char *filename, double* &brdf){
 
 	return true;
 }
+
+ */

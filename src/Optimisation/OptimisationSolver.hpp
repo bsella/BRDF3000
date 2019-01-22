@@ -30,7 +30,9 @@ namespace ChefDevr
         // Compute K_minus1
         // Compute cost
         centerMat<Scalar>(Z);
-        costval = cost();
+        costval = cost(K, detK);
+        
+        Vector<Scalar> new_X;
         
         // while ...
         do
@@ -38,7 +40,7 @@ namespace ChefDevr
             X = exploratoryMove();
             while(false)
             {
-                X = patternMove();
+                patternMove(new_X);
             }
         }while(false/*change this of course*/);
         
@@ -46,7 +48,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    Scalar OptimisationSolver<Scalar>::cost()
+    Scalar OptimisationSolver<Scalar>::cost(const Matrix<Scalar>& K_minus1, const Scalar& detK) const
     {
         Scalar trace(0);
         // Compute trace of K_minus1 * ZZt
@@ -58,7 +60,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    Vector<Scalar> OptimisationSolver<Scalar>::exploratoryMove ()
+    void OptimisationSolver<Scalar>::exploratoryMove ()
     {
         const auto& nbcoefs(X.rows());
         Scalar new_costval, new_detK;
@@ -76,10 +78,10 @@ namespace ChefDevr
             new_cov_vector = computeCovarianceVector(new_X, lv_num);
             
             // Update K_minus1 and detK with Sherman-Morisson formula
-            new_K_minus1 = updateInverse(K_minus1, lv_num, new_cov_vector);
+            updateInverse(K_minus1, new_K_minus1, lv_num, new_cov_vector);
             new_detK = updateDeterminant(new_K_minus1, lv_num, new_cov_vector);
             // Update costval
-            new_costval = cost(new_detK, new_K_minus1, ZZt, nb_data);
+            new_costval = cost(new_K_minus1, new_detK);
             
             if (new_costval > costval){
                 X_move[i] = -step;
@@ -87,10 +89,10 @@ namespace ChefDevr
                 new_cov_vector = computeCovVector(new_X, lv_num);
                 
                 // Update K_minus1 and detK with Sherman-Morisson formula
-                new_K_minus1 = updateInverse(K_minus1, lv_num, new_cov_vector);
+                updateInverse(K_minus1, new_K_minus1, lv_num, new_cov_vector);
                 new_detK = updateDeterminant(new_K_minus1, lv_num, new_cov_vector);
                 // Update cost
-                new_costval = cost(new_detK, new_K_minus1, ZZt, nb_data);
+                new_costval = cost(new_K_minus1, new_detK);
                 
                 if (new_costval > costval){
                     X_move[i] = Scalar(0);
@@ -116,21 +118,27 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    Matrix<Scalar> OptimisationSolver<Scalar>::computeInverse (unsigned int lv_num, Vector<Scalar>& cov_vector)const
+    void OptimisationSolver<Scalar>::computeInverse (
+        const Matrix<Scalar>& old_K_minus1,
+        Matrix<Scalar>& new_K_minus1,
+        unsigned int lv_num,
+        Vector<Scalar>& cov_vector) const
     {
         return Matrix<Scalar>();
     }
     
     template <typename Scalar>
-    Scalar OptimisationSolver<Scalar>::computeDeterminant (unsigned int lv_num, Vector<Scalar>& cov_vector)const
+    Scalar OptimisationSolver<Scalar>::computeDeterminant (
+        const Matrix<Scalar>& new_K_minus1,
+        unsigned int lv_num,
+        Vector<Scalar>& cov_vector) const
     {
         return Matrix<Scalar>();
     }
     
     template <typename Scalar>
-    Vector<Scalar> OptimisationSolver<Scalar>::patternMove ()
+    void OptimisationSolver<Scalar>::patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1) const
     {
-        return OptiResult();
     }
     
     template <typename Scalar>

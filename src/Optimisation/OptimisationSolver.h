@@ -6,6 +6,11 @@
 
 namespace ChefDevr
 {
+    /**
+     * @brief Class that solves the optimisation problem defined in the research paper:
+     * A Versatile Parametrization for Measured Materials Manifold
+     * Computes an optimised mapping from BRDFs space to a latent space
+     */
     template <typename Scalar>
     class OptimisationSolver {
     public:
@@ -37,12 +42,12 @@ namespace ChefDevr
         ~OptimisationSolver(){}
         
         /**
-        * @brief Compute an optimised mapping from BRDFs space to a latent space
+        * @brief Computes the optimized parametrization of the BRDFs manifold
         * @return Optimisation result (cf OptiResult struct)
         * 
         * Uses Hook & Jeeves method to solve the optimisation
         */
-        OptiResult computeOptimisation ();
+        OptiResult optimizeMapping ();
         
     private:
 
@@ -134,6 +139,12 @@ namespace ChefDevr
         Vector<Scalar> computeCovVector (unsigned int lv_num) const;
         
         /**
+         * @brief Centers the Z BRDFs data matrix
+         * Modifies the Z member variable 
+         */
+        void centerZ();
+        
+        /**
          * @brief Covariance function given in the research paper :
          * A Versatile Parametrization for Measured Materials Manifold
          * @param x1 first latent variable
@@ -146,12 +157,6 @@ namespace ChefDevr
             // dirac(x1-x2) <=> norm(x1-x2) == 0
             return norm_x1_x2 < 0.00001 ? mu + exp_part : exp_part;
         }
-        
-        /**
-         * @brief Centers the Z BRDFs data matrix
-         * Modifies the Z member variable 
-         */
-        void centerZ();
     };
 } // namespace ChefDevr
 

@@ -21,7 +21,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    typename OptimisationSolver<Scalar>::OptiResult OptimisationSolver<Scalar>::computeOptimisation ()
+    typename OptimisationSolver<Scalar>::OptiResult OptimisationSolver<Scalar>::optimizeMapping ()
     {
         X = PCASolver<Scalar>::computePCA(Z, dim);
         // Compute K
@@ -145,6 +145,12 @@ namespace ChefDevr
     Vector<Scalar> OptimisationSolver<Scalar>::patternMove ()
     {
         return OptiResult();
+    }
+    
+    template <template Scalar>
+    void OptimisationSolver<Scalar>::centerZ()
+    {
+        // TODO
     }
     
 } // namespace ChefDevr

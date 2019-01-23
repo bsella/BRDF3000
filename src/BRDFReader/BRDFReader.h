@@ -5,6 +5,7 @@
 #include "math.h"
 #include <cstdio>
 #include <iostream>
+#include <stxxl/vector>
 
 #include "../Parametrisation/types.h"
 
@@ -23,11 +24,15 @@ namespace ChefDevr
 	    ~BRDFReader(){}
 
 	    /**
-	    * @brief Read all the brdfs stored in a given directory
+	    * @brief Read all the BRDFs stored in a given directory
 	    * @param fileDirectory the path of the directory where all the brdfs are stored
-	    * @return The set of brdfs, the Z matrix
+	    * @return The set of BRDFs, the Z matrix
 	    *
-	    * Initializes the list of BRDF paths in the order in which they were read
+	    * Initializes the list of BRDFs paths in the order in which they were read.
+	    *
+	    * As the set of BRDFs can be heavy, we use the stxxl library
+	    * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
+	    * Indeed, in this case, the set of BRDFs is stored inside the disk
 	    */
 	    Matrix<Scalar> create_brdfSet(const char *fileDirectory);
 
@@ -77,10 +82,14 @@ namespace ChefDevr
 
 		/**
 		* @brief Read a BRDF from a file
-		* @param filePath the path of the BRDF's file 
+		* @param filePath the path of the BRDF's file
 		* @return All the coefficients of a BRDF as a vector of scalars
 		*
 		* If the file is not found, returns an error
+		*
+	    * As the set of BRDFs can be heavy, we use the stxxl library
+	    * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
+	    * Indeed, in this case, the set of BRDFs is stored inside the disk
 		*/
 	    Vector<Scalar> read_brdf(const char *filePath);
 

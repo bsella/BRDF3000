@@ -23,7 +23,7 @@ Vector<Scalar> computeCovVector (
     Vector<Scalar> cov_vector(dim);
     
     # pragma omp parallel for 
-    for (unsigned int i(0); i < nb_data; ++i){
+    for (unsigned int i = 0; i < nb_data; ++i){
         cov_vector[i] = covariance(latentRef, X_reshaped.col[i]);
     }
     

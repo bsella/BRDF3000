@@ -51,7 +51,7 @@ namespace ChefDevr
         Scalar trace(0);
         // Compute trace of K_minus1 * ZZt
         # pragma omp parallel for reduction(+:trace)
-        for (unsigned int i(0); i < ZZt.cols(); ++i){
+        for (unsigned int i = 0; i < ZZt.cols(); ++i){
             trace += K_minus1.row(i).dot(ZZt.col(i));
         }
         return Scalar(0.5) * nb_data * std::log(detK) + Scalar(0.5) * trace;

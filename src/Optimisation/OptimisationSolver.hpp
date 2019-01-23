@@ -10,12 +10,12 @@ namespace ChefDevr
     OptimisationSolver<Scalar>::OptimisationSolver(
         Scalar _minStep,
         Matrix<Scalar>& _Z,
-        const unsigned int _dim) :
+        const unsigned int _latentDim) :
         
         minStep(_minStep),
         nb_data(_Z.cols()),
         Z(_Z),
-        dim(_dim)
+        latentDim(_latentDim)
     {
         step = reduceStep;
         ZZt = Z*Z.transpose();
@@ -24,13 +24,15 @@ namespace ChefDevr
     template <typename Scalar>
     typename OptimisationSolver<Scalar>::OptiResult OptimisationSolver<Scalar>::optimizeMapping ()
     {
-        X = computePCA<Scalar>(Z, dim);
+        X = computePCA();
         // Compute K
         // Compute detK
         // Compute K_minus1
         // Compute cost
         centerMat<Scalar>(Z);
-        costval = cost();
+        costval = cost(K_minus1, detK);
+        
+        Vector<Scalar> new_X;
         
         // while ...
         do
@@ -38,7 +40,7 @@ namespace ChefDevr
             X = exploratoryMove();
             while(false)
             {
-                X = patternMove();
+                patternMove(new_X);
             }
         }while(false/*change this of course*/);
         
@@ -46,7 +48,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    Scalar OptimisationSolver<Scalar>::cost()
+    Scalar OptimisationSolver<Scalar>::cost(const Matrix<Scalar>& K_minus1, const Scalar& detK) const
     {
         Scalar trace(0);
         // Compute trace of K_minus1 * ZZt
@@ -58,7 +60,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    Vector<Scalar> OptimisationSolver<Scalar>::exploratoryMove ()
+    void OptimisationSolver<Scalar>::exploratoryMove ()
     {
         const auto& nbcoefs(X.rows());
         Scalar new_costval, new_detK;
@@ -70,16 +72,16 @@ namespace ChefDevr
         
         for (unsigned int i(0); i < nbcoefs;++i)
         {
-            lv_num = i/dim;
+            lv_num = i/latentDim;
             X_move[i] = step;
             new_X[i] += step;
-            new_cov_vector = computeCovarianceVector(new_X, lv_num);
+            computeCovarianceVector(new_cov_vector, new_X, lv_num);
             
             // Update K_minus1 and detK with Sherman-Morisson formula
-            new_K_minus1 = updateInverse(K_minus1, lv_num, new_cov_vector);
+            updateInverse(K_minus1, new_K_minus1, lv_num, new_cov_vector);
             new_detK = updateDeterminant(new_K_minus1, lv_num, new_cov_vector);
             // Update costval
-            new_costval = cost(new_detK, new_K_minus1, ZZt, nb_data);
+            new_costval = cost(new_K_minus1, new_detK);
             
             if (new_costval > costval){
                 X_move[i] = -step;
@@ -87,10 +89,10 @@ namespace ChefDevr
                 new_cov_vector = computeCovVector(new_X, lv_num);
                 
                 // Update K_minus1 and detK with Sherman-Morisson formula
-                new_K_minus1 = updateInverse(K_minus1, lv_num, new_cov_vector);
+                updateInverse(K_minus1, new_K_minus1, lv_num, new_cov_vector);
                 new_detK = updateDeterminant(new_K_minus1, lv_num, new_cov_vector);
                 // Update cost
-                new_costval = cost(new_detK, new_K_minus1, ZZt, nb_data);
+                new_costval = cost(new_K_minus1, new_detK);
                 
                 if (new_costval > costval){
                     X_move[i] = Scalar(0);
@@ -116,20 +118,68 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    Matrix<Scalar> OptimisationSolver<Scalar>::computeInverse (unsigned int lv_num, Vector<Scalar>& cov_vector)const
+    void OptimisationSolver<Scalar>::computeInverse (
+        const Matrix<Scalar>& old_K_minus1,
+        Matrix<Scalar>& new_K_minus1,
+        unsigned int lv_num,
+        Vector<Scalar>& cov_vector) const
     {
         return Matrix<Scalar>();
     }
     
     template <typename Scalar>
-    Scalar OptimisationSolver<Scalar>::computeDeterminant (unsigned int lv_num, Vector<Scalar>& cov_vector)const
+    Scalar OptimisationSolver<Scalar>::computeDeterminant (
+        const Matrix<Scalar>& new_K_minus1,
+        unsigned int lv_num,
+        Vector<Scalar>& cov_vector) const
     {
         return Matrix<Scalar>();
     }
     
     template <typename Scalar>
-    Vector<Scalar> OptimisationSolver<Scalar>::patternMove ()
+    void OptimisationSolver<Scalar>::patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1) const
     {
-        return OptiResult();
+    }
+    
+    template <typename Scalar>
+    Vector<Scalar> OptimisationSolver<Scalar>::computePCA ()
+    {
+        unsigned char i;
+        auto B(Z.transpose()*Z);
+        
+        // Use EigenSolver to compute eigen values and vectors
+        auto solver(Eigen::EigenSolver<Matrix<Scalar>>(B, true));
+        solver.compute();
+        auto eigenValues(solver.eigenvalues());
+        auto eigenVectors(solver.eigenvectors());
+        
+        // Use std::sort to sort an indices vector in the same way eigen values should be ordered
+        // initialize original index locations
+        std::vector<size_t> idx(eigenValues.size());
+        std::iota(idx.begin(), idx.end(), 0);
+        // sort indexes based on comparing values in eigenValues
+        std::sort(idx.begin(), idx.end(),
+                [&eigenValues](size_t i1, size_t i2) {return eigenValues[i1] > eigenValues[i2];});
+        
+        // Build D the diagonal matrix with ordered eigen values in diagonal
+        auto D(Matrix<Scalar>::Zero(latentDim, latentDim));
+        for (i=0; i<latentDim; ++i)
+        {
+            // use sorted indices to retrieve eigen values in descending order
+            D(i,i) = std::sqrt(eigenValues[idx[i]]);
+        }
+        
+        // Build V the transposed matrix of ordered eigen vectors 
+        Matrix<Scalar> V(latentDim, eigenVectors.cols());
+        for (i=0; i<latentDim; ++i)
+        {
+            // use sorted indices to retrieve eigen vectors in descending order
+            V.row(i) = eigenVectors.col(idx[i]);
+        }
+        
+        // Latent variables for each BRDFs are now in column
+        auto X(D*V);
+        // Output X as column vector
+        return X.reshaped();
     }
 } // namespace ChefDevr

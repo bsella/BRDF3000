@@ -5,6 +5,7 @@
 #include "math.h"
 #include <cstdio>
 #include <iostream>
+#include <vector>
 #include <stxxl/vector>
 
 #include "../Parametrisation/types.h"

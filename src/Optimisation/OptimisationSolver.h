@@ -45,7 +45,7 @@ namespace ChefDevr
         OptimisationSolver(
             Scalar minStep,
             Matrix<Scalar>& Z,
-            unsigned int dim);
+            unsigned int latentDim);
         
         ~OptimisationSolver(){}
         
@@ -91,12 +91,17 @@ namespace ChefDevr
         /**
          * @brief Dimension of produced latent space
          */
-        unsigned int dim;
+        unsigned int latentDim;
 
         /**
          * @brief Latent variables vector
          */
         Vector<Scalar> X;
+        
+        /**
+         * @brief The displacement vector of X that should improve the solution
+         */
+        Vector<Scalar> X_move;
 
         /**
          * @brief Inverse of K : Inverse mapping matrix
@@ -117,41 +122,61 @@ namespace ChefDevr
         Scalar costval;
         
         /**
-        * @brief Computes the current cost of the solution
-        * @return Current cost of the solution
+        * @brief Computes the cost of the solution defined by K_minus1
+        * @param K_minus1 Inverse mapping
+        * @param detK Determinant of the matrix K
+        * @return Cost of the solution
         */
-        Scalar cost ();
+        Scalar cost (const Matrix<Scalar>& K_minus1, const Scalar& detK) const;
 
         /**
-        * @brief Finds a displacement vector of X that improves the solution
-        * @return A displacement vector of X that improves the solution
+        * @brief Updates the displacement vector of X that improves the solution (X_move)
         * 
         * Adds and substracts _reduceStep_ from each element
         * and reevaluate the cost function to check for better solutions
         */
-        Vector<Scalar> exploratoryMove ();
+        void exploratoryMove ();
 
         /**
         * @brief Apply a previously computed displacement to each element of X
-        * @return New modified vector
+        * @param new_X Latent variables vector the apply the move on
         */
-        Vector<Scalar> patternMove ();
+        void patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1) const;
         
         /**
-         * @brief Computes the inverse matrix K_minus1 with Sherman-Morisson formula
+         * @brief Computes the new inverse matrix K_minus1 with Sherman-Morisson formula
+         * @param old_K_minus1 K_minus1 matrix before K had changed
+         * @param new_K_minus1 K_minus1 matrix after K has changed
          * @param lv_num Number of the latent variable that has changed
          * @param cov_vector The column of K that has changed
-         * @return The new K_minus1
          */
-        Matrix<Scalar> computeInverse (unsigned int lv_num, Vector<Scalar>& cov_vector) const;
+        void computeInverse (
+            const Matrix<Scalar>& old_K_minus1,
+            Matrix<Scalar>& new_K_minus1,
+            unsigned int lv_num,
+            Vector<Scalar>& cov_vector) const;
         
         /**
-         * @brief Computes the determinant of the matrix K with Sherman-Morisson formula
+         * @brief Computes new the determinant of the matrix K with Sherman-Morisson formula
+         * @param new_K_minus1 K_minus1 matrix after K has changed
          * @param lv_num Number of the latent variable that has changed
          * @param cov_vector The column of K that has changed
          * @return The new determinant of K
          */
-        Scalar computeDeterminant (unsigned int lv_num, Vector<Scalar>& cov_vector) const;
+        Scalar computeDeterminant (
+            const Matrix<Scalar>& new_K_minus1,
+            unsigned int lv_num,
+            Vector<Scalar>& cov_vector) const;
+        
+        /**
+        * @brief Generate a column vector of latent coordinates by applying the PCA method
+        * on the Z matrix
+        * @return Column vector of latent coordinates in latent space defined by the PCA 
+        * 
+        * Uses the Matusik method found in the paper
+        * "A data-driven reflectance model"
+        */
+        Vector<Scalar> computePCA ();
     };
 } // namespace ChefDevr
 

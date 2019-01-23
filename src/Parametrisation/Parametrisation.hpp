@@ -26,8 +26,6 @@ void computeCovVector (
     for (unsigned int i = 0; i < nb_data; ++i){
         cov_vector[i] = covariance(latentRef, X_reshaped.col[i]);
     }
-    
-    return cov_vector;
 }
 
 } // namespace ChevDevr

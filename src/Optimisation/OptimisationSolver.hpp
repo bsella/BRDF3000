@@ -114,7 +114,6 @@ namespace ChefDevr
         }
         // X = X+X_move; <=>
         X = new_X;
-        return X_move;
     }
     
     template <typename Scalar>
@@ -124,7 +123,7 @@ namespace ChefDevr
         unsigned int lv_num,
         Vector<Scalar>& cov_vector) const
     {
-        return Matrix<Scalar>();
+//        return Matrix<Scalar>();
     }
     
     template <typename Scalar>

@@ -75,7 +75,7 @@ namespace ChefDevr
             lv_num = i/latentDim;
             X_move[i] = step;
             new_X[i] += step;
-            new_cov_vector = computeCovarianceVector(new_X, lv_num);
+            computeCovarianceVector(new_cov_vector, new_X, lv_num);
             
             // Update K_minus1 and detK with Sherman-Morisson formula
             updateInverse(K_minus1, new_K_minus1, lv_num, new_cov_vector);

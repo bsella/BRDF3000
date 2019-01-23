@@ -2,6 +2,7 @@
 #define PARAMETRISATION__H
 
 /**
+ * @file Parametrisation.h
  * @brief Functions and classes that are common to the Optimisation module and BRDF Explorer module
  */ 
 
@@ -90,6 +91,7 @@ namespace ChefDevr
     
     /**
     * @brief Computes the covariance column vector for the lv_num'th latent variable
+    * @param cov_vector The covariance column vector to fill
     * @param lv_num Number of the latent variable for the cov vector to be computed
     * @param nb_data Number of data 
     * @return Covariance column vector
@@ -97,7 +99,8 @@ namespace ChefDevr
     * Covariance is computed with the "covariance" function
     */
     template <typename Scalar>
-    Vector<Scalar> computeCovVector (
+    void computeCovVector (
+        Vector<Scalar>& cov_vector,
         const Vector<Scalar>&X,
         const unsigned int lv_num,
         const unsigned int dim);

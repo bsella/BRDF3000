@@ -50,6 +50,7 @@ infringement.
 #include <vector>
 #include "BRDFBase.h"
 #include "BRDFReconstructionModel.h"
+#include "../../../BRDFMapScene.h"
 
 class QSlider;
 class QLabel;
@@ -120,6 +121,8 @@ private:
     QCheckBox* nDotLCheckbox;
     
     QFrame* spaceFiller;
+    
+    BRDFMapScene* brdfMapScene;
     
     float theta, phi;
     bool useLogPlot;

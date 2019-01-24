@@ -49,6 +49,7 @@ infringement.
 #include <QWidget>
 #include <vector>
 #include "BRDFBase.h"
+#include "BRDFReconstructionModel.h"
 
 class QSlider;
 class QLabel;
@@ -62,6 +63,9 @@ class QComboBox;
 class ParameterGroupWidget;
 class QFileDialog;
 
+/**
+ * @file ParameterWindow.h
+ */
 
 
 class ParameterWindow : public QWidget
@@ -125,6 +129,8 @@ private:
     bool soloBRDFUsesColors;
 
     QFileDialog* fileDialog;
+
+    BRDFReconstructionModel brdfModel;
 };
 
 #endif

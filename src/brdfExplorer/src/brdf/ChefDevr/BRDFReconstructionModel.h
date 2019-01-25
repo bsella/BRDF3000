@@ -8,7 +8,7 @@
 #include <string>
 
 #include "BRDFReconstructed.h
-#include "../../../Parametrisation/Parametrisation.h"
+#include "../../../../Parametrisation/Parametrisation.h"
 
 namespace ChefDevr
 {

@@ -49,8 +49,8 @@ infringement.
 #include <QWidget>
 #include <vector>
 #include "BRDFBase.h"
-#include "BRDFReconstructionModel.h"
-#include "BRDFMapScene.h"
+#include "ChefDevr/BRDFReconstructionModel.h"
+#include "ChefDevr/BRDFMapScene.h"
 
 class QSlider;
 class QLabel;

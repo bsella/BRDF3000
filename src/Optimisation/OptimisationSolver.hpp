@@ -26,7 +26,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    typename OptimisationSolver<Scalar>::OptiResult OptimisationSolver<Scalar>::optimizeMapping ()
+    void OptimisationSolver<Scalar>::optimizeMapping ()
     {
         X = computePCA();
         // Compute K
@@ -47,8 +47,6 @@ namespace ChefDevr
                 patternMove(new_X);
             }
         }while(false/*change this of course*/);
-        
-        return OptiResult();
     }
     
     template <typename Scalar>

@@ -48,7 +48,7 @@ namespace ChefDevr
         /**
          * @return The value of the cost function for the solution
          */
-        inline Scalar getCostValue() const { return cosval; }
+        inline Scalar getCostValue() const { return costval; }
         
     private:
 

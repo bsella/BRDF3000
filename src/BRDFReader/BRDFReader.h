@@ -17,6 +17,9 @@
 namespace ChefDevr
 {
 
+    using namespace Eigen;
+    using namespace std;
+    
 	/**
 	* @brief This class is used to read all the BRDF references and to sample them
 	*/   
@@ -44,12 +47,12 @@ namespace ChefDevr
 	    /**
 	    * @brief Samples a BRDF 
 	    * @param brdf the BRDF to be sampled
-        * @param sampled_brdf the sampled BRDF to fill in
-	    * @param num_sampling the number of possible values for the angles that parametrizes the retained BRDF values
-	    * 
-        * Fills the sampled_brdf variable
+	    * @param num_sampling the number of possible values for the angles 
+        * that parametrizes the retained BRDF values
 	    */
-	    void sampleBRDF(const Vector<Scalar> &brdf, Vector<Scalar>& sampled_brdf, unsigned int num_sampling);
+	    Vector<Scalar> sampleBRDF(
+            const Vector<Scalar> &brdf,
+            unsigned int num_sampling);
 
 	    /**
 	     * @return the list of BRDF paths in the order in which they were read

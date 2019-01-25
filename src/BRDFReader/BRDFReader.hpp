@@ -6,6 +6,9 @@ namespace ChefDevr {
 
     template <typename Scalar>
     Matrix<Scalar> BRDFReader::createZ(const char *fileDirectory) {
+        Matrix<Scalar> res = Matrix<Scalar>{};
+
+
 
     }
 

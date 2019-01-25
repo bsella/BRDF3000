@@ -45,27 +45,26 @@ namespace ChefDevr
         
         /**
          * @brief Writes the data that defines the parametrisation (without Z)
-         * @param path Path of the folder to write in=
+         * @param path Path of the folder to write in
          * @param brdfsFiles List of the BRDF files used for the parametrization
          * in the right order (consistent with Z matrix)
          * 
-         * Format of the file :
-         * ______________________________
-         * |            header           |
-         * |_____________________________|
-         * scalar
-         * "inverse mapping"
-         * |                             |
-         * |                             |
-         * |            K_minus1         |
-         * |                             |
-         * |_____________________________|
-         * "latent variables"            |
-         * |brdf_filename x11 x12 ... x1d|
-         * |brdf_filename x21 x22 ... x2d|
-         * |            ...              |
-         * |brdf_filename xn1 xn2 ... xnd|
-         * |_____________________________|
+         * <table>
+         * <caption id="multi_row">File format</caption>
+         * <tr><th>filename = paramtrzdata
+         * <tr><td>propriete intellectuelle et commentaires
+         * <tr><td>scalar_type
+         * <tr><td>"inverse mapping matrix"
+         * <tr><td>nb_rows nb_cols
+         * <tr><td>K_minus1
+         * <tr><td>"latent variables"
+         * <tr><td>number_of_latent_variables
+         * <tr><td>latent_space_dimension
+         * <tr><td>brdf_filename x11 x12 ... x1d
+         * <tr><td>brdf_filename x21 x22 ... x1d
+         * <tr><td>...
+         * <tr><td>brdf_filename xn1 xn2 ... xnd
+         * </table>
          * 
          */
         void writeParametrisationData (

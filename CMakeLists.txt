@@ -8,17 +8,17 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra -fPIC -fopenmp")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
+add_subdirectory(lib/stxxl)
+
 include_directories(
 	${CMAKE_SOURCE_DIR}/src
 	lib/Eigen
-	${CMAKE_CURRENT_BINARY_DIR}/lib/stxxl/include
-	lib/stxxl/include
+	${STXXL_INCLUDE_DIRS}
 )
 
 add_subdirectory(src/BRDFReader)
 add_subdirectory(src/Parametrisation)
 add_subdirectory(src/Optimisation)
-add_subdirectory(lib/stxxl)
 
 add_executable(${APPLICATION}
 	src/main.cpp

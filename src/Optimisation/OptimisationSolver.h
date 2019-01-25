@@ -22,6 +22,10 @@ namespace ChefDevr
     class OptimisationSolver {
     public:
         
+        /**
+         * @brief Constructor
+         * @param minStep Step below wich solution is considered optimal
+         */
         OptimisationSolver(
             Scalar minStep,
             Matrix<Scalar>& Z,

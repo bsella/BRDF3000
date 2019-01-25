@@ -1,9 +1,16 @@
 #ifndef BRDFMAP_H
 #define BRDFMAP_H
 
+/**
+ * @file BRDFMapScene.h
+ */
+
 #include <QGraphicsScene>
 #include <string>
 
+/**
+ * @brief Widget that allows choosing a BRDF by providing a latent space representation
+ */
 class BRDFMapScene : public QGraphicsScene{
 public:
 	explicit BRDFMapScene (const std::string& filePath, QWidget* parent = nullptr);

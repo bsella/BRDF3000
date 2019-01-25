@@ -1,7 +1,8 @@
 #include "BRDFReader.h"
 
-using namespace std;
-using namespace Eigen;
+/**
+ * @file BRDFReader.hpp
+ */
 
 namespace ChefDevr
 {
@@ -12,7 +13,7 @@ namespace ChefDevr
 	}
 
 	template <typename Scalar>
-	Matrix<Scalar> BRDFReader<Scalar>::create_brdfSet(const char *fileDirectory)
+	Matrix<Scalar> BRDFReader<Scalar>::createZ(const char *fileDirectory)
 	{
 
 	}

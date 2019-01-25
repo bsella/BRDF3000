@@ -127,6 +127,7 @@ private:
     
     QFrame* spaceFiller;
     
+    /** @brief Pointer to the map widget that allows choosing a BRDF from latent space coordinates */
     BRDFMapScene* brdfMapScene;
     
     float theta, phi;

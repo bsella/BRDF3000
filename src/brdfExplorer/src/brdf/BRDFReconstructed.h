@@ -5,10 +5,13 @@
 
 /**
  * @file BRDFReconstructed.h
- * A reconstructed BRDF, in the original space
  */
 
 
+/**
+ * @brief A reconstructed BRDF, in the original space
+ * Manipulable with BRDF Explorer
+ */
 class BRDFReconstructed : public BRDFMeasuredMERL {
 public:
 

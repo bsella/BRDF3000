@@ -1,13 +1,17 @@
 #ifndef BRDFPOINT_H
 #define BRDFPOINT_H
 
+/**
+ * @file BRDFMapPoint.h
+ */
+
 #include <QGraphicsItem>
 #include <string>
 
-/**
- * Point on the BRDFMap corresponding to a BRDF
- */
 //TODO : template<bool ui=false>
+/**
+ * @brief Point on the BRDFMap corresponding to a BRDF
+ */
 class BRDFMapPoint : public QGraphicsItem{
 public:
 	explicit BRDFMapPoint (const std::string& name, QColor clr, bool ui);

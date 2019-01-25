@@ -2,6 +2,10 @@
 #include <vector>
 #include <numeric>
 
+/**
+ * @file Parametrisation.hpp
+ */
+
 namespace ChefDevr
 {
     

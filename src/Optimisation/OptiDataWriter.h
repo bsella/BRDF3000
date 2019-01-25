@@ -1,6 +1,10 @@
 #ifndef OPTI_DATA_WRITER__H
 #define OPTI_DATA_WRITER__H
 
+/**
+ * @file OptiDataWriter.h
+ */
+
 #include "../Parametrisation/types.h"
 #include "../Optimisation/OptimisationSolver.h"
 

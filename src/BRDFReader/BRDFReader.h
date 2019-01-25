@@ -1,6 +1,10 @@
 #ifndef BRDFREADER_H
 #define BRDFREADER_H
 
+/**
+ * @file BRDFReader.h
+ */
+
 #include "stdlib.h"
 #include "math.h"
 #include <cstdio>
@@ -27,7 +31,7 @@ namespace ChefDevr
 	    /**
 	    * @brief Read all the BRDFs stored in a given directory
 	    * @param fileDirectory the path of the directory where all the brdfs are stored
-	    * @return The set of BRDFs, the Z matrix
+	    * @return Z BRDFs data matrix where each column represents a BRDF
 	    *
 	    * Initializes the list of BRDFs paths in the order in which they were read.
 	    *
@@ -35,15 +39,17 @@ namespace ChefDevr
 	    * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
 	    * Indeed, in this case, the set of BRDFs is stored inside the disk
 	    */
-	    Matrix<Scalar> create_brdfSet(const char *fileDirectory);
+	    Matrix<Scalar> createZ(const char *fileDirectory);
 
 	    /**
-	    * @brief Samples a BRDF
+	    * @brief Samples a BRDF 
 	    * @param brdf the BRDF to be sampled
+        * @param sampled_brdf the sampled BRDF to fill in
 	    * @param num_sampling the number of possible values for the angles that parametrizes the retained BRDF values
-	    * @return The sampled BRDF
+	    * 
+        * Fills the sampled_brdf variable
 	    */
-	    Vector<Scalar> sample_brdf(const Vector<Scalar> &brdf, unsigned int num_sampling);
+	    void sampleBRDF(const Vector<Scalar> &brdf, Vector<Scalar>& sampled_brdf, unsigned int num_sampling);
 
 	    /**
 	     * @return the list of BRDF paths in the order in which they were read

@@ -1,8 +1,13 @@
 #ifndef OPTIMISATIONSOLVER_H
 #define OPTIMISATIONSOLVER_H
 
+/** 
+ * @file OptimisationSolver.h
+ */
+
 #include "../Parametrisation/types.h"
 #include <cmath>
+
 
 namespace ChefDevr
 {
@@ -10,37 +15,12 @@ namespace ChefDevr
      * @brief Class that solves the optimisation problem defined in the research paper:
      * A Versatile Parametrisation for Measured Materials Manifold
      * Computes an optimised mapping from BRDFs space to a latent space
+     * @tparam Scalar The type of scalar values to do computations with
+     * The precision of this type is crucial to reconstruct an accurate BRDF from the latent space
      */
     template <typename Scalar>
     class OptimisationSolver {
     public:
-        struct OptiResult{
-            OptiResult(const OptiResult& other):
-                K(other.K),
-                K_minus1(other.K_minus1),
-                X(other.X),
-                cost(other.cost){}
-                
-            /**
-             * @brief Variance covariance matrix of latent variables : Mapping matrix
-             */
-            Matrix<Scalar> K;
-            
-            /**
-             * @brief Inverse of K : Inverse mapping matrix
-             */
-            Matrix<Scalar> K_minus1;
-            
-            /**
-             * @brief Latent variables vector
-             */
-            Vector<Scalar> X;
-            
-            /**
-             * @brief Value of the cost function for this solution
-             */
-            Scalar cost;
-        };
         
         OptimisationSolver(
             Scalar minStep,
@@ -51,11 +31,24 @@ namespace ChefDevr
         
         /**
         * @brief Computes the optimized parametrisation of the BRDFs manifold
-        * @return Optimisation result (cf OptiResult struct)
-        * 
         * Uses Hook & Jeeves method to solve the optimisation
         */
-        OptiResult optimizeMapping ();
+        void optimizeMapping ();
+        
+        /**
+         * @return A reference of the inverse mapping matrix
+         */
+        inline const Matrix<Scalar>& getInverseMapping() const { return K_minus1; }
+        
+        /**
+         * @return A reference of the latent variables vector
+         */
+        inline const Vector<Scalar>& getLatentVariables() const { return X; }
+        
+        /**
+         * @return The value of the cost function for the solution
+         */
+        inline Scalar getCostValue() const { return cosval; }
         
     private:
 

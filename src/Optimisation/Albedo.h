@@ -3,6 +3,10 @@
 
 #include "../Parametrisation/Parametrisation.h"
 
+/**
+ * @brief Albedo.h
+ */
+
 namespace ChefDevr
 {
     /**

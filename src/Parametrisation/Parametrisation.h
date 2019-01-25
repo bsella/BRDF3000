@@ -3,7 +3,8 @@
 
 /**
  * @file Parametrisation.h
- * @brief Functions and classes that are common to the Optimisation module and BRDF Explorer module
+ * @brief Functions and classes related to the BRDF space parametrisation
+ * that are common to the Optimisation module and BRDF Explorer module
  */ 
 
 

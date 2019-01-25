@@ -50,7 +50,7 @@ infringement.
 #include <vector>
 #include "BRDFBase.h"
 #include "BRDFReconstructionModel.h"
-#include "../../../BRDFMapScene.h"
+#include "BRDFMapScene.h"
 
 class QSlider;
 class QLabel;
@@ -93,7 +93,12 @@ signals:
 public slots:
      
     void openBRDFFromFile();
-
+    
+    /**
+     * @brief Opens the map widget that allows choosing a BRDF from latent space coordinates
+     */
+    void openBRDFFromMap();
+    
     void emitIncidentDirectionChanged();
     void emitGraphParametersChanged();
     void emitBRDFListChanged();

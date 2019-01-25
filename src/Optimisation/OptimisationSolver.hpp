@@ -6,7 +6,7 @@
  */
 
 #include <cmath>
-
+#include <Eigen/LU> 
 
 namespace ChefDevr
 {
@@ -17,36 +17,58 @@ namespace ChefDevr
         const unsigned int _latentDim) :
         
         minStep(_minStep),
+        step(reduceStep),
         nb_data(_Z.cols()),
         Z(_Z),
-        latentDim(_latentDim)
-    {
-        step = reduceStep;
-        ZZt = Z*Z.transpose();
-    }
+        ZZt(_Z*_Z.transpose()),
+        latentDim(_latentDim),
+        X(Vector<Scalar>(_Z.cols()*latentDim)),
+        X_move(Vector<Scalar>(_Z.cols()*latentDim)),
+        K_minus1(Matrix<Scalar>(_Z.cols(), _Z.cols)){}
     
     template <typename Scalar>
     void OptimisationSolver<Scalar>::optimizeMapping ()
     {
-        X = computePCA();
+        unsigned int i;
+        Vector<Scalar> new_X(latentDim*nb_data);
+        Matrix<Scalar> K(nb_data, nb_data), new_K_minus1(nb_data, nb_data);
+        Scalar new_costval, new_detK;
+        
+        initX();
+        
         // Compute K
+        # pragma omp parallel for
+        for (i=0; i < nb_data; ++i)
+        {
+            computeCovVector(K.col(i), X, i, nb_data);
+        }
         // Compute detK
+        detK = K.determinant();
         // Compute K_minus1
-        // Compute cost
+        K_minus1 = K.inverse();
+        // Center Z
         centerMat<Scalar>(Z);
+        // Init cost
         costval = cost(K_minus1, detK);
         
-        Vector<Scalar> new_X;
         
-        // while ...
+        // Optimisation loop
         do
         {
-            X = exploratoryMove();
-            while(false)
+            exploratoryMove();
+            
+            while(new_costval < costval)
             {
-                patternMove(new_X);
+                costval = new_costval;
+                X = new_X; 
+                K_minus1 = new_K_minus1;
+                detK = new_detK;
+                
+                patternMove(new_X, new_K_minus1, new_detK);
+                new_costval = cost(new_K_minus1, new_detK);
             }
-        }while(false/*change this of course*/);
+            step *= reduceStep;
+        }while(step >= minStep);
     }
     
     template <typename Scalar>
@@ -138,12 +160,14 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    void OptimisationSolver<Scalar>::patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1) const
+    void OptimisationSolver<Scalar>::patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const
     {
+        // TODO
+        // Shall we use Sherman Morisson here too ?
     }
     
     template <typename Scalar>
-    Vector<Scalar> OptimisationSolver<Scalar>::computePCA ()
+    void OptimisationSolver<Scalar>::initX ()
     {
         unsigned char i;
         auto B(Z.transpose()*Z);
@@ -164,6 +188,7 @@ namespace ChefDevr
         
         // Build D the diagonal matrix with ordered eigen values in diagonal
         auto D(Matrix<Scalar>::Zero(latentDim, latentDim));
+        # pragma omp parallel for
         for (i=0; i<latentDim; ++i)
         {
             // use sorted indices to retrieve eigen values in descending order
@@ -172,15 +197,16 @@ namespace ChefDevr
         
         // Build V the transposed matrix of ordered eigen vectors 
         Matrix<Scalar> V(latentDim, eigenVectors.cols());
+        # pragma omp parallel for
         for (i=0; i<latentDim; ++i)
         {
             // use sorted indices to retrieve eigen vectors in descending order
             V.row(i) = eigenVectors.col(idx[i]);
         }
         
-        // Latent variables for each BRDFs are now in column
-        auto X(D*V);
         // Output X as column vector
-        return X.reshaped();
+        X = (D*V).reshaped();
+        
+        // TODO normalize X
     }
 } // namespace ChefDevr

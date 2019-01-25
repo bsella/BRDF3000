@@ -128,7 +128,7 @@ namespace ChefDevr
     /**
      * @brief Computes the covariance column vector for the lv_num'th latent variable
      * @param cov_vector The covariance column vector to fill
-     * @param lv_num Number of the latent variable for the cov vector to be computed
+     * @param lv_num Number of the latent variable for the cov vector to be computed (starts at 0)
      * @param nb_data Number of data 
      * @return Covariance column vector
      * 

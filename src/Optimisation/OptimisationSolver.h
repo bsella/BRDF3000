@@ -137,8 +137,10 @@ namespace ChefDevr
         /**
         * @brief Apply a previously computed displacement to each element of X
         * @param new_X Latent variables vector the apply the move on
+        * @param new_K_minus1 New inverse mapping matrix K_minus1 to fill
+        * @param new_detK New determinant of K to fill
         */
-        void patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1) const;
+        void patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const;
         
         /**
          * @brief Computes the new inverse matrix K_minus1 with Sherman-Morisson formula
@@ -166,14 +168,13 @@ namespace ChefDevr
             Vector<Scalar>& cov_vector) const;
         
         /**
-        * @brief Generate a column vector of latent coordinates by applying the PCA method
+        * @brief Initializes the latent coordinates vector X by applying the PCA method
         * on the Z matrix
-        * @return Column vector of latent coordinates in latent space defined by the PCA 
         * 
         * Uses the Matusik method found in the paper
         * "A data-driven reflectance model"
         */
-        Vector<Scalar> computePCA ();
+        void initX ();
     };
 } // namespace ChefDevr
 

@@ -33,4 +33,4 @@ target_link_libraries(${APPLICATION}
 #TODO: qmake to cmake
 #add_subdirectory(src/brdfExplorer)
 
-#add_subdirectory(tests)
+add_subdirectory(tests)

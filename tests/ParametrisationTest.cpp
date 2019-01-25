@@ -1,6 +1,5 @@
 #include "ParametrisationTest.h"
 
-ParametrisationTest::ParametrisationTest()
-{
+ParametrisationTest::ParametrisationTest(): BaseTest(){
 
 }

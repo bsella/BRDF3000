@@ -17,6 +17,14 @@ include_directories(
 
 add_executable(${APPLICATION}
 	main.cpp
+	BaseTest.h
+	BaseTest.cpp
+	OptimisationTest.h
+	OptimisationTest.cpp
+	ParametrisationTest.h
+	ParametrisationTest.cpp
+	BRDFReaderTest.h
+	BRDFReaderTest.cpp
 )
 target_link_libraries(${APPLICATION}
 	BRDFReader

@@ -30,7 +30,4 @@ target_link_libraries(${APPLICATION}
 	${STXXL_LIBRARIES}
 )
 
-#TODO: qmake to cmake
-#add_subdirectory(src/brdfExplorer)
-
 add_subdirectory(tests)

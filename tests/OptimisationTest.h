@@ -1,9 +1,9 @@
 #ifndef OPTIMISATIONTEST_H
 #define OPTIMISATIONTEST_H
 
+#include "BaseTest.h"
 
-class OptimisationTest
-{
+class OptimisationTest : public BaseTest{
 public:
     OptimisationTest();
 };

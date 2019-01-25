@@ -61,7 +61,7 @@ namespace ChefDevr {
         class BRDFReaderError : public std::runtime_error {
         public:
             explicit BRDFReaderError(const std::string &message_error) :
-                runtime_error{message_error} {}
+            runtime_error{message_error} {}
         };
 
     private:
@@ -98,6 +98,7 @@ namespace ChefDevr {
         * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
         * Indeed, in this case, the set of BRDFs is stored inside the disk
         */
+        template<typename Scalar>
         Vector<Scalar> read_brdf(const char *filePath);
 
         /**
@@ -111,6 +112,7 @@ namespace ChefDevr {
          * @param[out] green_value green channel of the extracted color
          * @param[out] blue_value blue channel of the extracted color
          */
+        template<typename Scalar>
         void lookup_brdf_val(const Vector<Scalar> &brdf, double theta_in, double phi_in, double theta_out, double phi_out, double& red_value, double& green_value, double& blue_value);
 
         /**

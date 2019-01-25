@@ -15,7 +15,7 @@ namespace ChefDevr
      * @brief Class that solves the optimisation problem defined in the research paper:
      * A Versatile Parametrisation for Measured Materials Manifold
      * Computes an optimised mapping from BRDFs space to a latent space
-     * @tparam Scalar The type of scalar values to do computations with
+     * @tparam Scalar The type of scalar number to do computations with.
      * The precision of this type is crucial to reconstruct an accurate BRDF from the latent space
      */
     template <typename Scalar>

@@ -44,12 +44,30 @@ namespace ChefDevr
             const unsigned height = 1024);
         
         /**
-         * @brief Writes the data that defines the parametrization (without Z)
-         * @param path Path of the folder to write in=
+         * @brief Writes the data that defines the parametrisation (without Z)
+         * @param path Path of the folder to write in
          * @param brdfsFiles List of the BRDF files used for the parametrization
          * in the right order (consistent with Z matrix)
+         * 
+         * <table>
+         * <caption id="multi_row">File format</caption>
+         * <tr><th>filename = paramtrzdata
+         * <tr><td>propriete intellectuelle et commentaires
+         * <tr><td>scalar_type
+         * <tr><td>"inverse mapping matrix"
+         * <tr><td>nb_rows nb_cols
+         * <tr><td>K_minus1
+         * <tr><td>"latent variables"
+         * <tr><td>number_of_latent_variables
+         * <tr><td>latent_space_dimension
+         * <tr><td>brdf_filename x11 x12 ... x1d
+         * <tr><td>brdf_filename x21 x22 ... x1d
+         * <tr><td>...
+         * <tr><td>brdf_filename xn1 xn2 ... xnd
+         * </table>
+         * 
          */
-        void writeParametrizationData (
+        void writeParametrisationData (
             const std::string& path,
             const std::vector<std::string>& brdfsFiles);
         

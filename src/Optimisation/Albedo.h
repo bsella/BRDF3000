@@ -4,7 +4,7 @@
 #include "../Parametrisation/Parametrisation.h"
 
 /**
- * @brief Albedo.h
+ * @file Albedo.h
  */
 
 namespace ChefDevr

@@ -141,8 +141,9 @@ namespace ChefDevr
          * @param new_X Latent variables vector the apply the move on
          * @param new_K_minus1 New inverse mapping matrix K_minus1 to fill
          * @param new_detK New determinant of K to fill
+         * @return true if effectively moved, false otherwise
          */
-        void patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const;
+        bool patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const;
         
         /**
          * @brief Computes the new inverse matrix K_minus1 with Sherman-Morisson formula

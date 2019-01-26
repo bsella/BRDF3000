@@ -65,8 +65,11 @@ namespace ChefDevr
                 K_minus1 = new_K_minus1;
                 detK = new_detK;
                 
-                patternMove(new_X, new_K_minus1, new_detK);
-                cost(new_costval, new_K_minus1, new_detK);
+                if(patternMove(new_X, new_K_minus1, new_detK)){
+                    cost(new_costval, new_K_minus1, new_detK);
+                }else{
+                    break;
+                }
             }
             step *= reduceStep;
         }while(step >= minStep);
@@ -89,7 +92,8 @@ namespace ChefDevr
     void OptimisationSolver<Scalar>::exploratoryMove ()
     {
         const auto& nbcoefs(X.rows());
-        Scalar new_costval, new_detK;
+        Scalar new_costval(std::numeric_limits<Scalar>::infinity());
+        Scalar new_detK;
         Vector<Scalar> cov_vector(nb_data), diff_cov_vector(nb_data);
         Matrix<Scalar> new_K_minus1(K_minus1.rows(), K_minus1.cols());
         Vector<Scalar> X_move(nbcoefs);
@@ -100,34 +104,38 @@ namespace ChefDevr
             lv_num = i/latentDim;
             computeCovVector(cov_vector, X, lv_num);
             
-            X_move[i] = step;
             X[i] += step;
-            computeCovVector(diff_cov_vector, X, lv_num);
-            diff_cov_vector -= cov_vector;
-            
-            // Update K_minus1 and detK with Sherman-Morisson formula
-            updateInverse(K_minus1, new_K_minus1, lv_num, diff_cov_vector);
-            updateDeterminant(new_detK, new_K_minus1, lv_num, diff_cov_vector);
-            // Update costval
-            cost(new_costval, new_K_minus1, new_detK);
-            
-            if (new_costval > costval)
+            if ( X[i] < Scalar(1)) // latent variable constraint
             {
-                X_move[i] = -step;
-                X[i] -= Scalar(2)*step;
+                X_move[i] = step;
                 computeCovVector(diff_cov_vector, X, lv_num);
                 diff_cov_vector -= cov_vector;
                 
                 // Update K_minus1 and detK with Sherman-Morisson formula
                 updateInverse(K_minus1, new_K_minus1, lv_num, diff_cov_vector);
                 updateDeterminant(new_detK, new_K_minus1, lv_num, diff_cov_vector);
-                // Update cost
+                // Update costval
                 cost(new_costval, new_K_minus1, new_detK);
-                
+            }
+            if (new_costval > costval)
+            {
+                X[i] -= Scalar(2)*step;
+                if (X[i] > Scalar(-1)) // latent variable constraint
+                {
+                    X_move[i] = -step;
+                    computeCovVector(diff_cov_vector, X, lv_num);
+                    diff_cov_vector -= cov_vector;
+                    
+                    // Update K_minus1 and detK with Sherman-Morisson formula
+                    updateInverse(K_minus1, new_K_minus1, lv_num, diff_cov_vector);
+                    updateDeterminant(new_detK, new_K_minus1, lv_num, diff_cov_vector);
+                    // Update cost
+                    cost(new_costval, new_K_minus1, new_detK);
+                }   
                 if (new_costval > costval)
                 {
-                    X_move[i] = Scalar(0);
                     X[i] += step;
+                    X_move[i] = Scalar(0);
                 }
                 else
                 {
@@ -168,19 +176,24 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    void OptimisationSolver<Scalar>::patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const
+    bool OptimisationSolver<Scalar>::patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const
     {
         unsigned int i;
         new_X += X_move;
-        // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)
-        # pragma omp parallel for
-        for (i=0; i<nb_data; ++i){
-            computeCovVector(new_K_minus1.col(i), new_X, i, latentDim);
+        if (new_X.minCoeff() >= Scalar(-1) && new_X.maxCoeff() <= Scalar(1))
+        {
+            // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)
+            # pragma omp parallel for
+            for (i=0; i<nb_data; ++i){
+                computeCovVector(new_K_minus1.col(i), new_X, i, latentDim);
+            }
+            // Compute new_detK
+            new_detK = new_K_minus1.determinant();
+            // Compute new_K_minus1
+            new_K_minus1 = new_K_minus1.inverse();
+            return true;
         }
-        // Compute new_detK
-        new_detK = new_K_minus1.determinant();
-        // Compute new_K_minus1
-        new_K_minus1 = new_K_minus1.inverse();
+        return false;
     }
     
     template <typename Scalar>

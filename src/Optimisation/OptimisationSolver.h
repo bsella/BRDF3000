@@ -34,9 +34,9 @@ namespace ChefDevr
         ~OptimisationSolver(){}
         
         /**
-        * @brief Computes the optimized parametrisation of the BRDFs manifold
-        * Uses Hook & Jeeves method to solve the optimisation
-        */
+         * @brief Computes the optimized parametrisation of the BRDFs manifold
+         * Uses Hook & Jeeves method to solve the optimisation
+         */
         void optimizeMapping ();
         
         /**
@@ -50,9 +50,9 @@ namespace ChefDevr
         inline const Vector<Scalar>& getLatentVariables() const { return X; }
         
         /**
-         * @return The value of the cost function for the solution
+         * @return A reference of the value of the cost function for the solution
          */
-        inline Scalar getCostValue() const { return costval; }
+        inline const Scalar& getCostValue() const { return costval; }
         
     private:
 
@@ -106,7 +106,7 @@ namespace ChefDevr
          * We compute only columns of K when necessary instead -> covariance vectors
         */
         Matrix<Scalar> K_minus1;
-
+        
         /**
          * @brief Determinant of K
          */
@@ -118,28 +118,28 @@ namespace ChefDevr
         Scalar costval;
         
         /**
-        * @brief Computes the cost of the solution defined by K_minus1
-        * @param K_minus1 Inverse mapping
-        * @param detK Determinant of the matrix K
-        * @return Cost of the solution
-        */
-        Scalar cost (const Matrix<Scalar>& K_minus1, const Scalar& detK) const;
+         * @brief Computes the cost of the solution defined by K_minus1
+         * @param cost value of the cost to fill
+         * @param K_minus1 Inverse mapping
+         * @param detK Determinant of the matrix K
+         */
+        void cost (Scalar& cost, const Matrix<Scalar>& K_minus1, const Scalar& detK) const;
 
         /**
-        * @brief Updates the displacement vector of X that improves the solution (X_move)
-        * 
-        * Adds and substracts step from each element
-        * and reevaluate the cost function to check for better solutions
-        */
+         * @brief Updates the displacement vector of X that improves the solution (X_move)
+         * 
+         * Adds and substracts step from each element
+         * and reevaluate the cost function to check for better solutions
+         */
         void exploratoryMove ();
 
         /**
-        * @brief Apply X_move to the latent variable vector X
-        * Updates new_X, new_K_minus1, new_detK accordingly
-        * @param new_X Latent variables vector the apply the move on
-        * @param new_K_minus1 New inverse mapping matrix K_minus1 to fill
-        * @param new_detK New determinant of K to fill
-        */
+         * @brief Apply X_move to the latent variable vector X
+         * Updates new_X, new_K_minus1, new_detK accordingly
+         * @param new_X Latent variables vector the apply the move on
+         * @param new_K_minus1 New inverse mapping matrix K_minus1 to fill
+         * @param new_detK New determinant of K to fill
+         */
         void patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const;
         
         /**
@@ -147,33 +147,39 @@ namespace ChefDevr
          * @param old_K_minus1 K_minus1 matrix before K had changed
          * @param new_K_minus1 K_minus1 matrix after K has changed
          * @param lv_num Number of the latent variable that has changed
-         * @param cov_vector The column of K that has changed
+         * @param diff_cov_vector The difference between
+         * the column of K that has changed and the column before it had change.
+         * Although this parameter is not const it remains unchanged when the function returns
          */
         void computeInverse (
             const Matrix<Scalar>& old_K_minus1,
             Matrix<Scalar>& new_K_minus1,
             unsigned int lv_num,
-            Vector<Scalar>& cov_vector) const;
+            Vector<Scalar>& diff_cov_vector) const;
         
         /**
          * @brief Computes new the determinant of the matrix K with Sherman-Morisson formula
+         * @param detK Determinant of K to fill
          * @param new_K_minus1 K_minus1 matrix after K has changed
          * @param lv_num Number of the latent variable that has changed
-         * @param cov_vector The column of K that has changed
+         * @param diff_cov_vector The difference between
+         * the column of K that has changed and the column before it had change.
+         * Although this parameter is not const it remains unchanged when the function returns
          * @return The new determinant of K
          */
-        Scalar computeDeterminant (
+        void computeDeterminant (
+            Scalar& detK,
             const Matrix<Scalar>& new_K_minus1,
             unsigned int lv_num,
-            Vector<Scalar>& cov_vector) const;
+            Vector<Scalar>& diff_cov_vector) const;
         
         /**
-        * @brief Initializes the latent coordinates vector X by applying the PCA method
-        * on the Z matrix
-        * 
-        * Uses the Matusik method found in the paper
-        * "A data-driven reflectance model"
-        */
+         * @brief Initializes the latent coordinates vector X by applying the PCA method
+         * on the Z matrix
+         * 
+         * Uses the Matusik method found in the paper
+         * "A data-driven reflectance model"
+         */
         void initX ();
     };
 } // namespace ChefDevr

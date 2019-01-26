@@ -31,25 +31,26 @@ namespace ChefDevr
     {
         unsigned int i;
         Vector<Scalar> new_X(latentDim*nb_data);
-        Matrix<Scalar> K(nb_data, nb_data), new_K_minus1(nb_data, nb_data);
+        Matrix<Scalar> new_K_minus1(nb_data, nb_data);
         Scalar new_costval, new_detK;
         
         initX();
         
         // Compute K
+        // (We use K_minus1 to store it because we don't need K anymore after)
         # pragma omp parallel for
         for (i=0; i < nb_data; ++i)
         {
-            computeCovVector(K.col(i), X, i, nb_data);
+            computeCovVector(K_minus1.col(i), X, i, nb_data);
         }
         // Compute detK
-        detK = K.determinant();
-        // Compute K_minus1
-        K_minus1 = K.inverse();
+        detK = K_minus1.determinant();
+        // Compute K_minus1 from K
+        K_minus1 = K_minus1.inverse();
         // Center Z
         centerMat<Scalar>(Z);
         // Init cost
-        costval = cost(K_minus1, detK);
+        cost(costval, K_minus1, detK);
         
         
         // Optimisation loop
@@ -65,22 +66,23 @@ namespace ChefDevr
                 detK = new_detK;
                 
                 patternMove(new_X, new_K_minus1, new_detK);
-                new_costval = cost(new_K_minus1, new_detK);
+                cost(new_costval, new_K_minus1, new_detK);
             }
             step *= reduceStep;
         }while(step >= minStep);
     }
     
     template <typename Scalar>
-    Scalar OptimisationSolver<Scalar>::cost(const Matrix<Scalar>& K_minus1, const Scalar& detK) const
+    void OptimisationSolver<Scalar>::cost(Scalar& cost, const Matrix<Scalar>& K_minus1, const Scalar& detK) const
     {
         Scalar trace(0);
         // Compute trace of K_minus1 * ZZt
         # pragma omp parallel for reduction(+:trace)
-        for (unsigned int i = 0; i < ZZt.cols(); ++i){
+        for (unsigned int i = 0; i < ZZt.cols(); ++i)
+        {
             trace += K_minus1.row(i).dot(ZZt.col(i));
         }
-        return Scalar(0.5) * nb_data * std::log(detK) + Scalar(0.5) * trace;
+        cost = Scalar(0.5) * nb_data * std::log(detK) + Scalar(0.5) * trace;
     }
     
     template <typename Scalar>
@@ -88,8 +90,7 @@ namespace ChefDevr
     {
         const auto& nbcoefs(X.rows());
         Scalar new_costval, new_detK;
-        Vector<Scalar> new_X(X);
-        Vector<Scalar> cov_vector(nb_data), new_cov_vector(nb_data);
+        Vector<Scalar> cov_vector(nb_data), diff_cov_vector(nb_data);
         Matrix<Scalar> new_K_minus1(K_minus1.rows(), K_minus1.cols());
         Vector<Scalar> X_move(nbcoefs);
         unsigned int lv_num;
@@ -97,47 +98,53 @@ namespace ChefDevr
         for (unsigned int i(0); i < nbcoefs;++i)
         {
             lv_num = i/latentDim;
+            computeCovVector(cov_vector, X, lv_num);
+            
             X_move[i] = step;
-            new_X[i] += step;
-            computeCovarianceVector(new_cov_vector, new_X, lv_num);
+            X[i] += step;
+            computeCovVector(diff_cov_vector, X, lv_num);
+            diff_cov_vector -= cov_vector;
             
             // Update K_minus1 and detK with Sherman-Morisson formula
-            updateInverse(K_minus1, new_K_minus1, lv_num, new_cov_vector);
-            new_detK = updateDeterminant(new_K_minus1, lv_num, new_cov_vector);
+            updateInverse(K_minus1, new_K_minus1, lv_num, diff_cov_vector);
+            updateDeterminant(new_detK, new_K_minus1, lv_num, diff_cov_vector);
             // Update costval
-            new_costval = cost(new_K_minus1, new_detK);
+            cost(new_costval, new_K_minus1, new_detK);
             
-            if (new_costval > costval){
+            if (new_costval > costval)
+            {
                 X_move[i] = -step;
-                new_X[i] -= Scalar(2)*step;
-                new_cov_vector = computeCovVector(new_X, lv_num);
+                X[i] -= Scalar(2)*step;
+                computeCovVector(diff_cov_vector, X, lv_num);
+                diff_cov_vector -= cov_vector;
                 
                 // Update K_minus1 and detK with Sherman-Morisson formula
-                updateInverse(K_minus1, new_K_minus1, lv_num, new_cov_vector);
-                new_detK = updateDeterminant(new_K_minus1, lv_num, new_cov_vector);
+                updateInverse(K_minus1, new_K_minus1, lv_num, diff_cov_vector);
+                updateDeterminant(new_detK, new_K_minus1, lv_num, diff_cov_vector);
                 // Update cost
-                new_costval = cost(new_K_minus1, new_detK);
+                cost(new_costval, new_K_minus1, new_detK);
                 
-                if (new_costval > costval){
+                if (new_costval > costval)
+                {
                     X_move[i] = Scalar(0);
-                    new_X[i] += step;
+                    X[i] += step;
                 }
-                else{
+                else
+                {
                     costval = new_costval;
                     // cost has changed -> keep new_K_minus1 and new_detK
                     K_minus1 = new_K_minus1;
                     detK = new_detK;
                 }
             }
-            else{
+            else
+            {
                 costval = new_costval;
                 // cost has changed -> keep new_K_minus1 and new_detK
                 K_minus1 = new_K_minus1;
                 detK = new_detK;
             }
         }
-        // X = X+X_move; <=>
-        X = new_X;
     }
     
     template <typename Scalar>
@@ -145,25 +152,35 @@ namespace ChefDevr
         const Matrix<Scalar>& old_K_minus1,
         Matrix<Scalar>& new_K_minus1,
         unsigned int lv_num,
-        Vector<Scalar>& cov_vector) const
+        Vector<Scalar>& diff_cov_vector) const
     {
-//        return Matrix<Scalar>();
+        // TODO
     }
     
     template <typename Scalar>
-    Scalar OptimisationSolver<Scalar>::computeDeterminant (
+    void OptimisationSolver<Scalar>::computeDeterminant (
+        Scalar& detK,
         const Matrix<Scalar>& new_K_minus1,
         unsigned int lv_num,
-        Vector<Scalar>& cov_vector) const
+        Vector<Scalar>& diff_cov_vector) const
     {
-        return Matrix<Scalar>();
+        // TODO
     }
     
     template <typename Scalar>
     void OptimisationSolver<Scalar>::patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const
     {
-        // TODO
-        // Shall we use Sherman Morisson here too ?
+        unsigned int i;
+        new_X += X_move;
+        // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)
+        # pragma omp parallel for
+        for (i=0; i<nb_data; ++i){
+            computeCovVector(new_K_minus1.col(i), new_X, i, latentDim);
+        }
+        // Compute new_detK
+        new_detK = new_K_minus1.determinant();
+        // Compute new_K_minus1
+        new_K_minus1 = new_K_minus1.inverse();
     }
     
     template <typename Scalar>

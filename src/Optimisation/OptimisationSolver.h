@@ -83,7 +83,6 @@ namespace ChefDevr
          * @brief Z*Ztransposed
          */
         Matrix<Scalar> ZZt;
-        
 
         /**
          * @brief Dimension of produced latent space
@@ -129,13 +128,14 @@ namespace ChefDevr
         /**
         * @brief Updates the displacement vector of X that improves the solution (X_move)
         * 
-        * Adds and substracts _reduceStep_ from each element
+        * Adds and substracts step from each element
         * and reevaluate the cost function to check for better solutions
         */
         void exploratoryMove ();
 
         /**
-        * @brief Apply a previously computed displacement to each element of X
+        * @brief Apply X_move to the latent variable vector X
+        * Updates new_X, new_K_minus1, new_detK accordingly
         * @param new_X Latent variables vector the apply the move on
         * @param new_K_minus1 New inverse mapping matrix K_minus1 to fill
         * @param new_detK New determinant of K to fill

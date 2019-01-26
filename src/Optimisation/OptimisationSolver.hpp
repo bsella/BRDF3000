@@ -204,9 +204,10 @@ namespace ChefDevr
             V.row(i) = eigenVectors.col(idx[i]);
         }
         
-        // Output X as column vector
+        // X as column vector
         X = (D*V).reshaped();
         
-        // TODO normalize X
+        // normalize X
+        X = X / (std::max(std::abs(X.maxCoeff()), std::abs(X.minCoeff())));
     }
 } // namespace ChefDevr

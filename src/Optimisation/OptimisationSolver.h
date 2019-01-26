@@ -13,7 +13,7 @@ namespace ChefDevr
 {
     /**
      * @brief Class that solves the optimisation problem defined in the research paper:
-     * A Versatile Parametrisation for Measured Materials Manifold
+     * A Versatile Parametrisation for Measured Materials Manifold.
      * Computes an optimised mapping from BRDFs space to a latent space
      * @tparam Scalar The type of scalar number to do computations with.
      * The precision of this type is crucial to reconstruct an accurate BRDF from the latent space
@@ -36,7 +36,7 @@ namespace ChefDevr
         ~OptimisationSolver(){}
         
         /**
-         * @brief Computes the optimized parametrisation of the BRDFs manifold
+         * @brief Computes the optimized parametrisation of the BRDFs manifold.
          * Uses Hook & Jeeves method to solve the optimisation
          */
         void optimizeMapping ();
@@ -105,7 +105,7 @@ namespace ChefDevr
          * @brief Inverse of K : Inverse mapping matrix
          *
          * We do not store K because the algorithm doesnt require it directly :
-         * We compute only columns of K when necessary instead -> covariance vectors
+         * we compute only columns of K when necessary instead -> covariance vectors
         */
         Matrix<Scalar> K_minus1;
         
@@ -136,7 +136,7 @@ namespace ChefDevr
         void exploratoryMove ();
 
         /**
-         * @brief Apply X_move to the latent variable vector X
+         * @brief Apply X_move to the latent variable vector X.
          * Updates new_X, new_K_minus1, new_detK accordingly
          * @param new_X Latent variables vector the apply the move on
          * @param new_K_minus1 New inverse mapping matrix K_minus1 to fill

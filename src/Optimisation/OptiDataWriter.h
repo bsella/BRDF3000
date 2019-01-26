@@ -2,8 +2,10 @@
 #define OPTI_DATA_WRITER__H
 
 /**
- * @file OptiDataWriter.h
- */
+* @file OptiDataWriter.h
+* @brief Provides the functions to write latent space data needed for BRDFs reconstruction
+* and latent space visualization
+*/
 
 #include "../Parametrisation/types.h"
 #include "../Optimisation/OptimisationSolver.h"
@@ -11,10 +13,6 @@
 #include <string>
 #include <vector>
 
-/**
-* @file OptiDataWriter.h Provides the functions to write latent space data needed for BRDFs reconstruction
-* and latent space visualization
-*/
 
 namespace ChefDevr
 {

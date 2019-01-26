@@ -162,7 +162,23 @@ namespace ChefDevr
         unsigned int lv_num,
         Vector<Scalar>& diff_cov_vector) const
     {
-        // TODO
+        Scalar centerCoeff(diff_cov_vector[lv_num]);
+        
+        // One row modification
+        new_K_minus1 = K_minus1
+                        - ( ((K_minus1.col(lv_num)*diff_cov_vector.transpose())*K_minus1)
+                                /
+                            (Scalar(1)+diff_cov_vector.transpose()*K_minus1.col(lv_num))
+                          );
+        diff_cov_vector[lv_num] = Scalar(0);
+        
+        // One column modification
+        new_K_minus1 = new_K_minus1
+                        - ( (K_minus1*diff_cov_vector*K_minus1.col(lv_num))
+                            /
+                            (Scalar(1)+ K_minus1.col(lv_num)*diff_cov_vector)
+                          );
+        diff_cov_vector[lv_num] = centerCoeff;
     }
     
     template <typename Scalar>

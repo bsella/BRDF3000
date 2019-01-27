@@ -14,6 +14,9 @@
 
 int main(int argv, char* argc[]){
 
+    ParametrisationTest t;
+    t.doAllTests(std::cout);
+
     /*std::vector<std::string> opt = {};
     for (int i = 1; i < argv; i ++) {
         opt.emplace_back(std::string(argc[i]));

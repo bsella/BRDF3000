@@ -2,7 +2,6 @@
 #define BASETEST_H
 
 #include <iostream>
-#include <functional>
 #include <vector>
 #include <string>
 
@@ -12,7 +11,22 @@ public:
     virtual ~BaseTest();
     bool doAllTests(std::ostream&);
 protected:
-    std::vector<bool(*)(std::string&)> tests;
+    void addTest(std::istream&(*)(std::istream&),
+        const std::string&,
+        const std::string&);
+private:
+    struct testSet{
+        testSet(std::istream&(*)(std::istream&),
+            const std::string&,
+            const std::string&);
+
+        std::istream&(*procedure)(std::istream&);
+        const std::string dataPath;
+        const std::string gtPath;
+        // template<typename Scalar>
+        bool execute(std::string&)const;
+    };
+    std::vector<testSet> tests;
 };
 
 #endif // BASETEST_H

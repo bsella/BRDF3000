@@ -112,8 +112,7 @@ namespace ChefDevr
                 diff_cov_vector -= cov_vector;
                 
                 // Update K_minus1 and detK with Sherman-Morisson formula
-                updateInverse(K_minus1, new_K_minus1, lv_num, diff_cov_vector);
-                updateDeterminant(new_detK, new_K_minus1, lv_num, diff_cov_vector);
+                shermanMorissonUpdate(K_minus1, new_K_minus1, detK, new_detK, lv_num, diff_cov_vector);
                 // Update costval
                 cost(new_costval, new_K_minus1, new_detK);
             }
@@ -127,8 +126,7 @@ namespace ChefDevr
                     diff_cov_vector -= cov_vector;
                     
                     // Update K_minus1 and detK with Sherman-Morisson formula
-                    updateInverse(K_minus1, new_K_minus1, lv_num, diff_cov_vector);
-                    updateDeterminant(new_detK, new_K_minus1, lv_num, diff_cov_vector);
+                    shermanMorissonUpdate(K_minus1, new_K_minus1, detK, new_detK, lv_num, diff_cov_vector);
                     // Update cost
                     cost(new_costval, new_K_minus1, new_detK);
                 }   
@@ -156,7 +154,7 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    void OptimisationSolver<Scalar>::computeInverse (
+    void OptimisationSolver<Scalar>::shermanMorissonUpdate (
         const Matrix<Scalar>& old_K_minus1,
         Matrix<Scalar>& new_K_minus1,
         const Scalar& old_detK,
@@ -192,19 +190,6 @@ namespace ChefDevr
                           );
         
         diff_cov_vector[lv_num] = centerCoeff;
-    }
-    
-    template <typename Scalar>
-    void OptimisationSolver<Scalar>::computeDeterminant (
-        Scalar& new_detK,
-        const Matrix<Scalar>& new_K_minus1,
-        unsigned int lv_num,
-        Vector<Scalar>& diff_cov_vector) const
-    {
-        Scalar centerCoeff(diff_cov_vector[lv_num]);
-        
-        // One row modification
-        new_detK = new_K_minus1
     }
     
     template <typename Scalar>

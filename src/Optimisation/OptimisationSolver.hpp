@@ -159,36 +159,52 @@ namespace ChefDevr
     void OptimisationSolver<Scalar>::computeInverse (
         const Matrix<Scalar>& old_K_minus1,
         Matrix<Scalar>& new_K_minus1,
+        const Scalar& old_detK,
+        Scalar& new_detK,
+        unsigned int lv_num,
+        Vector<Scalar>& diff_cov_vector) const
+    {
+        Scalar centerCoeff(diff_cov_vector[lv_num]);
+        
+        // ===== One row modification =====
+        
+        // Determinant update
+        new_detK = (Scalar(1) + diff_cov_vector.transpose()*old_K_minus1.col(lv_num)) * old_detK;
+        
+        // Inverse update 
+        new_K_minus1 = old_K_minus1
+                        - ( ((old_K_minus1.col(lv_num)*diff_cov_vector.transpose())*old_K_minus1)
+                                /
+                            (Scalar(1)+diff_cov_vector.transpose()*old_K_minus1.col(lv_num))
+                          );
+        
+        // ===== One column modification =====
+        diff_cov_vector[lv_num] = Scalar(0);
+        
+        // Determinant update
+        new_detK = (Scalar(1) + new_K_minus1.row(lv_num)*diff_cov_vector) * new_detK;
+        
+        // Inverse update
+        new_K_minus1 = new_K_minus1
+                        - ( (new_K_minus1*diff_cov_vector*new_K_minus1.row(lv_num))
+                            /
+                            (Scalar(1)+ new_K_minus1.row(lv_num)*diff_cov_vector)
+                          );
+        
+        diff_cov_vector[lv_num] = centerCoeff;
+    }
+    
+    template <typename Scalar>
+    void OptimisationSolver<Scalar>::computeDeterminant (
+        Scalar& new_detK,
+        const Matrix<Scalar>& new_K_minus1,
         unsigned int lv_num,
         Vector<Scalar>& diff_cov_vector) const
     {
         Scalar centerCoeff(diff_cov_vector[lv_num]);
         
         // One row modification
-        new_K_minus1 = K_minus1
-                        - ( ((K_minus1.col(lv_num)*diff_cov_vector.transpose())*K_minus1)
-                                /
-                            (Scalar(1)+diff_cov_vector.transpose()*K_minus1.col(lv_num))
-                          );
-        diff_cov_vector[lv_num] = Scalar(0);
-        
-        // One column modification
-        new_K_minus1 = new_K_minus1
-                        - ( (K_minus1*diff_cov_vector*K_minus1.col(lv_num))
-                            /
-                            (Scalar(1)+ K_minus1.col(lv_num)*diff_cov_vector)
-                          );
-        diff_cov_vector[lv_num] = centerCoeff;
-    }
-    
-    template <typename Scalar>
-    void OptimisationSolver<Scalar>::computeDeterminant (
-        Scalar& detK,
-        const Matrix<Scalar>& new_K_minus1,
-        unsigned int lv_num,
-        Vector<Scalar>& diff_cov_vector) const
-    {
-        // TODO
+        new_detK = new_K_minus1
     }
     
     template <typename Scalar>

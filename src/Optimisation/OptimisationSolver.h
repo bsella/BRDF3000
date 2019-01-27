@@ -146,33 +146,25 @@ namespace ChefDevr
         bool patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const;
         
         /**
-         * @brief Computes the new inverse matrix K_minus1 with Sherman-Morisson formula
+         * @brief Computes the new inverse matrix K_minus1 and the new determinant of K
+         * using Sherman-Morisson formula
          * @param old_K_minus1 K_minus1 matrix before K had changed
-         * @param new_K_minus1 K_minus1 matrix after K has changed
+         * @param new_K_minus1 K_minus1 matrix after K has changed (computed in this function)
+         * @param old_detK Determinant of K before K had changed
+         * @param new_detK Determinant of K after K has changed (computed in this function)
          * @param lv_num Number of the latent variable that has changed
          * @param diff_cov_vector The difference between
-         * the column of K that has changed and the column before it had change.
+         * the column/row of K that has changed and the column/row before it had change.
          * Although this parameter is not const it remains unchanged when the function returns
+         * 
+         * Computes new_K_minus_1 and new_detK from their previous values using Sherman-Morisson formula.
+         * The formula for the inverse and determinant are applied twice : one for the row modification, and another one for the column modification.
          */
-        void computeInverse (
+        void shermanMorissonUpdate (
             const Matrix<Scalar>& old_K_minus1,
             Matrix<Scalar>& new_K_minus1,
-            unsigned int lv_num,
-            Vector<Scalar>& diff_cov_vector) const;
-        
-        /**
-         * @brief Computes new the determinant of the matrix K with Sherman-Morisson formula
-         * @param detK Determinant of K to fill
-         * @param new_K_minus1 K_minus1 matrix after K has changed
-         * @param lv_num Number of the latent variable that has changed
-         * @param diff_cov_vector The difference between
-         * the column of K that has changed and the column before it had change.
-         * Although this parameter is not const it remains unchanged when the function returns
-         * @return The new determinant of K
-         */
-        void computeDeterminant (
-            Scalar& detK,
-            const Matrix<Scalar>& new_K_minus1,
+            const Scalar& old_detK,
+            Scalar& new_detK,
             unsigned int lv_num,
             Vector<Scalar>& diff_cov_vector) const;
         

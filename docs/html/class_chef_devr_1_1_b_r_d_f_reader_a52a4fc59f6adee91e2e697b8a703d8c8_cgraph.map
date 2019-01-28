@@ -1,8 +1,0 @@
-<map id="ChefDevr::BRDFReader::lookup_brdf_val" name="ChefDevr::BRDFReader::lookup_brdf_val">
-<area shape="rect" id="node2" href="$class_chef_devr_1_1_b_r_d_f_reader.html#ac5e52ec93c480dd3d4ad47d5e1edf829" title="Lookup phi_diff index. " alt="" coords="211,5,368,47"/>
-<area shape="rect" id="node3" href="$class_chef_devr_1_1_b_r_d_f_reader.html#ab6a38cb74127f68f8f82bfde7afa9f27" title="Converts standard coordinates to half vector/difference vector coordinates. " alt="" coords="211,71,368,127"/>
-<area shape="rect" id="node6" href="$class_chef_devr_1_1_b_r_d_f_reader.html#af58b0fc1168419a46910cb4a706881a0" title="Lookup theta_diff index. " alt="" coords="211,152,368,193"/>
-<area shape="rect" id="node7" href="$class_chef_devr_1_1_b_r_d_f_reader.html#a565a677a9e08e4f140ac4c01ea5c37b3" title="Lookup theta_half index. " alt="" coords="211,217,368,259"/>
-<area shape="rect" id="node4" href="$class_chef_devr_1_1_b_r_d_f_reader.html#afe401d8c485d62681e32db306453d05d" title="Computes a direction from angles. " alt="" coords="416,47,573,88"/>
-<area shape="rect" id="node5" href="$class_chef_devr_1_1_b_r_d_f_reader.html#ac1a007bc9ab8355d71f7a23553b33c40" title="Rotates a vector along an axis. " alt="" coords="416,112,573,153"/>
-</map>

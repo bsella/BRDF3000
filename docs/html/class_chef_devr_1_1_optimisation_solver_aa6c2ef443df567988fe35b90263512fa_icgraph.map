@@ -1,5 +1,0 @@
-<map id="ChefDevr::OptimisationSolver::cost" name="ChefDevr::OptimisationSolver::cost">
-<area shape="rect" id="node2" href="$class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107" title="Computes the optimized parametrisation of the BRDFs manifold. Uses Hook &amp; Jeeves method to solve the ..." alt="" coords="480,5,669,47"/>
-<area shape="rect" id="node4" href="$class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba" title="Updates the displacement vector of X that improves the solution (X_move) " alt="" coords="243,35,432,76"/>
-<area shape="rect" id="node3" href="$class_chef_devr_1_1_optimisation_solver.html#a5cb2221de8949571cd64eb7aa270fd48" title="ChefDevr::OptimisationSolver\l::~OptimisationSolver" alt="" coords="717,5,907,47"/>
-</map>

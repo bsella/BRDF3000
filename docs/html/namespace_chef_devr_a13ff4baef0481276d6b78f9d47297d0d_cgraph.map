@@ -1,4 +1,0 @@
-<map id="ChefDevr::covariance" name="ChefDevr::covariance">
-<area shape="rect" id="node2" href="$namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b" title="Centers matrix by sustracting mean to all columns. " alt="" coords="222,5,361,32"/>
-<area shape="rect" id="node3" href="$namespace_chef_devr.html#ad3454462283359a3c41a36884b381965" title="Computes the covariance column vector for the lv_num&#39;th latent variable. " alt="" coords="196,56,387,83"/>
-</map>

@@ -4,8 +4,11 @@
 
 ParametrisationTest::ParametrisationTest(): BaseTest("Parametrisation"){
 	addTest(&testCovariance, "../tests/data/covTestSet1", "../tests/data/GT_covTestSet1");
+    addTest(&testCovariance, "../tests/data/covTestSet2", "../tests/data/GT_covTestSet2");
 	addTest(&testCenter, "../tests/data/centerTestSet1", "../tests/data/GT_centerTestSet1");
 }
+
+#include <iostream>
 
 std::istringstream ParametrisationTest::testCovariance(std::istream& istr){
 	uint dim;
@@ -34,6 +37,7 @@ std::istringstream ParametrisationTest::testCenter(std::istream& istr){
 			istr >> tmp;
 			M(i,j)=tmp;
 		}
+    ChefDevr::centerMat(M);
 	std::stringstream ret;
 	ret << M;
 	return std::istringstream(ret.str());

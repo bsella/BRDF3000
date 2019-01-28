@@ -6,7 +6,7 @@ var searchData=
   ['compute_5fdirection',['compute_direction',['../class_chef_devr_1_1_b_r_d_f_reader.html#afe401d8c485d62681e32db306453d05d',1,'ChefDevr::BRDFReader']]],
   ['computealbedo',['computeAlbedo',['../namespace_chef_devr.html#a37ecc247de0c8912848d42dff8bc852f',1,'ChefDevr']]],
   ['computealbedocuda',['computeAlbedoCuda',['../namespace_chef_devr.html#a2fa3ecb2ba850b48bde982430921559f',1,'ChefDevr']]],
-  ['computecovvector',['computeCovVector',['../namespace_chef_devr.html#ad3454462283359a3c41a36884b381965',1,'ChefDevr']]],
+  ['computecovvector',['computeCovVector',['../namespace_chef_devr.html#a349022012a8c5dc5757ba21824878766',1,'ChefDevr']]],
   ['cost',['cost',['../class_chef_devr_1_1_optimisation_solver.html#aa6c2ef443df567988fe35b90263512fa',1,'ChefDevr::OptimisationSolver']]],
   ['costval',['costval',['../class_chef_devr_1_1_optimisation_solver.html#afc47e7033cb5178d61f3595c82829950',1,'ChefDevr::OptimisationSolver']]],
   ['covariance',['covariance',['../namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d',1,'ChefDevr']]],

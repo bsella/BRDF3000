@@ -1,5 +1,5 @@
 <map id="ChefDevr::OptimisationSolver::optimizeMapping" name="ChefDevr::OptimisationSolver::optimizeMapping">
-<area shape="rect" id="node2" href="$namespace_chef_devr.html#ad3454462283359a3c41a36884b381965" title="Computes the covariance column vector for the lv_num&#39;th latent variable. " alt="" coords="480,137,671,163"/>
+<area shape="rect" id="node2" href="$namespace_chef_devr.html#a349022012a8c5dc5757ba21824878766" title="Computes the covariance column vector for the lv_num&#39;th latent variable. " alt="" coords="480,137,671,163"/>
 <area shape="rect" id="node5" href="$class_chef_devr_1_1_optimisation_solver.html#aa6c2ef443df567988fe35b90263512fa" title="Computes the cost of the solution defined by K_minus1. " alt="" coords="481,5,670,47"/>
 <area shape="rect" id="node6" href="$class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba" title="Updates the displacement vector of X that improves the solution (X_move) " alt="" coords="243,68,432,109"/>
 <area shape="rect" id="node8" href="$class_chef_devr_1_1_optimisation_solver.html#a110952ecfdcc6727aba129b064c7c733" title="Initializes the latent coordinates vector X by applying the PCA method on the Z matrix. " alt="" coords="243,185,432,227"/>

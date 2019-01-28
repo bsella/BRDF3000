@@ -8,10 +8,11 @@
  */ 
 
 
-#include "./types.h"
+#include "types.h"
 
-#define MU_DEFAULT 0.0001f
-#define L_DEFAULT 1.0f
+#define MU_DEFAULT Scalar(0.0001f)
+#define L_DEFAULT Scalar(1.0f)
+#define EPSILON Scalar(0.00001f)
 
 namespace ChefDevr
 {
@@ -111,10 +112,10 @@ namespace ChefDevr
         const Scalar mu = MU_DEFAULT,
         const Scalar l  = L_DEFAULT)
     {
-        const Scalar norm_x1_x2((x1-x2).norm());
-        const Scalar exp_part(std::exp(-norm_x1_x2*norm_x1_x2/(Scalar(2)*l*l)));
+        const Scalar sqnorm_x1_x2((x1-x2).squaredNorm());
+        const Scalar exp_part(std::exp(-sqnorm_x1_x2/(Scalar(2)*l*l)));
         // dirac(x1-x2) <=> norm(x1-x2) == 0
-        return norm_x1_x2 < Scalar(0.00001f) ? mu + exp_part : exp_part;
+        return sqnorm_x1_x2 < EPSILON ? mu + exp_part : exp_part;
     }
     
     /**
@@ -139,7 +140,8 @@ namespace ChefDevr
         Vector<Scalar>& cov_vector,
         const Vector<Scalar>&X,
         const unsigned int lv_num,
-        const unsigned int dim);
+        const unsigned int dim,
+        const unsigned int nb_data);
     
 } // ChefDevr
 

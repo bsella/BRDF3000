@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('_parametrisation_8h.html','');});
 
 <p>Functions and classes related to the BRDF space parametrisation that are common to the Optimisation module and BRDF Explorer module.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="types_8h_source.html">./types.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_parametrisation_8hpp_source.html">Parametrisation.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for Parametrisation.h:</div>
@@ -100,8 +100,8 @@ $(document).ready(function(){initNavTree('_parametrisation_8h.html','');});
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="_parametrisation_8h__incl.png" border="0" usemap="#_parametrisation_8h" alt=""/></div>
 <map name="_parametrisation_8h" id="_parametrisation_8h">
-<area shape="rect" id="node2" href="types_8h.html" title="./types.h" alt="" coords="73,80,143,107"/>
-<area shape="rect" id="node4" href="_parametrisation_8hpp.html" title="Parametrisation.hpp" alt="" coords="168,80,304,107"/>
+<area shape="rect" id="node2" href="types_8h.html" title="types.h" alt="" coords="78,80,141,107"/>
+<area shape="rect" id="node4" href="_parametrisation_8hpp.html" title="Parametrisation.hpp" alt="" coords="227,80,363,107"/>
 </map>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -139,10 +139,12 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ad7004d690712afdecdfe4f48eddcf451"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_parametrisation_8h.html#ad7004d690712afdecdfe4f48eddcf451">MU_DEFAULT</a>&#160;&#160;&#160;0.0001f</td></tr>
+<tr class="memitem:ad7004d690712afdecdfe4f48eddcf451"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_parametrisation_8h.html#ad7004d690712afdecdfe4f48eddcf451">MU_DEFAULT</a>&#160;&#160;&#160;<a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>(0.0001f)</td></tr>
 <tr class="separator:ad7004d690712afdecdfe4f48eddcf451"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5369c38dfbf19b5b4a77d10cfdc36f7c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_parametrisation_8h.html#a5369c38dfbf19b5b4a77d10cfdc36f7c">L_DEFAULT</a>&#160;&#160;&#160;1.0f</td></tr>
+<tr class="memitem:a5369c38dfbf19b5b4a77d10cfdc36f7c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_parametrisation_8h.html#a5369c38dfbf19b5b4a77d10cfdc36f7c">L_DEFAULT</a>&#160;&#160;&#160;<a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>(1.0f)</td></tr>
 <tr class="separator:a5369c38dfbf19b5b4a77d10cfdc36f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a002b2f4894492820fe708b1b7e7c5e70"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_parametrisation_8h.html#a002b2f4894492820fe708b1b7e7c5e70">EPSILON</a>&#160;&#160;&#160;<a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>(0.00001f)</td></tr>
+<tr class="separator:a002b2f4894492820fe708b1b7e7c5e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -154,14 +156,28 @@ Functions</h2></td></tr>
 <tr class="memitem:a464db6c1ced4f8bd6b20bb4d6248cb7b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b">ChefDevr::centerMat</a> (Matrix&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;Z)</td></tr>
 <tr class="memdesc:a464db6c1ced4f8bd6b20bb4d6248cb7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Centers matrix by sustracting mean to all columns.  <a href="namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b">More...</a><br /></td></tr>
 <tr class="separator:a464db6c1ced4f8bd6b20bb4d6248cb7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3454462283359a3c41a36884b381965"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
-<tr class="memitem:ad3454462283359a3c41a36884b381965"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#ad3454462283359a3c41a36884b381965">ChefDevr::computeCovVector</a> (Vector&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;cov_vector, const Vector&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;X, const unsigned int lv_num, const unsigned int dim)</td></tr>
-<tr class="memdesc:ad3454462283359a3c41a36884b381965"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the covariance column vector for the lv_num'th latent variable.  <a href="namespace_chef_devr.html#ad3454462283359a3c41a36884b381965">More...</a><br /></td></tr>
-<tr class="separator:ad3454462283359a3c41a36884b381965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a349022012a8c5dc5757ba21824878766"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
+<tr class="memitem:a349022012a8c5dc5757ba21824878766"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a349022012a8c5dc5757ba21824878766">ChefDevr::computeCovVector</a> (Vector&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;cov_vector, const Vector&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;X, const unsigned int lv_num, const unsigned int dim, const unsigned int nb_data)</td></tr>
+<tr class="memdesc:a349022012a8c5dc5757ba21824878766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the covariance column vector for the lv_num'th latent variable.  <a href="namespace_chef_devr.html#a349022012a8c5dc5757ba21824878766">More...</a><br /></td></tr>
+<tr class="separator:a349022012a8c5dc5757ba21824878766"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions and classes related to the BRDF space parametrisation that are common to the Optimisation module and BRDF Explorer module. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a002b2f4894492820fe708b1b7e7c5e70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a002b2f4894492820fe708b1b7e7c5e70">&#9670;&nbsp;</a></span>EPSILON</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EPSILON&#160;&#160;&#160;<a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>(0.00001f)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5369c38dfbf19b5b4a77d10cfdc36f7c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5369c38dfbf19b5b4a77d10cfdc36f7c">&#9670;&nbsp;</a></span>L_DEFAULT</h2>
 
@@ -169,7 +185,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define L_DEFAULT&#160;&#160;&#160;1.0f</td>
+          <td class="memname">#define L_DEFAULT&#160;&#160;&#160;<a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>(1.0f)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -183,7 +199,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MU_DEFAULT&#160;&#160;&#160;0.0001f</td>
+          <td class="memname">#define MU_DEFAULT&#160;&#160;&#160;<a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>(0.0001f)</td>
         </tr>
       </table>
 </div><div class="memdoc">

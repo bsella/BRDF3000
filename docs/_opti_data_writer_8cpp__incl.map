@@ -2,10 +2,10 @@
 <area shape="rect" id="node2" href="$_opti_data_writer_8h.html" title="Provides the functions to write latent space data needed for BRDFs reconstruction and latent space vi..." alt="" coords="400,80,517,107"/>
 <area shape="rect" id="node3" href="$types_8h.html" title="../Parametrisation\l/types.h" alt="" coords="5,408,128,449"/>
 <area shape="rect" id="node5" href="$_optimisation_solver_8h.html" title="../Optimisation/Optimisation\lSolver.h" alt="" coords="150,155,330,196"/>
-<area shape="rect" id="node15" href="$_opti_data_writer_8hpp.html" title="OptiDataWriter.hpp" alt="" coords="393,162,524,189"/>
+<area shape="rect" id="node16" href="$_opti_data_writer_8hpp.html" title="OptiDataWriter.hpp" alt="" coords="393,162,524,189"/>
 <area shape="rect" id="node7" href="$_optimisation_solver_8hpp.html" title="OptimisationSolver.hpp" alt="" coords="163,244,317,271"/>
 <area shape="rect" id="node8" href="$_parametrisation_8h.html" title="Functions and classes related to the BRDF space parametrisation that are common to the Optimisation m..." alt="" coords="286,319,413,360"/>
-<area shape="rect" id="node9" href="$_parametrisation_8hpp.html" title="Parametrisation.hpp" alt="" coords="313,415,449,442"/>
-<area shape="rect" id="node16" href="$_albedo_8h.html" title="Albedo.h" alt="" coords="433,244,505,271"/>
-<area shape="rect" id="node17" href="$_albedo_8hpp.html" title="Albedo.hpp" alt="" coords="437,326,523,353"/>
+<area shape="rect" id="node9" href="$_parametrisation_8hpp.html" title="Parametrisation.hpp" alt="" coords="296,415,432,442"/>
+<area shape="rect" id="node17" href="$_albedo_8h.html" title="Albedo.h" alt="" coords="433,244,505,271"/>
+<area shape="rect" id="node18" href="$_albedo_8hpp.html" title="Albedo.hpp" alt="" coords="437,326,523,353"/>
 </map>

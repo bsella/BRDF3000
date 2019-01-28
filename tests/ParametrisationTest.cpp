@@ -3,12 +3,10 @@
 #include <Parametrisation/types.h>
 
 ParametrisationTest::ParametrisationTest(): BaseTest("Parametrisation"){
-	addTest(&testCovariance, "../tests/data/covTestSet1", "../tests/data/GT_covTestSet1");
-    addTest(&testCovariance, "../tests/data/covTestSet2", "../tests/data/GT_covTestSet2");
-	addTest(&testCenter, "../tests/data/centerTestSet1", "../tests/data/GT_centerTestSet1");
+	addTest(&testCovariance, "Covariance", "../tests/data/covTestSet1", "../tests/data/GT_covTestSet1");
+    addTest(&testCovariance, "Covariance", "../tests/data/covTestSet2", "../tests/data/GT_covTestSet2");
+	addTest(&testCenter, "Center", "../tests/data/centerTestSet1", "../tests/data/GT_centerTestSet1");
 }
-
-#include <iostream>
 
 std::istringstream ParametrisationTest::testCovariance(std::istream& istr){
 	uint dim;

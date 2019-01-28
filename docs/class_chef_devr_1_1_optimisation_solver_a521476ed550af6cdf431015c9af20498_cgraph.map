@@ -1,0 +1,5 @@
+<map id="ChefDevr::OptimisationSolver::patternMove" name="ChefDevr::OptimisationSolver::patternMove">
+<area shape="rect" id="node2" href="$namespace_chef_devr.html#ad3454462283359a3c41a36884b381965" title="Computes the covariance column vector for the lv_num&#39;th latent variable. " alt="" coords="243,13,433,39"/>
+<area shape="rect" id="node3" href="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d" title="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..." alt="" coords="481,13,624,39"/>
+<area shape="rect" id="node4" href="$namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b" title="Centers matrix by sustracting mean to all columns. " alt="" coords="672,13,811,39"/>
+</map>

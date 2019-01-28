@@ -5,11 +5,9 @@
 
 class ParametrisationTest : public BaseTest{
 public:
-    ParametrisationTest();
+	ParametrisationTest();
 private:
-	static std::istream& test1(std::istream&);
-	static std::istream& test2(std::istream&);
-	static std::istream& test3(std::istream&);
+	static std::istringstream testCovariance(std::istream&);
 };
 
 #endif // PARAMETRISATIONTEST_H

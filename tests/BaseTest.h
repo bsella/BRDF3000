@@ -4,23 +4,25 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 
 class BaseTest{
 public:
-    BaseTest();
+    explicit BaseTest(const std::string&);
     virtual ~BaseTest();
     bool doAllTests(std::ostream&);
 protected:
-    void addTest(std::istream&(*)(std::istream&),
+    void addTest(std::istringstream(*)(std::istream&),
         const std::string&,
         const std::string&);
 private:
+    const std::string title;
     struct testSet{
-        testSet(std::istream&(*)(std::istream&),
+        testSet(std::istringstream(*)(std::istream&),
             const std::string&,
             const std::string&);
 
-        std::istream&(*procedure)(std::istream&);
+        std::istringstream(*procedure)(std::istream&);
         const std::string dataPath;
         const std::string gtPath;
         // template<typename Scalar>

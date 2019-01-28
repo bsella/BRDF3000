@@ -1,5 +1,5 @@
 #include "BRDFReaderTest.h"
 
-BRDFReaderTest::BRDFReaderTest(): BaseTest(){
+BRDFReaderTest::BRDFReaderTest(): BaseTest("BRDFReader"){
 
 }

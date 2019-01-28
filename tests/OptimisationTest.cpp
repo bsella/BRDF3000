@@ -1,5 +1,5 @@
 #include "OptimisationTest.h"
 
-OptimisationTest::OptimisationTest(): BaseTest(){
+OptimisationTest::OptimisationTest(): BaseTest("Optimisation"){
 
 }

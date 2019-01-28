@@ -41,7 +41,8 @@ namespace ChefDevr
         # pragma omp parallel for
         for (i=0; i < nb_data; ++i)
         {
-            computeCovVector(K_minus1.col(i), X, i, latentDim, nb_data);
+            computeCovVector(K_minus1.col(i), X.reshaped(latentDim, nb_data),
+                             X.reshaped(latentDim, nb_data).col(i), latentDim, nb_data);
         }
         // Compute detK
         detK = K_minus1.determinant();
@@ -102,17 +103,21 @@ namespace ChefDevr
         for (unsigned int i(0); i < nbcoefs;++i)
         {
             lv_num = i/latentDim;
-            computeCovVector(cov_vector, X, lv_num, latentDim, nb_data);
+            computeCovVector(cov_vector, X.reshaped(latentDim, nb_data),
+                             X.reshaped(latentDim, nb_data).col(lv_num), latentDim, nb_data);
             
             X[i] += step;
             if ( X[i] < Scalar(1)) // latent variable constraint
             {
                 X_move[i] = step;
-                computeCovVector(diff_cov_vector, X, lv_num, latentDim, nb_data);
+                computeCovVector(diff_cov_vector, X.reshaped(latentDim, nb_data),
+                                 X.reshaped(latentDim, nb_data).col(lv_num), latentDim, nb_data);
                 diff_cov_vector -= cov_vector;
                 
                 // Update K_minus1 and detK with Sherman-Morisson formula
-                shermanMorissonUpdate(K_minus1, new_K_minus1, detK, new_detK, lv_num, diff_cov_vector);
+                shermanMorissonUpdate(K_minus1, new_K_minus1,
+                                      detK, new_detK,
+                                      lv_num, diff_cov_vector);
                 // Update costval
                 cost(new_costval, new_K_minus1, new_detK);
             }
@@ -122,11 +127,14 @@ namespace ChefDevr
                 if (X[i] > Scalar(-1)) // latent variable constraint
                 {
                     X_move[i] = -step;
-                    computeCovVector(diff_cov_vector, X, lv_num, latentDim, nb_data);
+                    computeCovVector(diff_cov_vector, X.reshaped(latentDim, nb_data),
+                                     X.reshaped(latentDim, nb_data).col(lv_num), latentDim, nb_data);
                     diff_cov_vector -= cov_vector;
                     
                     // Update K_minus1 and detK with Sherman-Morisson formula
-                    shermanMorissonUpdate(K_minus1, new_K_minus1, detK, new_detK, lv_num, diff_cov_vector);
+                    shermanMorissonUpdate(K_minus1, new_K_minus1, 
+                                          detK, new_detK,
+                                          lv_num, diff_cov_vector);
                     // Update cost
                     cost(new_costval, new_K_minus1, new_detK);
                 }   
@@ -202,7 +210,8 @@ namespace ChefDevr
             // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)
             # pragma omp parallel for
             for (i=0; i<nb_data; ++i){
-                computeCovVector(new_K_minus1.col(i), new_X, i, latentDim, nb_data);
+                computeCovVector(new_K_minus1.col(i), new_X.reshaped(latentDim, nb_data),
+                                 new_X.reshaped(latentDim, nb_data).col(i), latentDim, nb_data);
             }
             // Compute new_detK
             new_detK = new_K_minus1.determinant();

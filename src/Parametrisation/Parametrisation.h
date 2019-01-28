@@ -29,21 +29,23 @@ namespace ChefDevr
          * @brief Constructor of the class
          * @param Z BRDFs data matrix,
          * @param K_minus1 Inverse mapping matrix
+         * @param X_reshaped Latent variables matrix in the form such that each column is a latent variable with a number of rows equal to dim
          * @param mu Value of the mu constant that helps interpolation source data
          * @param dim Dimension of the latent space
          */
         BRDFReconstructor (
             const Matrix<Scalar>& _Z, 
             const Matrix<Scalar>& _K_minus1,
-            const Vector<Scalar>& _X,
+            const Matrix<Scalar>& _X_reshaped,
             const unsigned int _dim,
             const Scalar _mu = MU_DEFAULT,
             const Scalar _l = L_DEFAULT):
             
             Z(_Z),
             K_minus1(_K_minus1),
-            X(_X),
+            X_reshaped(_X_reshaped.res),
             dim(_dim),
+            nb_data(Z.cols()),
             mu(_mu),
             l(_l){}
         
@@ -53,9 +55,12 @@ namespace ChefDevr
          * @brief Reconstructs a BRDF for latent space coordinates
          * @param brdf The brdf data vector to fill
          * @param coord Coordinates of the latent space point to recontruct as a BRDF
+         * @param mu The constant that helps interpolating data while keeping good solution
          * @return The BRDF data as a column vector
          */
-        void reconstruct (Vector<Scalar>& brdf, Vector<Scalar>& coord);
+        void reconstruct (Vector<Scalar>& brdf,
+                          const Vector<Scalar>& coord,
+                          const Scalar& mu = MU_DEFAULT);
         
     private:
         /** 
@@ -71,16 +76,19 @@ namespace ChefDevr
         const Matrix<Scalar>& K_minus1;
         
         /** 
-         * @brief Latent variables column vector
-         * 
-         * Each stack of dim elements makes a latent variable
+         * @brief Latent variables matrix in the form such that each column is a latent variable with a number of rows equal to dim.
          */
-        const Vector<Scalar>& X;
+        const Matrix<Scalar>& X_reshaped;
         
         /** 
          * @brief Dimension of the latent space
          */
         const unsigned int dim;
+        
+        /**
+         * @brief Number of BRDFs in Z
+         */
+        const unsigned int nb_data;
         
         /** 
          * @brief Value of the mu constant that helps interpolation source data
@@ -127,9 +135,11 @@ namespace ChefDevr
     void centerMat(Matrix<Scalar>& Z);
     
     /**
-     * @brief Computes the covariance column vector for the lv_num'th latent variable
+     * @brief Computes the covariance column vector for the coordRef coordinates variable
      * @param cov_vector The covariance column vector to fill
-     * @param lv_num Number of the latent variable for the cov vector to be computed (starts at 0)
+     * @param X_reshaped Latent variables matrix in the form such that each column is a latent variable with a number of rows equal to dim.
+     * @param coordRef Coordinates to compare with every latent variable 
+     * @param dim Dimension of latent space
      * @param nb_data Number of data 
      * @return Covariance column vector
      * 
@@ -138,8 +148,8 @@ namespace ChefDevr
     template <typename Scalar>
     void computeCovVector (
         Vector<Scalar>& cov_vector,
-        const Vector<Scalar>&X,
-        const unsigned int lv_num,
+        const Matrix<Scalar>& X_reshaped,
+        const Vector<Scalar>& coordRef,
         const unsigned int dim,
         const unsigned int nb_data);
     

@@ -1,0 +1,14 @@
+digraph "ChefDevr::OptimisationSolver::patternMove"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node48 [label="ChefDevr::OptimisationSolver\l::patternMove",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node48 -> Node49 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node49 [label="ChefDevr::computeCovVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861",tooltip="Computes the covariance column vector for the coordRef coordinates variable. "];
+  Node49 -> Node50 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node50 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d",tooltip="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..."];
+  Node50 -> Node51 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node51 [label="ChefDevr::centerMat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b",tooltip="Centers matrix by sustracting mean to all columns. "];
+  Node50 -> Node49 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+}

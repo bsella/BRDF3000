@@ -9,7 +9,7 @@ digraph "ChefDevr::OptimisationSolver::~OptimisationSolver"
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
   Node4 [label="ChefDevr::OptimisationSolver\l::initX",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#a110952ecfdcc6727aba129b064c7c733",tooltip="Initializes the latent coordinates vector X by applying the PCA method on the Z matrix and reducing i..."];
   Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node5 [label="ChefDevr::computeCovVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a349022012a8c5dc5757ba21824878766",tooltip="Computes the covariance column vector for the lv_num&#39;th latent variable. "];
+  Node5 [label="ChefDevr::computeCovVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861",tooltip="Computes the covariance column vector for the coordRef coordinates variable. "];
   Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
   Node6 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d",tooltip="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..."];
   Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];

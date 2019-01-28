@@ -125,10 +125,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a464db6c1ced4f8bd6b20bb4d6248cb7b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b">centerMat</a> (<a class="el" href="namespace_chef_devr.html#aa7d9f787c24a42aca7a754a29f67bcac">Matrix</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;Z)</td></tr>
 <tr class="memdesc:a464db6c1ced4f8bd6b20bb4d6248cb7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Centers matrix by sustracting mean to all columns.  <a href="#a464db6c1ced4f8bd6b20bb4d6248cb7b">More...</a><br /></td></tr>
 <tr class="separator:a464db6c1ced4f8bd6b20bb4d6248cb7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a349022012a8c5dc5757ba21824878766"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
-<tr class="memitem:a349022012a8c5dc5757ba21824878766"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a349022012a8c5dc5757ba21824878766">computeCovVector</a> (<a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;cov_vector, const <a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;X, const unsigned int lv_num, const unsigned int dim, const unsigned int nb_data)</td></tr>
-<tr class="memdesc:a349022012a8c5dc5757ba21824878766"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the covariance column vector for the lv_num'th latent variable.  <a href="#a349022012a8c5dc5757ba21824878766">More...</a><br /></td></tr>
-<tr class="separator:a349022012a8c5dc5757ba21824878766"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a596a285a8d77aad17878f22f23689861"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
+<tr class="memitem:a596a285a8d77aad17878f22f23689861"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861">computeCovVector</a> (<a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;cov_vector, const <a class="el" href="namespace_chef_devr.html#aa7d9f787c24a42aca7a754a29f67bcac">Matrix</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;X_reshaped, const <a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;coordRef, const unsigned int dim, const unsigned int nb_data)</td></tr>
+<tr class="memdesc:a596a285a8d77aad17878f22f23689861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the covariance column vector for the coordRef coordinates variable.  <a href="#a596a285a8d77aad17878f22f23689861">More...</a><br /></td></tr>
+<tr class="separator:a596a285a8d77aad17878f22f23689861"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37ecc247de0c8912848d42dff8bc852f"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
 <tr class="memitem:a37ecc247de0c8912848d42dff8bc852f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_chef_devr_1_1_color.html">Color</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a37ecc247de0c8912848d42dff8bc852f">computeAlbedo</a> (<a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;brdf)</td></tr>
 <tr class="memdesc:a37ecc247de0c8912848d42dff8bc852f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the albedo of a BRDF.  <a href="#a37ecc247de0c8912848d42dff8bc852f">More...</a><br /></td></tr>
@@ -305,8 +305,8 @@ template&lt;typename Scalar &gt; </div>
 
 </div>
 </div>
-<a id="a349022012a8c5dc5757ba21824878766"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a349022012a8c5dc5757ba21824878766">&#9670;&nbsp;</a></span>computeCovVector()</h2>
+<a id="a596a285a8d77aad17878f22f23689861"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a596a285a8d77aad17878f22f23689861">&#9670;&nbsp;</a></span>computeCovVector()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -322,14 +322,14 @@ template&lt;typename Scalar &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>X</em>, </td>
+          <td class="paramtype">const <a class="el" href="namespace_chef_devr.html#aa7d9f787c24a42aca7a754a29f67bcac">Matrix</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>X_reshaped</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const unsigned int&#160;</td>
-          <td class="paramname"><em>lv_num</em>, </td>
+          <td class="paramtype">const <a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>coordRef</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -351,11 +351,13 @@ template&lt;typename Scalar &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Computes the covariance column vector for the lv_num'th latent variable. </p>
+<p>Computes the covariance column vector for the coordRef coordinates variable. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cov_vector</td><td>The covariance column vector to fill </td></tr>
-    <tr><td class="paramname">lv_num</td><td>Number of the latent variable for the cov vector to be computed (starts at 0) </td></tr>
+    <tr><td class="paramname">X_reshaped</td><td>Latent variables matrix in the form such that each column is a latent variable with a number of rows equal to dim. </td></tr>
+    <tr><td class="paramname">coordRef</td><td>Coordinates to compare with every latent variable </td></tr>
+    <tr><td class="paramname">dim</td><td>Dimension of latent space </td></tr>
     <tr><td class="paramname">nb_data</td><td>Number of data </td></tr>
   </table>
   </dd>
@@ -369,10 +371,8 @@ template&lt;typename Scalar &gt; </div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="namespace_chef_devr_a349022012a8c5dc5757ba21824878766_cgraph.png" border="0" usemap="#namespace_chef_devr_a349022012a8c5dc5757ba21824878766_cgraph" alt=""/></div>
-<map name="namespace_chef_devr_a349022012a8c5dc5757ba21824878766_cgraph" id="namespace_chef_devr_a349022012a8c5dc5757ba21824878766_cgraph">
-<area shape="rect" id="node2" href="namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d" title="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..." alt="" coords="244,5,387,32"/>
-<area shape="rect" id="node3" href="namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b" title="Centers matrix by sustracting mean to all columns. " alt="" coords="435,5,573,32"/>
+<div class="center"><img src="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_cgraph.png" border="0" usemap="#namespace_chef_devr_a596a285a8d77aad17878f22f23689861_cgraph" alt=""/></div>
+<map name="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_cgraph" id="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_cgraph">
 </map>
 </div>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -380,13 +380,8 @@ template&lt;typename Scalar &gt; </div>
 <div id="dynsection-2-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
-<div class="center"><img src="namespace_chef_devr_a349022012a8c5dc5757ba21824878766_icgraph.png" border="0" usemap="#namespace_chef_devr_a349022012a8c5dc5757ba21824878766_icgraph" alt=""/></div>
-<map name="namespace_chef_devr_a349022012a8c5dc5757ba21824878766_icgraph" id="namespace_chef_devr_a349022012a8c5dc5757ba21824878766_icgraph">
-<area shape="rect" id="node2" href="class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107" title="Computes the optimized parametrisation of the BRDFs manifold. Uses Hook &amp; Jeeves method to solve the ..." alt="" coords="481,32,671,74"/>
-<area shape="rect" id="node4" href="class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba" title="Updates the displacement vector of X that improves the solution (X_move) " alt="" coords="244,32,433,74"/>
-<area shape="rect" id="node5" href="class_chef_devr_1_1_optimisation_solver.html#a521476ed550af6cdf431015c9af20498" title="Apply X_move to the latent variable vector X. Updates new_X, new_K_minus1, new_detK accordingly..." alt="" coords="244,98,433,139"/>
-<area shape="rect" id="node6" href="namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d" title="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..." alt="" coords="267,164,410,190"/>
-<area shape="rect" id="node3" href="class_chef_devr_1_1_optimisation_solver.html#a5cb2221de8949571cd64eb7aa270fd48" title="ChefDevr::OptimisationSolver\l::~OptimisationSolver" alt="" coords="719,32,908,74"/>
+<div class="center"><img src="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_icgraph.png" border="0" usemap="#namespace_chef_devr_a596a285a8d77aad17878f22f23689861_icgraph" alt=""/></div>
+<map name="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_icgraph" id="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_icgraph">
 </map>
 </div>
 
@@ -452,7 +447,7 @@ template&lt;typename Scalar &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Covariance value </dd></dl>
 
-<p class="reference">References <a class="el" href="namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b">centerMat()</a>, <a class="el" href="namespace_chef_devr.html#a349022012a8c5dc5757ba21824878766">computeCovVector()</a>, <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a783f8f505bf654ebac42998f2239a684">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::dim</a>, <a class="el" href="_parametrisation_8h.html#a002b2f4894492820fe708b1b7e7c5e70">EPSILON</a>, <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a1d8c5a67ec486806ba2e49f09831577c">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::l</a>, <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a3c62e143ab28b32e7f6c7fed83980f07">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::mu</a>, <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#ab9bfd8c7c205aa065bca5019a62f0e7c">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::X</a>, and <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#ab6ddef1ac33c9d1c9f53f0fd5092d24d">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::Z</a>.</p>
+<p class="reference">References <a class="el" href="namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b">centerMat()</a>, <a class="el" href="namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861">computeCovVector()</a>, <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a783f8f505bf654ebac42998f2239a684">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::dim</a>, <a class="el" href="_parametrisation_8h.html#a002b2f4894492820fe708b1b7e7c5e70">EPSILON</a>, <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a1d8c5a67ec486806ba2e49f09831577c">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::l</a>, <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a3c62e143ab28b32e7f6c7fed83980f07">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::mu</a>, <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#ad236ece34e16927520260ef8054f499f">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::nb_data</a>, <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a5c7a857c9ddd2aad09ba5610dafe3143">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::X_reshaped</a>, and <a class="el" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#ab6ddef1ac33c9d1c9f53f0fd5092d24d">ChefDevr::BRDFReconstructor&lt; Scalar &gt;::Z</a>.</p>
 <div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-3-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
 <div id="dynsection-3-summary" class="dynsummary" style="display:block;">

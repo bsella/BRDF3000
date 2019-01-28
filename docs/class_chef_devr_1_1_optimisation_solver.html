@@ -125,7 +125,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:aa6c2ef443df567988fe35b90263512fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the cost of the solution defined by K_minus1.  <a href="#aa6c2ef443df567988fe35b90263512fa">More...</a><br /></td></tr>
 <tr class="separator:aa6c2ef443df567988fe35b90263512fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a515eb2a32af01d73c8a7c0be3ebd5aba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba">exploratoryMove</a> ()</td></tr>
-<tr class="memdesc:a515eb2a32af01d73c8a7c0be3ebd5aba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the displacement vector of X that improves the solution (X_move)  <a href="#a515eb2a32af01d73c8a7c0be3ebd5aba">More...</a><br /></td></tr>
+<tr class="memdesc:a515eb2a32af01d73c8a7c0be3ebd5aba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the movement vector of X that improves the solution (X_move)  <a href="#a515eb2a32af01d73c8a7c0be3ebd5aba">More...</a><br /></td></tr>
 <tr class="separator:a515eb2a32af01d73c8a7c0be3ebd5aba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a521476ed550af6cdf431015c9af20498"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chef_devr_1_1_optimisation_solver.html#a521476ed550af6cdf431015c9af20498">patternMove</a> (<a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;new_X, <a class="el" href="namespace_chef_devr.html#aa7d9f787c24a42aca7a754a29f67bcac">Matrix</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;new_K_minus1, <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &amp;new_detK) const</td></tr>
 <tr class="memdesc:a521476ed550af6cdf431015c9af20498"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply X_move to the latent variable vector X. Updates new_X, new_K_minus1, new_detK accordingly.  <a href="#a521476ed550af6cdf431015c9af20498">More...</a><br /></td></tr>
@@ -134,7 +134,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:a45cfe6537a5b85d187236619f18ca9a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the new inverse matrix K_minus1 and the new determinant of K using Sherman-Morisson formula.  <a href="#a45cfe6537a5b85d187236619f18ca9a6">More...</a><br /></td></tr>
 <tr class="separator:a45cfe6537a5b85d187236619f18ca9a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a110952ecfdcc6727aba129b064c7c733"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chef_devr_1_1_optimisation_solver.html#a110952ecfdcc6727aba129b064c7c733">initX</a> ()</td></tr>
-<tr class="memdesc:a110952ecfdcc6727aba129b064c7c733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the latent coordinates vector X by applying the PCA method on the Z matrix.  <a href="#a110952ecfdcc6727aba129b064c7c733">More...</a><br /></td></tr>
+<tr class="memdesc:a110952ecfdcc6727aba129b064c7c733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the latent coordinates vector X by applying the PCA method on the Z matrix and reducing its coordinates between [-1; 1].  <a href="#a110952ecfdcc6727aba129b064c7c733">More...</a><br /></td></tr>
 <tr class="separator:a110952ecfdcc6727aba129b064c7c733"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -161,7 +161,7 @@ Private Attributes</h2></td></tr>
 <tr class="memdesc:ae1607c9470de01dda6cb470cb3ab1a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Latent variables vector.  <a href="#ae1607c9470de01dda6cb470cb3ab1a0d">More...</a><br /></td></tr>
 <tr class="separator:ae1607c9470de01dda6cb470cb3ab1a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1a17e4611d6ba0ebf1f9a2db18d2ae1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chef_devr_1_1_optimisation_solver.html#af1a17e4611d6ba0ebf1f9a2db18d2ae1">X_move</a></td></tr>
-<tr class="memdesc:af1a17e4611d6ba0ebf1f9a2db18d2ae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The displacement vector of X that should improve the solution.  <a href="#af1a17e4611d6ba0ebf1f9a2db18d2ae1">More...</a><br /></td></tr>
+<tr class="memdesc:af1a17e4611d6ba0ebf1f9a2db18d2ae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The movement vector of X that should improve the solution.  <a href="#af1a17e4611d6ba0ebf1f9a2db18d2ae1">More...</a><br /></td></tr>
 <tr class="separator:af1a17e4611d6ba0ebf1f9a2db18d2ae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d64b9eaec8a34b908dea09af1d1e7f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_chef_devr.html#aa7d9f787c24a42aca7a754a29f67bcac">Matrix</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chef_devr_1_1_optimisation_solver.html#a4d64b9eaec8a34b908dea09af1d1e7f0">K_minus1</a></td></tr>
 <tr class="memdesc:a4d64b9eaec8a34b908dea09af1d1e7f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inverse of K : Inverse mapping matrix.  <a href="#a4d64b9eaec8a34b908dea09af1d1e7f0">More...</a><br /></td></tr>
@@ -378,7 +378,7 @@ template&lt;typename Scalar &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Updates the displacement vector of X that improves the solution (X_move) </p>
+<p>Updates the movement vector of X that improves the solution (X_move) </p>
 <p>Adds and substracts step from each element and reevaluate the cost function to check for better solutions </p>
 
 <p class="reference">References <a class="el" href="namespace_chef_devr.html#a349022012a8c5dc5757ba21824878766">ChefDevr::computeCovVector()</a>, <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#aa6c2ef443df567988fe35b90263512fa">ChefDevr::OptimisationSolver&lt; Scalar &gt;::cost()</a>, <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#afc47e7033cb5178d61f3595c82829950">ChefDevr::OptimisationSolver&lt; Scalar &gt;::costval</a>, <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#af898f2634a1880a4cbf8105fcf679246">ChefDevr::OptimisationSolver&lt; Scalar &gt;::detK</a>, <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#a4d64b9eaec8a34b908dea09af1d1e7f0">ChefDevr::OptimisationSolver&lt; Scalar &gt;::K_minus1</a>, <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#a8458296058fd8f1f3cd568e36ddc5486">ChefDevr::OptimisationSolver&lt; Scalar &gt;::latentDim</a>, <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#afe1fa7486ff6ef624eff8ffd7b7bcc1a">ChefDevr::OptimisationSolver&lt; Scalar &gt;::nb_data</a>, <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#a45cfe6537a5b85d187236619f18ca9a6">ChefDevr::OptimisationSolver&lt; Scalar &gt;::shermanMorissonUpdate()</a>, <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#acfb3001a33f8199a9f20b1b7dff2ea42">ChefDevr::OptimisationSolver&lt; Scalar &gt;::step</a>, <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#ae1607c9470de01dda6cb470cb3ab1a0d">ChefDevr::OptimisationSolver&lt; Scalar &gt;::X</a>, and <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#af1a17e4611d6ba0ebf1f9a2db18d2ae1">ChefDevr::OptimisationSolver&lt; Scalar &gt;::X_move</a>.</p>
@@ -525,7 +525,7 @@ template&lt;typename Scalar &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Initializes the latent coordinates vector X by applying the PCA method on the Z matrix. </p>
+<p>Initializes the latent coordinates vector X by applying the PCA method on the Z matrix and reducing its coordinates between [-1; 1]. </p>
 <p>Uses the Matusik method found in the paper "A data-driven reflectance model" </p>
 
 <p class="reference">References <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#a8458296058fd8f1f3cd568e36ddc5486">ChefDevr::OptimisationSolver&lt; Scalar &gt;::latentDim</a>, <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#ae1607c9470de01dda6cb470cb3ab1a0d">ChefDevr::OptimisationSolver&lt; Scalar &gt;::X</a>, and <a class="el" href="class_chef_devr_1_1_optimisation_solver.html#a19da30532aac21138717d78ed611c81e">ChefDevr::OptimisationSolver&lt; Scalar &gt;::Z</a>.</p>
@@ -1019,7 +1019,7 @@ template&lt;typename Scalar &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>The displacement vector of X that should improve the solution. </p>
+<p>The movement vector of X that should improve the solution. </p>
 
 </div>
 </div>

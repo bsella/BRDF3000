@@ -1,0 +1,13 @@
+digraph "yen" {
+  compound=true
+  node [ fontsize="10", fontname="FreeSans"];
+  edge [ labelfontsize="10", labelfontname="FreeSans"];
+  subgraph clusterdir_43e0a1f539e00dcfa1a6bc4d4fee4fc2 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="home" fontname="FreeSans", fontsize="10", URL="dir_43e0a1f539e00dcfa1a6bc4d4fee4fc2.html"]
+  subgraph clusterdir_2c5c9818333ab28b2a8a0218a86b70e6 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_2c5c9818333ab28b2a8a0218a86b70e6.html"];
+    dir_2c5c9818333ab28b2a8a0218a86b70e6 [shape=plaintext label="yen"];
+    dir_b67a1e0690b0c54bfda5e5bfd34b8fee [shape=box label="Documents" color="red" fillcolor="white" style="filled" URL="dir_b67a1e0690b0c54bfda5e5bfd34b8fee.html"];
+  }
+  }
+}

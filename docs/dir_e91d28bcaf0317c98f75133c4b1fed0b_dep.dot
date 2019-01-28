@@ -1,0 +1,11 @@
+digraph "BRDFReader" {
+  compound=true
+  node [ fontsize="10", fontname="FreeSans"];
+  edge [ labelfontsize="10", labelfontname="FreeSans"];
+  subgraph clusterdir_5e89fe66524bd877de99e4bb07661e26 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="src" fontname="FreeSans", fontsize="10", URL="dir_5e89fe66524bd877de99e4bb07661e26.html"]
+  dir_e91d28bcaf0317c98f75133c4b1fed0b [shape=box, label="BRDFReader", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_e91d28bcaf0317c98f75133c4b1fed0b.html"];
+  }
+  dir_999454234ede5981bc76c28bebd84574 [shape=box label="Parametrisation" URL="dir_999454234ede5981bc76c28bebd84574.html"];
+  dir_e91d28bcaf0317c98f75133c4b1fed0b->dir_999454234ede5981bc76c28bebd84574 [headlabel="1", labeldistance=1.5 headhref="dir_000009_000010.html"];
+}

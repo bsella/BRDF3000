@@ -97,7 +97,7 @@ namespace ChefDevr
         Vector<Scalar> X;
         
         /**
-         * @brief The displacement vector of X that should improve the solution
+         * @brief The movement vector of X that should improve the solution
          */
         Vector<Scalar> X_move;
 
@@ -128,7 +128,7 @@ namespace ChefDevr
         void cost (Scalar& cost, const Matrix<Scalar>& K_minus1, const Scalar& detK) const;
 
         /**
-         * @brief Updates the displacement vector of X that improves the solution (X_move)
+         * @brief Updates the movement vector of X that improves the solution (X_move)
          * 
          * Adds and substracts step from each element
          * and reevaluate the cost function to check for better solutions
@@ -170,7 +170,7 @@ namespace ChefDevr
         
         /**
          * @brief Initializes the latent coordinates vector X by applying the PCA method
-         * on the Z matrix
+         * on the Z matrix and reducing its coordinates between [-1; 1]
          * 
          * Uses the Matusik method found in the paper
          * "A data-driven reflectance model"

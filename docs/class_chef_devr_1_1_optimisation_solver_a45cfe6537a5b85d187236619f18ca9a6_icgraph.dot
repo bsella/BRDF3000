@@ -1,0 +1,13 @@
+digraph "ChefDevr::OptimisationSolver::shermanMorissonUpdate"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node56 [label="ChefDevr::OptimisationSolver\l::shermanMorissonUpdate",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node56 -> Node57 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node57 [label="ChefDevr::OptimisationSolver\l::exploratoryMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba",tooltip="Updates the movement vector of X that improves the solution (X_move) "];
+  Node57 -> Node58 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node58 [label="ChefDevr::OptimisationSolver\l::optimizeMapping",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107",tooltip="Computes the optimized parametrisation of the BRDFs manifold. Uses Hook & Jeeves method to solve the ..."];
+  Node58 -> Node59 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node59 [label="ChefDevr::OptimisationSolver\l::~OptimisationSolver",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#a5cb2221de8949571cd64eb7aa270fd48"];
+}

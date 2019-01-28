@@ -8,6 +8,7 @@ public:
 	ParametrisationTest();
 private:
 	static std::istringstream testCovariance(std::istream&);
+	static std::istringstream testCenter(std::istream&);
 };
 
 #endif // PARAMETRISATIONTEST_H

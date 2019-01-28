@@ -5,11 +5,11 @@ BaseTest::~BaseTest(){}
 
 bool BaseTest::doAllTests(std::ostream& out){
 	bool successAll= true;
-	uint testsSucceeded= 0, testIndex= 0;
+	uint testsSucceeded= 0;
 	out << "\033[4mTesting the \033[1m" << title << "\033[0;4m module:\033[0m" << std::endl;
 	for(const auto& test : tests){
 		std::string message;
-		out << "│\tTest " << testIndex << ": ";
+		out << "│\t" << test.title << ": ";
 		bool success= test.execute(message);
 		if(success){
 			testsSucceeded++;
@@ -18,7 +18,6 @@ bool BaseTest::doAllTests(std::ostream& out){
 		else
 			out << "\033[1;31m[KO";
 		out << "] \033[0m"<< message << std::endl;
-		testIndex++;
 		successAll &= success;
 	}
 	out << "│\t";
@@ -30,14 +29,15 @@ bool BaseTest::doAllTests(std::ostream& out){
 	return successAll;
 }
 
-void BaseTest::addTest(std::istringstream(*f)(std::istream&), const std::string& data, const std::string& gt){
-	tests.push_back(testSet(f, data, gt));
+void BaseTest::addTest(std::istringstream(*f)(std::istream&),const std::string& t, const std::string& data, const std::string& gt){
+	tests.push_back(testSet(f, t, data, gt));
 }
 
 BaseTest::testSet::testSet(
 	std::istringstream(*f)(std::istream&),
+	const std::string& t,
 	const std::string& data,
-	const std::string& gt):procedure(f), dataPath(data), gtPath(gt){}
+	const std::string& gt):procedure(f), title(t), dataPath(data), gtPath(gt){}
 
 #include <fstream>
 // template<typename Scalar>

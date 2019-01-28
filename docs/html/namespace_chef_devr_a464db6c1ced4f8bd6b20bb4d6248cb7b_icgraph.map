@@ -1,0 +1,8 @@
+<map id="ChefDevr::centerMat" name="ChefDevr::centerMat">
+<area shape="rect" id="node2" href="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d" title="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..." alt="" coords="192,33,335,59"/>
+<area shape="rect" id="node3" href="$namespace_chef_devr.html#ad3454462283359a3c41a36884b381965" title="Computes the covariance column vector for the lv_num&#39;th latent variable. " alt="" coords="383,33,573,59"/>
+<area shape="rect" id="node4" href="$class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107" title="Computes the optimized parametrisation of the BRDFs manifold. Uses Hook &amp; Jeeves method to solve the ..." alt="" coords="859,25,1048,67"/>
+<area shape="rect" id="node6" href="$class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba" title="Updates the displacement vector of X that improves the solution (X_move) " alt="" coords="621,25,811,67"/>
+<area shape="rect" id="node7" href="$class_chef_devr_1_1_optimisation_solver.html#a521476ed550af6cdf431015c9af20498" title="Apply X_move to the latent variable vector X. Updates new_X, new_K_minus1, new_detK accordingly..." alt="" coords="621,91,811,132"/>
+<area shape="rect" id="node5" href="$class_chef_devr_1_1_optimisation_solver.html#a5cb2221de8949571cd64eb7aa270fd48" title="ChefDevr::OptimisationSolver\l::~OptimisationSolver" alt="" coords="1096,25,1285,67"/>
+</map>

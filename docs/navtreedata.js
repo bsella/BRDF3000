@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "ChefDevr", "index.html", [
+  [ "BRDF3000", "index.html", [
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [

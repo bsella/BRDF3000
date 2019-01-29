@@ -3,7 +3,7 @@
 <area shape="rect" id="node4" href="$class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba" title="Updates the movement vector of X that improves the solution (X_move) " alt="" coords="247,37,437,78"/>
 <area shape="rect" id="node5" href="$class_chef_devr_1_1_optimisation_solver.html#a521476ed550af6cdf431015c9af20498" title="Apply X_move to the latent variable vector X. Updates new_X, new_K_minus1, new_detK accordingly..." alt="" coords="247,102,437,143"/>
 <area shape="rect" id="node6" href="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d" title="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..." alt="" coords="271,168,413,195"/>
-<area shape="rect" id="node7" href="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#a3f29882c04874bc83a68e008a0542f03" title="Reconstructs a BRDF for latent space coordinates. " alt="" coords="244,219,440,261"/>
+<area shape="rect" id="node7" href="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#a205bf0004c370cd8633caa425dbcabd7" title="Reconstructs a BRDF for latent space coordinates. " alt="" coords="244,219,440,261"/>
 <area shape="rect" id="node3" href="$class_chef_devr_1_1_optimisation_solver.html#a5cb2221de8949571cd64eb7aa270fd48" title="ChefDevr::OptimisationSolver\l::~OptimisationSolver" alt="" coords="732,37,921,78"/>
 <area shape="rect" id="node8" href="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#a8943b55072cbcf99bd09553917c1ce68" title="ChefDevr::BRDFReconstructor\l::~BRDFReconstructor" alt="" coords="488,219,684,261"/>
 </map>

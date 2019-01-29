@@ -5,18 +5,17 @@
 /**
  * @file Parametrisation.hpp
  */
-#include <iostream>
 namespace ChefDevr
 {
     
 template <typename Scalar>
-void centerMat(Matrix<Scalar>& Z)
+void centerMat(Matrix<Scalar>& Z, Vector<Scalar>& meanBRDF)
 {
-    Vector<Scalar> colMean(Z.rowwise().mean());
+    meanBRDF = Z.rowwise().mean();
     unsigned int i(0);
     # pragma omp parallel for
     for(i=0; i<Z.cols(); ++i)
-        Z.col(i) -= colMean;
+        Z.col(i) -= meanBRDF;
 }
 
 template <typename Scalar>
@@ -35,12 +34,11 @@ void computeCovVector (
 
 template <typename Scalar>
 void BRDFReconstructor<Scalar>::reconstruct (Vector<Scalar>& brdf,
-                                     const Vector<Scalar>& coord,
-                                     const Scalar& mu)
+                                     const Vector<Scalar>& coord)
 {
     Vector<Scalar> cov_vector(nb_data);
     computeCovVector(cov_vector, X_reshaped, coord, dim, nb_data);
-    brdf = cov_vector * K_minus1 * Z + mu;
+    brdf = cov_vector * K_minus1 * Zcentered + meanBRDF;
 }
 
 } // namespace ChevDevr

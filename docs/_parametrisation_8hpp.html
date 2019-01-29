@@ -89,13 +89,14 @@ $(document).ready(function(){initNavTree('_parametrisation_8hpp.html','');});
 <div class="textblock"><code>#include &lt;Eigen/Eigenvalues&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;numeric&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for Parametrisation.hpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="_parametrisation_8hpp__incl.png" border="0" usemap="#_parametrisation_8hpp" alt=""/></div>
+<map name="_parametrisation_8hpp" id="_parametrisation_8hpp">
+</map>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
@@ -128,10 +129,9 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a464db6c1ced4f8bd6b20bb4d6248cb7b"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
-<tr class="memitem:a464db6c1ced4f8bd6b20bb4d6248cb7b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b">ChefDevr::centerMat</a> (Matrix&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;Z)</td></tr>
-<tr class="memdesc:a464db6c1ced4f8bd6b20bb4d6248cb7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Centers matrix by sustracting mean to all columns.  <a href="namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b">More...</a><br /></td></tr>
-<tr class="separator:a464db6c1ced4f8bd6b20bb4d6248cb7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a35bcb9393c9a05d738e608570ec8d8"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
+<tr class="memitem:a8a35bcb9393c9a05d738e608570ec8d8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a8a35bcb9393c9a05d738e608570ec8d8">ChefDevr::centerMat</a> (Matrix&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;Z, Vector&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;meanBRDF)</td></tr>
+<tr class="separator:a8a35bcb9393c9a05d738e608570ec8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a596a285a8d77aad17878f22f23689861"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
 <tr class="memitem:a596a285a8d77aad17878f22f23689861"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861">ChefDevr::computeCovVector</a> (Vector&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;cov_vector, const Matrix&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;X_reshaped, const Vector&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;coordRef, const unsigned int dim, const unsigned int nb_data)</td></tr>
 <tr class="memdesc:a596a285a8d77aad17878f22f23689861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the covariance column vector for the coordRef coordinates variable.  <a href="namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861">More...</a><br /></td></tr>

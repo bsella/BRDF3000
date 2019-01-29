@@ -46,7 +46,7 @@ namespace ChefDevr {
         /**
         * @brief Read all the BRDFs stored in a given directory
         * @param fileDirectory the path of the directory where all the brdfs are stored
-        * @return Z BRDFs data matrix where each column represents a BRDF
+        * @return Non-centered Z BRDFs data matrix where each column represents a BRDF
         *
         * Initializes the list of BRDFs paths in the order in which they were read.
         *

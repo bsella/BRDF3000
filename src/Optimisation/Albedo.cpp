@@ -17,10 +17,10 @@ namespace ChefDevr
     {
         const double one_over_pi(0.31830988618);
         double r(0), g(0), b(0);
-        using thnum = brdf.thetaNum;
-        using phnum = brdf.phiNum;
-        using thstep = brdf.thetaStep;
-        using phstep = brdf.phiStep;
+        auto& thnum = brdf.thetaNum;
+        auto& phnum = brdf.phiNum;
+        auto& thstep = brdf.thetaStep;
+        auto& phstep = brdf.phiStep;
         #pragma omp parallel
         {
             unsigned int thondex, thindex, phondex, phindex;

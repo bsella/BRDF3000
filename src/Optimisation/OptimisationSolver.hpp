@@ -48,8 +48,6 @@ namespace ChefDevr
         detK = K_minus1.determinant();
         // Compute K_minus1 from K
         K_minus1 = K_minus1.inverse();
-        // Center Z
-        centerMat<Scalar>(Z);
         // Init cost
         cost(costval, K_minus1, detK);
         

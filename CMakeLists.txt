@@ -28,7 +28,7 @@ target_link_libraries(${APPLICATION}
 	Parametrisation
 	Optimisation
 	${STXXL_LIBRARIES}
-	stdc++fc
+	stdc++fs
 )
 
 add_subdirectory(tests)

@@ -1,4 +1,5 @@
 #include <stdlib.h>
+// #include <experimental/filesystem>
 
 #include "Parametrisation/types.h"
 #include "BRDFReader/BRDFReader.h"
@@ -12,6 +13,10 @@ int main(int numArguments, const char *argv[]) {
 	// Récupérer les arguments
 	// Afficher le message d'aide si faut
 
+    
+    // test filesystem
+    //auto path = std::experimental::filesystem::current_path();
+    
     /*
 	BRDFReader<Scalar> reader;
 	const unsigned int dim = 2;

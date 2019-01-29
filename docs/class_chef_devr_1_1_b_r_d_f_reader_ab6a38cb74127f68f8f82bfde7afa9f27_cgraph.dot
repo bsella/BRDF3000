@@ -1,0 +1,12 @@
+digraph "ChefDevr::BRDFReader::std_coords_to_half_diff_coords"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node42 [label="ChefDevr::BRDFReader\l::std_coords_to_half\l_diff_coords",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Converts standard coordinates to half vector/difference vector coordinates."];
+  Node42 -> Node43 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node43 [label="ChefDevr::BRDFReader\l::compute_direction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reader.html#afe401d8c485d62681e32db306453d05d",tooltip="Computes a direction from angles."];
+  Node42 -> Node44 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node44 [label="ChefDevr::BRDFReader\l::rotate_vector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reader.html#ac1a007bc9ab8355d71f7a23553b33c40",tooltip="Rotates a vector along an axis."];
+}

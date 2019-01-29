@@ -1,0 +1,12 @@
+digraph "ChefDevr::BRDFReader::std_coords_to_half_diff_coords"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="RL";
+  Node45 [label="ChefDevr::BRDFReader\l::std_coords_to_half\l_diff_coords",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Converts standard coordinates to half vector/difference vector coordinates."];
+  Node45 -> Node46 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node46 [label="ChefDevr::BRDFReader\l::lookup_brdf_val",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reader.html#a52a4fc59f6adee91e2e697b8a703d8c8",tooltip="Extracts a color in a BRDF from a pair of incoming and outgoing angles."];
+  Node46 -> Node47 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node47 [label="ChefDevr::BRDFReader\l::resampleBRDF",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reader.html#a660c35ad652c7ff79a8391e5399680d7",tooltip="Resamples a BRDF."];
+}

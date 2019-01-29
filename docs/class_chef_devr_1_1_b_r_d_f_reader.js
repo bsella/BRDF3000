@@ -14,10 +14,10 @@ var class_chef_devr_1_1_b_r_d_f_reader =
     [ "std_coords_to_half_diff_coords", "class_chef_devr_1_1_b_r_d_f_reader.html#ab6a38cb74127f68f8f82bfde7afa9f27", null ],
     [ "theta_diff_index", "class_chef_devr_1_1_b_r_d_f_reader.html#af58b0fc1168419a46910cb4a706881a0", null ],
     [ "theta_half_index", "class_chef_devr_1_1_b_r_d_f_reader.html#a565a677a9e08e4f140ac4c01ea5c37b3", null ],
-    [ "blue_scale", "class_chef_devr_1_1_b_r_d_f_reader.html#a5b37bb3e3bdc9c1b70c5cc62e904fa1a", null ],
+    [ "blue_scale", "class_chef_devr_1_1_b_r_d_f_reader.html#aaebe8d7fb88f4a951f1ae458e028c585", null ],
     [ "brdf_filenames", "class_chef_devr_1_1_b_r_d_f_reader.html#a95b394a235c7bca69a20c9d1f6993aa2", null ],
-    [ "green_scale", "class_chef_devr_1_1_b_r_d_f_reader.html#a1734e2ef2bb9f54dd182bc26df9dcc5b", null ],
-    [ "red_scale", "class_chef_devr_1_1_b_r_d_f_reader.html#a0a9de7179e11efb2678312f39c149603", null ],
+    [ "green_scale", "class_chef_devr_1_1_b_r_d_f_reader.html#a199aedd27d10e44a828067c900688dff", null ],
+    [ "red_scale", "class_chef_devr_1_1_b_r_d_f_reader.html#af5d2e77bd769b2b43cb4672637873c88", null ],
     [ "samplingResolution_phiD", "class_chef_devr_1_1_b_r_d_f_reader.html#a83090057e279e9923f2fe5691b432a65", null ],
     [ "samplingResolution_thetaD", "class_chef_devr_1_1_b_r_d_f_reader.html#a4fc242ffdafd4e8af1a83709852e654a", null ],
     [ "samplingResolution_thetaH", "class_chef_devr_1_1_b_r_d_f_reader.html#ad51edca13e24637388e7707a5621a671", null ]

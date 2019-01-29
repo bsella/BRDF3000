@@ -1,12 +1,10 @@
 digraph "ChefDevr::computeCovVector"
 {
+ // LATEX_PDF_SIZE
   edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
   node [fontname="FreeSans",fontsize="10",shape=record];
   rankdir="LR";
-  Node10 [label="ChefDevr::computeCovVector",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node11 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d",tooltip="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..."];
-  Node11 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node12 [label="ChefDevr::centerMat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a8a35bcb9393c9a05d738e608570ec8d8",tooltip="Centers matrix by sustracting mean to all columns. "];
-  Node11 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="ChefDevr::computeCovVector",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Computes the covariance column vector for the coordRef coordinates variable."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d",tooltip="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..."];
 }

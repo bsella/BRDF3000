@@ -1,14 +1,12 @@
 digraph "ChefDevr::BRDFReconstructor::reconstruct"
 {
+ // LATEX_PDF_SIZE
   edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
   node [fontname="FreeSans",fontsize="10",shape=record];
   rankdir="LR";
-  Node8 [label="ChefDevr::BRDFReconstructor\l::reconstruct",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node9 [label="ChefDevr::computeCovVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861",tooltip="Computes the covariance column vector for the coordRef coordinates variable. "];
-  Node9 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node10 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d",tooltip="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..."];
-  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node11 [label="ChefDevr::centerMat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a8a35bcb9393c9a05d738e608570ec8d8",tooltip="Centers matrix by sustracting mean to all columns. "];
-  Node10 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="ChefDevr::BRDFReconstructor\l::reconstruct",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Reconstructs a BRDF for latent space coordinates."];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="ChefDevr::computeCovVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861",tooltip="Computes the covariance column vector for the coordRef coordinates variable."];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d",tooltip="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..."];
 }

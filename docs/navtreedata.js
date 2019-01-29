@@ -33,7 +33,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_albedo_8h.html"
+"_albedo_8cpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

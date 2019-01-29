@@ -87,9 +87,15 @@ $(document).ready(function(){initNavTree('namespace_chef_devr.html','');});
 <div class="title">ChefDevr Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="_albedo_8cpp.html">Albedo.cpp</a>.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chef_devr_1_1_albedo.html">Albedo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides albedo computation using the most efficient parallelization solution made available by the material.  <a href="class_chef_devr_1_1_albedo.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chef_devr_1_1_b_r_d_f_reader.html">BRDFReader</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class is used to read all the BRDF references and to sample them.  <a href="class_chef_devr_1_1_b_r_d_f_reader.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,6 +107,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chef_devr_1_1_optimisation_solver.html">OptimisationSolver</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that solves the optimisation problem defined in the research paper: A Versatile Parametrisation for Measured Materials Manifold. Computes an optimised mapping from BRDFs space to a latent space.  <a href="class_chef_devr_1_1_optimisation_solver.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_chef_devr_1_1_resampled_b_r_d_f.html">ResampledBRDF</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure that encapsulates a resampled BRDF in a suitable format for albedo computation.  <a href="struct_chef_devr_1_1_resampled_b_r_d_f.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -129,14 +138,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a596a285a8d77aad17878f22f23689861"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861">computeCovVector</a> (<a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;cov_vector, const <a class="el" href="namespace_chef_devr.html#aa7d9f787c24a42aca7a754a29f67bcac">Matrix</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;X_reshaped, const <a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;coordRef, const unsigned int dim, const unsigned int nb_data)</td></tr>
 <tr class="memdesc:a596a285a8d77aad17878f22f23689861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the covariance column vector for the coordRef coordinates variable.  <a href="#a596a285a8d77aad17878f22f23689861">More...</a><br /></td></tr>
 <tr class="separator:a596a285a8d77aad17878f22f23689861"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37ecc247de0c8912848d42dff8bc852f"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
-<tr class="memitem:a37ecc247de0c8912848d42dff8bc852f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_chef_devr_1_1_color.html">Color</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a37ecc247de0c8912848d42dff8bc852f">computeAlbedo</a> (<a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;brdf)</td></tr>
-<tr class="memdesc:a37ecc247de0c8912848d42dff8bc852f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the albedo of a BRDF.  <a href="#a37ecc247de0c8912848d42dff8bc852f">More...</a><br /></td></tr>
-<tr class="separator:a37ecc247de0c8912848d42dff8bc852f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fa3ecb2ba850b48bde982430921559f"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
-<tr class="memitem:a2fa3ecb2ba850b48bde982430921559f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_chef_devr_1_1_color.html">Color</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a2fa3ecb2ba850b48bde982430921559f">computeAlbedoCuda</a> (<a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;brdf)</td></tr>
-<tr class="memdesc:a2fa3ecb2ba850b48bde982430921559f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the albedo of a BRDF on a NVIDIA Cuda enabled graphics card.  <a href="#a2fa3ecb2ba850b48bde982430921559f">More...</a><br /></td></tr>
-<tr class="separator:a2fa3ecb2ba850b48bde982430921559f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0553d30a6398c44fc4946f0686ce9057"><td class="memTemplParams" colspan="2">template&lt;typename Scalar &gt; </td></tr>
 <tr class="memitem:a0553d30a6398c44fc4946f0686ce9057"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a0553d30a6398c44fc4946f0686ce9057">writeAlbedoMap</a> (const std::string &amp;path, const <a class="el" href="namespace_chef_devr.html#aa7d9f787c24a42aca7a754a29f67bcac">Matrix</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;Z, const <a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;X, const <a class="el" href="namespace_chef_devr.html#aa7d9f787c24a42aca7a754a29f67bcac">Matrix</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;K_minus1, const unsigned int latentDim, const unsigned width=1024, const unsigned height=1024)</td></tr>
 <tr class="memdesc:a0553d30a6398c44fc4946f0686ce9057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the image of the latent space on the disk.  <a href="#a0553d30a6398c44fc4946f0686ce9057">More...</a><br /></td></tr>
@@ -148,7 +149,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a0fe12ff6e989978a52d466f09d74e691"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_chef_devr.html#a0fe12ff6e989978a52d466f09d74e691">writeAlbedoMap</a> (const std::string &amp;path, const unsigned width=1024, const unsigned height=1024)</td></tr>
 <tr class="separator:a0fe12ff6e989978a52d466f09d74e691"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="_albedo_8cpp.html">Albedo.cpp</a>. </p>
+</div><h2 class="groupheader">Typedef Documentation</h2>
 <a id="aa7d9f787c24a42aca7a754a29f67bcac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa7d9f787c24a42aca7a754a29f67bcac">&#9670;&nbsp;</a></span>Matrix</h2>
 
@@ -259,52 +262,6 @@ template&lt;typename Scalar &gt; </div>
 
 </div>
 </div>
-<a id="a37ecc247de0c8912848d42dff8bc852f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37ecc247de0c8912848d42dff8bc852f">&#9670;&nbsp;</a></span>computeAlbedo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Scalar &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_chef_devr_1_1_color.html">Color</a> ChefDevr::computeAlbedo </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>brdf</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Computes the albedo of a BRDF. </p>
-<dl class="section return"><dt>Returns</dt><dd>Albedo colour (r g b) </dd></dl>
-
-</div>
-</div>
-<a id="a2fa3ecb2ba850b48bde982430921559f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2fa3ecb2ba850b48bde982430921559f">&#9670;&nbsp;</a></span>computeAlbedoCuda()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Scalar &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_chef_devr_1_1_color.html">Color</a> ChefDevr::computeAlbedoCuda </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_chef_devr.html#ab94fb10d249c6a83c367d13ef7598637">Vector</a>&lt; <a class="el" href="main_8cpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>brdf</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Computes the albedo of a BRDF on a NVIDIA Cuda enabled graphics card. </p>
-<dl class="section return"><dt>Returns</dt><dd>Albedo colour (r g b) </dd></dl>
-
-</div>
-</div>
 <a id="a596a285a8d77aad17878f22f23689861"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a596a285a8d77aad17878f22f23689861">&#9670;&nbsp;</a></span>computeCovVector()</h2>
 
@@ -373,6 +330,8 @@ template&lt;typename Scalar &gt; </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_cgraph.png" border="0" usemap="#namespace_chef_devr_a596a285a8d77aad17878f22f23689861_cgraph" alt=""/></div>
 <map name="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_cgraph" id="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_cgraph">
+<area shape="rect" id="node2" href="namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d" title="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..." alt="" coords="244,5,387,32"/>
+<area shape="rect" id="node3" href="namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b" title="Centers matrix by sustracting mean to all columns. " alt="" coords="435,5,573,32"/>
 </map>
 </div>
 <div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -382,6 +341,13 @@ template&lt;typename Scalar &gt; </div>
 <div id="dynsection-2-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_icgraph.png" border="0" usemap="#namespace_chef_devr_a596a285a8d77aad17878f22f23689861_icgraph" alt=""/></div>
 <map name="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_icgraph" id="namespace_chef_devr_a596a285a8d77aad17878f22f23689861_icgraph">
+<area shape="rect" id="node2" href="class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107" title="Computes the optimized parametrisation of the BRDFs manifold. Uses Hook &amp; Jeeves method to solve the ..." alt="" coords="491,37,681,78"/>
+<area shape="rect" id="node4" href="class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba" title="Updates the movement vector of X that improves the solution (X_move) " alt="" coords="247,37,437,78"/>
+<area shape="rect" id="node5" href="class_chef_devr_1_1_optimisation_solver.html#a521476ed550af6cdf431015c9af20498" title="Apply X_move to the latent variable vector X. Updates new_X, new_K_minus1, new_detK accordingly..." alt="" coords="247,102,437,143"/>
+<area shape="rect" id="node6" href="namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d" title="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..." alt="" coords="271,168,413,195"/>
+<area shape="rect" id="node7" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a3f29882c04874bc83a68e008a0542f03" title="Reconstructs a BRDF for latent space coordinates. " alt="" coords="244,219,440,261"/>
+<area shape="rect" id="node3" href="class_chef_devr_1_1_optimisation_solver.html#a5cb2221de8949571cd64eb7aa270fd48" title="ChefDevr::OptimisationSolver\l::~OptimisationSolver" alt="" coords="732,37,921,78"/>
+<area shape="rect" id="node8" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a8943b55072cbcf99bd09553917c1ce68" title="ChefDevr::BRDFReconstructor\l::~BRDFReconstructor" alt="" coords="488,219,684,261"/>
 </map>
 </div>
 
@@ -456,7 +422,7 @@ template&lt;typename Scalar &gt; </div>
 <div class="center"><img src="namespace_chef_devr_a13ff4baef0481276d6b78f9d47297d0d_cgraph.png" border="0" usemap="#namespace_chef_devr_a13ff4baef0481276d6b78f9d47297d0d_cgraph" alt=""/></div>
 <map name="namespace_chef_devr_a13ff4baef0481276d6b78f9d47297d0d_cgraph" id="namespace_chef_devr_a13ff4baef0481276d6b78f9d47297d0d_cgraph">
 <area shape="rect" id="node2" href="namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b" title="Centers matrix by sustracting mean to all columns. " alt="" coords="222,5,361,32"/>
-<area shape="rect" id="node3" href="namespace_chef_devr.html#a349022012a8c5dc5757ba21824878766" title="Computes the covariance column vector for the lv_num&#39;th latent variable. " alt="" coords="196,56,387,83"/>
+<area shape="rect" id="node3" href="namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861" title="Computes the covariance column vector for the coordRef coordinates variable. " alt="" coords="196,56,387,83"/>
 </map>
 </div>
 <div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -466,11 +432,13 @@ template&lt;typename Scalar &gt; </div>
 <div id="dynsection-4-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="namespace_chef_devr_a13ff4baef0481276d6b78f9d47297d0d_icgraph.png" border="0" usemap="#namespace_chef_devr_a13ff4baef0481276d6b78f9d47297d0d_icgraph" alt=""/></div>
 <map name="namespace_chef_devr_a13ff4baef0481276d6b78f9d47297d0d_icgraph" id="namespace_chef_devr_a13ff4baef0481276d6b78f9d47297d0d_icgraph">
-<area shape="rect" id="node2" href="namespace_chef_devr.html#a349022012a8c5dc5757ba21824878766" title="Computes the covariance column vector for the lv_num&#39;th latent variable. " alt="" coords="196,33,387,59"/>
-<area shape="rect" id="node3" href="class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107" title="Computes the optimized parametrisation of the BRDFs manifold. Uses Hook &amp; Jeeves method to solve the ..." alt="" coords="672,25,861,67"/>
-<area shape="rect" id="node5" href="class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba" title="Updates the displacement vector of X that improves the solution (X_move) " alt="" coords="435,25,624,67"/>
-<area shape="rect" id="node6" href="class_chef_devr_1_1_optimisation_solver.html#a521476ed550af6cdf431015c9af20498" title="Apply X_move to the latent variable vector X. Updates new_X, new_K_minus1, new_detK accordingly..." alt="" coords="435,91,624,132"/>
-<area shape="rect" id="node4" href="class_chef_devr_1_1_optimisation_solver.html#a5cb2221de8949571cd64eb7aa270fd48" title="ChefDevr::OptimisationSolver\l::~OptimisationSolver" alt="" coords="909,25,1099,67"/>
+<area shape="rect" id="node2" href="namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861" title="Computes the covariance column vector for the coordRef coordinates variable. " alt="" coords="196,68,387,95"/>
+<area shape="rect" id="node3" href="class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107" title="Computes the optimized parametrisation of the BRDFs manifold. Uses Hook &amp; Jeeves method to solve the ..." alt="" coords="682,28,871,69"/>
+<area shape="rect" id="node5" href="class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba" title="Updates the movement vector of X that improves the solution (X_move) " alt="" coords="438,28,627,69"/>
+<area shape="rect" id="node6" href="class_chef_devr_1_1_optimisation_solver.html#a521476ed550af6cdf431015c9af20498" title="Apply X_move to the latent variable vector X. Updates new_X, new_K_minus1, new_detK accordingly..." alt="" coords="438,93,627,134"/>
+<area shape="rect" id="node7" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a3f29882c04874bc83a68e008a0542f03" title="Reconstructs a BRDF for latent space coordinates. " alt="" coords="435,158,631,200"/>
+<area shape="rect" id="node4" href="class_chef_devr_1_1_optimisation_solver.html#a5cb2221de8949571cd64eb7aa270fd48" title="ChefDevr::OptimisationSolver\l::~OptimisationSolver" alt="" coords="923,28,1112,69"/>
+<area shape="rect" id="node8" href="class_chef_devr_1_1_b_r_d_f_reconstructor.html#a8943b55072cbcf99bd09553917c1ce68" title="ChefDevr::BRDFReconstructor\l::~BRDFReconstructor" alt="" coords="679,158,875,200"/>
 </map>
 </div>
 

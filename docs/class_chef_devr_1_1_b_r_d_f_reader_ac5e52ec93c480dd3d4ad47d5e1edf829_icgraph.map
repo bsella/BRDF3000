@@ -1,4 +1,4 @@
 <map id="ChefDevr::BRDFReader::phi_diff_index" name="ChefDevr::BRDFReader::phi_diff_index">
 <area shape="rect" id="node2" href="$class_chef_devr_1_1_b_r_d_f_reader.html#a52a4fc59f6adee91e2e697b8a703d8c8" title="Extracts a color in a BRDF from a pair of incoming and outgoing angles. " alt="" coords="211,5,368,47"/>
-<area shape="rect" id="node3" href="$class_chef_devr_1_1_b_r_d_f_reader.html#a5543a302fba3c5cd717d61828c1ed81b" title="Samples a BRDF. " alt="" coords="416,5,573,47"/>
+<area shape="rect" id="node3" href="$class_chef_devr_1_1_b_r_d_f_reader.html#a660c35ad652c7ff79a8391e5399680d7" title="Resamples a BRDF. " alt="" coords="416,5,573,47"/>
 </map>

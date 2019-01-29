@@ -1,0 +1,5 @@
+<map id="ChefDevr::BRDFReconstructor::reconstruct" name="ChefDevr::BRDFReconstructor::reconstruct">
+<area shape="rect" id="node2" href="$namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861" title="Computes the covariance column vector for the coordRef coordinates variable. " alt="" coords="249,13,440,39"/>
+<area shape="rect" id="node3" href="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d" title="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..." alt="" coords="488,13,631,39"/>
+<area shape="rect" id="node4" href="$namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b" title="Centers matrix by sustracting mean to all columns. " alt="" coords="679,13,817,39"/>
+</map>

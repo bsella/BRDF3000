@@ -138,7 +138,7 @@ namespace ChefDevr
         /**
          * @brief Apply X_move to the latent variable vector X.
          * Updates new_X, new_K_minus1, new_detK accordingly
-         * @param new_X Latent variables vector the apply the move on
+         * @param new_X Latent variables vector to apply the move on
          * @param new_K_minus1 New inverse mapping matrix K_minus1 to fill
          * @param new_detK New determinant of K to fill
          * @return true if effectively moved, false otherwise

@@ -1,5 +1,5 @@
 <map id="ChefDevr::BRDFReader::compute_direction" name="ChefDevr::BRDFReader::compute_direction">
 <area shape="rect" id="node2" href="$class_chef_devr_1_1_b_r_d_f_reader.html#ab6a38cb74127f68f8f82bfde7afa9f27" title="Converts standard coordinates to half vector/difference vector coordinates. " alt="" coords="211,5,368,61"/>
 <area shape="rect" id="node3" href="$class_chef_devr_1_1_b_r_d_f_reader.html#a52a4fc59f6adee91e2e697b8a703d8c8" title="Extracts a color in a BRDF from a pair of incoming and outgoing angles. " alt="" coords="416,13,573,54"/>
-<area shape="rect" id="node4" href="$class_chef_devr_1_1_b_r_d_f_reader.html#a5543a302fba3c5cd717d61828c1ed81b" title="Samples a BRDF. " alt="" coords="621,13,779,54"/>
+<area shape="rect" id="node4" href="$class_chef_devr_1_1_b_r_d_f_reader.html#a660c35ad652c7ff79a8391e5399680d7" title="Resamples a BRDF. " alt="" coords="621,13,779,54"/>
 </map>

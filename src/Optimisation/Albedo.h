@@ -27,23 +27,25 @@ namespace ChefDevr
     public:
         /**
         * @brief Computes the albedo of a BRDF
-        * @param resampled_brdf 
-        * @return Albedo colour (r g b)
+        * @param brdf Resampled BRDF in the format defined in Methods & Algorithm report
+        * @param albedo Albedo colour (r g b) to fill with result
         */
-        static Color computeAlbedo (const ResampledBRDF& brdf);
+        static void computeAlbedo (const ResampledBRDF& brdf, Color& albedo);
     
     private:
         /**
         * @brief Computes the albedo of a BRDF in parallel with OpenMP
-        * @return Albedo colour (r g b)
+        * @param brdf Resampled BRDF in the format defined in Methods & Algorithm report
+        * @param albedo Albedo colour (r g b) to fill with result
         */
-        static Color computeAlbedoOpenMP (const ResampledBRDF& brdf);
+        static void computeAlbedoOpenMP (const ResampledBRDF& brdf, Color& albedo);
         
         /**
         * @brief Computes the albedo of a BRDF in parallel with Nvidia Cuda
-        * @return Albedo colour (r g b)
+        * @param brdf Resampled BRDF in the format defined in Methods & Algorithm report
+        * @param albedo Albedo colour (r g b) to fill with result
         */
-        static Color computeAlbedoCuda (const ResampledBRDF& brdf);
+        static void computeAlbedoCuda (const ResampledBRDF& brdf, Color& albedo);
     };
 
 } // ChefDevr

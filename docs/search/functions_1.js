@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['centermat',['centerMat',['../namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b',1,'ChefDevr::centerMat(Matrix&lt; Scalar &gt; &amp;Z)'],['../namespace_chef_devr.html#a8a35bcb9393c9a05d738e608570ec8d8',1,'ChefDevr::centerMat(Matrix&lt; Scalar &gt; &amp;Z, Vector&lt; Scalar &gt; &amp;meanBRDF)']]],
+  ['centermat',['centerMat',['../namespace_chef_devr.html#a8a35bcb9393c9a05d738e608570ec8d8',1,'ChefDevr']]],
   ['compute_5fdirection',['compute_direction',['../class_chef_devr_1_1_b_r_d_f_reader.html#afe401d8c485d62681e32db306453d05d',1,'ChefDevr::BRDFReader']]],
   ['computealbedo',['computeAlbedo',['../class_chef_devr_1_1_albedo.html#a7370dcbcff64429c0890f4a1b64fda32',1,'ChefDevr::Albedo']]],
   ['computealbedocuda',['computeAlbedoCuda',['../class_chef_devr_1_1_albedo.html#ade4fbc2b32fd46186910bcb37164f3cc',1,'ChefDevr::Albedo']]],

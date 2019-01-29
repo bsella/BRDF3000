@@ -1,0 +1,12 @@
+digraph "ChefDevr::covariance"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node21 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node21 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node22 [label="ChefDevr::centerMat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a8a35bcb9393c9a05d738e608570ec8d8",tooltip="Centers matrix by sustracting mean to all columns. "];
+  Node21 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node23 [label="ChefDevr::computeCovVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861",tooltip="Computes the covariance column vector for the coordRef coordinates variable. "];
+  Node23 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+}

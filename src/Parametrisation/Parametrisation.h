@@ -136,10 +136,11 @@ namespace ChefDevr
     /**
      * @brief Centers matrix by sustracting mean to all columns
      * @param Z Matrix to center
+     * @param meanBRDF Mean column of Z (filled in the function)
      * Z should be in column major
      */
     template <typename Scalar>
-    void centerMat(Matrix<Scalar>& Z);
+    void centerMat(Matrix<Scalar>& Z, Vector<Scalar>& meanBRDF);
     
     /**
      * @brief Computes the covariance column vector for the coordRef coordinates variable

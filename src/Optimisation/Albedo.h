@@ -27,27 +27,34 @@ namespace ChefDevr
     public:
         /**
         * @brief Computes the albedo of a BRDF
-        * @param brdf Resampled BRDF in the format defined in Methods & Algorithm report
+        * @param brdf BRDF in the format defined in Methods & Algorithm report
+        * @param num_sampling the number of phi angles to sample
         * @param albedo Albedo colour (r g b) to fill with result
         */
-        static void computeAlbedo (const ResampledBRDF& brdf, Color& albedo);
+        template <typename Scalar>
+        static void computeAlbedo (const Vector<Scalar>& brdf, Color& albedo, unsigned int num_sampling);
     
     private:
         /**
         * @brief Computes the albedo of a BRDF in parallel with OpenMP
-        * @param brdf Resampled BRDF in the format defined in Methods & Algorithm report
+        * @param brdf BRDF in the format defined in Methods & Algorithm report
         * @param albedo Albedo colour (r g b) to fill with result
+        * @param num_sampling the number of phi angles to sample
         */
-        static void computeAlbedoOpenMP (const ResampledBRDF& brdf, Color& albedo);
+        template <typename Scalar>
+        static void computeAlbedoOpenMP (const Vector<Scalar>& brdf, Color& albedo, unsigned int num_sampling);
         
         /**
         * @brief Computes the albedo of a BRDF in parallel with Nvidia Cuda
         * @param brdf Resampled BRDF in the format defined in Methods & Algorithm report
         * @param albedo Albedo colour (r g b) to fill with result
         */
-        static void computeAlbedoCuda (const ResampledBRDF& brdf, Color& albedo);
+        template <typename Scalar>
+        static void computeAlbedoCuda (const Vector<Scalar>& brdf, Color& albedo);
     };
 
 } // ChefDevr
+
+#include "Albedo.hpp"
 
 #endif

@@ -5,9 +5,7 @@
 
 namespace ChefDevr {
 
-    BRDFReader::BRDFReader() {
-
-    }
+    BRDFReader::BRDFReader() = default;
 
     void BRDFReader::std_coords_to_half_diff_coords(double theta_in, double phi_in, double theta_out, double phi_out,
                                         double& theta_half, double& phi_half, double& theta_diff, double& phi_diff) {

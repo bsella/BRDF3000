@@ -2,8 +2,12 @@
 #include "Albedo.h"
 #include "../Parametrisation/Parametrisation.h"
 #include "../../lib/bitmap/bitmap_image.hpp"
+
 #include <iostream>
+#include <fstream>
 #include <cmath>
+#include <experimental/filesystem>
+#include <string>
 
 /**
  * @file OptiDataWriter.hpp
@@ -51,5 +55,35 @@ namespace ChefDevr
             coord[1] = -1;
         }
         map.save_image(path.c_str());
+    }
+    
+    template <typename Scalar>
+    void writeParametrisationData (
+        const std::string& path,
+        const std::vector<std::string>& brdfsFilenames,
+        const Vector<Scalar>& X,
+        const Matrix<Scalar>& K_minus1,
+        const unsigned int latentDim)
+    {
+        std::ofstream file(path);
+        
+        if (!file.is_open()){
+            std::cerr << "Could not create file \"" << path<< "\"" << std::endl;
+        }
+        
+        auto& X_resh(X.reshaped(latentDim, X.rows()/latentDim));
+        
+        file << "This file contains the results of an optimised parametrisation of the measured materials manifold" << std::endl;
+        file << typeid(Scalar).name() << std::endl;
+        file << "inverse mapping matrix" << std::endl;
+        file << K_minus1.rows() << " " << K_minus1.cols() << std::endl;
+        file << K_minus1 << std::endl;
+        file << "latent variables" << std::endl;
+        file << X_resh.cols() << std::endl;
+        
+        for (unsigned int ivar(0); ivar < X_resh.cols(); ++ivar)
+        {
+            file << brdfsFilenames[ivar] << X_resh.col(ivar).transpose() << std::endl;
+        }
     }
 } // namespace ChevDevr  

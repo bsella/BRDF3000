@@ -1,12 +1,16 @@
 #include "BRDFReader.h"
 
+#include <Eigen/Geometry>
+
+
 namespace ChefDevr {
 
     BRDFReader::BRDFReader() {
 
     }
 
-    void BRDFReader::std_coords_to_half_diff_coords(double theta_in, double phi_in, double theta_out, double phi_out, double& theta_half, double& phi_half, double& theta_diff, double& phi_diff) {
+    void BRDFReader::std_coords_to_half_diff_coords(double theta_in, double phi_in, double theta_out, double phi_out,
+                                        double& theta_half, double& phi_half, double& theta_diff, double& phi_diff) {
         const Vector3d in = compute_direction(theta_in, phi_in);
         const Vector3d out = compute_direction(theta_out, phi_out);
 
@@ -70,6 +74,37 @@ namespace ChefDevr {
                 result = samplingResolution_thetaH - 1;
             }
         }
+        return (unsigned int)result;
+    }
+
+    unsigned int BRDFReader::theta_diff_index(double theta_diff)
+    {
+        int result = int(theta_diff / (M_PI * 0.5) * samplingResolution_thetaD);
+
+        if (result < 0) {
+            result = 0;
+        } else if (result > samplingResolution_thetaD - 1) {
+            result = samplingResolution_thetaD - 1;
+        }
+
+        return  (unsigned int)result;
+    }
+
+    unsigned int BRDFReader::phi_diff_index(double phi_diff) {
+        // Because of reciprocity, the BRDF is unchanged under
+        // phi_diff -> phi_diff + M_PI
+        if (phi_diff < 0.0) {
+            phi_diff += M_PI;
+        }
+
+        int result = int(phi_diff / M_PI * samplingResolution_phiD / 2);
+
+        if (result < 0) {
+            result = 0;
+        } else if (result > samplingResolution_phiD / 2 - 1) {
+            result = samplingResolution_phiD / 2 - 1;
+        }
+
         return (unsigned int)result;
     }
 

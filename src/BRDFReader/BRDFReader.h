@@ -15,9 +15,6 @@
 #include "../Parametrisation/types.h"
 
 namespace ChefDevr {
-
-    using namespace Eigen;
-    using namespace std;
     
     /**
     * @brief This class is used to read all the BRDF references and to sample them
@@ -99,7 +96,7 @@ namespace ChefDevr {
         * Indeed, in this case, the set of BRDFs is stored inside the disk
         */
         template<typename Scalar>
-        Vector<Scalar> read_brdf(const char *filePath);
+        Vector<Scalar> read_brdf(unsigned int num_coefficientsNeeded, const char *filePath);
 
         /**
          * @brief Extracts a color in a BRDF from a pair of incoming and outgoing angles

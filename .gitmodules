@@ -4,3 +4,6 @@
 [submodule "lib/Eigen"]
 	path = lib/Eigen
 	url = https://github.com/libigl/eigen
+[submodule "lib/bitmap"]
+	path = lib/bitmap
+	url = git://github.com/ArashPartow/bitmap.git

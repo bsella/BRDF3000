@@ -1,4 +1,9 @@
 <map id="BRDFReader.h" name="BRDFReader.h">
 <area shape="rect" id="node2" href="$main_8cpp.html" title="main.cpp" alt="" coords="5,80,80,107"/>
-<area shape="rect" id="node3" href="$_b_r_d_f_reader_8cpp.html" title="BRDFReader.cpp" alt="" coords="104,80,227,107"/>
+<area shape="rect" id="node3" href="$_albedo_8h.html" title="Albedo.h" alt="" coords="104,80,176,107"/>
+<area shape="rect" id="node8" href="$_b_r_d_f_reader_8cpp.html" title="BRDFReader.cpp" alt="" coords="200,80,323,107"/>
+<area shape="rect" id="node4" href="$_albedo_8cpp.html" title="Albedo.cpp" alt="" coords="30,155,117,181"/>
+<area shape="rect" id="node5" href="$_opti_data_writer_8hpp.html" title="OptiDataWriter.hpp" alt="" coords="141,155,272,181"/>
+<area shape="rect" id="node6" href="$_opti_data_writer_8h.html" title="Provides the functions to write latent space data needed for BRDFs reconstruction and latent space vi..." alt="" coords="148,229,265,256"/>
+<area shape="rect" id="node7" href="$_opti_data_writer_8cpp.html" title="OptiDataWriter.cpp" alt="" coords="141,304,272,331"/>
 </map>

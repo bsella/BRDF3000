@@ -35,7 +35,8 @@ std::istringstream ParametrisationTest::testCenter(std::istream& istr){
 			istr >> tmp;
 			M(i,j)=tmp;
 		}
-    ChefDevr::centerMat(M);
+    ChefDevr::Vector<double> mean(h);
+    ChefDevr::centerMat(M, mean);
 	std::stringstream ret;
 	ret << M;
 	return std::istringstream(ret.str());

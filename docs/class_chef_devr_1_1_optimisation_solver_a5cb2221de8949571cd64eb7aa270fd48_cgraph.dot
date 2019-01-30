@@ -13,7 +13,7 @@ digraph "ChefDevr::OptimisationSolver::~OptimisationSolver"
   Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
   Node6 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d",tooltip="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..."];
   Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node7 [label="ChefDevr::centerMat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b",tooltip="Centers matrix by sustracting mean to all columns. "];
+  Node7 [label="ChefDevr::centerMat",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a8a35bcb9393c9a05d738e608570ec8d8",tooltip="Centers matrix by sustracting mean to all columns. "];
   Node6 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
   Node3 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
   Node8 [label="ChefDevr::OptimisationSolver\l::cost",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#aa6c2ef443df567988fe35b90263512fa",tooltip="Computes the cost of the solution defined by K_minus1. "];

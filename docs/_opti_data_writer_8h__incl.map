@@ -1,10 +1,11 @@
 <map id="OptiDataWriter.h" name="OptiDataWriter.h">
 <area shape="rect" id="node2" href="$types_8h.html" title="../Parametrisation\l/types.h" alt="" coords="5,333,128,375"/>
-<area shape="rect" id="node4" href="$_optimisation_solver_8h.html" title="../Optimisation/Optimisation\lSolver.h" alt="" coords="150,80,330,121"/>
-<area shape="rect" id="node15" href="$_opti_data_writer_8hpp.html" title="OptiDataWriter.hpp" alt="" coords="393,87,524,114"/>
-<area shape="rect" id="node6" href="$_optimisation_solver_8hpp.html" title="OptimisationSolver.hpp" alt="" coords="163,169,317,196"/>
+<area shape="rect" id="node4" href="$_optimisation_solver_8h.html" title="../Optimisation/Optimisation\lSolver.h" alt="" coords="121,80,301,121"/>
+<area shape="rect" id="node14" href="$_opti_data_writer_8hpp.html" title="OptiDataWriter.hpp" alt="" coords="325,87,456,114"/>
+<area shape="rect" id="node6" href="$_optimisation_solver_8hpp.html" title="OptimisationSolver.hpp" alt="" coords="155,169,309,196"/>
 <area shape="rect" id="node7" href="$_parametrisation_8h.html" title="Functions and classes related to the BRDF space parametrisation that are common to the Optimisation m..." alt="" coords="286,244,413,285"/>
-<area shape="rect" id="node8" href="$_parametrisation_8hpp.html" title="Parametrisation.hpp" alt="" coords="296,341,432,367"/>
-<area shape="rect" id="node16" href="$_albedo_8h.html" title="Albedo.h" alt="" coords="433,169,505,196"/>
-<area shape="rect" id="node17" href="$_albedo_8hpp.html" title="Albedo.hpp" alt="" coords="437,251,523,278"/>
+<area shape="rect" id="node8" href="$_parametrisation_8hpp.html" title="Parametrisation.hpp" alt="" coords="152,341,288,367"/>
+<area shape="rect" id="node15" href="$_albedo_8h.html" title="Albedo.h" alt="" coords="355,169,427,196"/>
+<area shape="rect" id="node16" href="$_b_r_d_f_reader_8h.html" title="../BRDFReader/BRDFReader.h" alt="" coords="437,251,635,278"/>
+<area shape="rect" id="node22" href="$_b_r_d_f_reader_8hpp.html" title="BRDFReader.hpp" alt="" coords="735,341,857,367"/>
 </map>

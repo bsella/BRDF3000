@@ -16,19 +16,34 @@
 
 namespace ChefDevr {
     
+    /** @brief Structure that encapsulates a resampled BRDF in a suitable format for albedo computation */
+    struct ResampledBRDF
+    {
+        /** @brief Data of the BRDF in the format specified in the Methods & Algorithm report */
+        std::unique_ptr<double[]> data;
+        /** @brief Delta between two consecutives theta values */
+        double thetaStep;
+        /** @brief Number of theta values */
+        unsigned int thetaNum;
+        /** @brief Delta between two consecutives phi values */
+        double phiStep;
+        /** @brief Number of phi values */
+        unsigned int phiNum;
+    };
+    
     /**
     * @brief This class is used to read all the BRDF references and to sample them
     */
-
     class BRDFReader {
     public:
+        
         BRDFReader();
         ~BRDFReader(){}
 
         /**
         * @brief Read all the BRDFs stored in a given directory
         * @param fileDirectory the path of the directory where all the brdfs are stored
-        * @return Z BRDFs data matrix where each column represents a BRDF
+        * @return Non-centered Z BRDFs data matrix where each column represents a BRDF
         *
         * Initializes the list of BRDFs paths in the order in which they were read.
         *
@@ -46,13 +61,13 @@ namespace ChefDevr {
         * that parametrizes the retained BRDF values
         */
         template<typename Scalar>
-        Vector<Scalar> sampleBRDF(const Vector<Scalar> &brdf, unsigned int num_sampling);
+        ResampledBRDF sampleBRDF(const Vector<Scalar> &brdf, unsigned int num_sampling);
 
         /**
          * @return the list of BRDF paths in the order in which they were read
          */
-        inline const std::vector<std::string>& getBRDFPaths () const {
-            return brdf_filePaths;
+        inline const std::vector<std::string>& getBRDFFilenames () const {
+            return brdf_filenames;
         }
 
         class BRDFReaderError : public std::runtime_error {
@@ -78,7 +93,7 @@ namespace ChefDevr {
         /**
          * @brief the list of BRDF paths in the order in which they were read
          */
-        std::vector<std::string> brdf_filePaths;
+        std::vector<std::string> brdf_filenames;
 
         /* ------------*/
         /* Functions */
@@ -109,8 +124,8 @@ namespace ChefDevr {
          * @param[out] green_value green channel of the extracted color
          * @param[out] blue_value blue channel of the extracted color
          */
-        template<typename Scalar>
-        void lookup_brdf_val(const Vector<Scalar> &brdf, double theta_in, double phi_in, double theta_out, double phi_out, double& red_value, double& green_value, double& blue_value);
+        template <typename Scalar>
+        void lookup_brdf_val(const Vector<Scalar>& brdf, double theta_in, double phi_in, double theta_out, double phi_out, double& red_value, double& green_value, double& blue_value);
 
         /**
          * @brief Converts standard coordinates to half vector/difference vector coordinates

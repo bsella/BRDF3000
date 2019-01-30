@@ -1,0 +1,7 @@
+digraph "ChefDevr::BRDFReader"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="{ChefDevr::BRDFReader\n|- brdf_filenames\l- samplingResolution\l_thetaH\l- samplingResolution\l_thetaD\l- samplingResolution_phiD\l- red_scale\l- green_scale\l- blue_scale\l|+ BRDFReader()\l+ ~BRDFReader()\l+ createZ()\l+ resampleBRDF()\l+ getBRDFFilenames()\l- read_brdf()\l- lookup_brdf_val()\l- std_coords_to_half\l_diff_coords()\l- rotate_vector()\l- compute_direction()\l- theta_half_index()\l- theta_diff_index()\l- phi_diff_index()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="This class is used to read all the BRDF references and to sample them."];
+}

@@ -1,0 +1,32 @@
+digraph "Parametrisation.hpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node4 [label="Parametrisation.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="Parametrisation.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_parametrisation_8h.html",tooltip="Functions and classes related to the BRDF space parametrisation that are common to the Optimisation m..."];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="OptimisationSolver.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_optimisation_solver_8hpp.html",tooltip=" "];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="OptimisationSolver.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_optimisation_solver_8h.html",tooltip=" "];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node8 [label="main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node9 [label="OptiDataWriter.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_opti_data_writer_8h.html",tooltip="Provides the functions to write latent space data needed for BRDFs reconstruction and latent space vi..."];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node10 [label="OptiDataWriter.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_opti_data_writer_8cpp.html",tooltip=" "];
+  Node9 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node11 [label="OptiDataWriter.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_opti_data_writer_8hpp.html",tooltip=" "];
+  Node11 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node12 [label="OptimisationSolver.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_optimisation_solver_8cpp.html",tooltip=" "];
+  Node5 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node13 [label="Parametrisation.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_parametrisation_8cpp.html",tooltip=" "];
+  Node5 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node14 [label="Albedo.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_albedo_8h.html",tooltip=" "];
+  Node14 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node15 [label="Albedo.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_albedo_8cpp.html",tooltip=" "];
+  Node14 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+}

@@ -1,3 +1,6 @@
 <map id="ChefDevr::BRDFReconstructor::~BRDFReconstructor" name="ChefDevr::BRDFReconstructor::~BRDFReconstructor">
-<area shape="rect" id="node2" href="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#ac71d85c4f5647fad9bbb79171e81a578" title="Reconstructs a BRDF for latent space coordinates. " alt="" coords="249,5,445,47"/>
+<area shape="rect" id="node2" href="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#a205bf0004c370cd8633caa425dbcabd7" title="Reconstructs a BRDF for latent space coordinates. " alt="" coords="249,5,445,47"/>
+<area shape="rect" id="node3" href="$namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861" title="Computes the covariance column vector for the coordRef coordinates variable. " alt="" coords="493,13,684,39"/>
+<area shape="rect" id="node4" href="$namespace_chef_devr.html#a13ff4baef0481276d6b78f9d47297d0d" title="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..." alt="" coords="732,13,875,39"/>
+<area shape="rect" id="node5" href="$namespace_chef_devr.html#a464db6c1ced4f8bd6b20bb4d6248cb7b" title="Centers matrix by sustracting mean to all columns. " alt="" coords="923,13,1061,39"/>
 </map>

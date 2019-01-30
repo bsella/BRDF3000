@@ -27,25 +27,28 @@ namespace ChefDevr
     public:
         /**
          * @brief Constructor of the class
-         * @param Z BRDFs data matrix,
-         * @param K_minus1 Inverse mapping matrix
-         * @param X_reshaped Latent variables matrix in the form such that each column is a latent variable with a number of rows equal to dim
-         * @param mu Value of the mu constant that helps interpolation source data
-         * @param dim Dimension of the latent space
+         * @param _Zcentered Centered BRDFs data matrix,
+         * @param _K_minus1 Inverse mapping matrix
+         * @param _X_reshaped Latent variables matrix in the form such that each column is a latent variable with a number of rows equal to dim
+         * @param _dim Dimension of the latent space
+         * @param _mu Value of the mu constant that helps interpolation source data
+         * @param _l Constant defined in the research paper
          */
         BRDFReconstructor (
-            const Matrix<Scalar>& _Z, 
+            const Matrix<Scalar>& _Zcentered, 
             const Matrix<Scalar>& _K_minus1,
             const Matrix<Scalar>& _X_reshaped,
+            const Vector<Scalar>& _meanBRDF,
             const unsigned int _dim,
             const Scalar _mu = MU_DEFAULT,
             const Scalar _l = L_DEFAULT):
             
-            Z(_Z),
+            Zcentered(_Zcentered),
             K_minus1(_K_minus1),
             X_reshaped(_X_reshaped.res),
+            meanBRDF(_meanBRDF),
             dim(_dim),
-            nb_data(Z.cols()),
+            nb_data(Zcentered.cols()),
             mu(_mu),
             l(_l){}
         
@@ -59,8 +62,7 @@ namespace ChefDevr
          * @return The BRDF data as a column vector
          */
         void reconstruct (Vector<Scalar>& brdf,
-                          const Vector<Scalar>& coord,
-                          const Scalar& mu = MU_DEFAULT);
+                          const Vector<Scalar>& coord);
         
     private:
         /** 
@@ -68,7 +70,7 @@ namespace ChefDevr
          * 
          * Each column represents a BRDF
          */
-        const Matrix<Scalar>& Z;
+        const Matrix<Scalar>& Zcentered;
         
         /** 
          * @brief Inverse mapping matrix
@@ -79,6 +81,11 @@ namespace ChefDevr
          * @brief Latent variables matrix in the form such that each column is a latent variable with a number of rows equal to dim.
          */
         const Matrix<Scalar>& X_reshaped;
+        
+        /**
+         * @brief Mean column of Z (before it was centered)
+         */
+        Vector<Scalar> meanBRDF;
         
         /** 
          * @brief Dimension of the latent space
@@ -129,10 +136,11 @@ namespace ChefDevr
     /**
      * @brief Centers matrix by sustracting mean to all columns
      * @param Z Matrix to center
+     * @param meanBRDF Mean column of Z (filled in the function)
      * Z should be in column major
      */
     template <typename Scalar>
-    void centerMat(Matrix<Scalar>& Z);
+    void centerMat(Matrix<Scalar>& Z, Vector<Scalar>& meanBRDF);
     
     /**
      * @brief Computes the covariance column vector for the coordRef coordinates variable

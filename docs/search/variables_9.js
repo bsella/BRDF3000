@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['samplingresolution_5fphid',['samplingResolution_phiD',['../class_chef_devr_1_1_b_r_d_f_reader.html#a83090057e279e9923f2fe5691b432a65',1,'ChefDevr::BRDFReader']]],
-  ['samplingresolution_5fthetad',['samplingResolution_thetaD',['../class_chef_devr_1_1_b_r_d_f_reader.html#a4fc242ffdafd4e8af1a83709852e654a',1,'ChefDevr::BRDFReader']]],
-  ['samplingresolution_5fthetah',['samplingResolution_thetaH',['../class_chef_devr_1_1_b_r_d_f_reader.html#ad51edca13e24637388e7707a5621a671',1,'ChefDevr::BRDFReader']]],
-  ['step',['step',['../class_chef_devr_1_1_optimisation_solver.html#acfb3001a33f8199a9f20b1b7dff2ea42',1,'ChefDevr::OptimisationSolver']]]
+  ['r',['r',['../struct_chef_devr_1_1_color.html#a14d3543fed00ba8441f58f1beede06f7',1,'ChefDevr::Color']]],
+  ['red_5fscale',['red_scale',['../class_chef_devr_1_1_b_r_d_f_reader.html#af5d2e77bd769b2b43cb4672637873c88',1,'ChefDevr::BRDFReader']]],
+  ['reducestep',['reduceStep',['../class_chef_devr_1_1_optimisation_solver.html#a91bcfbcedaeeb4395898cfdc18f04da9',1,'ChefDevr::OptimisationSolver']]]
 ];

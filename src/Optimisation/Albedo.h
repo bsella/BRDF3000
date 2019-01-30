@@ -2,6 +2,7 @@
 #define ALBEDO__H
 
 #include "../Parametrisation/Parametrisation.h"
+#include "../BRDFReader/BRDFReader.h"
 
 /**
  * @file Albedo.h
@@ -10,29 +11,43 @@
 namespace ChefDevr
 {
     /**
-     * @brief Simple (red, green, blue) color structure
-     */
+    * @brief Simple (red, green, blue) color structure
+    */
     struct Color
     {
         double r, g, b;
     };
     
     /**
-     * @brief Computes the albedo of a BRDF
-     * @return Albedo colour (r g b)
+     * @brief Provides albedo computation using the most efficient parallelization
+     * solution made available by the material
      */
-    template <typename Scalar>
-    Color computeAlbedo (Vector<Scalar>& brdf);
+    class Albedo
+    {
+    public:
+        /**
+        * @brief Computes the albedo of a BRDF
+        * @param brdf Resampled BRDF in the format defined in Methods & Algorithm report
+        * @param albedo Albedo colour (r g b) to fill with result
+        */
+        static void computeAlbedo (const ResampledBRDF& brdf, Color& albedo);
     
-    /**
-     * @brief Computes the albedo of a BRDF on a NVIDIA Cuda enabled graphics card
-     * @return Albedo colour (r g b)
-     */
-    template <typename Scalar>
-    Color computeAlbedoCuda (Vector<Scalar>& brdf);
+    private:
+        /**
+        * @brief Computes the albedo of a BRDF in parallel with OpenMP
+        * @param brdf Resampled BRDF in the format defined in Methods & Algorithm report
+        * @param albedo Albedo colour (r g b) to fill with result
+        */
+        static void computeAlbedoOpenMP (const ResampledBRDF& brdf, Color& albedo);
+        
+        /**
+        * @brief Computes the albedo of a BRDF in parallel with Nvidia Cuda
+        * @param brdf Resampled BRDF in the format defined in Methods & Algorithm report
+        * @param albedo Albedo colour (r g b) to fill with result
+        */
+        static void computeAlbedoCuda (const ResampledBRDF& brdf, Color& albedo);
+    };
 
 } // ChefDevr
-
-#include "Albedo.hpp"
 
 #endif

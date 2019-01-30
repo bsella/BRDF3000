@@ -48,7 +48,7 @@ namespace ChefDevr {
     }
 
     template <typename Scalar>
-    Vector<Scalar> BRDFReader::sampleBRDF(const Vector<Scalar> &brdf, unsigned int num_sampling) {
+    ResampledBRDF BRDFReader::sampleBRDF(const Vector<Scalar> &brdf, unsigned int num_sampling) {
         const unsigned int num_phi = 4 * num_sampling;
         const double stepTheta = 0.5 * M_PI / num_sampling;
         const double stepPhi = 2.0 * M_PI / num_phi;

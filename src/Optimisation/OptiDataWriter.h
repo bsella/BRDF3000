@@ -19,9 +19,10 @@ namespace ChefDevr
     /**
     * @brief Writes the image of the latent space on the disk
     * @param path Path of the folder to write into
-    * @param Z BRDF data matrix (BRDFs stored in column major)
+    * @param Z Centered BRDF data matrix (BRDFs stored in column major)
     * @param X Latent variables vector
     * @param K_minus1 Inverse mapping matrix
+    * @param meanBRDF Mean column of Z (before it was centered)
     * @param width Width of the image in number of pixels
     * @param height Height of the image in number of pixels
     */
@@ -31,6 +32,7 @@ namespace ChefDevr
         const Matrix<Scalar>& Z,
         const Vector<Scalar>& X,
         const Matrix<Scalar>& K_minus1,
+        const Vector<Scalar>& meanBRDF,
         const unsigned int latentDim,
         const unsigned width = 1024,
         const unsigned height = 1024);

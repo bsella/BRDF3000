@@ -1,24 +1,18 @@
 digraph "ChefDevr::covariance"
 {
+ // LATEX_PDF_SIZE
   edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
   node [fontname="FreeSans",fontsize="10",shape=record];
-  rankdir="LR";
-  Node28 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node28 -> Node29 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node29 [label="ChefDevr::computeCovVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861",tooltip="Computes the covariance column vector for the coordRef coordinates variable. "];
-  Node29 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node30 [label="ChefDevr::OptimisationSolver\l::optimizeMapping",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107",tooltip="Computes the optimized parametrisation of the BRDFs manifold. Uses Hook & Jeeves method to solve the ..."];
-  Node30 -> Node31 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node31 [label="ChefDevr::OptimisationSolver\l::~OptimisationSolver",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#a5cb2221de8949571cd64eb7aa270fd48"];
-  Node29 -> Node32 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node32 [label="ChefDevr::OptimisationSolver\l::exploratoryMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba",tooltip="Updates the movement vector of X that improves the solution (X_move) "];
-  Node32 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node29 -> Node33 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node33 [label="ChefDevr::OptimisationSolver\l::patternMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#a521476ed550af6cdf431015c9af20498",tooltip="Apply X_move to the latent variable vector X. Updates new_X, new_K_minus1, new_detK accordingly..."];
-  Node33 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node29 -> Node28 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node29 -> Node34 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node34 [label="ChefDevr::BRDFReconstructor\l::reconstruct",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#a3f29882c04874bc83a68e008a0542f03",tooltip="Reconstructs a BRDF for latent space coordinates. "];
-  Node34 -> Node35 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node35 [label="ChefDevr::BRDFReconstructor\l::~BRDFReconstructor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#a8943b55072cbcf99bd09553917c1ce68"];
+  rankdir="RL";
+  Node10 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..."];
+  Node10 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node11 [label="ChefDevr::computeCovVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a596a285a8d77aad17878f22f23689861",tooltip="Computes the covariance column vector for the coordRef coordinates variable."];
+  Node11 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node12 [label="ChefDevr::OptimisationSolver\l::optimizeMapping",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107",tooltip="Computes the optimized parametrisation of the BRDFs manifold. Uses Hook & Jeeves method to solve the ..."];
+  Node11 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node13 [label="ChefDevr::OptimisationSolver\l::exploratoryMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#a515eb2a32af01d73c8a7c0be3ebd5aba",tooltip="Updates the movement vector of X that improves the solution (X_move)"];
+  Node11 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node14 [label="ChefDevr::OptimisationSolver\l::patternMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#a521476ed550af6cdf431015c9af20498",tooltip="Apply X_move to the latent variable vector X. Updates new_X, new_K_minus1, new_detK accordingly."];
+  Node11 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node15 [label="ChefDevr::BRDFReconstructor\l::reconstruct",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#a205bf0004c370cd8633caa425dbcabd7",tooltip="Reconstructs a BRDF for latent space coordinates."];
 }

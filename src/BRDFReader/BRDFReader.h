@@ -9,7 +9,7 @@
 //#include <stxxl/vector>
 
 #include "../Parametrisation/types.h"
-
+#include "../../tests/BRDFReaderTest.h"
 namespace ChefDevr {
     
     /**
@@ -17,7 +17,7 @@ namespace ChefDevr {
     */
     class BRDFReader {
     public:
-        
+        friend BRDFReaderTest;
         BRDFReader();
         ~BRDFReader() = default;
 

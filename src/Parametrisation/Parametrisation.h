@@ -29,7 +29,7 @@ namespace ChefDevr
          * @brief Constructor of the class
          * @param _Zcentered Centered BRDFs data matrix,
          * @param _K_minus1 Inverse mapping matrix
-         * @param _X_reshaped Latent variables matrix in the form such that each column is a latent variable with a number of rows equal to dim
+         * @param _X Latent variables vector
          * @param _dim Dimension of the latent space
          * @param _mu Value of the mu constant that helps interpolation source data
          * @param _l Constant defined in the research paper
@@ -37,7 +37,7 @@ namespace ChefDevr
         BRDFReconstructor (
             const Matrix<Scalar>& _Zcentered, 
             const Matrix<Scalar>& _K_minus1,
-            const Matrix<Scalar>& _X_reshaped,
+            const Vector<Scalar>& _X,
             const Vector<Scalar>& _meanBRDF,
             const unsigned int _dim,
             const Scalar _mu = MU_DEFAULT,
@@ -45,7 +45,7 @@ namespace ChefDevr
             
             Zcentered(_Zcentered),
             K_minus1(_K_minus1),
-            X_reshaped(_X_reshaped.res),
+            X(_X),
             meanBRDF(_meanBRDF),
             dim(_dim),
             nb_data(Zcentered.cols()),
@@ -78,9 +78,9 @@ namespace ChefDevr
         const Matrix<Scalar>& K_minus1;
         
         /** 
-         * @brief Latent variables matrix in the form such that each column is a latent variable with a number of rows equal to dim.
+         * @brief Latent variables vector
          */
-        const Matrix<Scalar>& X_reshaped;
+        const Vector<Scalar>& X;
         
         /**
          * @brief Mean column of Z (before it was centered)
@@ -122,8 +122,8 @@ namespace ChefDevr
      */
     template <typename Scalar>
     inline Scalar covariance (
-        Vector<Scalar>& x1,
-        Vector<Scalar>& x2,
+        const Vector<Scalar>& x1,
+        const Vector<Scalar>& x2,
         const Scalar mu = MU_DEFAULT,
         const Scalar l  = L_DEFAULT)
     {
@@ -156,7 +156,7 @@ namespace ChefDevr
     template <typename Scalar>
     void computeCovVector (
         Vector<Scalar>& cov_vector,
-        const Matrix<Scalar>& X_reshaped,
+        const Vector<Scalar>& X,
         const Vector<Scalar>& coordRef,
         const unsigned int dim,
         const unsigned int nb_data);

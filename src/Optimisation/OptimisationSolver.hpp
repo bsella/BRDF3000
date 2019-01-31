@@ -22,9 +22,9 @@ namespace ChefDevr
         Z(_Z),
         ZZt(_Z*_Z.transpose()),
         latentDim(_latentDim),
-        X(Vector<Scalar>(_Z.cols()*latentDim)),
-        X_move(Vector<Scalar>(_Z.cols()*latentDim)),
-        K_minus1(Matrix<Scalar>(_Z.cols(), _Z.cols)){}
+        X(_Z.cols()*latentDim),
+        X_move(_Z.cols()*latentDim),
+        K_minus1(_Z.cols(), _Z.cols()){}
     
     template <typename Scalar>
     void OptimisationSolver<Scalar>::optimizeMapping ()
@@ -41,8 +41,9 @@ namespace ChefDevr
         # pragma omp parallel for
         for (i=0; i < nb_data; ++i)
         {
-            computeCovVector(K_minus1.col(i), X.reshaped(latentDim, nb_data),
-                             X.reshaped(latentDim, nb_data).col(i), latentDim, nb_data);
+            computeCovVector(K_minus1.col(i).data(), X,
+                             X.segment(latentDim*i, latentDim),
+                             latentDim, nb_data);
         }
         // Compute detK
         detK = K_minus1.determinant();
@@ -101,15 +102,17 @@ namespace ChefDevr
         for (unsigned int i(0); i < nbcoefs;++i)
         {
             lv_num = i/latentDim;
-            computeCovVector(cov_vector, X.reshaped(latentDim, nb_data),
-                             X.reshaped(latentDim, nb_data).col(lv_num), latentDim, nb_data);
+            computeCovVector(cov_vector.data(), X,
+                             X.segment(latentDim*lv_num, latentDim),
+                             latentDim, nb_data);
             
             X[i] += step;
             if ( X[i] < Scalar(1)) // latent variable constraint
             {
                 X_move[i] = step;
-                computeCovVector(diff_cov_vector, X.reshaped(latentDim, nb_data),
-                                 X.reshaped(latentDim, nb_data).col(lv_num), latentDim, nb_data);
+                computeCovVector(diff_cov_vector.data(), X,
+                                 X.segment(latentDim*lv_num,latentDim),
+                                 latentDim, nb_data);
                 diff_cov_vector -= cov_vector;
                 
                 // Update K_minus1 and detK with Sherman-Morisson formula
@@ -125,8 +128,9 @@ namespace ChefDevr
                 if (X[i] > Scalar(-1)) // latent variable constraint
                 {
                     X_move[i] = -step;
-                    computeCovVector(diff_cov_vector, X.reshaped(latentDim, nb_data),
-                                     X.reshaped(latentDim, nb_data).col(lv_num), latentDim, nb_data);
+                    computeCovVector(diff_cov_vector.data(), X,
+                                     X.segment(latentDim*lv_num, latentDim),
+                                     latentDim, nb_data);
                     diff_cov_vector -= cov_vector;
                     
                     // Update K_minus1 and detK with Sherman-Morisson formula
@@ -208,8 +212,9 @@ namespace ChefDevr
             // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)
             # pragma omp parallel for
             for (i=0; i<nb_data; ++i){
-                computeCovVector(new_K_minus1.col(i), new_X.reshaped(latentDim, nb_data),
-                                 new_X.reshaped(latentDim, nb_data).col(i), latentDim, nb_data);
+                computeCovVector(new_K_minus1.col(i).data(), new_X,
+                                 new_X.segment(i*latentDim, latentDim),
+                                 latentDim, nb_data);
             }
             // Compute new_detK
             new_detK = new_K_minus1.determinant();
@@ -223,25 +228,27 @@ namespace ChefDevr
     template <typename Scalar>
     void OptimisationSolver<Scalar>::initX ()
     {
-        unsigned char i;
+        unsigned int i;
         auto B(Z.transpose()*Z);
         
         // Use EigenSolver to compute eigen values and vectors
-        auto solver(Eigen::EigenSolver<Matrix<Scalar>>(B, true));
-        solver.compute();
-        auto eigenValues(solver.eigenvalues());
-        auto eigenVectors(solver.eigenvectors());
+        Eigen::EigenSolver<Matrix<Scalar>> solver(B, true);
+        const Vector<Scalar>& eigenValues(solver.eigenvalues());
+        const Matrix<Scalar>& eigenVectors(solver.eigenvectors());
         
         // Use std::sort to sort an indices vector in the same way eigen values should be ordered
         // initialize original index locations
         std::vector<size_t> idx(eigenValues.size());
         std::iota(idx.begin(), idx.end(), 0);
         // sort indexes based on comparing values in eigenValues
-        std::sort(idx.begin(), idx.end(),
-                [&eigenValues](size_t i1, size_t i2) {return eigenValues[i1] > eigenValues[i2];});
+        std::function<size_t(size_t, size_t)> cmpIndices(
+                [&eigenValues](size_t i1, size_t i2) {
+                    return eigenValues[i1] > eigenValues[i2];});
+        
+        std::sort(idx.begin(), idx.end(),cmpIndices);
         
         // Build D the diagonal matrix with ordered eigen values in diagonal
-        auto D(Matrix<Scalar>::Zero(latentDim, latentDim));
+        Matrix<Scalar> D(Matrix<Scalar>::Zero(latentDim, latentDim));
         # pragma omp parallel for
         for (i=0; i<latentDim; ++i)
         {
@@ -259,7 +266,8 @@ namespace ChefDevr
         }
         
         // X as column vector
-        X = (D*V).reshaped();
+        D = (D*V);
+        X = Eigen::Map<Vector<Scalar>>(D.data(), latentDim*nb_data, 1);
         
         // normalize X
         X = X / (std::max(std::abs(X.maxCoeff()), std::abs(X.minCoeff())));

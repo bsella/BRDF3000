@@ -1,6 +1,7 @@
 #include "ParametrisationTest.h"
-#include <Parametrisation/Parametrisation.h>
-#include <Parametrisation/types.h>
+#include "Parametrisation/Parametrisation.h"
+#include "Parametrisation/types.h"
+#include "BRDFReaderTest.h"
 
 ParametrisationTest::ParametrisationTest(): BaseTest("Parametrisation"){
 	addTest(&testCovariance, "Covariance1", "../tests/data/covTestSet1", "../tests/data/GT_covTestSet1");

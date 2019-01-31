@@ -1,4 +1,5 @@
 #include "BaseTest.h"
+#include <fstream>
 
 BaseTest::BaseTest(const std::string& t):title(t){}
 BaseTest::~BaseTest(){}
@@ -39,7 +40,6 @@ BaseTest::testSet::testSet(
 	const std::string& data,
 	const std::string& gt):procedure(f), title(t), dataPath(data), gtPath(gt){}
 
-#include <fstream>
 // template<typename Scalar>
 bool BaseTest::testSet::execute(std::string& message)const{
 	std::ifstream dataFile, gtFile;

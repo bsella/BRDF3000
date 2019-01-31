@@ -10,6 +10,7 @@
 
 #include "../Parametrisation/types.h"
 #include "../../tests/BRDFReaderTest.h"
+
 namespace ChefDevr {
     
     /**
@@ -17,7 +18,6 @@ namespace ChefDevr {
     */
     class BRDFReader {
     public:
-        friend BRDFReaderTest;
         BRDFReader();
         ~BRDFReader() = default;
 
@@ -162,6 +162,12 @@ namespace ChefDevr {
          * @post the result is between 0 and 179
          */
         static unsigned int phi_diff_index(double phi_diff);
+
+        /* ------------*/
+        /* Friends */
+        /* ------------*/
+
+        friend std::istringstream BRDFReaderTest::readBRDF(std::istream& istr);
     };
 } // namespace ChefDevr
 

@@ -20,7 +20,7 @@ void centerMat(Matrix<Scalar>& Z, Vector<Scalar>& meanBRDF)
 
 template <typename Scalar>
 void computeCovVector (
-    Vector<Scalar>& cov_vector,
+    Scalar* cov_vector,
     const Matrix<Scalar>& X_reshaped,
     const Vector<Scalar>& coordRef,
     const unsigned int dim,
@@ -37,7 +37,7 @@ void BRDFReconstructor<Scalar>::reconstruct (Vector<Scalar>& brdf,
                                      const Vector<Scalar>& coord)
 {
     Vector<Scalar> cov_vector(nb_data);
-    computeCovVector(cov_vector, X_reshaped, coord, dim, nb_data);
+    computeCovVector(cov_vector, X, coord, dim, nb_data);
     brdf = cov_vector * K_minus1 * Zcentered + meanBRDF;
 }
 

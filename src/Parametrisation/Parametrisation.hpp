@@ -20,7 +20,7 @@ void centerMat(Matrix<Scalar>& Z, Vector<Scalar>& meanBRDF)
 
 template <typename Scalar>
 void computeCovVector (
-    Vector<Scalar>& cov_vector,
+    Scalar* cov_vector,
     const Matrix<Scalar>& X_reshaped,
     const Vector<Scalar>& coordRef,
     const unsigned int dim,

@@ -41,7 +41,7 @@ namespace ChefDevr
         # pragma omp parallel for
         for (i=0; i < nb_data; ++i)
         {
-            computeCovVector(K_minus1.col(i), X,
+            computeCovVector(K_minus1.col(i).data(), X,
                              X.segment(latentDim*i, latentDim),
                              latentDim, nb_data);
         }
@@ -102,7 +102,7 @@ namespace ChefDevr
         for (unsigned int i(0); i < nbcoefs;++i)
         {
             lv_num = i/latentDim;
-            computeCovVector(cov_vector, X,
+            computeCovVector(cov_vector.data(), X,
                              X.segment(latentDim*lv_num, latentDim),
                              latentDim, nb_data);
             
@@ -110,7 +110,7 @@ namespace ChefDevr
             if ( X[i] < Scalar(1)) // latent variable constraint
             {
                 X_move[i] = step;
-                computeCovVector(diff_cov_vector, X,
+                computeCovVector(diff_cov_vector.data(), X,
                                  X.segment(latentDim*lv_num,latentDim),
                                  latentDim, nb_data);
                 diff_cov_vector -= cov_vector;
@@ -128,7 +128,7 @@ namespace ChefDevr
                 if (X[i] > Scalar(-1)) // latent variable constraint
                 {
                     X_move[i] = -step;
-                    computeCovVector(diff_cov_vector, X,
+                    computeCovVector(diff_cov_vector.data(), X,
                                      X.segment(latentDim*lv_num, latentDim),
                                      latentDim, nb_data);
                     diff_cov_vector -= cov_vector;
@@ -212,7 +212,7 @@ namespace ChefDevr
             // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)
             # pragma omp parallel for
             for (i=0; i<nb_data; ++i){
-                computeCovVector(new_K_minus1.col(i), new_X,
+                computeCovVector(new_K_minus1.col(i).data(), new_X,
                                  new_X.segment(i*latentDim, latentDim),
                                  latentDim, nb_data);
             }

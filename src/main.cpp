@@ -3,14 +3,28 @@
 #include "Parametrisation/types.h"
 #include "BRDFReader/BRDFReader.h"
 #include "Optimisation/OptimisationSolver.h"
-
+#include "Parametrisation/Parametrisation.h"
 using namespace ChefDevr;
 using Scalar = double;
 
-void test(const Vector<Scalar>& v)
+void test(
+    Scalar* a,
+    const Vector<Scalar>& X,
+    const Vector<Scalar>& coordRef,
+    const unsigned int dim,
+    const unsigned int nb_data)
 {
-    std::cout << v << std::endl;
+    std::cout << "a" << a << std::endl;
+    std::cout << "X" << X << std::endl;
+    std::cout << "coref" << coordRef << std::endl;
+    std::cout << "dim" << dim << std::endl;
+    std::cout << "njbdtata" << nb_data << std::endl;
 }
+
+void test2(const Vector<Scalar>& a)
+{
+    std::cout << "const vector access ok" << std::endl;
+}    
 
 int main(int numArguments, const char *argv[]) {
 	// Récupérer les arguments
@@ -23,8 +37,8 @@ int main(int numArguments, const char *argv[]) {
 	const char *fileDirectory = "../data/";
 
 	auto Z = reader.createZ<Scalar>(fileDirectory);
-    test(Z.col(1).segment(1,5));
-    
+    Vector<Scalar> b(Z.col(1));
+    test(Z.col(0).data(),b,b.segment(4,6),1,1);
 	//OptimisationSolver<Scalar> optimisation{minStep, Z, dim};
     
     start = std::chrono::system_clock::now();

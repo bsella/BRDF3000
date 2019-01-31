@@ -155,7 +155,7 @@ namespace ChefDevr
      */
     template <typename Scalar>
     void computeCovVector (
-        Vector<Scalar>& cov_vector,
+        Scalar* cov_vector,
         const Vector<Scalar>& X,
         const Vector<Scalar>& coordRef,
         const unsigned int dim,

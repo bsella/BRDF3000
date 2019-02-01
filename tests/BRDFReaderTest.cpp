@@ -2,7 +2,8 @@
 #include "../src/BRDFReader/BRDFReader.h"
 
 BRDFReaderTest::BRDFReaderTest(): BaseTest("BRDFReader"){
-    addTest(&readBRDF, "Read BRDF", "../tests/data/BRDFReader_data/inputTest.txt", "../tests/data/BRDFReader_data/brdf_output.txt");
+    addTest(&readBRDF, "Read BRDF", "../tests/data/BRDFReader_data/inputBRDF.txt", "../tests/data/BRDFReader_data/brdf_output.txt");
+    addTest(&createZ, "Create Z", "../tests/data/BRDFReader_data/inputSetBRDFs.txt", "../tests/data/BRDFReader_data/setBRDF_output.txt");
 }
 
 std::istringstream BRDFReaderTest::readBRDF(std::istream& istr){
@@ -13,11 +14,26 @@ std::istringstream BRDFReaderTest::readBRDF(std::istream& istr){
     istr >> pathFile_brdf;
     istr >> num_coefficients;
 
-    ChefDevr::Vector<double> brdf = reader.read_brdf<double>(num_coefficients, pathFile_brdf.c_str());
+    auto brdf = reader.read_brdf<double>(num_coefficients, pathFile_brdf.c_str());
 
     std::stringstream ret;
     ret.precision(20);
     ret << brdf.topRows<100>();
+
+    return std::istringstream(ret.str());
+}
+
+std::istringstream BRDFReaderTest::createZ(std::istream& istr){
+    ChefDevr::BRDFReader reader;
+    std::string pathBRDFs;
+
+    istr >> pathBRDFs;
+
+    const auto Z = reader.createZ<double>(pathBRDFs.c_str());
+
+    std::stringstream ret;
+    ret.precision(20);
+    ret << Z.topRows<100>();
 
     return std::istringstream(ret.str());
 }

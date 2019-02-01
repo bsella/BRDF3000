@@ -167,7 +167,7 @@ namespace ChefDevr {
         /* Friends */
         /* ------------*/
 
-        friend std::istringstream BRDFReaderTest::readBRDF(std::istream& istr);
+        friend BRDFReaderTest;
     };
 } // namespace ChefDevr
 

@@ -7,6 +7,8 @@ class BRDFReaderTest : public BaseTest{
 public:
     BRDFReaderTest();
 
+private:
+    static std::istringstream createZ(std::istream& istr);
     static std::istringstream readBRDF(std::istream& istr);
 };
 

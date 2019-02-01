@@ -1,0 +1,1 @@
+../tests/data/BRDFReader_data/brdfs/

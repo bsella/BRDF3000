@@ -31,4 +31,5 @@ target_link_libraries(${APPLICATION}
 	Parametrisation
 	Optimisation
 	${STXXL_LIBRARIES}
+	stdc++fs
 )

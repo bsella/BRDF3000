@@ -6,7 +6,8 @@
  */
 
 #include <cmath>
-#include <Eigen/LU> 
+#include <Eigen/LU>
+#include <Eigen/SVD>
 
 namespace ChefDevr
 {
@@ -18,35 +19,35 @@ namespace ChefDevr
         
         minStep(_minStep),
         step(reduceStep),
-        nb_data(_Z.cols()),
+        nb_data(_Z.rows()),
         Z(_Z),
         ZZt(_Z*_Z.transpose()),
         latentDim(_latentDim),
-        X(_Z.cols()*latentDim),
-        X_move(_Z.cols()*latentDim),
-        K_minus1(_Z.cols(), _Z.cols()){}
+        X(_Z.rows()*latentDim),
+        X_move(_Z.rows()*latentDim),
+        K_minus1(_Z.rows(), _Z.rows()){}
     
     template <typename Scalar>
     void OptimisationSolver<Scalar>::optimizeMapping ()
     {
-        unsigned int i;
         Vector<Scalar> new_X(latentDim*nb_data);
         Matrix<Scalar> new_K_minus1(nb_data, nb_data);
         Scalar new_costval, new_detK;
         
-        initX();
-        
         // Compute K
         // (We use K_minus1 to store it because we don't need K anymore after)
         # pragma omp parallel for
-        for (i=0; i < nb_data; ++i)
+        for (unsigned int i=0; i < nb_data; ++i)
         {
-            computeCovVector(K_minus1.col(i).data(), X,
+            
+            computeCovVector<Scalar>(K_minus1.col(i).data(), X,
                              X.segment(latentDim*i, latentDim),
                              latentDim, nb_data);
         }
         // Compute detK
         detK = K_minus1.determinant();
+        // Init X using PCA thanks to K
+        initX(K_minus1);
         // Compute K_minus1 from K
         K_minus1 = K_minus1.inverse();
         // Init cost
@@ -80,10 +81,10 @@ namespace ChefDevr
     {
         Scalar trace(0);
         // Compute trace of K_minus1 * ZZt
-        # pragma omp parallel for reduction(+:trace)
+        //# pragma omp parallel for reduction(+:trace)
         for (unsigned int i = 0; i < ZZt.cols(); ++i)
         {
-            trace += K_minus1.row(i).dot(ZZt.col(i));
+            trace += K_minus1.row(i).dot(ZZt.col(i).transpose());
         }
         cost = Scalar(0.5) * nb_data * std::log(detK) + Scalar(0.5) * trace;
     }
@@ -102,7 +103,7 @@ namespace ChefDevr
         for (unsigned int i(0); i < nbcoefs;++i)
         {
             lv_num = i/latentDim;
-            computeCovVector(cov_vector.data(), X,
+            computeCovVector<Scalar>(cov_vector.data(), X,
                              X.segment(latentDim*lv_num, latentDim),
                              latentDim, nb_data);
             
@@ -110,7 +111,7 @@ namespace ChefDevr
             if ( X[i] < Scalar(1)) // latent variable constraint
             {
                 X_move[i] = step;
-                computeCovVector(diff_cov_vector.data(), X,
+                computeCovVector<Scalar>(diff_cov_vector.data(), X,
                                  X.segment(latentDim*lv_num,latentDim),
                                  latentDim, nb_data);
                 diff_cov_vector -= cov_vector;
@@ -128,7 +129,7 @@ namespace ChefDevr
                 if (X[i] > Scalar(-1)) // latent variable constraint
                 {
                     X_move[i] = -step;
-                    computeCovVector(diff_cov_vector.data(), X,
+                    computeCovVector<Scalar>(diff_cov_vector.data(), X,
                                      X.segment(latentDim*lv_num, latentDim),
                                      latentDim, nb_data);
                     diff_cov_vector -= cov_vector;
@@ -212,7 +213,7 @@ namespace ChefDevr
             // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)
             # pragma omp parallel for
             for (i=0; i<nb_data; ++i){
-                computeCovVector(new_K_minus1.col(i).data(), new_X,
+                computeCovVector<Scalar>(new_K_minus1.col(i).data(), new_X,
                                  new_X.segment(i*latentDim, latentDim),
                                  latentDim, nb_data);
             }
@@ -226,16 +227,16 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    void OptimisationSolver<Scalar>::initX ()
+    void OptimisationSolver<Scalar>::initX (const Matrix<Scalar>& K)
     {
         unsigned int i;
-        auto B(Z.transpose()*Z);
         
-        // Use EigenSolver to compute eigen values and vectors
-        Eigen::EigenSolver<Matrix<Scalar>> solver(B, true);
-        const Vector<Scalar>& eigenValues(solver.eigenvalues());
-        const Matrix<Scalar>& eigenVectors(solver.eigenvectors());
+        // Use EigenSolver to compute eigen vector/values decomposition
+        Eigen::EigenSolver<Matrix<Scalar>> solver(K, true);
         
+        const Vector<Scalar>& eigenValues(solver.eigenvalues().real());
+        const Matrix<Scalar>& eigenVectors(solver.eigenvectors().real());
+         
         // Use std::sort to sort an indices vector in the same way eigen values should be ordered
         // initialize original index locations
         std::vector<size_t> idx(eigenValues.size());
@@ -247,27 +248,17 @@ namespace ChefDevr
         
         std::sort(idx.begin(), idx.end(),cmpIndices);
         
-        // Build D the diagonal matrix with ordered eigen values in diagonal
-        Matrix<Scalar> D(Matrix<Scalar>::Zero(latentDim, latentDim));
-        # pragma omp parallel for
-        for (i=0; i<latentDim; ++i)
-        {
-            // use sorted indices to retrieve eigen values in descending order
-            D(i,i) = std::sqrt(eigenValues[idx[i]]);
-        }
-        
         // Build V the transposed matrix of ordered eigen vectors 
         Matrix<Scalar> V(latentDim, eigenVectors.cols());
         # pragma omp parallel for
         for (i=0; i<latentDim; ++i)
         {
             // use sorted indices to retrieve eigen vectors in descending order
-            V.row(i) = eigenVectors.col(idx[i]);
+            V.row(i) = eigenVectors.col(idx[i]).transpose();
         }
         
         // X as column vector
-        D = (D*V);
-        X = Eigen::Map<Vector<Scalar>>(D.data(), latentDim*nb_data, 1);
+        X = Eigen::Map<Vector<Scalar>>(V.data(), latentDim*nb_data, 1);
         
         // normalize X
         X = X / (std::max(std::abs(X.maxCoeff()), std::abs(X.minCoeff())));

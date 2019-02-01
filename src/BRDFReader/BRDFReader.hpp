@@ -28,7 +28,7 @@ namespace ChefDevr {
 
         const auto num_brdfs = list_filePaths.size();
         const unsigned int num_coefficientsBRDF = 3 * samplingResolution_thetaH * samplingResolution_thetaD * samplingResolution_phiD / 2;
-        Matrix<Scalar> Z{num_coefficientsBRDF, num_brdfs};
+        Matrix<Scalar> Z{num_brdfs, num_coefficientsBRDF};
 
         //const auto num_coefficients = num_brdfs * num_coefficientsBRDF;
         //stxxl::vector<Scalar, 1> Z_stxxl;
@@ -36,7 +36,7 @@ namespace ChefDevr {
 
         //auto Z_iterator = Z_stxxl.begin();
         for (unsigned int i = 0; i < num_brdfs; ++i) {
-            Z.col(i) = read_brdf<Scalar>(num_coefficientsBRDF, list_filePaths[i].c_str());
+            Z.row(i) = read_brdf<Scalar>(num_coefficientsBRDF, list_filePaths[i].c_str());
 
             //StreamType input{brdf.begin(), brdf.end()};
             //Z_iterator = stxxl::stream::materialize(input, Z_iterator);
@@ -72,7 +72,7 @@ namespace ChefDevr {
     }
 
     template <typename Scalar>
-    Vector<Scalar> BRDFReader::read_brdf(unsigned int num_coefficientsNeeded, const char *filePath) {
+    RowVector<Scalar> BRDFReader::read_brdf(unsigned int num_coefficientsNeeded, const char *filePath) {
         FILE *file = fopen(filePath, "rb");
         if (!file) {
             throw BRDFReaderError{string{"The file "} + filePath + " could not have been opened"};
@@ -86,7 +86,7 @@ namespace ChefDevr {
             throw BRDFReaderError{string{"Dimensions don't match : "} + to_string(num_coefficients) + " is not equal to " + to_string(num_coefficientsNeeded)};
         }
 
-        Vector<Scalar> brdf{num_coefficients};
+        RowVector<Scalar> brdf{num_coefficients};
         std::fread(brdf.data(), sizeof(Scalar), num_coefficients, file);
 
         std::fclose(file);

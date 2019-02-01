@@ -25,33 +25,36 @@ namespace ChefDevr
         const unsigned int phnum = 4 * num_sampling;
         const double thstep = 0.5 * M_PI / num_sampling;
         const double phstep = 2.0 * M_PI / phnum;
-        #pragma omp parallel
+        #pragma omp parallel reduction(+:r,g,b)
         {
             unsigned int thondex, thindex, phondex, phindex;
-            double tho, thi, pho, phi;
-            #pragma omp for reduction(+:r,g,b)
+            double tho(0), thi(0), pho(0), phi(0);
+            double red, green, blue;
+            #pragma omp for
             for (thindex=0; thindex < thnum; ++thindex)
             {
-                thi = thstep*thindex;
+                thi += thstep;
                 for (phindex=0; phindex < phnum; ++phindex)
                 {
-                    phi = phstep*phindex;
+                    phi += phstep;
                     for (thondex=0; thondex < thnum; ++thondex)
                     {   
-                        tho = thstep*thondex;
+                        tho += thstep;
                         for (phondex=0; phondex < phnum; ++phondex)
                         {
-                            pho = phstep*thindex;
-
-                            double red, green, blue;
+                            pho += phstep;
+                            
                             BRDFReader::lookup_brdf_val(brdf, thi, phi, tho, pho, red, green, blue);
 
                             r += red;
                             g += green;
                             b += blue;
                         }
+                        pho = 0.0;
                     }
+                    tho = 0.0;
                 }
+                phi = 0.0;
             }
         }
         albedo.r = r*one_over_pi;

@@ -7,7 +7,7 @@
  * that are common to the Optimisation module and BRDF Explorer module
  */ 
 
-
+#include <iostream>
 #include "types.h"
 
 #define MU_DEFAULT Scalar(0.0001f)
@@ -27,9 +27,10 @@ namespace ChefDevr
     public:
         /**
          * @brief Constructor of the class
-         * @param _Zcentered Centered BRDFs data matrix,
+         * @param _Zcentered Centered BRDFs data matrix (BRDFs stored in row major),
          * @param _K_minus1 Inverse mapping matrix
          * @param _X Latent variables vector
+         * @param _meanBRDF The mean BRDF (mean of the rows of Z before it was centered)
          * @param _dim Dimension of the latent space
          * @param _mu Value of the mu constant that helps interpolation source data
          * @param _l Constant defined in the research paper
@@ -48,7 +49,7 @@ namespace ChefDevr
             X(_X),
             meanBRDF(_meanBRDF),
             dim(_dim),
-            nb_data(Zcentered.cols()),
+            nb_data(Zcentered.rows()),
             mu(_mu),
             l(_l){}
         
@@ -62,13 +63,15 @@ namespace ChefDevr
          * @return The BRDF data as a column vector
          */
         void reconstruct (Vector<Scalar>& brdf,
-                          const Vector<Scalar>& coord);
+                          const Vector<Scalar>& coord) const;
+        
+        Scalar reconstructionError (const unsigned int brdfindex) const;
         
     private:
         /** 
          * @brief BRDFs data matrix
          * 
-         * Each column represents a BRDF
+         * Each row represents a BRDF
          */
         const Matrix<Scalar>& Zcentered;
         
@@ -85,7 +88,7 @@ namespace ChefDevr
         /**
          * @brief Mean column of Z (before it was centered)
          */
-        Vector<Scalar> meanBRDF;
+        const Vector<Scalar>& meanBRDF;
         
         /** 
          * @brief Dimension of the latent space
@@ -140,7 +143,7 @@ namespace ChefDevr
      * Z should be in column major
      */
     template <typename Scalar>
-    void centerMat(Matrix<Scalar>& Z, Vector<Scalar>& meanBRDF);
+    void centerMat(Matrix<Scalar>& Z, RowVector<Scalar>& meanBRDF);
     
     /**
      * @brief Computes the covariance column vector for the coordRef coordinates variable
@@ -160,7 +163,7 @@ namespace ChefDevr
         const Vector<Scalar>& coordRef,
         const unsigned int dim,
         const unsigned int nb_data);
-    
+        
 } // ChefDevr
 
 #include "Parametrisation.hpp"

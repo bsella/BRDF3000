@@ -25,7 +25,7 @@ namespace ChefDevr
         /**
          * @brief Constructor
          * @param minStep Step below wich solution is considered optimal
-         * @param Z Centered BRDF data matrix (BRDFs stored in column major)
+         * @param Z Centered BRDF data matrix (BRDFs stored in row major)
          * @param latentDim Dimension of optimised latent space
          */
         OptimisationSolver(
@@ -80,11 +80,11 @@ namespace ChefDevr
          * @brief Centered BRDFs data matrix
          */
         const Matrix<Scalar>& Z;
-
+        
         /**
          * @brief Z*Ztransposed
          */
-        Matrix<Scalar> ZZt;
+        const Matrix<Scalar> ZZt;
 
         /**
          * @brief Dimension of produced latent space
@@ -171,11 +171,9 @@ namespace ChefDevr
         /**
          * @brief Initializes the latent coordinates vector X by applying the PCA method
          * on the Z matrix and reducing its coordinates between [-1; 1]
-         * 
-         * Uses the Matusik method found in the paper
-         * "A data-driven reflectance model"
+         * @param K Variance-covariance matrix used to compute eigen vectors & values
          */
-        void initX ();
+        void initX (const Matrix<Scalar>& K);
     };
 } // namespace ChefDevr
 

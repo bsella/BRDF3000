@@ -1,52 +1,65 @@
 #include <chrono>
 
 #include "Parametrisation/types.h"
+#include "Parametrisation/Parametrisation.h"
 #include "BRDFReader/BRDFReader.h"
 #include "Optimisation/OptimisationSolver.h"
-#include "Parametrisation/Parametrisation.h"
+#include "Optimisation/OptiDataWriter.h"
+
 using namespace ChefDevr;
 using Scalar = double;
 
-void test(
-    Scalar* a,
-    const Vector<Scalar>& X,
-    const Vector<Scalar>& coordRef,
-    const unsigned int dim,
-    const unsigned int nb_data)
-{
-    std::cout << "a" << a << std::endl;
-    std::cout << "X" << X << std::endl;
-    std::cout << "coref" << coordRef << std::endl;
-    std::cout << "dim" << dim << std::endl;
-    std::cout << "njbdtata" << nb_data << std::endl;
-}
-
-void test2(const Vector<Scalar>& a)
-{
-    std::cout << "const vector access ok" << std::endl;
-}    
-
 int main(int numArguments, const char *argv[]) {
-	// Récupérer les arguments
-	// Afficher le message d'aide si faut
+    // Récupérer les arguments
+    // Afficher le message d'aide si faut
+    
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
+    std::chrono::duration<double, std::micro> duration;
+        
+    BRDFReader reader;
+    const unsigned int dim = 2;
+    const Scalar minStep = 0.5;
+    const char *brdfsDir = "../data/";
+    const std::string mapPath("../map.bmp");
+    const unsigned int mapWidth(16), mapHeight(16), albedoSampling(4);
 
-	BRDFReader reader;
-	const unsigned int dim = 2;
-	const Scalar minStep = 0.5;
-	const char *fileDirectory = "../data/";
-
-	auto Z = reader.createZ<Scalar>(fileDirectory);
-    Vector<Scalar> b(Z.col(1));
-    test(Z.col(0).data(),b,b.segment(4,6),1,1);
-	//OptimisationSolver<Scalar> optimisation{minStep, Z, dim};
+    auto Z = reader.createZ<Scalar>(brdfsDir);
+    RowVector<Scalar> meanBRDF(Z.cols());
+    centerMat(Z, meanBRDF);
+    //meanBRDF.transposeInPlace();
+    
+    OptimisationSolver<Scalar> optimisation{minStep, Z, dim};
     
     start = std::chrono::system_clock::now();
-    //optimisation.optimizeMapping();
+    optimisation.optimizeMapping();
     end = std::chrono::system_clock::now();
+    duration = end - start;
+    std::cout << "Optimisation took " << duration.count() << " micro seconds" << std::endl;
     
-    int elapsed_ms(std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count());
+    BRDFReconstructor<Scalar> reconstructor(
+                Z,
+                optimisation.getInverseMapping(),
+                optimisation.getLatentVariables(),
+                meanBRDF.transpose(),
+                dim);
     
-    std::cout << "Optimisation took " << elapsed_ms << " ms" << std::endl;
-	exit(0);
+    std::cout << "Reconstruction error for BRDF n°0 : " << reconstructor.reconstructionError(0) << std::endl;
+    
+    /*
+    start = std::chrono::system_clock::now();
+    writeAlbedoMap<Scalar>(mapPath,
+                   Z,
+                   optimisation.getLatentVariables(),
+                   optimisation.getInverseMapping(),
+                   meanBRDF,
+                   dim,
+                   albedoSampling,
+                   mapWidth,
+                   mapHeight);
+    end = std::chrono::system_clock::now();
+    duration = end - start;
+    std::cout << "Map computing took " << duration.count()*0.000001 << " seconds" << std::endl;
+    */
+    
+    exit(0);
 }

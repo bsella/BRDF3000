@@ -24,7 +24,7 @@ namespace ChefDevr {
         /**
         * @brief Read all the BRDFs stored in a given directory
         * @param fileDirectory the path of the directory where all the BRDFs are stored
-        * @return Non-centered Z BRDFs data matrix where each column represents a BRDF
+        * @return Non-centered Z BRDFs data matrix where each row represents a BRDF
         *
         * Initializes the list of BRDFs paths in the order in which they were read.
         *
@@ -99,7 +99,7 @@ namespace ChefDevr {
         * Indeed, in this case, the set of BRDFs is stored inside the disk
         */
         template<typename Scalar>
-        Vector<Scalar> read_brdf(unsigned int num_coefficientsNeeded, const char *filePath);
+        RowVector<Scalar> read_brdf(unsigned int num_coefficientsNeeded, const char *filePath);
 
         /**
          * @brief Converts standard coordinates to half vector/difference vector coordinates

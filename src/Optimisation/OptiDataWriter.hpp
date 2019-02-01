@@ -23,8 +23,9 @@ namespace ChefDevr
         const Matrix<Scalar>& K_minus1,
         const Vector<Scalar>& meanBRDF,
         const unsigned int latentDim,
-        const unsigned width,
-        const unsigned height)
+        const unsigned int albedoSampling,
+        const unsigned int width,
+        const unsigned int height)
     {
         if (latentDim != 2){
             std::cerr << "Cannot produce a map of a latent space whose dim is different than 2" << std::endl;
@@ -35,7 +36,7 @@ namespace ChefDevr
         Color albedo;
         
         BRDFReconstructor<Scalar> reconstructor(
-            Z, K_minus1, X.reshaped(latentDim, Z.cols()), meanBRDF, latentDim);
+            Z, K_minus1, X, meanBRDF, latentDim);
         Scalar xstep(2/width), ystep(2/height);
         Vector<Scalar> brdf(Z.rows());
         Vector<Scalar> coord(2);
@@ -48,7 +49,7 @@ namespace ChefDevr
             {
                 coord[1] += ystep;
                 reconstructor.reconstruct(brdf, coord);
-                computeAlbedo(brdf, albedo);
+                Albedo::computeAlbedo<Scalar>(brdf, albedo, albedoSampling);
                 map.set_pixel(pixx, pixy,
                              albedo.r*color_res, albedo.g*color_res, albedo.b*color_res);
             }

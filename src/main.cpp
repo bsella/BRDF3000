@@ -24,6 +24,7 @@ int main(int numArguments, const char *argv[]) {
     const unsigned int mapWidth(8), mapHeight(8), albedoSampling(4);
 
     auto Z = reader.createZ<Scalar>(brdfsDir);
+    std::cout << Z.row(0).transpose() << std::endl;
     RowVector<Scalar> meanBRDF(Z.cols());
     centerMat(Z, meanBRDF);
     

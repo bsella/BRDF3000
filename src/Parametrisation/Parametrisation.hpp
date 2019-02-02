@@ -37,7 +37,7 @@ void BRDFReconstructor<Scalar>::reconstruct (Vector<Scalar>& brdf,
 {
     Vector<Scalar> cov_vector(nb_data);
     computeCovVector<Scalar>(cov_vector.data(), X, coord, dim, nb_data);
-    brdf = Zcentered.transpose() * K_minus1.transpose() * cov_vector + meanBRDF;
+    brdf.noalias() = Zcentered.transpose() * K_minus1.transpose() * cov_vector + meanBRDF;
 }
 
 template <typename Scalar>

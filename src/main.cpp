@@ -27,7 +27,7 @@ int main(int numArguments, const char *argv[]) {
     std::chrono::duration<double, std::micro> duration;
     BRDFReader reader;
     const unsigned int dim = 2;
-    const Scalar minStep = 0.5;
+    const Scalar minStep = 0.0001;
     const char *brdfsDir = "../data/";
     const std::string mapPath("../map.bmp");
     const unsigned int mapWidth(8), mapHeight(8), albedoSampling(4);
@@ -44,7 +44,7 @@ int main(int numArguments, const char *argv[]) {
     optimizer.optimizeMapping();
     end = std::chrono::system_clock::now();
     duration = end - start;
-    std::cout << "Optimisation took " << duration.count() << " micro seconds" << std::endl << std::endl;
+    std::cout << "Optimisation took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
     
     BRDFReconstructor<Scalar> reconstructor(
                 Z,

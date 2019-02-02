@@ -176,29 +176,32 @@ namespace ChefDevr
         Scalar centerCoeff(diff_cov_vector[lv_num]);
         
         // ===== One row modification =====
-        
+        Scalar dot(diff_cov_vector.transpose()*old_K_minus1.col(lv_num));
         // Determinant update
-        new_detK = (Scalar(1) + diff_cov_vector.transpose()*old_K_minus1.col(lv_num)) * old_detK;
+        new_detK = (Scalar(1) + dot) * old_detK;
         
         // Inverse update 
-        new_K_minus1 = old_K_minus1
+        new_K_minus1.noalias() = old_K_minus1
                         - ( ((old_K_minus1.col(lv_num)*diff_cov_vector.transpose())*old_K_minus1)
                                 /
-                            (Scalar(1)+diff_cov_vector.transpose()*old_K_minus1.col(lv_num))
+                            (Scalar(1)+dot)
                           );
         
         // ===== One column modification =====
         diff_cov_vector[lv_num] = Scalar(0);
         
+        dot = new_K_minus1.row(lv_num)*diff_cov_vector;
+        
         // Determinant update
-        new_detK = (Scalar(1) + new_K_minus1.row(lv_num)*diff_cov_vector) * new_detK;
+        new_detK = (Scalar(1) + dot) * new_detK;
         
         // Inverse update
-        new_K_minus1 = new_K_minus1
+        new_K_minus1 = (new_K_minus1
                         - ( (new_K_minus1*diff_cov_vector*new_K_minus1.row(lv_num))
                             /
-                            (Scalar(1)+ new_K_minus1.row(lv_num)*diff_cov_vector)
-                          );
+                            (Scalar(1)+ dot)
+                          )
+                        ).eval();
         
         diff_cov_vector[lv_num] = centerCoeff;
     }
@@ -254,7 +257,7 @@ namespace ChefDevr
         for (i=0; i<latentDim; ++i)
         {
             // use sorted indices to retrieve eigen vectors in descending order
-            V.row(i) = eigenVectors.col(idx[i]).transpose();
+            V.row(i).noalias() = eigenVectors.col(idx[i]).transpose();
         }
         
         // X as column vector

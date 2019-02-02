@@ -18,7 +18,7 @@ std::istringstream BRDFReaderTest::readBRDF(std::istream& istr){
 
     std::stringstream ret;
     ret.precision(20);
-    ret << brdf.topRows<100>();
+    ret << brdf.leftCols<100>();
 
     return std::istringstream(ret.str());
 }
@@ -33,7 +33,7 @@ std::istringstream BRDFReaderTest::createZ(std::istream& istr){
 
     std::stringstream ret;
     ret.precision(20);
-    ret << Z.topRows<100>();
+    ret << Z.leftCols<100>();
 
     return std::istringstream(ret.str());
 }

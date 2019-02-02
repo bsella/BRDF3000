@@ -50,8 +50,8 @@ void write_setBRDFs(const char *filePath, double *brdf[], unsigned int num_brdfs
     if (!f)
         exit(EXIT_FAILURE);
 
-    for (unsigned int index_coefficient = 0; index_coefficient < num_coefficientsToWrite; ++index_coefficient) {
-        for (unsigned int index_brdf = 0; index_brdf < num_brdfs; ++index_brdf) {
+    for (unsigned int index_brdf = 0; index_brdf < num_brdfs; ++index_brdf) {
+        for (unsigned int index_coefficient = 0; index_coefficient < num_coefficientsToWrite; ++index_coefficient) {
             fprintf(f, "%.20f ",brdf[index_brdf][index_coefficient]);
         }
         fprintf(f, "\n");

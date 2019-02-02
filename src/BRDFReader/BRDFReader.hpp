@@ -37,7 +37,6 @@ namespace ChefDevr {
         //auto Z_iterator = Z_stxxl.begin();
         for (unsigned int i = 0; i < num_brdfs; ++i) {
             Z.row(i) = read_brdf<Scalar>(num_coefficientsBRDF, list_filePaths[i].c_str());
-
             //StreamType input{brdf.begin(), brdf.end()};
             //Z_iterator = stxxl::stream::materialize(input, Z_iterator);
         }
@@ -90,7 +89,9 @@ namespace ChefDevr {
         std::fread(brdf.data(), sizeof(Scalar), num_coefficients, file);
 
         std::fclose(file);
-
+        
+        // removing negative values
+        // brdf.transpose().min(Scalar(0));
         return brdf;
     }
 

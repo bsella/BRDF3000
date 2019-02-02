@@ -21,12 +21,12 @@ int main(int numArguments, const char *argv[]) {
     const Scalar minStep = 0.5;
     const char *brdfsDir = "../data/";
     const std::string mapPath("../map.bmp");
-    const unsigned int mapWidth(16), mapHeight(16), albedoSampling(4);
+    const unsigned int mapWidth(8), mapHeight(8), albedoSampling(4);
 
     auto Z = reader.createZ<Scalar>(brdfsDir);
     RowVector<Scalar> meanBRDF(Z.cols());
     centerMat(Z, meanBRDF);
-    //meanBRDF.transposeInPlace();
+    
     
     OptimisationSolver<Scalar> optimisation{minStep, Z, dim};
     

@@ -47,9 +47,12 @@ Scalar BRDFReconstructor<Scalar>::reconstructionError (const unsigned int brdfin
         std::cerr << "Given index for BRDF reconstruction is out of bounds !" << std::endl;
         return Scalar(-1);
     }
-    Vector<Scalar> reconstructed(Zcentered.cols());
-    reconstruct(reconstructed, X.segment(brdfindex*dim,dim));
-    return ((reconstructed-Zcentered.row(brdfindex).transpose()+meanBRDF).norm());
+    //Vector<Scalar> reconstructed(Zcentered.cols());
+    //reconstruct(reconstructed, X.segment(brdfindex*dim,dim));
+    const Vector<Scalar> reconstructed(Zcentered.row(brdfindex).transpose()+meanBRDF);
+    const Vector<Scalar> diff( (Zcentered.row(brdfindex).transpose()+meanBRDF) - reconstructed);
+    std::cout << "min " << diff.minCoeff() << " max " << diff.maxCoeff() << std::endl;
+    return (diff.dot(diff)/Zcentered.cols());
 }
 
 } // namespace ChevDevr

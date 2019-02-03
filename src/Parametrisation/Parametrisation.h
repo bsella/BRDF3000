@@ -12,7 +12,6 @@
 
 #define MU_DEFAULT Scalar(0.0001f)
 #define L_DEFAULT Scalar(1.0f)
-#define EPSILON Scalar(0.00001f)
 
 namespace ChefDevr
 {
@@ -141,7 +140,7 @@ namespace ChefDevr
         const Scalar sqnorm_x1_x2((x1-x2).squaredNorm());
         const Scalar exp_part(std::exp(-sqnorm_x1_x2/(Scalar(2)*l*l)));
         // dirac(x1-x2) <=> norm(x1-x2) == 0
-        return sqnorm_x1_x2 < EPSILON ? mu + exp_part : exp_part;
+        return sqnorm_x1_x2 < std::numeric_limits<Scalar>::epsilon() ? mu + exp_part : exp_part;
     }
     
     /**

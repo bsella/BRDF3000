@@ -129,11 +129,12 @@ namespace ChefDevr
 
         /**
          * @brief Updates the movement vector of X that improves the solution (X_move)
+         * @return True if has moved, false otherwise
          * 
          * Adds and substracts step from each element
          * and reevaluate the cost function to check for better solutions
          */
-        void exploratoryMove ();
+        bool exploratoryMove ();
 
         /**
          * @brief Apply X_move to the latent variable vector X.

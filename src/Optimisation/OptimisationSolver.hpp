@@ -33,6 +33,7 @@ namespace ChefDevr
         Vector<Scalar> new_X(latentDim*nb_data);
         Matrix<Scalar> new_K_minus1(nb_data, nb_data);
         Scalar new_costval, new_detK;
+        bool explormoved(false);
         
         // Init X
         initX(ZZt);
@@ -57,40 +58,76 @@ namespace ChefDevr
         
         #ifdef DEBUG
         std::cout << "cost :" << costval << std::endl;
+        std::cout << "detK :" << detK << std::endl;
         std::cout << "K_minus1 :" << std::endl << K_minus1 << std::endl;
         std::cout << "X :" << std::endl << X << std::endl << std::endl;
         #endif
         // Optimisation loop
         do
         {
-            exploratoryMove();
-            
-            while(new_costval < costval)
+            #ifdef DEBUG
+            std::cout << " ================ Exploratory Move ================ " << std::endl;
+            #endif
+            if(exploratoryMove())
             {
                 #ifdef DEBUG
+                std::cout << "~~~ exploratory moved ~~~" << std::endl;
                 std::cout << "cost :" << costval << std::endl;
+                std::cout << "detK :" << detK << std::endl;
                 std::cout << "K_minus1 :" << std::endl << K_minus1 << std::endl;
                 std::cout << "X :" << std::endl << X << std::endl << std::endl;
                 #endif
-                
-                costval = new_costval;
-                X = new_X; 
-                K_minus1 = new_K_minus1;
-                detK = new_detK;
-                
-                if(patternMove(new_X, new_K_minus1, new_detK)){
-                    cost(new_costval, new_K_minus1, new_detK);
-                }else{
-                    break;
+                do
+                {   
+                    if(patternMove(new_X, new_K_minus1, new_detK))
+                    {
+                        #ifdef DEBUG
+                        std::cout << "~~~ pattern moved ~~~" << std::endl;
+                        #endif 
+                        cost(new_costval, new_K_minus1, new_detK);
+                        if (new_costval < costval)
+                        {
+                            #ifdef DEBUG
+                            std::cout << "    effective ! :)" << std::endl;
+                            #endif
+                            costval = new_costval;
+                            X.noalias() = new_X; 
+                            K_minus1.noalias() = new_K_minus1;
+                            detK = new_detK;
+                            #ifdef DEBUG
+                            std::cout << "cost :" << costval << std::endl;
+                            std::cout << "detK :" << detK << std::endl;
+                            std::cout << "K_minus1 :" << std::endl << K_minus1 << std::endl;
+                            std::cout << "X :" << std::endl << X << std::endl << std::endl;
+                            #endif
+                        }
+                        else
+                        {
+                            #ifdef DEBUG
+                            std::cout << "____ineffective____" << std::endl;
+                            #endif
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        #ifdef DEBUG
+                        std::cout << "~~~ pattern didn't move : out of bounds ~~~" << std::endl;
+                        #endif 
+                        break;
+                    }
                 }
+                while(true);
             }
             step *= reduceStep;
-            #ifdef DEBUG
-            std::cout << "cost :" << costval << std::endl;
-            std::cout << "K_minus1 :" << std::endl << K_minus1 << std::endl;
-            std::cout << "X :" << std::endl << X << std::endl << std::endl;
-            #endif
         }while(step >= minStep);
+        #ifdef DEBUG
+        std::cout << " ================ OPTIMIZATION HAS CONVERGED ================ " << std::endl;
+        std::cout << "cost :" << costval << std::endl;
+        std::cout << "detK :" << detK << std::endl;
+        std::cout << "K_minus1 :" << std::endl << K_minus1 << std::endl;
+        std::cout << "X :" << std::endl << X << std::endl << std::endl;
+        #endif
     }
     
     template <typename Scalar>
@@ -107,15 +144,15 @@ namespace ChefDevr
     }
     
     template <typename Scalar>
-    void OptimisationSolver<Scalar>::exploratoryMove ()
+    bool OptimisationSolver<Scalar>::exploratoryMove ()
     {
         const auto& nbcoefs(X.rows());
-        Scalar new_costval(std::numeric_limits<Scalar>::infinity());
-        Scalar new_detK;
+        Scalar new_detK, new_costval(std::numeric_limits<Scalar>::infinity());
         Vector<Scalar> cov_vector(nb_data), diff_cov_vector(nb_data);
         Matrix<Scalar> new_K_minus1(K_minus1.rows(), K_minus1.cols());
         Vector<Scalar> X_move(nbcoefs);
         unsigned int lv_num;
+        bool moved(false);
         
         for (unsigned int i(0); i < nbcoefs;++i)
         {
@@ -169,6 +206,7 @@ namespace ChefDevr
                     // cost has changed -> keep new_K_minus1 and new_detK
                     K_minus1.noalias() = new_K_minus1;
                     detK = new_detK;
+                    moved = true;
                 }
             }
             else
@@ -177,8 +215,10 @@ namespace ChefDevr
                 // cost has changed -> keep new_K_minus1 and new_detK
                 K_minus1.noalias() = new_K_minus1;
                 detK = new_detK;
+                moved = true;
             }
         }
+        return moved;
     }
     
     template <typename Scalar>

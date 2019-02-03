@@ -59,7 +59,6 @@ namespace ChefDevr
          * @brief Reconstructs a BRDF for latent space coordinates
          * @param brdf The brdf data vector to fill
          * @param coord Coordinates of the latent space point to recontruct as a BRDF
-         * @param mu The constant that helps interpolating data while keeping good solution
          * @return The BRDF data as a column vector
          */
         void reconstruct (Vector<Scalar>& brdf,
@@ -111,6 +110,15 @@ namespace ChefDevr
          * See paper "A Versatile Parametrisation for Measured Materials Manifold"
          */
         const Scalar l;
+        
+        /**
+         * @brief Reconstructs a BRDF for latent space coordinates without adding the mean
+         * @param brdf The brdf data vector to fill
+         * @param coord Coordinates of the latent space point to recontruct as a BRDF
+         * @return The BRDF data as a column vector
+         */
+        void reconstructWithoutMean (Vector<Scalar>& brdf,
+                                    const Vector<Scalar>& coord) const;
         
     };
     

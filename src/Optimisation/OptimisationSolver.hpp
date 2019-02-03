@@ -34,6 +34,9 @@ namespace ChefDevr
         Matrix<Scalar> new_K_minus1(nb_data, nb_data);
         Scalar new_costval, new_detK;
         
+        // Init X
+        initX(ZZt);
+        
         // Compute K
         // (We use K_minus1 to store it because we don't need K anymore after)
         # pragma omp parallel for
@@ -44,16 +47,19 @@ namespace ChefDevr
                              X.segment(latentDim*i, latentDim),
                              latentDim, nb_data);
         }
+        
         // Compute detK
         detK = K_minus1.determinant();
-        // Init X using PCA thanks to K
-        initX(K_minus1);
         // Compute K_minus1 from K
-        K_minus1 = K_minus1.inverse();
+        K_minus1 = K_minus1.inverse().eval();
         // Init cost
         cost(costval, K_minus1, detK);
         
-        
+        #ifdef DEBUG
+        std::cout << "cost :" << costval << std::endl;
+        std::cout << "K_minus1 :" << std::endl << K_minus1 << std::endl;
+        std::cout << "X :" << std::endl << X << std::endl << std::endl;
+        #endif
         // Optimisation loop
         do
         {
@@ -61,6 +67,12 @@ namespace ChefDevr
             
             while(new_costval < costval)
             {
+                #ifdef DEBUG
+                std::cout << "cost :" << costval << std::endl;
+                std::cout << "K_minus1 :" << std::endl << K_minus1 << std::endl;
+                std::cout << "X :" << std::endl << X << std::endl << std::endl;
+                #endif
+                
                 costval = new_costval;
                 X = new_X; 
                 K_minus1 = new_K_minus1;
@@ -73,6 +85,11 @@ namespace ChefDevr
                 }
             }
             step *= reduceStep;
+            #ifdef DEBUG
+            std::cout << "cost :" << costval << std::endl;
+            std::cout << "K_minus1 :" << std::endl << K_minus1 << std::endl;
+            std::cout << "X :" << std::endl << X << std::endl << std::endl;
+            #endif
         }while(step >= minStep);
     }
     
@@ -84,7 +101,7 @@ namespace ChefDevr
         //# pragma omp parallel for reduction(+:trace)
         for (unsigned int i = 0; i < ZZt.cols(); ++i)
         {
-            trace += K_minus1.row(i).dot(ZZt.col(i).transpose());
+            trace += K_minus1.row(i).dot(ZZt.col(i));
         }
         cost = Scalar(0.5) * nb_data * std::log(detK) + Scalar(0.5) * trace;
     }
@@ -114,7 +131,7 @@ namespace ChefDevr
                 computeCovVector<Scalar>(diff_cov_vector.data(), X,
                                  X.segment(latentDim*lv_num,latentDim),
                                  latentDim, nb_data);
-                diff_cov_vector -= cov_vector;
+                diff_cov_vector.noalias() -= cov_vector;
                 
                 // Update K_minus1 and detK with Sherman-Morisson formula
                 shermanMorissonUpdate(K_minus1, new_K_minus1,
@@ -150,7 +167,7 @@ namespace ChefDevr
                 {
                     costval = new_costval;
                     // cost has changed -> keep new_K_minus1 and new_detK
-                    K_minus1 = new_K_minus1;
+                    K_minus1.noalias() = new_K_minus1;
                     detK = new_detK;
                 }
             }
@@ -158,7 +175,7 @@ namespace ChefDevr
             {
                 costval = new_costval;
                 // cost has changed -> keep new_K_minus1 and new_detK
-                K_minus1 = new_K_minus1;
+                K_minus1.noalias() = new_K_minus1;
                 detK = new_detK;
             }
         }
@@ -176,30 +193,30 @@ namespace ChefDevr
         Scalar centerCoeff(diff_cov_vector[lv_num]);
         
         // ===== One row modification =====
-        Scalar dot(diff_cov_vector.transpose()*old_K_minus1.col(lv_num));
+        Scalar dotp1(diff_cov_vector.dot(old_K_minus1.col(lv_num)) + Scalar(1));
         // Determinant update
-        new_detK = (Scalar(1) + dot) * old_detK;
+        new_detK = dotp1 * old_detK;
         
         // Inverse update 
-        new_K_minus1.noalias() = old_K_minus1
+        new_K_minus1.noalias() = (old_K_minus1
                         - ( ((old_K_minus1.col(lv_num)*diff_cov_vector.transpose())*old_K_minus1)
                                 /
-                            (Scalar(1)+dot)
-                          );
+                            dotp1)
+                          ).eval();
         
         // ===== One column modification =====
         diff_cov_vector[lv_num] = Scalar(0);
         
-        dot = new_K_minus1.row(lv_num)*diff_cov_vector;
+        dotp1 = new_K_minus1.row(lv_num).dot(diff_cov_vector) + Scalar(1);
         
         // Determinant update
-        new_detK = (Scalar(1) + dot) * new_detK;
+        new_detK = dotp1 * new_detK;
         
         // Inverse update
         new_K_minus1 = (new_K_minus1
                         - ( (new_K_minus1*diff_cov_vector*new_K_minus1.row(lv_num))
                             /
-                            (Scalar(1)+ dot)
+                            dotp1
                           )
                         ).eval();
         
@@ -210,7 +227,7 @@ namespace ChefDevr
     bool OptimisationSolver<Scalar>::patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const
     {
         unsigned int i;
-        new_X += X_move;
+        new_X.noalias() += X_move;
         if (new_X.minCoeff() >= Scalar(-1) && new_X.maxCoeff() <= Scalar(1))
         {
             // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)
@@ -223,19 +240,19 @@ namespace ChefDevr
             // Compute new_detK
             new_detK = new_K_minus1.determinant();
             // Compute new_K_minus1
-            new_K_minus1 = new_K_minus1.inverse();
+            new_K_minus1 = new_K_minus1.inverse().eval();
             return true;
         }
         return false;
     }
     
     template <typename Scalar>
-    void OptimisationSolver<Scalar>::initX (const Matrix<Scalar>& K)
+    void OptimisationSolver<Scalar>::initX (const Matrix<Scalar>& ZZt)
     {
         unsigned int i;
         
         // Use EigenSolver to compute eigen vector/values decomposition
-        Eigen::EigenSolver<Matrix<Scalar>> solver(K, true);
+        Eigen::EigenSolver<Matrix<Scalar>> solver(ZZt, true);
         
         const Vector<Scalar>& eigenValues(solver.eigenvalues().real());
         const Matrix<Scalar>& eigenVectors(solver.eigenvectors().real());

@@ -27,7 +27,7 @@ int main(int numArguments, const char *argv[]) {
     std::chrono::duration<double, std::micro> duration;
     BRDFReader reader;
     const unsigned int dim = 2;
-    const Scalar minStep = 0.0001;
+    const Scalar minStep = 0.01;
     const char *brdfsDir = "../data/";
     const std::string mapPath("../map.bmp");
     const unsigned int mapWidth(8), mapHeight(8), albedoSampling(4);

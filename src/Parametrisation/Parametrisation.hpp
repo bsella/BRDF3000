@@ -11,9 +11,8 @@ template <typename Scalar>
 void centerMat(Matrix<Scalar>& Z, RowVector<Scalar>& meanBRDF)
 {
     meanBRDF.noalias() = Z.colwise().mean();
-    unsigned int i(0);
     # pragma omp parallel for
-    for(i=0; i<Z.rows(); ++i)
+    for(unsigned int i = 0; i<Z.rows(); ++i)
         Z.row(i) -= meanBRDF;
 }
 

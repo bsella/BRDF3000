@@ -168,7 +168,7 @@ namespace ChefDevr
                 computeCovVector<Scalar>(diff_cov_vector.data(), X,
                                  X.segment(latentDim*lv_num,latentDim),
                                  latentDim, nb_data);
-                diff_cov_vector.noalias() -= cov_vector;
+                diff_cov_vector = diff_cov_vector - cov_vector;
                 
                 // Update K_minus1 and detK with Sherman-Morisson formula
                 shermanMorissonUpdate(K_minus1, new_K_minus1,
@@ -186,7 +186,7 @@ namespace ChefDevr
                     computeCovVector<Scalar>(diff_cov_vector.data(), X,
                                      X.segment(latentDim*lv_num, latentDim),
                                      latentDim, nb_data);
-                    diff_cov_vector -= cov_vector;
+                    diff_cov_vector = diff_cov_vector - cov_vector;
                     
                     // Update K_minus1 and detK with Sherman-Morisson formula
                     shermanMorissonUpdate(K_minus1, new_K_minus1, 
@@ -267,7 +267,7 @@ namespace ChefDevr
     bool OptimisationSolver<Scalar>::patternMove (Vector<Scalar>& new_X, Matrix<Scalar>& new_K_minus1, Scalar& new_detK) const
     {
         unsigned int i;
-        new_X.noalias() += X_move;
+        new_X = new_X + X_move;
         if (new_X.minCoeff() >= Scalar(-1) && new_X.maxCoeff() <= Scalar(1))
         {
             // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)

@@ -21,11 +21,14 @@ namespace ChefDevr {
             throw BRDFReaderError{"The directory " + std::string{fileDirectory} + " does not exist"};
         }
 
+        std::vector<std::string> list_filePaths;
         for(const path &filePath : directory_iterator(fileDirectory)) {
-            brdf_filenames.push_back(filePath);
+            list_filePaths.push_back(filePath);
+            const auto filename = filePath.filename();
+            brdf_filenames.push_back(filename.string());
         }
 
-        const auto num_brdfs = brdf_filenames.size();
+        const auto num_brdfs = list_filePaths.size();
         const unsigned int num_coefficientsBRDF = 3 * samplingResolution_thetaH * samplingResolution_thetaD * samplingResolution_phiD / 2;
         Matrix<Scalar> Z{num_brdfs, num_coefficientsBRDF};
 
@@ -35,7 +38,7 @@ namespace ChefDevr {
 
         //auto Z_iterator = Z_stxxl.begin();
         for (unsigned int i = 0; i < num_brdfs; ++i) {
-            Z.row(i) = read_brdf<Scalar>(num_coefficientsBRDF, brdf_filenames[i].c_str());
+            Z.row(i) = read_brdf<Scalar>(num_coefficientsBRDF, list_filePaths[i].c_str());
             // clamp negative values to zero
             Z.row(i) = Z.row(i).cwiseMax(Scalar(0));
         

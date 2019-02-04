@@ -71,8 +71,7 @@ namespace ChefDevr
         if (!file.is_open()){
             std::cerr << "Could not create file \"" << path<< "\"" << std::endl;
         }
-        
-        auto& X_resh(X.reshaped(latentDim, X.rows()/latentDim));
+        unsigned int nbLVars(X.rows()/latentDim);
         
         file << "This file contains the results of an optimised parametrisation of the measured materials manifold" << std::endl;
         file << typeid(Scalar).name() << std::endl;
@@ -80,11 +79,11 @@ namespace ChefDevr
         file << K_minus1.rows() << " " << K_minus1.cols() << std::endl;
         file << K_minus1 << std::endl;
         file << "latent variables" << std::endl;
-        file << X_resh.cols() << std::endl;
+        file << nbLVars << std::endl;
         
-        for (unsigned int ivar(0); ivar < X_resh.cols(); ++ivar)
+        for (unsigned int ivar(0); ivar < nbLVars; ++ivar)
         {
-            file << brdfsFilenames[ivar] << X_resh.col(ivar).transpose() << std::endl;
+            file << brdfsFilenames[ivar] << " " <<  X.segment(ivar*latentDim, latentDim).transpose() << std::endl;
         }
     }
 } // namespace ChevDevr  

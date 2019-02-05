@@ -11,10 +11,10 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 add_subdirectory(lib/stxxl)
 
 include_directories(
-	${CMAKE_SOURCE_DIR}/src
-	lib/Eigen
+	${CMAKE_CURRENT_SOURCE_DIR}/src
+	${CMAKE_CURRENT_SOURCE_DIR}/lib/Eigen
+	${CMAKE_CURRENT_SOURCE_DIR}/lib/bitmap
 	${STXXL_INCLUDE_DIRS}
-	lib/bitmap
 )
 
 add_subdirectory(src/BRDFReader)

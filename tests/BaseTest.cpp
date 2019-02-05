@@ -59,6 +59,7 @@ bool BaseTest::testSet::execute(std::string& message)const{
 	while(result >> tmp){
 		gtFile >> gt;
 		if(gt!=tmp){
+			std::cout << gt - tmp;
 			message = "Test failed";
 			return false;
 		}

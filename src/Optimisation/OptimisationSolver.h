@@ -6,6 +6,7 @@
  */
 
 #include "Parametrisation/types.h"
+#include "../../tests/OptimisationTest.h"
 #include <cmath>
 
 
@@ -75,11 +76,6 @@ namespace ChefDevr
          * @brief Number of BRDFs in the Z matrix
          */
         const unsigned int nb_data;
-
-        /**
-         * @brief Centered BRDFs data matrix
-         */
-        const Matrix<Scalar>& Z;
         
         /**
          * @brief Z*Ztransposed
@@ -175,6 +171,12 @@ namespace ChefDevr
          * @param K Variance-covariance matrix used to compute eigen vectors & values
          */
         void initX (const Matrix<Scalar>& K);
+
+        /* ------------*/
+        /* Friends */
+        /* ------------*/
+
+        friend OptimisationTest;
     };
 } // namespace ChefDevr
 

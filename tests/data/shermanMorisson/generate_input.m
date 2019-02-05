@@ -1,39 +1,43 @@
-num_rows = 5;
-index_changed = 3;
+name_file = 'shermanMorissonUpdateSet3';
+
+num_rows = 100;
+index_changed = 10;
 
 #num_rows
-dlmwrite('shermanMorissonUpdateSet1', num_rows, ' ', "precision", "%.30f");
+dlmwrite(name_file, num_rows, ' ');
 
 #lv_num
-dlmwrite('shermanMorissonUpdateSet1', index_changed, ' ', 1, "-append", "precision", "%.30f");
+dlmwrite(name_file, index_changed - 1, ' ', 1, "-append");
 
 #old_K_minus1
 do
-	random = rand(num_rows, 1) .* 10;
-	K_minus1 = random * random';
-	detK = det(K_minus1);
-until (detK > 0.0001);
+	random = rand(num_rows, num_rows) ./ 10;
+	K = (random + random') .* 5;
+	detK = det(K);
+until (abs(detK) > 0.00000000001);
 
-dlmwrite('shermanMorissonUpdateSet1', K_minus1, ' ', 1, "-append", "precision", "%.30f");
+dlmwrite(name_file, inverse(K), ' ', 1, "-append", "precision", "%.100f");
 
 #old_detK
-detK = det(K_minus1);
+detK = det(K);
 
-dlmwrite('shermanMorissonUpdateSet1', detK, ' ', 1, "-append", "precision", "%.30f");
+dlmwrite(name_file, detK, ' ', 1, "-append", "precision", "%.100f");
 
 #diff_cov_vector
-new_values = rand(1, num_rows) .* 10;
-diff = new_values - K_minus1(index_changed, :);
+new_values = rand(1, num_rows) ./ 10;
+diff = new_values - K(index_changed, :);
 
-dlmwrite('shermanMorissonUpdateSet1', diff, ' ', 1, "-append", "precision", "%.30f");
+dlmwrite(name_file, diff, ' ', 1, "-append", "precision", "%.100f");
+
+name_file = [name_file, "_output"];
 
 #new_K_minus1
-K_minus1(:, index_changed) = new_values';
-K_minus1(index_changed, :) = new_values;
+K(:, index_changed) = new_values';
+K(index_changed, :) = new_values;
 
-dlmwrite('shermanMorissonUpdateSet1', K_minus1, ' ', 1, "-append", "precision", "%.30f");
+dlmwrite(name_file, inverse(K), ' ', "precision", "%.100f");
 
 #new_detK
-detK = det(K_minus1);
+detK = det(K);
 
-dlmwrite('shermanMorissonUpdateSet1', detK, ' ', 1, "-append", "precision", "%.30f");
+dlmwrite(name_file, detK, ' ', 1, "-append", "precision", "%.100f");

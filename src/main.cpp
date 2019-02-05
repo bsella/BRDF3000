@@ -10,13 +10,16 @@
 using namespace ChefDevr;
 using Scalar = double;
 
-void writeBRDF(const std::string& path, const Vector<Scalar>& brdf)
+void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
 {
     std::ofstream file(path);
     if (!file.is_open()){
         std::cerr << "Could not create file \"" << path<< "\"" << std::endl;
     }
-    file << brdf;
+    for (unsigned int i(0); i < brdf.cols(); ++i)
+    {
+        file << double(brdf[i]);
+    }
 }
 
 int main(int numArguments, const char *argv[]) {
@@ -37,11 +40,12 @@ int main(int numArguments, const char *argv[]) {
     auto Z = reader.createZ<Scalar>(brdfsDir);
     RowVector<Scalar> meanBRDF(Z.cols());
     centerMat(Z, meanBRDF);
-    Vector<Scalar> brdf0_r(Z.cols());
+    RowVector<Scalar> brdf0_r(Z.cols());
     
     
     OptimisationSolver<Scalar> optimizer{minStep, Z, dim};
     
+    std::cout << "==== optimize mapping ===" << std::endl;
     start = std::chrono::system_clock::now();
     optimizer.optimizeMapping();
     end = std::chrono::system_clock::now();
@@ -60,7 +64,7 @@ int main(int numArguments, const char *argv[]) {
     end = std::chrono::system_clock::now();
     duration = end - start;
     std::cout << "Reconstruction took " << duration.count()*0.001 << " seconds" << std::endl << std::endl;
-    writeBRDF("../brdf0.binary", brdf0_r);
+    //writeBRDF("../brdf0.binary", brdf0_r);
     
     for (unsigned int i(0); i < Z.rows(); ++i)
     {

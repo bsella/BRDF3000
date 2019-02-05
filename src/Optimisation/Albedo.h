@@ -32,7 +32,7 @@ namespace ChefDevr
         * @param albedo Albedo colour (r g b) to fill with result
         */
         template <typename Scalar>
-        static void computeAlbedo (const Vector<Scalar>& brdf, Color& albedo, unsigned int num_sampling);
+        static void computeAlbedo (const RowVector<Scalar>& brdf, Color& albedo, unsigned int num_sampling);
     
     private:
         /**
@@ -42,7 +42,7 @@ namespace ChefDevr
         * @param num_sampling the number of phi angles to sample
         */
         template <typename Scalar>
-        static void computeAlbedoOpenMP (const Vector<Scalar>& brdf, Color& albedo, unsigned int num_sampling);
+        static void computeAlbedoOpenMP (const RowVector<Scalar>& brdf, Color& albedo, unsigned int num_sampling);
         
         /**
         * @brief Computes the albedo of a BRDF in parallel with Nvidia Cuda
@@ -50,7 +50,7 @@ namespace ChefDevr
         * @param albedo Albedo colour (r g b) to fill with result
         */
         template <typename Scalar>
-        static void computeAlbedoCuda (const Vector<Scalar>& brdf, Color& albedo);
+        static void computeAlbedoCuda (const RowVector<Scalar>& brdf, Color& albedo);
     };
 
 } // ChefDevr

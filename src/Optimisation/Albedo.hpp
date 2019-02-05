@@ -11,13 +11,13 @@
 namespace ChefDevr
 {
     template <typename Scalar>
-    void Albedo::computeAlbedo (const Vector<Scalar>& brdf, Color& albedo, unsigned int num_sampling)
+    void Albedo::computeAlbedo (const RowVector<Scalar>& brdf, Color& albedo, unsigned int num_sampling)
     {
         computeAlbedoOpenMP(brdf, albedo, num_sampling);
     }
 
     template <typename Scalar>
-    void Albedo::computeAlbedoOpenMP (const Vector<Scalar>& brdf, Color& albedo, unsigned int num_sampling)
+    void Albedo::computeAlbedoOpenMP (const RowVector<Scalar>& brdf, Color& albedo, unsigned int num_sampling)
     {
         const double one_over_pi(0.31830988618);
         double r(0), g(0), b(0);
@@ -63,7 +63,7 @@ namespace ChefDevr
     }
 
     template <typename Scalar>
-    void Albedo::computeAlbedoCuda (const Vector<Scalar>& brdf, Color& albedo)
+    void Albedo::computeAlbedoCuda (const RowVector<Scalar>& brdf, Color& albedo)
     {
     }
 } // namespace ChefDevr

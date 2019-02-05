@@ -46,7 +46,7 @@ namespace ChefDevr {
          * @param[out] blue_value blue channel of the extracted color
          */
         template <typename Scalar>
-        static void lookup_brdf_val(const Vector<Scalar>& brdf, double theta_in, double phi_in,
+        static void lookup_brdf_val(const RowVector<Scalar>& brdf, double theta_in, double phi_in,
                              double theta_out, double phi_out, double& red_value, double& green_value, double& blue_value);
 
         /**

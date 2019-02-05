@@ -228,6 +228,8 @@ namespace ChefDevr
         unsigned int lv_num,
         Vector<Scalar>& diff_cov_vector) const
     {
+        assert(old_detK != 0.0);
+
         Scalar centerCoeff(diff_cov_vector[lv_num]);
         
         // ===== One row modification =====

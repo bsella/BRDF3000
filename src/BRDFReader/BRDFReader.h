@@ -6,8 +6,7 @@
  */
 
 #include <cstdio>
-#include <stxxl/vector>
-
+#include <vector>
 #include "Parametrisation/types.h"
 
 namespace ChefDevr {

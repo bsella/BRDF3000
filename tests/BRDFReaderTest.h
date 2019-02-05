@@ -2,6 +2,7 @@
 #define BRDFREADERTEST_H
 
 #include "BaseTest.h"
+#include "BRDFReader/BRDFReader.h"
 
 class BRDFReaderTest : public BaseTest{
 public:

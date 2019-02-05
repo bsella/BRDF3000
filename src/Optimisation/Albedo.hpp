@@ -1,7 +1,7 @@
 #include "Albedo.h" 
 #include <cmath>
 
-#include "../BRDFReader/BRDFReader.h"
+#include "BRDFReader/BRDFReader.h"
 
 
 /**

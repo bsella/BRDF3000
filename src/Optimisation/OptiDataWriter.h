@@ -7,8 +7,8 @@
 * and latent space visualization
 */
 
-#include "../Parametrisation/types.h"
-#include "../Optimisation/OptimisationSolver.h"
+#include "Parametrisation/types.h"
+#include "Optimisation/OptimisationSolver.h"
 
 #include <string>
 #include <vector>

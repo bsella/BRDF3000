@@ -5,7 +5,7 @@
  * @file OptimisationSolver.h
  */
 
-#include "../Parametrisation/types.h"
+#include "Parametrisation/types.h"
 #include <cmath>
 
 

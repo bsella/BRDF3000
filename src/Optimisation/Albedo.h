@@ -1,8 +1,8 @@
 #ifndef ALBEDO__H 
 #define ALBEDO__H
 
-#include "../Parametrisation/Parametrisation.h"
-#include "../BRDFReader/BRDFReader.h"
+#include "Parametrisation/Parametrisation.h"
+#include "BRDFReader/BRDFReader.h"
 
 /**
  * @file Albedo.h

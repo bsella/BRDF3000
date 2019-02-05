@@ -6,10 +6,9 @@
  */
 
 #include <cstdio>
-//#include <stxxl/vector>
+#include <stxxl/vector>
 
-#include "../Parametrisation/types.h"
-#include "../../tests/BRDFReaderTest.h"
+#include "Parametrisation/types.h"
 
 namespace ChefDevr {
     
@@ -62,6 +61,20 @@ namespace ChefDevr {
             explicit BRDFReaderError(const std::string &message_error) :
             runtime_error{message_error} {}
         };
+        /**
+        * @brief Read a BRDF from a file
+        * @param num_coefficientsNeeded the number of coefficients of the BRDF which should be inside the file
+        * @param filePath the path of the BRDF's file
+        * @return All the coefficients of a BRDF as a vector of scalars
+        *
+        * If the file is not found, returns an error
+        *
+        * As the set of BRDFs can be heavy, we use the stxxl library
+        * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
+        * Indeed, in this case, the set of BRDFs is stored inside the disk
+        */
+        template<typename Scalar>
+        RowVector<Scalar> read_brdf(unsigned int num_coefficientsNeeded, const char *filePath);
 
     private:
 
@@ -86,20 +99,6 @@ namespace ChefDevr {
         /* Functions */
         /* ------------*/
 
-        /**
-        * @brief Read a BRDF from a file
-        * @param num_coefficientsNeeded the number of coefficients of the BRDF which should be inside the file
-        * @param filePath the path of the BRDF's file
-        * @return All the coefficients of a BRDF as a vector of scalars
-        *
-        * If the file is not found, returns an error
-        *
-        * As the set of BRDFs can be heavy, we use the stxxl library
-        * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
-        * Indeed, in this case, the set of BRDFs is stored inside the disk
-        */
-        template<typename Scalar>
-        RowVector<Scalar> read_brdf(unsigned int num_coefficientsNeeded, const char *filePath);
 
         /**
          * @brief Converts standard coordinates to half vector/difference vector coordinates
@@ -167,7 +166,7 @@ namespace ChefDevr {
         /* Friends */
         /* ------------*/
 
-        friend BRDFReaderTest;
+        friend class BRDFReaderTest;
     };
 } // namespace ChefDevr
 

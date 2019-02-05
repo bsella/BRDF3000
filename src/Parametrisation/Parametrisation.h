@@ -60,7 +60,7 @@ namespace ChefDevr
          * @param coord Coordinates of the latent space point to recontruct as a BRDF
          * @return The BRDF data as a column vector
          */
-        void reconstruct (Vector<Scalar>& brdf,
+        void reconstruct (RowVector<Scalar>& brdf,
                           const Vector<Scalar>& coord) const;
         
         Scalar reconstructionError (const unsigned int brdfindex) const;
@@ -116,7 +116,7 @@ namespace ChefDevr
          * @param coord Coordinates of the latent space point to recontruct as a BRDF
          * @return The BRDF data as a column vector
          */
-        void reconstructWithoutMean (Vector<Scalar>& brdf,
+        void reconstructWithoutMean (RowVector<Scalar>& brdf,
                                     const Vector<Scalar>& coord) const;
         
     };

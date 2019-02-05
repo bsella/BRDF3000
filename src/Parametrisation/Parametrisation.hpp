@@ -31,7 +31,7 @@ void computeCovVector (
 }
 
 template <typename Scalar>
-void BRDFReconstructor<Scalar>::reconstruct (Vector<Scalar>& brdf,
+void BRDFReconstructor<Scalar>::reconstruct (RowVector<Scalar>& brdf,
                                      const Vector<Scalar>& coord) const
 {
     RowVector<Scalar> cov_vector(nb_data);
@@ -40,7 +40,7 @@ void BRDFReconstructor<Scalar>::reconstruct (Vector<Scalar>& brdf,
 }
 
 template <typename Scalar>
-void BRDFReconstructor<Scalar>::reconstructWithoutMean (Vector<Scalar>& brdf,
+void BRDFReconstructor<Scalar>::reconstructWithoutMean (RowVector<Scalar>& brdf,
                                                         const Vector<Scalar>& coord) const
 {
     RowVector<Scalar> cov_vector(nb_data);
@@ -55,10 +55,10 @@ Scalar BRDFReconstructor<Scalar>::reconstructionError (const unsigned int brdfin
         std::cerr << "Given index for BRDF reconstruction is out of bounds !" << std::endl;
         return Scalar(-1);
     }
-    Vector<Scalar> reconstructed(Zcentered.cols());
+    RowVector<Scalar> reconstructed(Zcentered.cols());
     reconstructWithoutMean(reconstructed, X.segment(brdfindex*dim,dim));
     //const Vector<Scalar> reconstructed(Zcentered.row(brdfindex).transpose()+meanBRDF);
-    const Vector<Scalar> diff((reconstructed - Zcentered.transpose().col(brdfindex)) );
+    const RowVector<Scalar> diff((reconstructed - Zcentered.row(brdfindex)) );
     return (diff.dot(diff)/Zcentered.cols());
 }
 

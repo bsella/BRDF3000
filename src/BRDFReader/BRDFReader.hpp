@@ -52,7 +52,7 @@ namespace ChefDevr {
     }
 
     template <typename Scalar>
-    void BRDFReader::lookup_brdf_val(const Vector<Scalar> &brdf, double theta_in, double phi_in,
+    void BRDFReader::lookup_brdf_val(const RowVector<Scalar> &brdf, double theta_in, double phi_in,
                                      double theta_out, double phi_out, double& red_value, double& green_value, double& blue_value) {
         // Convert to halfangle / difference angle coordinates
         double theta_half, phi_half, theta_diff, phi_diff;
@@ -90,9 +90,10 @@ namespace ChefDevr {
             throw BRDFReaderError{string{"Dimensions don't match : "} + to_string(num_coefficients) + " is not equal to " + to_string(num_coefficientsNeeded)};
         }
 
-        RowVector<Scalar> brdf{num_coefficients};
-        std::fread(brdf.data(), sizeof(Scalar), num_coefficients, file);
-
+        RowVector<double> brdf_double{num_coefficients};
+        std::fread(brdf_double.data(), sizeof(double), num_coefficients, file);
+        RowVector<Scalar> brdf = brdf_double.template cast<Scalar>();
+        
         std::fclose(file);
         
         return brdf;

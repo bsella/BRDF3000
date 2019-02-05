@@ -31,7 +31,7 @@ int main(int numArguments, const char *argv[]) {
     const Scalar minStep = 0.005;
     const char *brdfsDir = "../data/";
     const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
-    const unsigned int mapWidth(64), mapHeight(64), albedoSampling(64);
+    const unsigned int mapWidth(64), mapHeight(64), albedoSampling(32);
     Color color;
 
     auto Z = reader.createZ<Scalar>(brdfsDir);

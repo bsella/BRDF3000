@@ -33,14 +33,12 @@ namespace ChefDevr
         Vector<Scalar> new_X(latentDim*nb_data);
         Matrix<Scalar> new_K_minus1(nb_data, nb_data);
         Scalar new_costval, new_detK;
-        bool explormoved(false);
         
         // Init X
         initX(ZZt);
         
         // Compute K
         // (We use K_minus1 to store it because we don't need K anymore after)
-        # pragma omp parallel for
         for (unsigned int i=0; i < nb_data; ++i)
         {
             
@@ -135,7 +133,7 @@ namespace ChefDevr
     {
         Scalar trace(0);
         // Compute trace of K_minus1 * ZZt
-        //# pragma omp parallel for reduction(+:trace)
+        # pragma omp parallel for reduction(+:trace)
         for (unsigned int i = 0; i < ZZt.cols(); ++i)
         {
             trace += K_minus1.row(i).dot(ZZt.col(i));
@@ -238,11 +236,9 @@ namespace ChefDevr
         new_detK = dotp1 * old_detK;
         
         // Inverse update 
-        new_K_minus1.noalias() = (old_K_minus1
-                        - ( ((old_K_minus1.col(lv_num)*diff_cov_vector.transpose())*old_K_minus1)
-                                /
-                            dotp1)
-                          ).eval();
+        new_K_minus1.noalias() =
+            (old_K_minus1 - ( ((old_K_minus1.col(lv_num)*diff_cov_vector.transpose())*old_K_minus1)/dotp1)
+            ).eval();
         
         // ===== One column modification =====
         diff_cov_vector[lv_num] = Scalar(0);
@@ -253,12 +249,9 @@ namespace ChefDevr
         new_detK = dotp1 * new_detK;
         
         // Inverse update
-        new_K_minus1 = (new_K_minus1
-                        - ( (new_K_minus1*diff_cov_vector*new_K_minus1.row(lv_num))
-                            /
-                            dotp1
-                          )
-                        ).eval();
+        new_K_minus1 = 
+            (new_K_minus1 - ( (new_K_minus1*diff_cov_vector*new_K_minus1.row(lv_num))/dotp1)
+            ).eval();
         
         diff_cov_vector[lv_num] = centerCoeff;
     }
@@ -271,7 +264,6 @@ namespace ChefDevr
         if (new_X.minCoeff() >= Scalar(-1) && new_X.maxCoeff() <= Scalar(1))
         {
             // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)
-            # pragma omp parallel for
             for (i=0; i<nb_data; ++i){
                 computeCovVector<Scalar>(new_K_minus1.col(i).data(), new_X,
                                  new_X.segment(i*latentDim, latentDim),
@@ -289,8 +281,6 @@ namespace ChefDevr
     template <typename Scalar>
     void OptimisationSolver<Scalar>::initX (const Matrix<Scalar>& ZZt)
     {
-        unsigned int i;
-        
         // Use EigenSolver to compute eigen vector/values decomposition
         Eigen::EigenSolver<Matrix<Scalar>> solver(ZZt, true);
         
@@ -311,7 +301,7 @@ namespace ChefDevr
         // Build V the transposed matrix of ordered eigen vectors 
         Matrix<Scalar> V(latentDim, eigenVectors.cols());
         # pragma omp parallel for
-        for (i=0; i<latentDim; ++i)
+        for (unsigned int i=0; i<latentDim; ++i)
         {
             // use sorted indices to retrieve eigen vectors in descending order
             V.row(i).noalias() = eigenVectors.col(idx[i]).transpose();

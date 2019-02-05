@@ -24,6 +24,8 @@ namespace ChefDevr {
         std::vector<std::string> list_filePaths;
         for(const path &filePath : directory_iterator(fileDirectory)) {
             list_filePaths.push_back(filePath);
+            const auto filename = filePath.filename();
+            brdf_filenames.push_back(filename.string());
         }
 
         const auto num_brdfs = list_filePaths.size();
@@ -37,7 +39,7 @@ namespace ChefDevr {
         //auto Z_iterator = Z_stxxl.begin();
         for (unsigned int i = 0; i < num_brdfs; ++i) {
             Z.row(i) = read_brdf<Scalar>(num_coefficientsBRDF, list_filePaths[i].c_str());
-            // removing negative values
+            // clamp negative values to zero
             Z.row(i) = Z.row(i).cwiseMax(Scalar(0));
         
             //StreamType input{brdf.begin(), brdf.end()};

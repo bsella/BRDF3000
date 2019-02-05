@@ -29,7 +29,7 @@ int main(int numArguments, const char *argv[]) {
     const unsigned int dim = 2;
     const Scalar minStep = 0.005;
     const char *brdfsDir = "../data/";
-    const std::string mapPath("../map.bmp");
+    const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
     const unsigned int mapWidth(8), mapHeight(8), albedoSampling(4);
 
     auto Z = reader.createZ<Scalar>(brdfsDir);
@@ -78,6 +78,13 @@ int main(int numArguments, const char *argv[]) {
     duration = end - start;
     std::cout << "Map computing took " << duration.count()*0.000001 << " seconds" << std::endl;
     */
+    
+    writeParametrisationData<Scalar>(
+        optiDataPath,
+        reader.getBRDFFilenames(),
+        optimizer.getLatentVariables(),
+        optimizer.getInverseMapping(),
+        dim);
     
     exit(0);
 }

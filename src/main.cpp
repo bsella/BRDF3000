@@ -5,6 +5,7 @@
 #include "BRDFReader/BRDFReader.h"
 #include "Optimisation/OptimisationSolver.h"
 #include "Optimisation/OptiDataWriter.h"
+#include "Optimisation/Albedo.h"
 
 using namespace ChefDevr;
 using Scalar = double;
@@ -24,13 +25,14 @@ int main(int numArguments, const char *argv[]) {
     // Afficher le message d'aide si faut
     
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
-    std::chrono::duration<double, std::micro> duration;
+    std::chrono::duration<double, std::milli> duration;
     BRDFReader reader;
     const unsigned int dim = 2;
     const Scalar minStep = 0.005;
     const char *brdfsDir = "../data/";
     const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
-    const unsigned int mapWidth(8), mapHeight(8), albedoSampling(4);
+    const unsigned int mapWidth(64), mapHeight(64), albedoSampling(64);
+    Color color;
 
     auto Z = reader.createZ<Scalar>(brdfsDir);
     RowVector<Scalar> meanBRDF(Z.cols());
@@ -57,11 +59,22 @@ int main(int numArguments, const char *argv[]) {
     reconstructor.reconstruct(brdf0_r, optimizer.getLatentVariables().segment(0,dim));
     end = std::chrono::system_clock::now();
     duration = end - start;
-    std::cout << "Reconstruction took " << duration.count()*0.000001 << " seconds" << std::endl << std::endl;
+    std::cout << "Reconstruction took " << duration.count()*0.001 << " seconds" << std::endl << std::endl;
     writeBRDF("../brdf0.binary", brdf0_r);
     
+    for (unsigned int i(0); i < Z.rows(); ++i)
+    {
+        std::cout << "Reconstruction error for " << reader.getBRDFFilenames()[i] <<  " : " << reconstructor.reconstructionError(0) << std::endl;
+    }
+    std::cout << std::endl;
+        
+    start = std::chrono::system_clock::now();
+    Albedo::computeAlbedo<Scalar>(brdf0_r, color, albedoSampling);
+    end = std::chrono::system_clock::now();
+    duration = end - start;
+    std::cout << "Albedo computing took " << duration.count()*0.001 << " seconds" << std::endl;
+    std::cout << "rgb : " << color.r << " " << color.g << " " << color.b << std::endl;
     
-    std::cout << "Reconstruction error for BRDF n°0 : " << reconstructor.reconstructionError(0) << std::endl << std::endl;
     
     /*
     start = std::chrono::system_clock::now();
@@ -76,9 +89,8 @@ int main(int numArguments, const char *argv[]) {
                    mapHeight);
     end = std::chrono::system_clock::now();
     duration = end - start;
-    std::cout << "Map computing took " << duration.count()*0.000001 << " seconds" << std::endl;
+    std::cout << "Map computing took " << duration.count()*0.001 << " seconds" << std::endl;
     */
-    
     writeParametrisationData<Scalar>(
         optiDataPath,
         reader.getBRDFFilenames(),

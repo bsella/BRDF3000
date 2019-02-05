@@ -6,11 +6,12 @@
  * This file defines types used in ChefDevr classes
  */
 
+/*
 #define DEBUG
 #ifdef DEBUG
 #include <iostream>
 #endif
-
+*/
 #include <Eigen/Core>
 
 

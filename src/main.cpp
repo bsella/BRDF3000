@@ -12,13 +12,13 @@ using Scalar = double;
 
 void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
 {
-    std::ofstream file(path);
+    std::ofstream file(path, ios::binary);
     if (!file.is_open()){
         std::cerr << "Could not create file \"" << path<< "\"" << std::endl;
     }
     for (unsigned int i(0); i < brdf.cols(); ++i)
     {
-        file << double(brdf[i]);
+        file.write(reinterpret_cast<const char*>(&brdf[i]), sizeof(double));
     }
 }
 
@@ -64,7 +64,7 @@ int main(int numArguments, const char *argv[]) {
     end = std::chrono::system_clock::now();
     duration = end - start;
     std::cout << "Reconstruction took " << duration.count()*0.001 << " seconds" << std::endl << std::endl;
-    //writeBRDF("../brdf0.binary", brdf0_r);
+    writeBRDF("../brdf0.binary", brdf0_r);
     
     for (unsigned int i(0); i < Z.rows(); ++i)
     {

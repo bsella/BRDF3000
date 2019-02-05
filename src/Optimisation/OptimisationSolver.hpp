@@ -1,5 +1,5 @@
 #include "OptimisationSolver.h"
-#include "../Parametrisation/Parametrisation.h"
+#include "Parametrisation/Parametrisation.h"
 
 /**
  * @file OptimisationSolver.h

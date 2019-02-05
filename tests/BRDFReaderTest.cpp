@@ -1,5 +1,4 @@
 #include "BRDFReaderTest.h"
-#include "../src/BRDFReader/BRDFReader.h"
 
 BRDFReaderTest::BRDFReaderTest(): BaseTest("BRDFReader"){
     addTest(&readBRDF, "Read BRDF", "../tests/data/BRDFReader_data/inputBRDF.txt", "../tests/data/BRDFReader_data/brdf_output.txt");

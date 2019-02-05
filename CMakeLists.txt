@@ -14,6 +14,7 @@ include_directories(
 	${CMAKE_SOURCE_DIR}/src
 	lib/Eigen
 	${STXXL_INCLUDE_DIRS}
+	lib/bitmap
 )
 
 add_subdirectory(src/BRDFReader)

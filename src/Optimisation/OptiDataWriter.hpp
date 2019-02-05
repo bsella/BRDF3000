@@ -1,7 +1,7 @@
 #include "OptiDataWriter.h"
 #include "Albedo.h"
-#include "../Parametrisation/Parametrisation.h"
-#include "../../lib/bitmap/bitmap_image.hpp"
+#include "Parametrisation/Parametrisation.h"
+#include "bitmap_image.hpp"
 
 #include <iostream>
 #include <fstream>

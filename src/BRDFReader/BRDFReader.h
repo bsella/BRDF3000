@@ -26,7 +26,7 @@ namespace ChefDevr {
         * @param fileDirectory the path of the directory where all the BRDFs are stored
         * @return Non-centered Z BRDFs data matrix where each row represents a BRDF
         *
-        * Initializes the list of BRDFs paths in the order in which they were read.
+        * Initializes the list of BRDFs filenames in the order in which they were read.
         *
         * As the set of BRDFs can be heavy, we use the stxxl library
         * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
@@ -51,7 +51,7 @@ namespace ChefDevr {
                              double theta_out, double phi_out, double& red_value, double& green_value, double& blue_value);
 
         /**
-         * @return the list of BRDF paths in the order in which they were read
+         * @return the list of BRDF filenames in the order in which they were read
          */
         inline const std::vector<std::string>& getBRDFFilenames () const {
             return brdf_filenames;
@@ -78,7 +78,7 @@ namespace ChefDevr {
         constexpr static double blue_scale = 1.66 / 1500.0;
 
         /**
-         * @brief the list of BRDF paths in the order in which they were read
+         * @brief the list of BRDF filenames in the order in which they were read
          */
         std::vector<std::string> brdf_filenames;
 

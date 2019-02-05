@@ -21,7 +21,7 @@ namespace ChefDevr
         const Matrix<Scalar>& Z,
         const Vector<Scalar>& X,
         const Matrix<Scalar>& K_minus1,
-        const Vector<Scalar>& meanBRDF,
+        const RowVector<Scalar>& meanBRDF,
         const unsigned int latentDim,
         const unsigned int albedoSampling,
         const unsigned int width,

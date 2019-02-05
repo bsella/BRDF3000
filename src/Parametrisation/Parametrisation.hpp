@@ -34,18 +34,18 @@ template <typename Scalar>
 void BRDFReconstructor<Scalar>::reconstruct (Vector<Scalar>& brdf,
                                      const Vector<Scalar>& coord) const
 {
-    Vector<Scalar> cov_vector(nb_data);
+    RowVector<Scalar> cov_vector(nb_data);
     computeCovVector<Scalar>(cov_vector.data(), X, coord, dim, nb_data);
-    brdf.noalias() = (Zcentered.transpose() * K_minus1.transpose()).eval() * cov_vector + meanBRDF;
+    brdf.noalias() = cov_vector * K_minus1 * Zcentered + meanBRDF;
 }
 
 template <typename Scalar>
 void BRDFReconstructor<Scalar>::reconstructWithoutMean (Vector<Scalar>& brdf,
                                                         const Vector<Scalar>& coord) const
 {
-    Vector<Scalar> cov_vector(nb_data);
+    RowVector<Scalar> cov_vector(nb_data);
     computeCovVector<Scalar>(cov_vector.data(), X, coord, dim, nb_data);
-    brdf.noalias() = (Zcentered.transpose() * K_minus1.transpose()).eval() * cov_vector;
+    brdf.noalias() = cov_vector * K_minus1 * Zcentered;
 }
 
 template <typename Scalar>

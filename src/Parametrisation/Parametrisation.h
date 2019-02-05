@@ -38,7 +38,7 @@ namespace ChefDevr
             const Matrix<Scalar>& _Zcentered, 
             const Matrix<Scalar>& _K_minus1,
             const Vector<Scalar>& _X,
-            const Vector<Scalar>& _meanBRDF,
+            const RowVector<Scalar>& _meanBRDF,
             const unsigned int _dim,
             const Scalar _mu = MU_DEFAULT,
             const Scalar _l = L_DEFAULT):
@@ -86,7 +86,7 @@ namespace ChefDevr
         /**
          * @brief Mean column of Z (before it was centered)
          */
-        const Vector<Scalar>& meanBRDF;
+        const RowVector<Scalar>& meanBRDF;
         
         /** 
          * @brief Dimension of the latent space

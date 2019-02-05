@@ -50,7 +50,7 @@ int main(int numArguments, const char *argv[]) {
                 Z,
                 optimizer.getInverseMapping(),
                 optimizer.getLatentVariables(),
-                meanBRDF.transpose(),
+                meanBRDF,
                 dim);
     
     start = std::chrono::system_clock::now();

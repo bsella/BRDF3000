@@ -102,5 +102,5 @@ int main(int numArguments, const char *argv[]) {
         optimizer.getInverseMapping(),
         dim);
     
-    exit(0);
+    exit(EXIT_SUCCESS);
 }

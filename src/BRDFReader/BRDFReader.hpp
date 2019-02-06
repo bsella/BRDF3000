@@ -2,9 +2,7 @@
  * @file BRDFReader.hpp
  */
 
-//#include <stxxl/bits/io/syscall_file.h>
 #include <experimental/filesystem>
-//#include <stxxl/bits/stream/stream.h>
 
 
 namespace ChefDevr {
@@ -15,7 +13,6 @@ namespace ChefDevr {
     template <typename Scalar>
     Matrix<Scalar> BRDFReader::createZ(const char *fileDirectory) {
         using namespace std::experimental::filesystem;
-        //using StreamType = stxxl::stream::iterator2stream<typename std::vector<Scalar>::const_iterator>;
 
         if (!is_directory(fileDirectory)) {
             throw BRDFReaderError{"The directory " + std::string{fileDirectory} + " does not exist"};
@@ -32,21 +29,11 @@ namespace ChefDevr {
         const unsigned int num_coefficientsBRDF = 3 * samplingResolution_thetaH * samplingResolution_thetaD * samplingResolution_phiD / 2;
         Matrix<Scalar> Z{num_brdfs, num_coefficientsBRDF};
 
-        //const auto num_coefficients = num_brdfs * num_coefficientsBRDF;
-        //stxxl::vector<Scalar, 1> Z_stxxl;
-        //Z_stxxl.reserve(num_coefficients);
-
-        //auto Z_iterator = Z_stxxl.begin();
         for (unsigned int i = 0; i < num_brdfs; ++i) {
             Z.row(i) = read_brdf<Scalar>(num_coefficientsBRDF, list_filePaths[i].c_str());
             // clamp negative values to zero
             Z.row(i) = Z.row(i).cwiseMax(Scalar(0));
-        
-            //StreamType input{brdf.begin(), brdf.end()};
-            //Z_iterator = stxxl::stream::materialize(input, Z_iterator);
         }
-
-        //Map< Matrix<Scalar> > Z(&Z_stxxl[0], num_coefficientsBRDF, num_brdfs);
 
         return Z;
     }
@@ -83,19 +70,29 @@ namespace ChefDevr {
         }
 
         unsigned int dims[3];
-        std::fread(dims, sizeof(unsigned int), 3, file);
+        auto numElementsRead = fread(dims, sizeof(unsigned int), 3, file);
+        if (numElementsRead < 3) {
+            std::fclose(file);
+            throw BRDFReaderError{"The dimensions of the brdf has not been successfully read"};
+        }
+
         const unsigned int num_coefficients = dims[0] * dims[1] * dims[2] * 3;
         if (num_coefficients != num_coefficientsNeeded){
             std::fclose(file);
-            throw BRDFReaderError{string{"Dimensions don't match : "} + to_string(num_coefficients) + " is not equal to " + to_string(num_coefficientsNeeded)};
+            throw BRDFReaderError{string{"Dimensions don't match : "} + to_string(num_coefficients) +
+                                  " is not equal to " + to_string(num_coefficientsNeeded)};
         }
 
         RowVector<double> brdf_double{num_coefficients};
-        std::fread(brdf_double.data(), sizeof(double), num_coefficients, file);
-        RowVector<Scalar> brdf = brdf_double.template cast<Scalar>();
+        numElementsRead = fread(brdf_double.data(), sizeof(double), num_coefficients, file);
+        if (numElementsRead < num_coefficients) {
+            std::fclose(file);
+            throw BRDFReaderError{"The coefficients of the brdf has not been successfully read"};
+        }
         
         std::fclose(file);
-        
+
+        const RowVector<Scalar> brdf = brdf_double.template cast<Scalar>();
         return brdf;
     }
 

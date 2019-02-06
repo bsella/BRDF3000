@@ -4,7 +4,7 @@ num_rows = 100;
 index_changed = 10;
 
 #num_rows
-dlmwrite(name_file, num_rows, ' ');
+dlmwrite(name_file, num_rows);
 
 #lv_num
 dlmwrite(name_file, index_changed - 1, ' ', 1, "-append");
@@ -19,8 +19,6 @@ until (abs(detK) > 0.00000000001);
 dlmwrite(name_file, inverse(K), ' ', 1, "-append", "precision", "%.100f");
 
 #old_detK
-detK = det(K);
-
 dlmwrite(name_file, detK, ' ', 1, "-append", "precision", "%.100f");
 
 #diff_cov_vector

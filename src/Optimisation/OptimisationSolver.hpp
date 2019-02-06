@@ -14,12 +14,13 @@ namespace ChefDevr
     template <typename Scalar>
     OptimisationSolver<Scalar>::OptimisationSolver(
         Scalar _minStep,
-        Matrix<Scalar>& _Z,
+        const Matrix<Scalar>& _Z,
         const unsigned int _latentDim) :
         
         minStep(_minStep),
         step(reduceStep),
         nb_data(_Z.rows()),
+        num_BRDFCoefficients{_Z.cols()},
         ZZt(_Z*_Z.transpose()),
         latentDim(_latentDim),
         X(_Z.rows()*latentDim),
@@ -137,7 +138,7 @@ namespace ChefDevr
         {
             trace += K_minus1.row(i).dot(ZZt.col(i));
         }
-        cost = Scalar(0.5) * nb_data * std::log(detK) + Scalar(0.5) * trace;
+        cost = Scalar(0.5) * num_BRDFCoefficients * std::log(detK) + Scalar(0.5) * trace;
     }
     
     template <typename Scalar>

@@ -19,7 +19,7 @@ std::istringstream BRDFReaderTest::readBRDF(std::istream& istr){
     istr >> pathFile_brdf;
     istr >> num_coefficients;
 
-    auto brdf = reader.read_brdf<Scalar>(num_coefficients, pathFile_brdf.c_str());
+    const ChefDevr::RowVector<Scalar> brdf = reader.read_brdf<Scalar>(num_coefficients, pathFile_brdf.c_str());
 
     std::stringstream ret;
     ret.precision(20);
@@ -34,7 +34,7 @@ std::istringstream BRDFReaderTest::createZ(std::istream& istr){
 
     istr >> pathBRDFs;
 
-    const auto Z = reader.createZ<Scalar>(pathBRDFs.c_str());
+    const ChefDevr::Matrix<Scalar> Z = reader.createZ<Scalar>(pathBRDFs.c_str());
 
     std::stringstream ret;
     ret.precision(20);

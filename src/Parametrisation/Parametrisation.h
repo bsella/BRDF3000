@@ -63,7 +63,7 @@ namespace ChefDevr
         void reconstruct (RowVector<Scalar>& brdf,
                           const Vector<Scalar>& coord) const;
         
-        Scalar reconstructionError (const unsigned int brdfindex) const;
+        Scalar reconstructionError (unsigned int brdfindex) const;
         
     private:
         /** 
@@ -168,8 +168,8 @@ namespace ChefDevr
         Scalar* cov_vector,
         const Vector<Scalar>& X,
         const Vector<Scalar>& coordRef,
-        const unsigned int dim,
-        const unsigned int nb_data);
+        unsigned int dim,
+        unsigned int nb_data);
         
 } // ChefDevr
 

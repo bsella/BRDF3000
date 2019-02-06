@@ -31,11 +31,11 @@ namespace ChefDevr
          */
         OptimisationSolver(
             Scalar minStep,
-            Matrix<Scalar>& Z,
+            const Matrix<Scalar>& Z,
             unsigned int latentDim);
         
-        ~OptimisationSolver(){}
-        
+        ~OptimisationSolver() = default;
+
         /**
          * @brief Computes the optimized parametrisation of the BRDFs manifold.
          * Uses Hook & Jeeves method to solve the optimisation
@@ -76,6 +76,11 @@ namespace ChefDevr
          * @brief Number of BRDFs in the Z matrix
          */
         const unsigned int nb_data;
+
+        /**
+         * @brief Number of coefficients of each BRDF stored inside the Z matrix
+         */
+        const long num_BRDFCoefficients;
         
         /**
          * @brief Z*Ztransposed

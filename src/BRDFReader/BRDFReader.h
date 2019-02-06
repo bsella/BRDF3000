@@ -8,6 +8,8 @@
 #include <cstdio>
 #include <vector>
 #include "Parametrisation/types.h"
+#include "../tests/BRDFReaderTest.h"
+
 
 namespace ChefDevr {
     
@@ -45,7 +47,7 @@ namespace ChefDevr {
          * @param[out] blue_value blue channel of the extracted color
          */
         template <typename Scalar>
-        static void lookup_brdf_val(const Vector<Scalar>& brdf, double theta_in, double phi_in,
+        static void lookup_brdf_val(const RowVector<Scalar>& brdf, double theta_in, double phi_in,
                              double theta_out, double phi_out, double& red_value, double& green_value, double& blue_value);
 
         /**
@@ -60,20 +62,6 @@ namespace ChefDevr {
             explicit BRDFReaderError(const std::string &message_error) :
             runtime_error{message_error} {}
         };
-        /**
-        * @brief Read a BRDF from a file
-        * @param num_coefficientsNeeded the number of coefficients of the BRDF which should be inside the file
-        * @param filePath the path of the BRDF's file
-        * @return All the coefficients of a BRDF as a vector of scalars
-        *
-        * If the file is not found, returns an error
-        *
-        * As the set of BRDFs can be heavy, we use the stxxl library
-        * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
-        * Indeed, in this case, the set of BRDFs is stored inside the disk
-        */
-        template<typename Scalar>
-        RowVector<Scalar> read_brdf(unsigned int num_coefficientsNeeded, const char *filePath);
 
     private:
 
@@ -97,6 +85,21 @@ namespace ChefDevr {
         /* ------------*/
         /* Functions */
         /* ------------*/
+
+        /**
+        * @brief Read a BRDF from a file
+        * @param num_coefficientsNeeded the number of coefficients of the BRDF which should be inside the file
+        * @param filePath the path of the BRDF's file
+        * @return All the coefficients of a BRDF as a vector of scalars
+        *
+        * If the file is not found, returns an error
+        *
+        * As the set of BRDFs can be heavy, we use the stxxl library
+        * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
+        * Indeed, in this case, the set of BRDFs is stored inside the disk
+        */
+        template<typename Scalar>
+        RowVector<Scalar> read_brdf(unsigned int num_coefficientsNeeded, const char *filePath);
 
 
         /**
@@ -165,7 +168,7 @@ namespace ChefDevr {
         /* Friends */
         /* ------------*/
 
-        friend class BRDFReaderTest;
+        friend BRDFReaderTest;
     };
 } // namespace ChefDevr
 

@@ -1,5 +1,11 @@
 #include "BRDFReaderTest.h"
 
+#include "BRDFReader/BRDFReader.h"
+
+
+using Scalar = long double;
+
+
 BRDFReaderTest::BRDFReaderTest(): BaseTest("BRDFReader"){
     addTest(&readBRDF, "Read BRDF", "../tests/data/BRDFReader_data/inputBRDF.txt", "../tests/data/BRDFReader_data/brdf_output.txt");
     addTest(&createZ, "Create Z", "../tests/data/BRDFReader_data/inputSetBRDFs.txt", "../tests/data/BRDFReader_data/setBRDF_output.txt");
@@ -13,7 +19,7 @@ std::istringstream BRDFReaderTest::readBRDF(std::istream& istr){
     istr >> pathFile_brdf;
     istr >> num_coefficients;
 
-    auto brdf = reader.read_brdf<double>(num_coefficients, pathFile_brdf.c_str());
+    auto brdf = reader.read_brdf<Scalar>(num_coefficients, pathFile_brdf.c_str());
 
     std::stringstream ret;
     ret.precision(20);
@@ -28,7 +34,7 @@ std::istringstream BRDFReaderTest::createZ(std::istream& istr){
 
     istr >> pathBRDFs;
 
-    const auto Z = reader.createZ<double>(pathBRDFs.c_str());
+    const auto Z = reader.createZ<Scalar>(pathBRDFs.c_str());
 
     std::stringstream ret;
     ret.precision(20);

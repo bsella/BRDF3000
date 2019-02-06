@@ -20,7 +20,6 @@ namespace ChefDevr
         minStep(_minStep),
         step(reduceStep),
         nb_data(_Z.rows()),
-        Z(_Z),
         ZZt(_Z*_Z.transpose()),
         latentDim(_latentDim),
         X(_Z.rows()*latentDim),

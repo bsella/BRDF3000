@@ -73,14 +73,15 @@ namespace ChefDevr
         }
         unsigned int nbLVars(X.rows()/latentDim);
         
-        file << "This file contains the results of an optimised parametrisation of the measured materials manifold" << std::endl;
-        file << typeid(Scalar).name() << std::endl;
-        file << "inverse mapping matrix" << std::endl;
+        file << "# This file contains the results of an optimised parametrisation of the measured materials manifold" << std::endl;
+        file << "# " << typeid(Scalar).name() << std::endl;
+        file << "# inverse mapping matrix" << std::endl;
         file << K_minus1.rows() << " " << K_minus1.cols() << std::endl;
         file << K_minus1 << std::endl;
-        file << "latent variables" << std::endl;
+        file << "# latent variables" << std::endl;
         file << nbLVars << std::endl;
-        
+        file << latentDim << std::endl;
+
         for (unsigned int ivar(0); ivar < nbLVars; ++ivar)
         {
             file << brdfsFilenames[ivar] << " " <<  X.segment(ivar*latentDim, latentDim).transpose() << std::endl;

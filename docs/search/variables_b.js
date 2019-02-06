@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['thetanum',['thetaNum',['../struct_chef_devr_1_1_resampled_b_r_d_f.html#ae397d82e7f47bba42193b34a53cd82f9',1,'ChefDevr::ResampledBRDF']]],
-  ['thetastep',['thetaStep',['../struct_chef_devr_1_1_resampled_b_r_d_f.html#a9c1d4f530e6de6c519b19ec6d1cb1810',1,'ChefDevr::ResampledBRDF']]]
+  ['x',['X',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#ab9bfd8c7c205aa065bca5019a62f0e7c',1,'ChefDevr::BRDFReconstructor::X()'],['../class_chef_devr_1_1_optimisation_solver.html#ae1607c9470de01dda6cb470cb3ab1a0d',1,'ChefDevr::OptimisationSolver::X()']]],
+  ['x_5fmove',['X_move',['../class_chef_devr_1_1_optimisation_solver.html#af1a17e4611d6ba0ebf1f9a2db18d2ae1',1,'ChefDevr::OptimisationSolver']]]
 ];

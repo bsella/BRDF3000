@@ -158,7 +158,9 @@ namespace ChefDevr
          * @param diff_cov_vector The difference between
          * the column/row of K that has changed and the column/row before it had change.
          * Although this parameter is not const it remains unchanged when the function returns
-         * 
+         *
+         * @pre old_detK != 0
+         *
          * Computes new_K_minus_1 and new_detK from their previous values using Sherman-Morisson formula.
          * The formula for the inverse and determinant are applied twice : one for the row modification, and another one for the column modification.
          */

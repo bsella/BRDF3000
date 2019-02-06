@@ -1,4 +1,7 @@
-name_file = 'shermanMorissonUpdateSet3';
+pkg load symbolic;
+digits(200);
+
+name_file = 'shermanMorissonUpdateSet2';
 
 num_rows = 100;
 index_changed = 10;

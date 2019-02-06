@@ -1,3 +1,6 @@
+pkg load symbolic;
+digits(200);
+
 name_file = 'costSet3';
 
 num_rows = 5;

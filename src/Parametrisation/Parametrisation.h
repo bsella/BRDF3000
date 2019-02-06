@@ -52,8 +52,8 @@ namespace ChefDevr
             mu(_mu),
             l(_l){}
         
-        ~BRDFReconstructor(){}
-        
+        ~BRDFReconstructor() = default;
+
         /**
          * @brief Reconstructs a BRDF for latent space coordinates
          * @param brdf The brdf data vector to fill

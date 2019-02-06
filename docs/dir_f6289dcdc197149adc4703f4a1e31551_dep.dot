@@ -1,0 +1,14 @@
+digraph "Optimisation" {
+  compound=true
+  node [ fontsize="10", fontname="FreeSans"];
+  edge [ labelfontsize="10", labelfontname="FreeSans"];
+  subgraph clusterdir_91400285565c7420929e76e03301d041 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="src" fontname="FreeSans", fontsize="10", URL="dir_91400285565c7420929e76e03301d041.html"]
+  dir_f6289dcdc197149adc4703f4a1e31551 [shape=box, label="Optimisation", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_f6289dcdc197149adc4703f4a1e31551.html"];
+  }
+  dir_2b94db6e84339b4a935ae0cee470426e [shape=box label="BRDFReader" URL="dir_2b94db6e84339b4a935ae0cee470426e.html"];
+  dir_5dc37d8b5cf0675cf1937de4f7aaf759 [shape=box label="Parametrisation" URL="dir_5dc37d8b5cf0675cf1937de4f7aaf759.html"];
+  dir_2b94db6e84339b4a935ae0cee470426e->dir_5dc37d8b5cf0675cf1937de4f7aaf759 [headlabel="1", labeldistance=1.5 headhref="dir_000011_000012.html"];
+  dir_f6289dcdc197149adc4703f4a1e31551->dir_2b94db6e84339b4a935ae0cee470426e [headlabel="2", labeldistance=1.5 headhref="dir_000010_000011.html"];
+  dir_f6289dcdc197149adc4703f4a1e31551->dir_5dc37d8b5cf0675cf1937de4f7aaf759 [headlabel="5", labeldistance=1.5 headhref="dir_000010_000012.html"];
+}

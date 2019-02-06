@@ -18,6 +18,11 @@ namespace ChefDevr {
     */
     class BRDFReader {
     public:
+
+        const static int samplingResolution_thetaH = 90;
+        const static int samplingResolution_thetaD = 90;
+        const static int samplingResolution_phiD = 360;
+
         BRDFReader();
         ~BRDFReader() = default;
 
@@ -68,10 +73,6 @@ namespace ChefDevr {
         /* ------------*/
         /* Attributes */
         /* ------------*/
-
-        const static int samplingResolution_thetaH = 90;
-        const static int samplingResolution_thetaD = 90;
-        const static int samplingResolution_phiD = 360;
 
         constexpr static double red_scale = 1.0 / 1500.0;
         constexpr static double green_scale = 1.15 / 1500.0;

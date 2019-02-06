@@ -30,6 +30,5 @@ target_link_libraries(${APPLICATION}
 	BRDFReader
 	Parametrisation
 	Optimisation
-	${STXXL_LIBRARIES}
 	stdc++fs
 )

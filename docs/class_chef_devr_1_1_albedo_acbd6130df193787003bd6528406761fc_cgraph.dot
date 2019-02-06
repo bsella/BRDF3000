@@ -1,0 +1,11 @@
+digraph "ChefDevr::Albedo::computeAlbedo"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="ChefDevr::Albedo::compute\lAlbedo",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="ChefDevr::Albedo::compute\lAlbedoOpenMP",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_albedo.html#a66531044b3cb64f15c2fb3597ae31668",tooltip="Computes the albedo of a BRDF in parallel with OpenMP. "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="ChefDevr::BRDFReader\l::lookup_brdf_val",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reader.html#ad378cbc9336d69b8c7c4fa4821c8c6c5",tooltip="Extracts a color in a BRDF from a pair of incoming and outgoing angles. "];
+}

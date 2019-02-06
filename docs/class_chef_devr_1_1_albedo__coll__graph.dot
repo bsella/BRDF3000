@@ -1,7 +1,0 @@
-digraph "ChefDevr::Albedo"
-{
- // LATEX_PDF_SIZE
-  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
-  node [fontname="FreeSans",fontsize="10",shape=record];
-  Node1 [label="{ChefDevr::Albedo\n||+ computeAlbedo()\l- computeAlbedoOpenMP()\l- computeAlbedoCuda()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Provides albedo computation using the most efficient parallelization solution made available by the m..."];
-}

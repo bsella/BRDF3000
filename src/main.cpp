@@ -16,6 +16,10 @@ void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
     if (!file.is_open()){
         std::cerr << "Could not create file \"" << path<< "\"" << std::endl;
     }
+    unsigned int dims[3] = {BRDFReader::samplingResolution_thetaH/2, BRDFReader::samplingResolution_thetaD/2, BRDFReader::samplingResolution_phiD/2};
+    file.write(reinterpret_cast<const char*>(&dims[0]), sizeof(unsigned int));
+    file.write(reinterpret_cast<const char*>(&dims[1]), sizeof(unsigned int));
+    file.write(reinterpret_cast<const char*>(&dims[2]), sizeof(unsigned int));
     for (unsigned int i(0); i < brdf.cols(); ++i)
     {
         file.write(reinterpret_cast<const char*>(&brdf[i]), sizeof(double));

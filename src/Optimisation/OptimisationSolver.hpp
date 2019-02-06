@@ -153,6 +153,7 @@ namespace ChefDevr
         
         for (unsigned int i(0); i < nbcoefs;++i)
         {
+            new_costval = std::numeric_limits<Scalar>::infinity();
             lv_num = i/latentDim;
             computeCovVector<Scalar>(cov_vector.data(), X,
                              X.segment(latentDim*lv_num, latentDim),
@@ -262,7 +263,7 @@ namespace ChefDevr
     {
         unsigned int i;
         new_X = new_X + X_move;
-        if (new_X.minCoeff() >= Scalar(-1) && new_X.maxCoeff() <= Scalar(1))
+        if (new_X.minCoeff() > Scalar(-1) && new_X.maxCoeff() < Scalar(1))
         {
             // Compute new_K (in new_K_minus1 so we don't have to allocate more memory)
             for (i=0; i<nb_data; ++i){

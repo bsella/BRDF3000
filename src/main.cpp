@@ -1,4 +1,5 @@
 #include <chrono>
+#include <cstdio>
 
 #include "Parametrisation/types.h"
 #include "Parametrisation/Parametrisation.h"
@@ -8,21 +9,31 @@
 #include "Optimisation/Albedo.h"
 
 using namespace ChefDevr;
-using Scalar = double;
+using Scalar = long double;
 
+template <typename Scalar>
 void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
 {
     std::ofstream file(path, ios::binary);
+    
     if (!file.is_open()){
         std::cerr << "Could not create file \"" << path<< "\"" << std::endl;
     }
-    unsigned int dims[3] = {BRDFReader::samplingResolution_thetaH/2, BRDFReader::samplingResolution_thetaD/2, BRDFReader::samplingResolution_phiD/2};
-    file.write(reinterpret_cast<const char*>(&dims[0]), sizeof(unsigned int));
-    file.write(reinterpret_cast<const char*>(&dims[1]), sizeof(unsigned int));
-    file.write(reinterpret_cast<const char*>(&dims[2]), sizeof(unsigned int));
+    
+    int dims[3]{
+        BRDFReader::samplingResolution_thetaH,
+        BRDFReader::samplingResolution_thetaD,
+        BRDFReader::samplingResolution_phiD/2};
+        
+    file.write(reinterpret_cast<char*>(&dims[0]), sizeof(int));
+    file.write(reinterpret_cast<char*>(&dims[1]), sizeof(int));
+    file.write(reinterpret_cast<char*>(&dims[2]), sizeof(int));
+    
+    double conv;
     for (unsigned int i(0); i < brdf.cols(); ++i)
-    {
-        file.write(reinterpret_cast<const char*>(&brdf[i]), sizeof(double));
+    {    
+        conv = brdf[i];
+        file.write(reinterpret_cast<char*>(&conv), sizeof(double));
     }
 }
 
@@ -39,12 +50,13 @@ int main(int numArguments, const char *argv[]) {
     const char *brdfsDir = "../data/";
     const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
     const unsigned int mapWidth(64), mapHeight(64), albedoSampling(32);
+    const unsigned int reconstBRDFindex(1);
     Color color;
 
     auto Z = reader.createZ<Scalar>(brdfsDir);
     RowVector<Scalar> meanBRDF(Z.cols());
     centerMat(Z, meanBRDF);
-    RowVector<Scalar> brdf0_r(Z.cols());
+    RowVector<Scalar> brdf_r(Z.cols());
     
     
     OptimisationSolver<Scalar> optimizer{minStep, Z, dim};
@@ -64,20 +76,20 @@ int main(int numArguments, const char *argv[]) {
                 dim);
     
     start = std::chrono::system_clock::now();
-    reconstructor.reconstruct(brdf0_r, optimizer.getLatentVariables().segment(0,dim));
+    reconstructor.reconstruct(brdf_r, optimizer.getLatentVariables().segment(reconstBRDFindex*dim,dim));
     end = std::chrono::system_clock::now();
     duration = end - start;
-    std::cout << "Reconstruction took " << duration.count()*0.001 << " seconds" << std::endl << std::endl;
-    writeBRDF("../brdf0.binary", brdf0_r);
+    std::cout <<"Reconstruction of " << reader.getBRDFFilenames()[reconstBRDFindex] << " took " << duration.count()*0.001 << " seconds" << std::endl << std::endl;
+    writeBRDF<Scalar>("../r_" + reader.getBRDFFilenames()[reconstBRDFindex], brdf_r);
     
-    for (unsigned int i(0); i < Z.rows(); ++i)
+    for (unsigned int i(0); i < std::min(static_cast<int>(Z.rows()), 5); ++i)
     {
         std::cout << "Reconstruction error for " << reader.getBRDFFilenames()[i] <<  " : " << reconstructor.reconstructionError(0) << std::endl;
     }
     std::cout << std::endl;
         
     start = std::chrono::system_clock::now();
-    Albedo::computeAlbedo<Scalar>(brdf0_r, color, albedoSampling);
+    Albedo::computeAlbedo<Scalar>(brdf_r, color, albedoSampling);
     end = std::chrono::system_clock::now();
     duration = end - start;
     std::cout << "Albedo computing took " << duration.count()*0.001 << " seconds" << std::endl;

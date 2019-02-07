@@ -44,7 +44,7 @@ namespace ChefDevr
             const Scalar _l = L_DEFAULT):
             
             Zcentered(_Zcentered),
-            K_minus1(_K_minus1),
+            Km1Zc(_K_minus1*_Zcentered),
             X(_X),
             meanBRDF(_meanBRDF),
             dim(_dim),
@@ -66,17 +66,15 @@ namespace ChefDevr
         Scalar reconstructionError (unsigned int brdfindex) const;
         
     private:
-        /** 
-         * @brief BRDFs data matrix
-         * 
-         * Each row represents a BRDF
+        /**
+         * @brief Centered BRDFs data matrix (BRDFs stored in row major)
          */
         const Matrix<Scalar>& Zcentered;
         
         /** 
-         * @brief Inverse mapping matrix
+         * @brief K_minus1 * Zcentered
          */
-        const Matrix<Scalar>& K_minus1;
+        const Matrix<Scalar> Km1Zc;
         
         /** 
          * @brief Latent variables vector

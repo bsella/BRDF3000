@@ -8,7 +8,7 @@ digraph "Optimisation" {
   }
   dir_999454234ede5981bc76c28bebd84574 [shape=box label="Parametrisation" URL="dir_999454234ede5981bc76c28bebd84574.html"];
   dir_e91d28bcaf0317c98f75133c4b1fed0b [shape=box label="BRDFReader" URL="dir_e91d28bcaf0317c98f75133c4b1fed0b.html"];
-  dir_14b1bd7493e69cb52e0f610a7e38e44e->dir_999454234ede5981bc76c28bebd84574 [headlabel="4", labeldistance=1.5 headhref="dir_000008_000010.html"];
-  dir_14b1bd7493e69cb52e0f610a7e38e44e->dir_e91d28bcaf0317c98f75133c4b1fed0b [headlabel="1", labeldistance=1.5 headhref="dir_000008_000009.html"];
+  dir_14b1bd7493e69cb52e0f610a7e38e44e->dir_999454234ede5981bc76c28bebd84574 [headlabel="5", labeldistance=1.5 headhref="dir_000008_000010.html"];
+  dir_14b1bd7493e69cb52e0f610a7e38e44e->dir_e91d28bcaf0317c98f75133c4b1fed0b [headlabel="2", labeldistance=1.5 headhref="dir_000008_000009.html"];
   dir_e91d28bcaf0317c98f75133c4b1fed0b->dir_999454234ede5981bc76c28bebd84574 [headlabel="1", labeldistance=1.5 headhref="dir_000009_000010.html"];
 }

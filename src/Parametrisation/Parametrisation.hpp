@@ -36,7 +36,7 @@ void BRDFReconstructor<Scalar>::reconstruct (RowVector<Scalar>& brdf,
 {
     RowVector<Scalar> cov_vector(nb_data);
     computeCovVector<Scalar>(cov_vector.data(), X, coord, dim, nb_data);
-    brdf.noalias() = cov_vector * K_minus1 * Zcentered + meanBRDF;
+    brdf.noalias() = cov_vector * Km1Zc + meanBRDF;
 }
 
 template <typename Scalar>
@@ -45,7 +45,7 @@ void BRDFReconstructor<Scalar>::reconstructWithoutMean (RowVector<Scalar>& brdf,
 {
     RowVector<Scalar> cov_vector(nb_data);
     computeCovVector<Scalar>(cov_vector.data(), X, coord, dim, nb_data);
-    brdf.noalias() = cov_vector * K_minus1 * Zcentered;
+    brdf.noalias() = cov_vector * Km1Zc;
 }
 
 template <typename Scalar>

@@ -12,11 +12,13 @@ public:
 private:
     using Scalar = long double;
 
-    static std::istringstream shermanMorissonUpdate(std::istream& istr);
+    static std::istringstream testShermanMorissonUpdate(std::istream& istr);
 
-    static std::istringstream cost(std::istream& istr);
+    static std::istringstream testCost(std::istream& istr);
 
-    static ChefDevr::Matrix<Scalar> readMatrix(std::istream &istr, unsigned int num_rows, unsigned int num_cols);
+    static ChefDevr::Matrix<Scalar> testReadMatrix(std::istream &istr, unsigned int num_rows, unsigned int num_cols);
+
+
 };
 
 #endif // OPTIMISATIONTEST_H

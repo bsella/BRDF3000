@@ -6,20 +6,20 @@
 
 
 OptimisationTest::OptimisationTest(): BaseTest("Optimisation"){
-    addTest(&shermanMorissonUpdate, "Sherman Morisson update 1", "../tests/data/shermanMorisson/shermanMorissonUpdateSet1",
+    addTest(&testShermanMorissonUpdate, "Sherman Morisson update 1", "../tests/data/shermanMorisson/shermanMorissonUpdateSet1",
             "../tests/data/shermanMorisson/shermanMorissonUpdateSet1_output");
-    addTest(&shermanMorissonUpdate, "Sherman Morisson update 2", "../tests/data/shermanMorisson/shermanMorissonUpdateSet2",
+    addTest(&testShermanMorissonUpdate, "Sherman Morisson update 2", "../tests/data/shermanMorisson/shermanMorissonUpdateSet2",
             "../tests/data/shermanMorisson/shermanMorissonUpdateSet2_output");
-    addTest(&cost, "Cost 1", "../tests/data/cost/costSet1",
+    addTest(&testCost, "Cost 1", "../tests/data/cost/costSet1",
             "../tests/data/cost/costSet1_output");
-    addTest(&cost, "Cost 2", "../tests/data/cost/costSet2",
+    addTest(&testCost, "Cost 2", "../tests/data/cost/costSet2",
             "../tests/data/cost/costSet2_output");
-    addTest(&cost, "Cost 3", "../tests/data/cost/costSet3",
+    addTest(&testCost, "Cost 3", "../tests/data/cost/costSet3",
             "../tests/data/cost/costSet3_output");
 }
 
 
-std::istringstream OptimisationTest::shermanMorissonUpdate(std::istream& istr){
+std::istringstream OptimisationTest::testShermanMorissonUpdate(std::istream& istr){
     unsigned int num_rows, lv_num;
     Scalar detK, new_detK;
     ChefDevr::Matrix<Scalar> dummy{1, 1};
@@ -61,7 +61,7 @@ std::istringstream OptimisationTest::shermanMorissonUpdate(std::istream& istr){
 }
 
 
-std::istringstream OptimisationTest::cost(std::istream& istr) {
+std::istringstream OptimisationTest::testCost(std::istream& istr) {
     unsigned int num_rows, d;
     Scalar detK, cost;
 
@@ -87,7 +87,7 @@ std::istringstream OptimisationTest::cost(std::istream& istr) {
 }
 
 
-ChefDevr::Matrix<OptimisationTest::Scalar> OptimisationTest::readMatrix(std::istream &istr, unsigned int num_rows, unsigned int num_cols) {
+ChefDevr::Matrix<OptimisationTest::Scalar> OptimisationTest::testReadMatrix(std::istream &istr, unsigned int num_rows, unsigned int num_cols) {
     ChefDevr::Matrix<Scalar> matrix{num_rows, num_cols};
 
     for (unsigned int i = 0; i < num_rows; ++i) {

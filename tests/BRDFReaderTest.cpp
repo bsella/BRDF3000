@@ -7,8 +7,8 @@ using Scalar = long double;
 
 
 BRDFReaderTest::BRDFReaderTest(): BaseTest("BRDFReader"){
-    addTest(&readBRDF, "Read BRDF", "../tests/data/BRDFReader_data/inputBRDF.txt", "../tests/data/BRDFReader_data/brdf_output.txt");
-    addTest(&createZ, "Create Z", "../tests/data/BRDFReader_data/inputSetBRDFs.txt", "../tests/data/BRDFReader_data/setBRDF_output.txt");
+    addTest(&readBRDF, "Read BRDF", "../tests/data/BRDFReader/inputBRDF.txt", "../tests/data/BRDFReader/brdf_output.txt");
+    addTest(&createZ, "Create Z", "../tests/data/BRDFReader/inputSetBRDFs.txt", "../tests/data/BRDFReader/setBRDF_output.txt");
 }
 
 std::istringstream BRDFReaderTest::readBRDF(std::istream& istr){

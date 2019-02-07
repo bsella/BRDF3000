@@ -2,20 +2,25 @@
 
 #include "Parametrisation/types.h"
 #include "Optimisation/OptimisationSolver.h"
+#include "BRDFReader/BRDFReader.h"
+
+#include <iostream>
+#include <string>
+#include <fstream>
 
 
 
 OptimisationTest::OptimisationTest(): BaseTest("Optimisation"){
-    addTest(&testShermanMorissonUpdate, "Sherman Morisson update 1", "../tests/data/shermanMorisson/shermanMorissonUpdateSet1",
-            "../tests/data/shermanMorisson/shermanMorissonUpdateSet1_output");
-    addTest(&testShermanMorissonUpdate, "Sherman Morisson update 2", "../tests/data/shermanMorisson/shermanMorissonUpdateSet2",
-            "../tests/data/shermanMorisson/shermanMorissonUpdateSet2_output");
-    addTest(&testCost, "Cost 1", "../tests/data/cost/costSet1",
-            "../tests/data/cost/costSet1_output");
-    addTest(&testCost, "Cost 2", "../tests/data/cost/costSet2",
-            "../tests/data/cost/costSet2_output");
-    addTest(&testCost, "Cost 3", "../tests/data/cost/costSet3",
-            "../tests/data/cost/costSet3_output");
+    addTest(&testShermanMorissonUpdate, "Sherman Morisson update 1", "../tests/data/Optimisation/shermanMorisson/shermanMorissonUpdateSet1",
+            "../tests/data/Optimisation/shermanMorisson/shermanMorissonUpdateSet1_output");
+    addTest(&testShermanMorissonUpdate, "Sherman Morisson update 2", "../tests/data/Optimisation/shermanMorisson/shermanMorissonUpdateSet2",
+            "../tests/data/Optimisation/shermanMorisson/shermanMorissonUpdateSet2_output");
+    addTest(&testCost, "Cost 1", "../tests/data/Optimisation/cost/costSet1",
+            "../tests/data/Optimisation/cost/costSet1_output");
+    addTest(&testCost, "Cost 2", "../tests/data/Optimisation/cost/costSet2",
+            "../tests/data/Optimisation/cost/costSet2_output");
+    addTest(&testCost, "Cost 3", "../tests/data/Optimisation/cost/costSet3",
+            "../tests/data/Optimisation/cost/costSet3_output");
 }
 
 
@@ -97,4 +102,23 @@ ChefDevr::Matrix<OptimisationTest::Scalar> OptimisationTest::readMatrix(std::ist
     }
 
     return matrix;
+}
+
+std::istringstream OptimisationTest::testInitX(std::istream& istr) {
+    ChefDevr::Matrix<OptimisationTest::Scalar> Z;
+    uint latentDim;
+    //load Z and latentDim
+
+    ChefDevr::OptimisationSolver<OptimisationTest::Scalar> solver(OptimisationTest::Scalar(0), Z, latentDim);
+
+    ChefDevr::Matrix<OptimisationTest::Scalar> ZZt;
+    //load ZZt
+
+    solver.initX(ZZt);
+
+    std::stringstream ret;
+
+    ret << solver.X;
+
+    return std::istringstream(ret.str());
 }

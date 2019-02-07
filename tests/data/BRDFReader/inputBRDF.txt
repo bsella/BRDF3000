@@ -1,0 +1,3 @@
+../tests/data/BRDFReader/brdfs/cherry-235.binary
+4374000
+

@@ -38,7 +38,7 @@ namespace ChefDevr
         BRDFReconstructor<Scalar> reconstructor(
             Z, K_minus1, X, meanBRDF, latentDim);
         Scalar xstep(2/width), ystep(2/height);
-        Vector<Scalar> brdf(Z.rows());
+        RowVector<Scalar> brdf(Z.rows());
         Vector<Scalar> coord(2);
         coord << -1, -1;
         
@@ -47,11 +47,13 @@ namespace ChefDevr
             coord[0] += xstep;
             for (unsigned int pixy(0); pixy < height; ++pixy)
             {
+                std::cout << "Mapping computing : " << double(pixx*height+pixy) / (width*height) *100 << "%" << std::endl;
                 coord[1] += ystep;
                 reconstructor.reconstruct(brdf, coord);
+                brdf = brdf.cwiseMax(Scalar(0));
                 Albedo::computeAlbedo<Scalar>(brdf, albedo, albedoSampling);
                 map.set_pixel(pixx, pixy,
-                             albedo.r*color_res, albedo.g*color_res, albedo.b*color_res);
+                             albedo.r*color_res/255., albedo.g*color_res/255., albedo.b*color_res/255.);
             }
             coord[1] = -1;
         }

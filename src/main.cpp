@@ -49,8 +49,8 @@ int main(int numArguments, const char *argv[]) {
     const Scalar minStep = 0.005;
     const char *brdfsDir = "../data/";
     const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
-    const unsigned int mapWidth(64), mapHeight(64), albedoSampling(32);
-    const unsigned int reconstBRDFindex(1);
+    const unsigned int mapWidth(16), mapHeight(16), albedoSampling(32);
+    const unsigned int reconstBRDFindex(0);
     Color color;
 
     auto Z = reader.createZ<Scalar>(brdfsDir);
@@ -96,7 +96,7 @@ int main(int numArguments, const char *argv[]) {
     std::cout << "rgb : " << color.r << " " << color.g << " " << color.b << std::endl;
     
     
-    /*
+
     start = std::chrono::system_clock::now();
     writeAlbedoMap<Scalar>(mapPath,
                    Z,
@@ -110,7 +110,7 @@ int main(int numArguments, const char *argv[]) {
     end = std::chrono::system_clock::now();
     duration = end - start;
     std::cout << "Map computing took " << duration.count()*0.001 << " seconds" << std::endl;
-    */
+
     writeParametrisationData<Scalar>(
         optiDataPath,
         reader.getBRDFFilenames(),

@@ -289,18 +289,24 @@ namespace ChefDevr
         // Use EigenSolver to compute eigen vector/values decomposition
         Eigen::EigenSolver<Matrix<Scalar>> solver(ZZt, true);
         
+        std::cout << "initX: ZZt = " << ZZt << std::endl;
+
         const Vector<Scalar>& eigenValues(solver.eigenvalues().real());
         const Matrix<Scalar>& eigenVectors(solver.eigenvectors().real());
          
+         std::cout << "test1" << std::endl;
         // Use std::sort to sort an indices vector in the same way eigen values should be ordered
         // initialize original index locations
         std::vector<size_t> idx(eigenValues.size());
         std::iota(idx.begin(), idx.end(), 0);
         // sort indexes based on comparing values in eigenValues
         std::function<size_t(size_t, size_t)> cmpIndices(
-                [&eigenValues](size_t i1, size_t i2) {
-                    return eigenValues[i1] > eigenValues[i2];});
-        
+            [&eigenValues](size_t i1, size_t i2) {
+                return eigenValues[i1] > eigenValues[i2];
+            }
+        );
+
+        std::cout << "test2" << std::endl;
         std::sort(idx.begin(), idx.end(),cmpIndices);
         
         // Build V the transposed matrix of ordered eigen vectors 
@@ -311,11 +317,18 @@ namespace ChefDevr
             // use sorted indices to retrieve eigen vectors in descending order
             V.row(i).noalias() = eigenVectors.col(idx[i]).transpose();
         }
-        
+
+        std::cout << "test3" << std::endl;
         // X as column vector
-        X = Eigen::Map<Vector<Scalar>>(V.data(), latentDim*nb_data, 1);
+        X  = Eigen::Map<Vector<Scalar>>(V.data(), latentDim*nb_data, 1);
         
+        std::cout << "test4" << std::endl;
+
         // normalize X
         X = X / (std::numeric_limits<Scalar>::epsilon() + std::max(std::abs(X.maxCoeff()), std::abs(X.minCoeff())));
+
+        std::cout << "test5" << std::endl;
+
+        std::cout << "initX: X = " << X << std::endl;
     }
 } // namespace ChefDevr

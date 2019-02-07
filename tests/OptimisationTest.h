@@ -16,7 +16,7 @@ private:
 
     static std::istringstream testCost(std::istream& istr);
 
-    static ChefDevr::Matrix<Scalar> testReadMatrix(std::istream &istr, unsigned int num_rows, unsigned int num_cols);
+    static ChefDevr::Matrix<Scalar> readMatrix(std::istream &istr, unsigned int num_rows, unsigned int num_cols);
 
 
 };

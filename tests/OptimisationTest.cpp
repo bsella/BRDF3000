@@ -87,7 +87,7 @@ std::istringstream OptimisationTest::testCost(std::istream& istr) {
 }
 
 
-ChefDevr::Matrix<OptimisationTest::Scalar> OptimisationTest::testReadMatrix(std::istream &istr, unsigned int num_rows, unsigned int num_cols) {
+ChefDevr::Matrix<OptimisationTest::Scalar> OptimisationTest::readMatrix(std::istream &istr, unsigned int num_rows, unsigned int num_cols) {
     ChefDevr::Matrix<Scalar> matrix{num_rows, num_cols};
 
     for (unsigned int i = 0; i < num_rows; ++i) {

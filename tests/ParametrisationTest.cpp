@@ -5,7 +5,7 @@
 
 ParametrisationTest::ParametrisationTest(): BaseTest("Parametrisation") {
     addTest(&testCovariance, "Covariance1", "../tests/data/Parametrisation/covTestSet1", "../tests/data/Parametrisation/GT_covTestSet1");
-    addTest(&testCovariance, "Covariance2", "../tests/data/covTestSet2", "../tests/data/Parametrisation/GT_covTestSet2");
+    addTest(&testCovariance, "Covariance2", "../tests/data/Parametrisation/covTestSet2", "../tests/data/Parametrisation/GT_covTestSet2");
     addTest(&testCenter, "Center1", "../tests/data/Parametrisation/centerTestSet1", "../tests/data/Parametrisation/GT_centerTestSet1");
     addTest(&testCenter, "Center2", "../tests/data/Parametrisation/centerTestSet2", "../tests/data/Parametrisation/GT_centerTestSet2");
 }

@@ -41,17 +41,28 @@ namespace ChefDevr
         const unsigned int width,
         const unsigned int height)
     {
-        if (latentDim != 2){
+        BRDFReconstructor<Scalar> reconstructor(
+            Z, K_minus1, X, meanBRDF, latentDim);
+        writeAlbedoMap(path, reconstructor, albedoSampling, width, height);
+    }
+    
+    template <typename Scalar>
+    void writeAlbedoMap (
+        const std::string& path,
+        const BRDFReconstructor<Scalar>& reconstructor,
+        const unsigned int albedoSampling,
+        const unsigned int width,
+        const unsigned int height)
+    {
+         if (reconstructor.getLatentDim() != 2){
             std::cerr << "Cannot produce a map of a latent space whose dim is different than 2" << std::endl;
             return;
         }
         bitmap_image map(width, height);
         int color_res(std::pow(8, map.bytes_per_pixel()));
         double r, g, b;
-        BRDFReconstructor<Scalar> reconstructor(
-            Z, K_minus1, X, meanBRDF, latentDim);
         Scalar xstep(2./width), ystep(2./height);
-        RowVector<Scalar> brdf(Z.rows());
+        RowVector<Scalar> brdf(reconstructor.getBRDFCoeffNb());
         Vector<Scalar> coord(2);
         coord << -1, -1;
         std::cout << "Compute albedo map" << std::endl;
@@ -70,7 +81,8 @@ namespace ChefDevr
             }
             coord[1] = -1;
         }
-        map.save_image(path.c_str());
+        std::cout << std::endl;
+        map.save_image(path.c_str());   
     }
     
     template <typename Scalar>

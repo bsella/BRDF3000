@@ -47,7 +47,7 @@ int main(int numArguments, const char *argv[]) {
     BRDFReader reader;
     const unsigned int dim = 2;
     const Scalar minStep = 0.005;
-    const char *brdfsDir = "../dataFull/";
+    const char *brdfsDir = "../data/";
     const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
     const unsigned int mapWidth(32), mapHeight(32), albedoSampling(16);
     const unsigned int reconstBRDFindex(0);
@@ -92,21 +92,15 @@ int main(int numArguments, const char *argv[]) {
     Albedo::computeAlbedo<Scalar>(brdf_r, r, g, b, albedoSampling);
     end = std::chrono::system_clock::now();
     duration = end - start;
-    std::cout << "Albedo computing took " << duration.count()*0.001 << " seconds" << std::endl;
-    std::cout << "rgb : " << r << " " << g << " " << b << std::endl;
-    
-    
+    std::cout << "Albedo computing took " << duration.count()*0.001 << " seconds" << std::endl << std::endl;
 
     start = std::chrono::system_clock::now();
-    writeAlbedoMap<Scalar>(mapPath,
-                   Z,
-                   optimizer.getLatentVariables(),
-                   optimizer.getInverseMapping(),
-                   meanBRDF,
-                   dim,
-                   albedoSampling,
-                   mapWidth,
-                   mapHeight);
+    writeAlbedoMap<Scalar>(
+        mapPath,
+        reconstructor,
+        albedoSampling,
+        mapWidth,
+        mapHeight);
     end = std::chrono::system_clock::now();
     duration = end - start;
     std::cout << "Map computing took " << duration.count()*0.001 << " seconds" << std::endl;

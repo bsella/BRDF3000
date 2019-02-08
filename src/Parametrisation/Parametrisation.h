@@ -30,7 +30,7 @@ namespace ChefDevr
          * @param _K_minus1 Inverse mapping matrix
          * @param _X Latent variables vector
          * @param _meanBRDF The mean BRDF (mean of the rows of Z before it was centered)
-         * @param _dim Dimension of the latent space
+         * @param _latentDim Dimension of the latent space
          * @param _mu Value of the mu constant that helps interpolation source data
          * @param _l Constant defined in the research paper
          */
@@ -39,7 +39,7 @@ namespace ChefDevr
             const Matrix<Scalar>& _K_minus1,
             const Vector<Scalar>& _X,
             const RowVector<Scalar>& _meanBRDF,
-            const unsigned int _dim,
+            const unsigned int _latentDim,
             const Scalar _mu = MU_DEFAULT,
             const Scalar _l = L_DEFAULT):
             
@@ -47,7 +47,7 @@ namespace ChefDevr
             Km1Zc(_K_minus1*_Zcentered),
             X(_X),
             meanBRDF(_meanBRDF),
-            dim(_dim),
+            latentDim(_latentDim),
             nb_data(Zcentered.rows()),
             mu(_mu),
             l(_l){}
@@ -64,6 +64,10 @@ namespace ChefDevr
                           const Vector<Scalar>& coord) const;
         
         Scalar reconstructionError (unsigned int brdfindex) const;
+        
+        inline unsigned int getLatentDim() const { return latentDim; }
+        
+        inline unsigned int getBRDFCoeffNb() const { return Zcentered.rows(); }
         
     private:
         /**
@@ -89,7 +93,7 @@ namespace ChefDevr
         /** 
          * @brief Dimension of the latent space
          */
-        const unsigned int dim;
+        const unsigned int latentDim;
         
         /**
          * @brief Number of BRDFs in Z

@@ -35,7 +35,7 @@ void BRDFReconstructor<Scalar>::reconstruct (RowVector<Scalar>& brdf,
                                      const Vector<Scalar>& coord) const
 {
     RowVector<Scalar> cov_vector(nb_data);
-    computeCovVector<Scalar>(cov_vector.data(), X, coord, dim, nb_data);
+    computeCovVector<Scalar>(cov_vector.data(), X, coord, latentDim, nb_data);
     brdf.noalias() = cov_vector * Km1Zc + meanBRDF;
 }
 
@@ -44,7 +44,7 @@ void BRDFReconstructor<Scalar>::reconstructWithoutMean (RowVector<Scalar>& brdf,
                                                         const Vector<Scalar>& coord) const
 {
     RowVector<Scalar> cov_vector(nb_data);
-    computeCovVector<Scalar>(cov_vector.data(), X, coord, dim, nb_data);
+    computeCovVector<Scalar>(cov_vector.data(), X, coord, latentDim, nb_data);
     brdf.noalias() = cov_vector * Km1Zc;
 }
 
@@ -56,7 +56,7 @@ Scalar BRDFReconstructor<Scalar>::reconstructionError (const unsigned int brdfin
         return Scalar(-1);
     }
     RowVector<Scalar> reconstructed(Zcentered.cols());
-    reconstructWithoutMean(reconstructed, X.segment(brdfindex*dim,dim));
+    reconstructWithoutMean(reconstructed, X.segment(brdfindex*latentDim,latentDim));
     //const Vector<Scalar> reconstructed(Zcentered.row(brdfindex).transpose()+meanBRDF);
     const RowVector<Scalar> diff((reconstructed - Zcentered.row(brdfindex)) );
     return (diff.dot(diff)/Zcentered.cols());

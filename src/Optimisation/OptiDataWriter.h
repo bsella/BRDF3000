@@ -40,6 +40,21 @@ namespace ChefDevr
         const unsigned int height = 16);
     
     /**
+    * @brief Writes the image of the latent space on the disk
+    * @param path Path of the folder to write into
+    * @param albedoSampling Sampling resolution in phi for albedo computation
+    * @param width Width of the image in number of pixels
+    * @param height Height of the image in number of pixels
+    */
+    template <typename Scalar>
+    void writeAlbedoMap(
+        const std::string& path,
+        const BRDFReconstructor<Scalar>& reconstructor,
+        const unsigned int albedoSampling = 4,
+        const unsigned int width = 16,
+        const unsigned int height = 16);
+    
+    /**
     * @brief Writes the data that defines the parametrisation (without Z)
     * @param path Path of the folder to write in
     * @param brdfsFilenames List of the BRDF files used for the parametrization

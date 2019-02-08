@@ -47,11 +47,11 @@ int main(int numArguments, const char *argv[]) {
     BRDFReader reader;
     const unsigned int dim = 2;
     const Scalar minStep = 0.005;
-    const char *brdfsDir = "../data/";
+    const char *brdfsDir = "../dataFull/";
     const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
-    const unsigned int mapWidth(16), mapHeight(16), albedoSampling(32);
+    const unsigned int mapWidth(32), mapHeight(32), albedoSampling(16);
     const unsigned int reconstBRDFindex(0);
-    Color color;
+    double r, g, b;
 
     auto Z = reader.createZ<Scalar>(brdfsDir);
     RowVector<Scalar> meanBRDF(Z.cols());
@@ -89,11 +89,11 @@ int main(int numArguments, const char *argv[]) {
     std::cout << std::endl;
         
     start = std::chrono::system_clock::now();
-    Albedo::computeAlbedo<Scalar>(brdf_r, color, albedoSampling);
+    Albedo::computeAlbedo<Scalar>(brdf_r, r, g, b, albedoSampling);
     end = std::chrono::system_clock::now();
     duration = end - start;
     std::cout << "Albedo computing took " << duration.count()*0.001 << " seconds" << std::endl;
-    std::cout << "rgb : " << color.r << " " << color.g << " " << color.b << std::endl;
+    std::cout << "rgb : " << r << " " << g << " " << b << std::endl;
     
     
 

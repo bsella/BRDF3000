@@ -11,14 +11,6 @@
 namespace ChefDevr
 {
     /**
-    * @brief Simple (red, green, blue) color structure
-    */
-    struct Color
-    {
-        double r, g, b;
-    };
-    
-    /**
      * @brief Provides albedo computation using the most efficient parallelization
      * solution made available by the material
      */
@@ -28,29 +20,45 @@ namespace ChefDevr
         /**
         * @brief Computes the albedo of a BRDF
         * @param brdf BRDF in the format defined in Methods & Algorithm report
+        * @param[out] r red value for the albedo
+        * @param[out] g green value for the albedo
+        * @param[out] b blue value for the albedo
         * @param num_sampling the number of phi angles to sample
-        * @param albedo Albedo colour (r g b) to fill with result
         */
         template <typename Scalar>
-        static void computeAlbedo (const RowVector<Scalar>& brdf, Color& albedo, unsigned int num_sampling);
+        static void computeAlbedo (
+            const RowVector<Scalar>& brdf,
+            double& r, double& g, double& b,
+            const unsigned int num_sampling);
     
     private:
         /**
         * @brief Computes the albedo of a BRDF in parallel with OpenMP
         * @param brdf BRDF in the format defined in Methods & Algorithm report
-        * @param albedo Albedo colour (r g b) to fill with result
+        * @param[out] r red value for the albedo
+        * @param[out] g green value for the albedo
+        * @param[out] b blue value for the albedo
         * @param num_sampling the number of phi angles to sample
         */
         template <typename Scalar>
-        static void computeAlbedoOpenMP (const RowVector<Scalar>& brdf, Color& albedo, unsigned int num_sampling);
+        static void computeAlbedoOpenMP (
+            const RowVector<Scalar>& brdf,
+            double& r, double& g, double& b,
+            const unsigned int num_sampling);
         
         /**
         * @brief Computes the albedo of a BRDF in parallel with Nvidia Cuda
         * @param brdf Resampled BRDF in the format defined in Methods & Algorithm report
-        * @param albedo Albedo colour (r g b) to fill with result
+        * @param[out] r red value for the albedo
+        * @param[out] g green value for the albedo
+        * @param[out] b blue value for the albedo
+        * @param num_sampling the number of phi angles to sample
         */
         template <typename Scalar>
-        static void computeAlbedoCuda (const RowVector<Scalar>& brdf, Color& albedo);
+        static void computeAlbedoCuda (
+            const RowVector<Scalar>& brdf,
+            double& r, double& g, double& b,
+            const unsigned int num_sampling);
     };
 
 } // ChefDevr

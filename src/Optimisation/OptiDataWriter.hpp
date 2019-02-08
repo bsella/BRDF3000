@@ -15,6 +15,20 @@
 
 namespace ChefDevr
 {
+    void progressBar(double progress)
+    {
+        const int barWidth = 70;
+        std::cout << "[";
+        int pos = barWidth * progress;
+        for (int i = 0; i < barWidth; ++i) {
+            if (i < pos) std::cout << "=";
+            else if (i == pos) std::cout << ">";
+            else std::cout << " ";
+        }
+        std::cout << "] " << int(progress * 100.0) << " %\r";
+        std::cout.flush();
+    }
+    
     template <typename Scalar>
     void writeAlbedoMap (
         const std::string& path,
@@ -32,28 +46,27 @@ namespace ChefDevr
             return;
         }
         bitmap_image map(width, height);
-        int color_res(std::pow(2, map.bytes_per_pixel()));
-        Color albedo;
-        
+        int color_res(std::pow(8, map.bytes_per_pixel()));
+        double r, g, b;
         BRDFReconstructor<Scalar> reconstructor(
             Z, K_minus1, X, meanBRDF, latentDim);
-        Scalar xstep(2/width), ystep(2/height);
+        Scalar xstep(2./width), ystep(2./height);
         RowVector<Scalar> brdf(Z.rows());
         Vector<Scalar> coord(2);
         coord << -1, -1;
-        
+        std::cout << "Compute albedo map" << std::endl;
         for (unsigned int pixx(0); pixx < width; ++pixx)
         {
             coord[0] += xstep;
             for (unsigned int pixy(0); pixy < height; ++pixy)
             {
-                std::cout << "Mapping computing : " << double(pixx*height+pixy) / (width*height) *100 << "%" << std::endl;
+                progressBar(double(pixx*height+pixy) / (width*height));
                 coord[1] += ystep;
                 reconstructor.reconstruct(brdf, coord);
                 brdf = brdf.cwiseMax(Scalar(0));
-                Albedo::computeAlbedo<Scalar>(brdf, albedo, albedoSampling);
+                Albedo::computeAlbedo<Scalar>(brdf, r, g, b, albedoSampling);
                 map.set_pixel(pixx, pixy,
-                             albedo.r*color_res/255., albedo.g*color_res/255., albedo.b*color_res/255.);
+                             r*color_res, g*color_res, b*color_res);
             }
             coord[1] = -1;
         }

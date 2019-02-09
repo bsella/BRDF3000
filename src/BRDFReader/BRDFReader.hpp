@@ -53,9 +53,9 @@ namespace ChefDevr {
 
         const double stepBlue = samplingResolution_thetaH * samplingResolution_thetaD * samplingResolution_phiD;
 
-        red_value = brdf[index] * red_scale;
-        green_value = brdf[index + stepBlue * 0.5] * green_scale;
-        blue_value = brdf[index + stepBlue] * blue_scale;
+        red_value = (double)(brdf[index] * red_scale);
+        green_value = (double)(brdf[index + stepBlue * 0.5] * green_scale);
+        blue_value = (double)(brdf[index + stepBlue] * blue_scale);
 
         if (red_value < 0.0 || green_value < 0.0 || blue_value < 0.0) {
             throw BRDFReaderError{"Below horizon."};

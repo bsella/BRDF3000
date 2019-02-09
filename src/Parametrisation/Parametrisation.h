@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include "types.h"
+#include "mathwrap.h"
 
 #define MU_DEFAULT Scalar(0.0001f)
 #define L_DEFAULT Scalar(1.0f)
@@ -140,7 +141,7 @@ namespace ChefDevr
         const Scalar l  = L_DEFAULT)
     {
         const Scalar sqnorm_x1_x2((x1-x2).squaredNorm());
-        const Scalar exp_part(std::exp(-sqnorm_x1_x2/(Scalar(2)*l*l)));
+        const Scalar exp_part(exp(-sqnorm_x1_x2/(Scalar(2)*l*l)));
         // dirac(x1-x2) <=> norm(x1-x2) == 0
         return sqnorm_x1_x2 < std::numeric_limits<Scalar>::epsilon() ? mu + exp_part : exp_part;
     }

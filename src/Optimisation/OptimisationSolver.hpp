@@ -140,7 +140,7 @@ namespace ChefDevr
         {
             trace += K_minus1.row(i).dot(ZZt.col(i));
         }
-        cost = Scalar(0.5) * (num_BRDFCoefficients * std::log(detK) + trace);
+        cost = Scalar(0.5) * (num_BRDFCoefficients * log(detK) + trace);
     }
     
     template <typename Scalar>
@@ -318,6 +318,6 @@ namespace ChefDevr
         X  = Eigen::Map<Vector<Scalar>>(V.data(), latentDim*nb_data, 1);
 
         // normalize X
-        X = X / (std::numeric_limits<Scalar>::epsilon() + std::max(std::abs(X.maxCoeff()), std::abs(X.minCoeff())));
+        X = X / (std::numeric_limits<Scalar>::epsilon() + std::max(abs(X.maxCoeff()), abs(X.minCoeff())));
     }
 } // namespace ChefDevr

@@ -7,3 +7,6 @@
 [submodule "lib/bitmap"]
 	path = lib/bitmap
 	url = git://github.com/ArashPartow/bitmap.git
+[submodule "lib/multiprecision"]
+	path = lib/multiprecision
+	url = https://github.com/boostorg/multiprecision.git

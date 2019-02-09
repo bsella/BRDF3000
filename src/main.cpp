@@ -51,7 +51,7 @@ int main(int numArguments, const char *argv[]) {
     const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
     const unsigned int mapWidth(32), mapHeight(32), albedoSampling(16);
     const unsigned int reconstBRDFindex(0);
-    const double latentSize(9.);
+    const double latentSize(8.);
     double r, g, b;
 
     

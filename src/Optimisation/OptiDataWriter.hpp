@@ -68,7 +68,7 @@ namespace ChefDevr
         Scalar xstep(latentHeight/width), ystep(latentHeight/height);
         RowVector<Scalar> brdf(reconstructor.getBRDFCoeffNb());
         Vector<Scalar> coord(2);
-        coord << -latentWidth*0.5, -latentHeight*0.5;
+        coord << (xstep-latentWidth)*0.5, (ystep-latentHeight)*0.5;
         std::cout << "Compute albedo map" << std::endl;
         for (unsigned int pixx(0); pixx < width; ++pixx)
         {
@@ -86,7 +86,7 @@ namespace ChefDevr
                               g*color_max,
                               b*color_max);
             }
-            coord[1] = -latentWidth*0.5;
+            coord[1] = (ystep-latentHeight)*0.5;
         }
         std::cout << std::endl;
         map.save_image(path.c_str());   

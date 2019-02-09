@@ -49,7 +49,7 @@ int main(int numArguments, const char *argv[]) {
     const Scalar minStep = 0.0005;
     const char *brdfsDir = "../dataFull";
     const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
-    const unsigned int mapWidth(4), mapHeight(4), albedoSampling(16);
+    const unsigned int mapWidth(200), mapHeight(200), albedoSampling(16);
     const unsigned int reconstBRDFindex(0);
     const double latentSize(8.);
     double r, g, b;
@@ -72,12 +72,15 @@ int main(int numArguments, const char *argv[]) {
     duration = end - start;
     std::cout << "Optimisation took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
     
+    start = std::chrono::system_clock::now();
     BRDFReconstructor<Scalar> reconstructor(
                 Z,
                 optimizer.getInverseMapping(),
                 optimizer.getLatentVariables(),
                 meanBRDF,
                 dim);
+    end = std::chrono::system_clock::now();
+    std::cout << "Reconstructor creation took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
     
     start = std::chrono::system_clock::now();
     reconstructor.reconstruct(brdf_r, optimizer.getLatentVariables().segment(reconstBRDFindex*dim,dim));

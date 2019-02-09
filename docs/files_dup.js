@@ -1,7 +1,6 @@
 var files_dup =
 [
     [ "Albedo.h", "_albedo_8h.html", [
-      [ "Color", "struct_chef_devr_1_1_color.html", "struct_chef_devr_1_1_color" ],
       [ "Albedo", "class_chef_devr_1_1_albedo.html", "class_chef_devr_1_1_albedo" ]
     ] ],
     [ "Albedo.hpp", "_albedo_8hpp.html", null ],
@@ -12,6 +11,7 @@ var files_dup =
     ] ],
     [ "BRDFReader.hpp", "_b_r_d_f_reader_8hpp.html", null ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
+    [ "mathwrap.h", "mathwrap_8h.html", "mathwrap_8h" ],
     [ "OptiDataWriter.cpp", "_opti_data_writer_8cpp.html", null ],
     [ "OptiDataWriter.h", "_opti_data_writer_8h.html", "_opti_data_writer_8h" ],
     [ "OptiDataWriter.hpp", "_opti_data_writer_8hpp.html", "_opti_data_writer_8hpp" ],

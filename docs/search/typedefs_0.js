@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['matrix',['Matrix',['../namespace_chef_devr.html#aa7d9f787c24a42aca7a754a29f67bcac',1,'ChefDevr']]]
+  ['float128',['float128',['../namespace_chef_devr.html#aa6b4bd15ae22aea6e15fcff6d0ad3d4f',1,'ChefDevr']]]
 ];

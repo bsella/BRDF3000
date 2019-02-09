@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['getbrdffilenames',['getBRDFFilenames',['../class_chef_devr_1_1_b_r_d_f_reader.html#a072fd200a36a80aad0240d242e1bd2de',1,'ChefDevr::BRDFReader']]],
-  ['getcostvalue',['getCostValue',['../class_chef_devr_1_1_optimisation_solver.html#a51d3f0b832ed5f6a5243cbfba91ade7a',1,'ChefDevr::OptimisationSolver']]],
-  ['getinversemapping',['getInverseMapping',['../class_chef_devr_1_1_optimisation_solver.html#a5a4acc638798687299a14c994148b5ac',1,'ChefDevr::OptimisationSolver']]],
-  ['getlatentvariables',['getLatentVariables',['../class_chef_devr_1_1_optimisation_solver.html#af23363c7e58b33281c61fc3919b30ed0',1,'ChefDevr::OptimisationSolver']]]
+  ['exp',['exp',['../namespace_chef_devr.html#a32a6050007122653c2126dd432afe13a',1,'ChefDevr']]],
+  ['exp_3c_20float128_20_3e',['exp&lt; float128 &gt;',['../namespace_chef_devr.html#ad2f8a469d8b715be474dfc05b99a94fe',1,'ChefDevr']]],
+  ['exploratorymove',['exploratoryMove',['../class_chef_devr_1_1_optimisation_solver.html#a8e53a3b232857f165df0a13370bdd404',1,'ChefDevr::OptimisationSolver']]]
 ];

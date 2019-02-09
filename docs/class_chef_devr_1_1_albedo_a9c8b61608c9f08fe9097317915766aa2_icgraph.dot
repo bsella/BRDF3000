@@ -1,0 +1,10 @@
+digraph "ChefDevr::Albedo::computeAlbedoOpenMP"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="RL";
+  Node8 [label="ChefDevr::Albedo::compute\lAlbedoOpenMP",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Computes the albedo of a BRDF in parallel with OpenMP."];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node9 [label="ChefDevr::Albedo::compute\lAlbedo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_albedo.html#af24503fff9a96471454e3ae140c0ddd6",tooltip="Computes the albedo of a BRDF."];
+}

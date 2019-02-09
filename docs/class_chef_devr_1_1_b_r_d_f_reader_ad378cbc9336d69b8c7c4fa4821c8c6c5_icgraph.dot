@@ -6,7 +6,7 @@ digraph "ChefDevr::BRDFReader::lookup_brdf_val"
   rankdir="RL";
   Node14 [label="ChefDevr::BRDFReader\l::lookup_brdf_val",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Extracts a color in a BRDF from a pair of incoming and outgoing angles."];
   Node14 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node15 [label="ChefDevr::Albedo::compute\lAlbedoOpenMP",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_albedo.html#a66531044b3cb64f15c2fb3597ae31668",tooltip="Computes the albedo of a BRDF in parallel with OpenMP."];
+  Node15 [label="ChefDevr::Albedo::compute\lAlbedoOpenMP",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_albedo.html#a9c8b61608c9f08fe9097317915766aa2",tooltip="Computes the albedo of a BRDF in parallel with OpenMP."];
   Node15 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node16 [label="ChefDevr::Albedo::compute\lAlbedo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_albedo.html#acbd6130df193787003bd6528406761fc",tooltip="Computes the albedo of a BRDF."];
+  Node16 [label="ChefDevr::Albedo::compute\lAlbedo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_albedo.html#af24503fff9a96471454e3ae140c0ddd6",tooltip="Computes the albedo of a BRDF."];
 }

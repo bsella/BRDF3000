@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['scalar',['Scalar',['../main_8cpp.html#ae52308b3630bba23d07d4fd32347bbce',1,'main.cpp']]]
+  ['rowvector',['RowVector',['../namespace_chef_devr.html#af9ef85362f7720c992cba629ad782f92',1,'ChefDevr']]]
 ];

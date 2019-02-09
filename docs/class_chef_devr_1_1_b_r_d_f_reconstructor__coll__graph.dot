@@ -1,0 +1,7 @@
+digraph "ChefDevr::BRDFReconstructor&lt; Scalar &gt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="{ChefDevr::BRDFReconstructor\l\< Scalar \>\n|- Zcentered\l- Km1Zc\l- X\l- meanBRDF\l- latentDim\l- nb_data\l- mu\l- l\l|+ BRDFReconstructor()\l+ ~BRDFReconstructor()\l+ reconstruct()\l+ reconstructionError()\l+ getLatentDim()\l+ getBRDFCoeffNb()\l- reconstructWithoutMean()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Class that allows BRDF reconstruction from latent space coordinates."];
+}

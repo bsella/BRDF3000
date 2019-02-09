@@ -1,12 +1,5 @@
 var searchData=
 [
-  ['optidatawriter_2ecpp',['OptiDataWriter.cpp',['../_opti_data_writer_8cpp.html',1,'']]],
-  ['optidatawriter_2eh',['OptiDataWriter.h',['../_opti_data_writer_8h.html',1,'']]],
-  ['optidatawriter_2ehpp',['OptiDataWriter.hpp',['../_opti_data_writer_8hpp.html',1,'']]],
-  ['optimisationsolver',['OptimisationSolver',['../class_chef_devr_1_1_optimisation_solver.html',1,'ChefDevr::OptimisationSolver&lt; Scalar &gt;'],['../class_chef_devr_1_1_optimisation_solver.html#ae007848cf70cd53ffc4d9f4a269b2c32',1,'ChefDevr::OptimisationSolver::OptimisationSolver()']]],
-  ['optimisationsolver_2ecpp',['OptimisationSolver.cpp',['../_optimisation_solver_8cpp.html',1,'']]],
-  ['optimisationsolver_2eh',['OptimisationSolver.h',['../_optimisation_solver_8h.html',1,'']]],
-  ['optimisationsolver_2ehpp',['OptimisationSolver.hpp',['../_optimisation_solver_8hpp.html',1,'']]],
-  ['optimisationtest',['OptimisationTest',['../class_chef_devr_1_1_optimisation_solver.html#a8fe47918a13847dbf124c16903418e6f',1,'ChefDevr::OptimisationSolver']]],
-  ['optimizemapping',['optimizeMapping',['../class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107',1,'ChefDevr::OptimisationSolver']]]
+  ['nb_5fdata',['nb_data',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#ad236ece34e16927520260ef8054f499f',1,'ChefDevr::BRDFReconstructor::nb_data()'],['../class_chef_devr_1_1_optimisation_solver.html#afe1fa7486ff6ef624eff8ffd7b7bcc1a',1,'ChefDevr::OptimisationSolver::nb_data()']]],
+  ['num_5fbrdfcoefficients',['num_BRDFCoefficients',['../class_chef_devr_1_1_optimisation_solver.html#a712aad573a563e22e17840401fe82ae1',1,'ChefDevr::OptimisationSolver']]]
 ];

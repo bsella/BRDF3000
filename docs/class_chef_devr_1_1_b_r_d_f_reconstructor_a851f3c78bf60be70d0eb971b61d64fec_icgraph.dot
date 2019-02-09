@@ -1,0 +1,10 @@
+digraph "ChefDevr::BRDFReconstructor::getBRDFCoeffNb"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="RL";
+  Node5 [label="ChefDevr::BRDFReconstructor\l::getBRDFCoeffNb",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="ChefDevr::writeAlbedoMap",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#afcf68527742ee1de65d83c8871a3ac90",tooltip="Writes the image of the latent space on the disk."];
+}

@@ -1,0 +1,12 @@
+digraph "ChefDevr::exp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="RL";
+  Node16 [label="ChefDevr::exp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node16 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node17 [label="ChefDevr::exp\< float128 \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#ad2f8a469d8b715be474dfc05b99a94fe",tooltip=" "];
+  Node16 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node18 [label="ChefDevr::covariance",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a6c4d013fb62a0ebda77f459876959b69",tooltip="Covariance function given in the research paper : A Versatile Parametrization for Measured Materials ..."];
+}

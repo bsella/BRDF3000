@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['writealbedomap',['writeAlbedoMap',['../namespace_chef_devr.html#a9fb03dec05ff560a5cba36e62c6cc94d',1,'ChefDevr']]],
-  ['writebrdf',['writeBRDF',['../main_8cpp.html#a05b5eddae7d273c80183c09236a1d71b',1,'main.cpp']]],
-  ['writeparametrisationdata',['writeParametrisationData',['../namespace_chef_devr.html#a434a21c6a6697ebd326b66eeb3dfa5e6',1,'ChefDevr']]]
+  ['theta_5fdiff_5findex',['theta_diff_index',['../class_chef_devr_1_1_b_r_d_f_reader.html#af58b0fc1168419a46910cb4a706881a0',1,'ChefDevr::BRDFReader']]],
+  ['theta_5fhalf_5findex',['theta_half_index',['../class_chef_devr_1_1_b_r_d_f_reader.html#a565a677a9e08e4f140ac4c01ea5c37b3',1,'ChefDevr::BRDFReader']]]
 ];

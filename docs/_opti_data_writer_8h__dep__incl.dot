@@ -1,0 +1,14 @@
+digraph "OptiDataWriter.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node29 [label="OptiDataWriter.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Provides the functions to write latent space data needed for BRDFs reconstruction and latent space vi..."];
+  Node29 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node30 [label="main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
+  Node29 -> Node31 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node31 [label="OptiDataWriter.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_opti_data_writer_8hpp.html",tooltip=" "];
+  Node31 -> Node29 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node29 -> Node32 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node32 [label="OptiDataWriter.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_opti_data_writer_8cpp.html",tooltip=" "];
+}

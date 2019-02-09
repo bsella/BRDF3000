@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['_7ebrdfreader',['~BRDFReader',['../class_chef_devr_1_1_b_r_d_f_reader.html#a0e0d8eb5eb075da76721dabf18da48ad',1,'ChefDevr::BRDFReader']]],
-  ['_7ebrdfreconstructor',['~BRDFReconstructor',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a06673efe057199a4a750d1f3dfe642de',1,'ChefDevr::BRDFReconstructor']]],
-  ['_7eoptimisationsolver',['~OptimisationSolver',['../class_chef_devr_1_1_optimisation_solver.html#a0eccd7a73916af0a0b9e23858146a7f4',1,'ChefDevr::OptimisationSolver']]]
+  ['writealbedomap',['writeAlbedoMap',['../namespace_chef_devr.html#a9e42f3a268f60e3bf5d0d2320c4ee2cf',1,'ChefDevr::writeAlbedoMap(const std::string &amp;path, const Matrix&lt; Scalar &gt; &amp;Z, const Vector&lt; Scalar &gt; &amp;X, const Matrix&lt; Scalar &gt; &amp;K_minus1, const RowVector&lt; Scalar &gt; &amp;meanBRDF, const unsigned int latentDim, const unsigned int albedoSampling=4, const unsigned int width=16, const unsigned int height=16, const double latentWidth=3., const double latentHeight=3)'],['../namespace_chef_devr.html#afcf68527742ee1de65d83c8871a3ac90',1,'ChefDevr::writeAlbedoMap(const std::string &amp;path, const BRDFReconstructor&lt; Scalar &gt; &amp;reconstructor, const unsigned int albedoSampling=4, const unsigned int width=16, const unsigned int height=16, const double latentWidth=3., const double latentHeight=3)']]],
+  ['writebrdf',['writeBRDF',['../main_8cpp.html#a05b5eddae7d273c80183c09236a1d71b',1,'main.cpp']]],
+  ['writeparametrisationdata',['writeParametrisationData',['../namespace_chef_devr.html#a434a21c6a6697ebd326b66eeb3dfa5e6',1,'ChefDevr']]]
 ];

@@ -60,6 +60,11 @@ namespace ChefDevr
     private:
 
         /**
+         * @brief Initial value of the step
+         */
+        static constexpr Scalar step0 = .5f;
+        
+        /**
          * @brief Factor of step reduction
          */
         static constexpr Scalar reduceStep = .5f;

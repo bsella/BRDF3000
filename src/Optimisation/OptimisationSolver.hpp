@@ -18,7 +18,7 @@ namespace ChefDevr
         const unsigned int _latentDim) :
         
         minStep(_minStep),
-        step(reduceStep),
+        step(step0),
         nb_data(_Z.rows()),
         num_BRDFCoefficients{_Z.cols()},
         ZZt(_Z*_Z.transpose()),
@@ -231,8 +231,10 @@ namespace ChefDevr
         unsigned int lv_num,
         Vector<Scalar>& diff_cov_vector) const
     {
+        #ifdef DEBUG
         assert(old_detK != 0.0);
-
+        #endif
+        
         Scalar centerCoeff(diff_cov_vector[lv_num]);
         
         // ===== One row modification =====
@@ -242,7 +244,7 @@ namespace ChefDevr
         
         // Inverse update 
         new_K_minus1.noalias() =
-            (old_K_minus1 - ( ((old_K_minus1.col(lv_num)*diff_cov_vector.transpose())*old_K_minus1)/dotp1)
+            (old_K_minus1 - ( ((old_K_minus1.col(lv_num)*(diff_cov_vector.transpose()/dotp1))*old_K_minus1))
             ).eval();
         
         // ===== One column modification =====
@@ -255,7 +257,7 @@ namespace ChefDevr
         
         // Inverse update
         new_K_minus1 = 
-            (new_K_minus1 - ( (new_K_minus1*diff_cov_vector*new_K_minus1.row(lv_num))/dotp1)
+            (new_K_minus1 - ( new_K_minus1*(diff_cov_vector/dotp1)*new_K_minus1.row(lv_num))
             ).eval();
         
         diff_cov_vector[lv_num] = centerCoeff;

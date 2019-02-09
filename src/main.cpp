@@ -1,7 +1,5 @@
 #include <chrono>
 #include <cstdio>
-#include <boost/multiprecision/float128.hpp>
-
 
 #include "Parametrisation/types.h"
 #include "Parametrisation/Parametrisation.h"
@@ -48,10 +46,10 @@ int main(int numArguments, const char *argv[]) {
     std::chrono::duration<double, std::milli> duration;
     BRDFReader reader;
     const unsigned int dim = 2;
-    const Scalar minStep = 0.005;
+    const Scalar minStep = 0.0005;
     const char *brdfsDir = "../dataFull";
     const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
-    const unsigned int mapWidth(32), mapHeight(32), albedoSampling(16);
+    const unsigned int mapWidth(4), mapHeight(4), albedoSampling(16);
     const unsigned int reconstBRDFindex(0);
     const double latentSize(8.);
     double r, g, b;
@@ -87,7 +85,7 @@ int main(int numArguments, const char *argv[]) {
     duration = end - start;
     std::cout <<"Reconstruction of " << reader.getBRDFFilenames()[reconstBRDFindex] << " took " << duration.count()*0.001 << " seconds" << std::endl << std::endl;
     
-    // writeBRDF<Scalar>("../r_" + reader.getBRDFFilenames()[reconstBRDFindex], brdf_r);
+    writeBRDF<Scalar>("../r_" + reader.getBRDFFilenames()[reconstBRDFindex], brdf_r);
     
     for (unsigned int i(0); i < std::min(static_cast<int>(Z.rows()), 5); ++i)
     {

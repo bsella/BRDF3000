@@ -14,6 +14,8 @@ include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/src
 	${CMAKE_CURRENT_SOURCE_DIR}/lib/Eigen
 	${CMAKE_CURRENT_SOURCE_DIR}/lib/bitmap
+	${CMAKE_CURRENT_SOURCE_DIR}/lib/boost/libs/multiprecision/include/boost/multiprecision
+	${CMAKE_CURRENT_SOURCE_DIR}/lib/boost/libs/numeric/odeint/include/
 	${STXXL_INCLUDE_DIRS}
 )
 

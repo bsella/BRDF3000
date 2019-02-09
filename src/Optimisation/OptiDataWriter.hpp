@@ -39,7 +39,9 @@ namespace ChefDevr
         const unsigned int latentDim,
         const unsigned int albedoSampling,
         const unsigned int width,
-        const unsigned int height)
+        const unsigned int height,
+        const double latentWidth,
+        const double latentHeight)
     {
         BRDFReconstructor<Scalar> reconstructor(
             Z, K_minus1, X, meanBRDF, latentDim);
@@ -52,19 +54,21 @@ namespace ChefDevr
         const BRDFReconstructor<Scalar>& reconstructor,
         const unsigned int albedoSampling,
         const unsigned int width,
-        const unsigned int height)
+        const unsigned int height,
+        const double latentWidth,
+        const double latentHeight)
     {
          if (reconstructor.getLatentDim() != 2){
             std::cerr << "Cannot produce a map of a latent space whose dim is different than 2" << std::endl;
             return;
         }
         bitmap_image map(width, height);
-        int color_res(std::pow(8, map.bytes_per_pixel()));
+        const double color_max(255);
         double r, g, b;
-        Scalar xstep(2./width), ystep(2./height);
+        Scalar xstep(latentHeight/width), ystep(latentHeight/height);
         RowVector<Scalar> brdf(reconstructor.getBRDFCoeffNb());
         Vector<Scalar> coord(2);
-        coord << -1, -1;
+        coord << -latentWidth*0.5, -latentHeight*0.5;
         std::cout << "Compute albedo map" << std::endl;
         for (unsigned int pixx(0); pixx < width; ++pixx)
         {
@@ -74,12 +78,15 @@ namespace ChefDevr
                 progressBar(double(pixx*height+pixy) / (width*height));
                 coord[1] += ystep;
                 reconstructor.reconstruct(brdf, coord);
+                // clamp BRDF values in [0; +inf)
                 brdf = brdf.cwiseMax(Scalar(0));
                 Albedo::computeAlbedo<Scalar>(brdf, r, g, b, albedoSampling);
                 map.set_pixel(pixx, pixy,
-                             r*color_res, g*color_res, b*color_res);
+                              r*color_max,
+                              g*color_max,
+                              b*color_max);
             }
-            coord[1] = -1;
+            coord[1] = -latentWidth*0.5;
         }
         std::cout << std::endl;
         map.save_image(path.c_str());   

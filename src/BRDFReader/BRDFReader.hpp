@@ -58,9 +58,9 @@ namespace ChefDevr {
         blue_value = brdf[index + stepBlue] * blue_scale;
 
         if (red_value < 0.0 || green_value < 0.0 || blue_value < 0.0) {
-            std::cerr << brdf.minCoeff() << std::endl;
             throw BRDFReaderError{"Below horizon."};
         }
+        
     }
 
     template <typename Scalar>

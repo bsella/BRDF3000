@@ -65,9 +65,9 @@ namespace ChefDevr
                 phi = 0.0;
             }
         }
-        r *= normalizeIrradiance;
-        g *= normalizeIrradiance;
-        b *= normalizeIrradiance;
+        r = std::min(r*normalizeIrradiance, 1.);
+        g = std::min(g*normalizeIrradiance, 1.);
+        b = std::min(b*normalizeIrradiance, 1.);
     }
 
     template <typename Scalar>

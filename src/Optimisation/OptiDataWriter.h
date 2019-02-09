@@ -26,6 +26,8 @@ namespace ChefDevr
     * @param albedoSampling Sampling resolution in phi for albedo computation
     * @param width Width of the image in number of pixels
     * @param height Height of the image in number of pixels
+    * @param latentWidth Width of the plotted latent space (centered on 0)
+    * @param latentHeight Height of the plotted latent space (centered on 0)
     */
     template <typename Scalar>
     void writeAlbedoMap (
@@ -37,14 +39,19 @@ namespace ChefDevr
         const unsigned int latentDim,
         const unsigned int albedoSampling = 4,
         const unsigned int width = 16,
-        const unsigned int height = 16);
+        const unsigned int height = 16,
+        const double latentWidth = 3.,
+        const double latentHeight = 3);
     
     /**
     * @brief Writes the image of the latent space on the disk
     * @param path Path of the folder to write into
+    * @param reconstructor Reconstructor object used to reconstruct BRDFs from coordinates
     * @param albedoSampling Sampling resolution in phi for albedo computation
     * @param width Width of the image in number of pixels
     * @param height Height of the image in number of pixels
+    * @param latentWidth Width of the plotted latent space (centered on 0)
+    * @param latentHeight Height of the plotted latent space (centered on 0)
     */
     template <typename Scalar>
     void writeAlbedoMap(
@@ -52,7 +59,9 @@ namespace ChefDevr
         const BRDFReconstructor<Scalar>& reconstructor,
         const unsigned int albedoSampling = 4,
         const unsigned int width = 16,
-        const unsigned int height = 16);
+        const unsigned int height = 16,
+        const double latentWidth = 3.,
+        const double latentHeight = 3);
     
     /**
     * @brief Writes the data that defines the parametrisation (without Z)

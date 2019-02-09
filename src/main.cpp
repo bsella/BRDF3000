@@ -47,22 +47,26 @@ int main(int numArguments, const char *argv[]) {
     BRDFReader reader;
     const unsigned int dim = 2;
     const Scalar minStep = 0.005;
-    const char *brdfsDir = "../data/";
+    const char *brdfsDir = "../dataFull";
     const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
     const unsigned int mapWidth(32), mapHeight(32), albedoSampling(16);
     const unsigned int reconstBRDFindex(0);
+    const double latentSize(9.);
     double r, g, b;
 
+    
+    start = std::chrono::system_clock::now();
     auto Z = reader.createZ<Scalar>(brdfsDir);
+    end= std::chrono::system_clock::now();
+    duration = end - start;
+    std::cout << "Loading Z took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
+    
     RowVector<Scalar> meanBRDF(Z.cols());
     centerMat(Z, meanBRDF);
     RowVector<Scalar> brdf_r(Z.cols());
     
-    
-    OptimisationSolver<Scalar> optimizer{minStep, Z, dim};
-    
-    std::cout << "==== optimize mapping ===" << std::endl;
     start = std::chrono::system_clock::now();
+    OptimisationSolver<Scalar> optimizer{minStep, Z, dim};
     optimizer.optimizeMapping();
     end = std::chrono::system_clock::now();
     duration = end - start;
@@ -80,7 +84,8 @@ int main(int numArguments, const char *argv[]) {
     end = std::chrono::system_clock::now();
     duration = end - start;
     std::cout <<"Reconstruction of " << reader.getBRDFFilenames()[reconstBRDFindex] << " took " << duration.count()*0.001 << " seconds" << std::endl << std::endl;
-    writeBRDF<Scalar>("../r_" + reader.getBRDFFilenames()[reconstBRDFindex], brdf_r);
+    
+    // writeBRDF<Scalar>("../r_" + reader.getBRDFFilenames()[reconstBRDFindex], brdf_r);
     
     for (unsigned int i(0); i < std::min(static_cast<int>(Z.rows()), 5); ++i)
     {
@@ -100,7 +105,10 @@ int main(int numArguments, const char *argv[]) {
         reconstructor,
         albedoSampling,
         mapWidth,
-        mapHeight);
+        mapHeight,
+        latentSize,
+        latentSize);
+    
     end = std::chrono::system_clock::now();
     duration = end - start;
     std::cout << "Map computing took " << duration.count()*0.001 << " seconds" << std::endl;

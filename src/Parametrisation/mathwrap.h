@@ -47,6 +47,11 @@ namespace ChefDevr
     }
 } // namespace ChefDevr
 
-inline bool isfinite(const float128& x) { return boost::math::isfinite(x); }
-
+namespace Eigen
+{
+    namespace internal
+    {
+        inline bool isfinite(const float128& x) { return boost::math::isfinite(x); }
+    }
+}
 #endif // __MATHWRAP_H

@@ -32,7 +32,7 @@ void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
     double conv;
     for (unsigned int i(0); i < brdf.cols(); ++i)
     {    
-        conv = brdf[i];
+        conv = (double)brdf[i];
         file.write(reinterpret_cast<char*>(&conv), sizeof(double));
     }
 }
@@ -80,6 +80,7 @@ int main(int numArguments, const char *argv[]) {
                 meanBRDF,
                 dim);
     end = std::chrono::system_clock::now();
+    duration = end - start;
     std::cout << "Reconstructor creation took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
     
     start = std::chrono::system_clock::now();

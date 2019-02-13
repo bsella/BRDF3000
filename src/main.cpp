@@ -33,7 +33,7 @@ void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
     double conv;
     for (unsigned int i(0); i < brdf.cols(); ++i)
     {    
-        conv = brdf[i];
+        conv = (double)brdf[i];
         file.write(reinterpret_cast<char*>(&conv), sizeof(double));
     }
 }
@@ -58,7 +58,7 @@ int main(int numArguments, const char *argv[]) {
     ChefDevr::Matrix<Scalar> Z;
     double r, g, b;
     long num_brdf;
-    const bool smallStorage = true;
+    const bool smallStorage = false;
 
 
     if (smallStorage) {

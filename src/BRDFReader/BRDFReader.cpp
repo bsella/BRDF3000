@@ -1,11 +1,27 @@
 #include "BRDFReader.h"
 
+#include <experimental/filesystem>
+
 #include <Eigen/Geometry>
 
 
 namespace ChefDevr {
 
     BRDFReader::BRDFReader() = default;
+
+    void BRDFReader::extract_brdfFilePaths (const char *fileDirectory) {
+        using namespace std::experimental::filesystem;
+
+        if (!is_directory(fileDirectory)) {
+            throw BRDFReaderError{"The directory " + std::string{fileDirectory} + " does not exist"};
+        }
+
+        for(const path &filePath : directory_iterator(fileDirectory)) {
+            brdf_filePaths.push_back(filePath);
+            const auto filename = filePath.filename();
+            brdf_filenames.push_back(filename.string());
+        }
+    }
 
     void BRDFReader::std_coords_to_half_diff_coords(double theta_in, double phi_in, double theta_out, double phi_out,
                                         double& theta_half, double& phi_half, double& theta_diff, double& phi_diff) {

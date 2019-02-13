@@ -16,7 +16,7 @@
 
 namespace ChefDevr
 {
-    /**
+    /*
     * @brief Writes the image of the latent space on the disk
     * @param path Path of the folder to write into
     * @param Z Centered BRDF data matrix (BRDFs stored in row major)
@@ -28,7 +28,7 @@ namespace ChefDevr
     * @param height Height of the image in number of pixels
     * @param latentWidth Width of the plotted latent space (centered on 0)
     * @param latentHeight Height of the plotted latent space (centered on 0)
-    */
+
     template <typename Scalar>
     void writeAlbedoMap (
         const std::string& path,
@@ -36,12 +36,13 @@ namespace ChefDevr
         const Vector<Scalar>& X,
         const Matrix<Scalar>& K_minus1,
         const RowVector<Scalar>& meanBRDF,
-        const unsigned int latentDim,
-        const unsigned int albedoSampling = 4,
-        const unsigned int width = 16,
-        const unsigned int height = 16,
-        const double latentWidth = 3.,
-        const double latentHeight = 3);
+        unsigned int latentDim,
+        unsigned int albedoSampling = 4,
+        unsigned int width = 16,
+        unsigned int height = 16,
+        double latentWidth = 3.,
+        double latentHeight = 3);
+    */
     
     /**
     * @brief Writes the image of the latent space on the disk
@@ -56,12 +57,12 @@ namespace ChefDevr
     template <typename Scalar>
     void writeAlbedoMap(
         const std::string& path,
-        const BRDFReconstructor<Scalar>& reconstructor,
-        const unsigned int albedoSampling = 4,
-        const unsigned int width = 16,
-        const unsigned int height = 16,
-        const double latentWidth = 3.,
-        const double latentHeight = 3);
+        const BRDFReconstructor<Scalar>* reconstructor,
+        unsigned int albedoSampling = 4,
+        unsigned int width = 16,
+        unsigned int height = 16,
+        double latentWidth = 3.,
+        double latentHeight = 3);
     
     /**
     * @brief Writes the data that defines the parametrisation (without Z)
@@ -96,7 +97,7 @@ namespace ChefDevr
         const std::vector<std::string>& brdfsFilenames,
         const Vector<Scalar>& X,
         const Matrix<Scalar>& K_minus1,
-        const unsigned int latentDim);
+        unsigned int latentDim);
 } // ChefDevr
 
 #include "OptiDataWriter.hpp"

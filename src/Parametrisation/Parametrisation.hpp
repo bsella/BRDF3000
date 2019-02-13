@@ -1,6 +1,6 @@
-#include <Eigen/Eigenvalues>
-#include <vector>
-#include <numeric>
+//#include <vector>
+//#include <numeric>
+
 /**
  * @file Parametrisation.hpp
  */
@@ -11,9 +11,7 @@ template <typename Scalar>
 void centerMat(Matrix<Scalar>& Z, RowVector<Scalar>& meanBRDF)
 {
     meanBRDF.noalias() = Z.colwise().mean();
-    # pragma omp parallel for
-    for(unsigned int i = 0; i<Z.rows(); ++i)
-        Z.row(i) -= meanBRDF;
+    Z.rowwise() -= meanBRDF;
 }
 
 template <typename Scalar>
@@ -30,36 +28,5 @@ void computeCovVector (
     }
 }
 
-template <typename Scalar>
-void BRDFReconstructor<Scalar>::reconstruct (RowVector<Scalar>& brdf,
-                                     const Vector<Scalar>& coord) const
-{
-    RowVector<Scalar> cov_vector(nb_data);
-    computeCovVector<Scalar>(cov_vector.data(), X, coord, latentDim, nb_data);
-    brdf.noalias() = cov_vector * Km1Zc + meanBRDF;
-}
-
-template <typename Scalar>
-void BRDFReconstructor<Scalar>::reconstructWithoutMean (RowVector<Scalar>& brdf,
-                                                        const Vector<Scalar>& coord) const
-{
-    RowVector<Scalar> cov_vector(nb_data);
-    computeCovVector<Scalar>(cov_vector.data(), X, coord, latentDim, nb_data);
-    brdf.noalias() = cov_vector * Km1Zc;
-}
-
-template <typename Scalar>
-Scalar BRDFReconstructor<Scalar>::reconstructionError (const unsigned int brdfindex) const
-{
-    if (brdfindex < 0 || brdfindex >= nb_data){
-        std::cerr << "Given index for BRDF reconstruction is out of bounds !" << std::endl;
-        return Scalar(-1);
-    }
-    RowVector<Scalar> reconstructed(Zcentered.cols());
-    reconstructWithoutMean(reconstructed, X.segment(brdfindex*latentDim,latentDim));
-    //const Vector<Scalar> reconstructed(Zcentered.row(brdfindex).transpose()+meanBRDF);
-    const RowVector<Scalar> diff((reconstructed - Zcentered.row(brdfindex)) );
-    return (diff.dot(diff)/Zcentered.cols());
-}
 
 } // namespace ChevDevr

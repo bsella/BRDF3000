@@ -22,3 +22,5 @@ add_library(Optimisation
 	${SOURCES}
 	${HEADERS}
 )
+
+set_target_properties(Optimisation PROPERTIES LINKER_LANGUAGE CXX)

@@ -56,8 +56,8 @@ bool BaseTest::testSet::execute(std::string& message)const{
 	//Scalar tmp, gt;
 	double tmp, gt;
 	std::istringstream result= (*procedure)(dataFile); 
-	while(result >> tmp){
-		gtFile >> gt;
+	while(gtFile >> gt){
+		result >> tmp;
 		if(gt!=tmp){
 			std::cout << gt - tmp;
 			message = "Test failed";

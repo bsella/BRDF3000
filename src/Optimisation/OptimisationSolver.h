@@ -30,8 +30,9 @@ namespace ChefDevr
          * @param latentDim Dimension of optimised latent space
          */
         OptimisationSolver(
+            long num_BRDFCoefficients,
             Scalar minStep,
-            const Matrix<Scalar>& Z,
+            const Matrix<Scalar>& ZZt,
             unsigned int latentDim);
         
         ~OptimisationSolver() = default;
@@ -80,7 +81,7 @@ namespace ChefDevr
         /**
          * @brief Number of BRDFs in the Z matrix
          */
-        const unsigned int nb_data;
+        const long nb_data;
 
         /**
          * @brief Number of coefficients of each BRDF stored inside the Z matrix

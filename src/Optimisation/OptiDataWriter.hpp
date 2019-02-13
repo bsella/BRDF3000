@@ -28,7 +28,8 @@ namespace ChefDevr
         std::cout << "] " << int(progress * 100.0) << " %\r";
         std::cout.flush();
     }
-    
+
+    /*
     template <typename Scalar>
     void writeAlbedoMap (
         const std::string& path,
@@ -47,18 +48,19 @@ namespace ChefDevr
             Z, K_minus1, X, meanBRDF, latentDim);
         writeAlbedoMap(path, reconstructor, albedoSampling, width, height);
     }
+    */
     
     template <typename Scalar>
     void writeAlbedoMap (
         const std::string& path,
-        const BRDFReconstructor<Scalar>& reconstructor,
+        const BRDFReconstructor<Scalar>* reconstructor,
         const unsigned int albedoSampling,
         const unsigned int width,
         const unsigned int height,
         const double latentWidth,
         const double latentHeight)
     {
-         if (reconstructor.getLatentDim() != 2){
+         if (reconstructor->getLatentDim() != 2){
             std::cerr << "Cannot produce a map of a latent space whose dim is different than 2" << std::endl;
             return;
         }
@@ -66,7 +68,7 @@ namespace ChefDevr
         const double color_max(255);
         double r, g, b;
         Scalar xstep(latentHeight/width), ystep(latentHeight/height);
-        RowVector<Scalar> brdf(reconstructor.getBRDFCoeffNb());
+        RowVector<Scalar> brdf(reconstructor->getBRDFCoeffNb());
         Vector<Scalar> coord(2);
         coord << (xstep-latentWidth)*0.5, (ystep-latentHeight)*0.5;
         std::cout << "Compute albedo map" << std::endl;
@@ -77,7 +79,7 @@ namespace ChefDevr
             {
                 progressBar(double(pixx*height+pixy) / (width*height));
                 coord[1] += ystep;
-                reconstructor.reconstruct(brdf, coord);
+                reconstructor->reconstruct(brdf, coord);
                 // clamp BRDF values in [0; +inf)
                 brdf = brdf.cwiseMax(Scalar(0));
                 Albedo::computeAlbedo<Scalar>(brdf, r, g, b, albedoSampling);

@@ -32,13 +32,33 @@ namespace ChefDevr {
         * @return Non-centered Z BRDFs data matrix where each row represents a BRDF
         *
         * Initializes the list of BRDFs filenames in the order in which they were read.
-        *
-        * As the set of BRDFs can be heavy, we use the stxxl library
-        * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
-        * Indeed, in this case, the set of BRDFs is stored inside the disk
         */
         template<typename Scalar>
         Matrix<Scalar> createZ(const char *fileDirectory);
+
+        /**
+        * @brief Creates the centered ZZt matrix
+        * @param fileDirectory the path of the directory where all the BRDFs are stored
+        * @return the centered ZZt matrix
+        *
+        * Initializes the list of BRDFs filenames in the order in which they were read.
+        *
+        * As the set of BRDFs can be heavy, Z is not stored entirely inside the RAM.
+        * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs.
+        */
+        template <typename Scalar>
+        Matrix<Scalar> createZZt_centered(const char *fileDirectory, RowVector<Scalar> &meanBRDF);
+
+
+        /**
+        * @brief Read a BRDF from a file
+        * @param filePath the path of the BRDF's file
+        * @return All the coefficients of a BRDF as a vector of scalars
+        *
+        * If the file is not found, returns an error
+        */
+        template<typename Scalar>
+        RowVector<Scalar> read_brdf(const char *filePath);
 
         /**
          * @brief Extracts a color in a BRDF from a pair of incoming and outgoing angles
@@ -62,6 +82,13 @@ namespace ChefDevr {
             return brdf_filenames;
         }
 
+        /**
+        * @return the list of BRDF filepaths in the order in which they were read
+        */
+        inline const std::vector<std::string>& getBRDFFilePaths () const {
+            return brdf_filePaths;
+        }
+
         class BRDFReaderError : public std::runtime_error {
         public:
             explicit BRDFReaderError(const std::string &message_error) :
@@ -79,28 +106,31 @@ namespace ChefDevr {
         constexpr static double blue_scale = 1.66 / 1500.0;
 
         /**
+         * @brief Number of coefficients of each BRDF
+         */
+        const unsigned int num_coefficientsBRDF = 3 * samplingResolution_thetaH
+                                                    * samplingResolution_thetaD
+                                                    * samplingResolution_phiD / 2;
+
+        /**
          * @brief the list of BRDF filenames in the order in which they were read
          */
         std::vector<std::string> brdf_filenames;
+
+        /**
+         * @brief the list of BRDF filePaths in the order in which they were read
+         */
+        std::vector<std::string> brdf_filePaths;
 
         /* ------------*/
         /* Functions */
         /* ------------*/
 
         /**
-        * @brief Read a BRDF from a file
-        * @param num_coefficientsNeeded the number of coefficients of the BRDF which should be inside the file
-        * @param filePath the path of the BRDF's file
-        * @return All the coefficients of a BRDF as a vector of scalars
-        *
-        * If the file is not found, returns an error
-        *
-        * As the set of BRDFs can be heavy, we use the stxxl library
-        * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs
-        * Indeed, in this case, the set of BRDFs is stored inside the disk
-        */
-        template<typename Scalar>
-        RowVector<Scalar> read_brdf(unsigned int num_coefficientsNeeded, const char *filePath);
+         * @brief Initializes the list of BRDFs filenames and the list of BRDF filePaths in the order in which they are read.
+         * @param fileDirectory the path of the directory where all the BRDFs are stored
+         */
+        void extract_brdfFilePaths (const char *fileDirectory);
 
 
         /**

@@ -29,7 +29,7 @@ namespace ChefDevr
         static void computeAlbedo (
             const RowVector<Scalar>& brdf,
             double& r, double& g, double& b,
-            const unsigned int num_sampling);
+            unsigned int num_sampling);
     
     private:
         /**
@@ -44,7 +44,7 @@ namespace ChefDevr
         static void computeAlbedoOpenMP (
             const RowVector<Scalar>& brdf,
             double& r, double& g, double& b,
-            const unsigned int num_sampling);
+            unsigned int num_sampling);
         
         /**
         * @brief Computes the albedo of a BRDF in parallel with Nvidia Cuda
@@ -58,7 +58,7 @@ namespace ChefDevr
         static void computeAlbedoCuda (
             const RowVector<Scalar>& brdf,
             double& r, double& g, double& b,
-            const unsigned int num_sampling);
+            unsigned int num_sampling);
     };
 
 } // ChefDevr

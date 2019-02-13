@@ -8,24 +8,25 @@
 #include <cmath>
 #include <Eigen/LU>
 #include <Eigen/SVD>
+#include <Eigen/Eigenvalues>
 
 namespace ChefDevr
 {
     template <typename Scalar>
     OptimisationSolver<Scalar>::OptimisationSolver(
+        const long num_BRDFCoefficients,
         Scalar _minStep,
-        const Matrix<Scalar>& _Z,
+        const Matrix<Scalar>& _ZZt,
         const unsigned int _latentDim) :
-        
         minStep(_minStep),
         step(step0),
-        nb_data(_Z.rows()),
-        num_BRDFCoefficients{_Z.cols()},
-        ZZt(_Z*_Z.transpose()),
+        nb_data(_ZZt.rows()),
+        num_BRDFCoefficients{num_BRDFCoefficients},
+        ZZt(_ZZt),
         latentDim(_latentDim),
-        X(_Z.rows()*latentDim),
-        X_move(_Z.rows()*latentDim),
-        K_minus1(_Z.rows(), _Z.rows()){}
+        X(_ZZt.rows()*latentDim),
+        X_move(_ZZt.rows()*latentDim),
+        K_minus1(_ZZt.rows(), _ZZt.rows()){}
     
     template <typename Scalar>
     void OptimisationSolver<Scalar>::optimizeMapping ()

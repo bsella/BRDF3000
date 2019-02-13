@@ -2,8 +2,6 @@
  * @file BRDFReader.hpp
  */
 
-#include <experimental/filesystem>
-
 
 namespace ChefDevr {
     using namespace Eigen;
@@ -12,31 +10,54 @@ namespace ChefDevr {
 
     template <typename Scalar>
     Matrix<Scalar> BRDFReader::createZ(const char *fileDirectory) {
-        using namespace std::experimental::filesystem;
+        extract_brdfFilePaths(fileDirectory);
 
-        if (!is_directory(fileDirectory)) {
-            throw BRDFReaderError{"The directory " + std::string{fileDirectory} + " does not exist"};
-        }
-
-        std::vector<std::string> list_filePaths;
-        for(const path &filePath : directory_iterator(fileDirectory)) {
-            list_filePaths.push_back(filePath);
-            const auto filename = filePath.filename();
-            brdf_filenames.push_back(filename.string());
-        }
-
-        const auto num_brdfs = list_filePaths.size();
-        const unsigned int num_coefficientsBRDF = 3 * samplingResolution_thetaH * samplingResolution_thetaD * samplingResolution_phiD / 2;
+        const auto num_brdfs = brdf_filePaths.size();
         Matrix<Scalar> Z{num_brdfs, num_coefficientsBRDF};
 
         for (unsigned int i = 0; i < num_brdfs; ++i) {
-            Z.row(i) = read_brdf<Scalar>(num_coefficientsBRDF, list_filePaths[i].c_str());
-            // clamp negative values to zero
-            Z.row(i) = Z.row(i).cwiseMax(Scalar(0));
+            Z.row(i) = read_brdf<Scalar>(brdf_filePaths[i].c_str());
         }
 
         return Z;
     }
+
+    template <typename Scalar>
+    Matrix<Scalar> BRDFReader::createZZt_centered(const char *fileDirectory, RowVector<Scalar> &meanBRDF) {
+        extract_brdfFilePaths(fileDirectory);
+
+        const auto num_brdfs = brdf_filePaths.size();
+        Matrix<Scalar> ZZt_centered{num_brdfs, num_brdfs};
+        meanBRDF.resize(num_coefficientsBRDF);
+
+        for (unsigned int i = 0; i < num_brdfs; ++i) {
+            const RowVector<Scalar> brdf_first = read_brdf<Scalar>(brdf_filePaths[i].c_str());
+
+            ZZt_centered(i, i) = brdf_first.dot(brdf_first);
+            meanBRDF += brdf_first;
+
+            for (unsigned int j = i + 1; j < num_brdfs; ++j) {
+                const RowVector<Scalar> brdf_second = read_brdf<Scalar>(brdf_filePaths[j].c_str());
+                const Scalar coefficient = brdf_first.dot(brdf_second);
+                ZZt_centered(i, j) = ZZt_centered(j, i) = coefficient;
+            }
+        }
+
+        meanBRDF /= num_brdfs;
+
+        RowVector<Scalar> brdf_brdfMean{num_brdfs};
+        for (unsigned int i = 0; i < num_brdfs; ++i) {
+            const RowVector<Scalar> brdf = read_brdf<Scalar>(brdf_filePaths[i].c_str());
+            brdf_brdfMean(i) = brdf.dot(meanBRDF);
+        }
+
+        ZZt_centered.colwise() -= brdf_brdfMean.transpose();
+        ZZt_centered.rowwise() -= brdf_brdfMean;
+        ZZt_centered = ZZt_centered.array() + meanBRDF.dot(meanBRDF);
+
+        return ZZt_centered;
+    }
+
 
     template <typename Scalar>
     void BRDFReader::lookup_brdf_val(const RowVector<Scalar> &brdf, double theta_in, double phi_in,
@@ -64,7 +85,7 @@ namespace ChefDevr {
     }
 
     template <typename Scalar>
-    RowVector<Scalar> BRDFReader::read_brdf(unsigned int num_coefficientsNeeded, const char *filePath) {
+    RowVector<Scalar> BRDFReader::read_brdf(const char *filePath) {
         FILE *file = fopen(filePath, "rb");
         if (!file) {
             throw BRDFReaderError{string{"The file "} + filePath + " could not have been opened"};
@@ -78,10 +99,10 @@ namespace ChefDevr {
         }
 
         const unsigned int num_coefficients = dims[0] * dims[1] * dims[2] * 3;
-        if (num_coefficients != num_coefficientsNeeded){
+        if (num_coefficients != num_coefficientsBRDF){
             std::fclose(file);
             throw BRDFReaderError{string{"Dimensions don't match : "} + to_string(num_coefficients) +
-                                  " is not equal to " + to_string(num_coefficientsNeeded)};
+                                  " is not equal to " + to_string(num_coefficientsBRDF)};
         }
 
         RowVector<double> brdf_double{num_coefficients};
@@ -92,6 +113,9 @@ namespace ChefDevr {
         }
         
         std::fclose(file);
+
+        // clamp negative values to zero
+        brdf_double = brdf_double.cwiseMax(0.0);
 
         const RowVector<Scalar> brdf = brdf_double.template cast<Scalar>();
         return brdf;

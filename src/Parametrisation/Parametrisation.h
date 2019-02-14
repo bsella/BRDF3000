@@ -49,6 +49,8 @@ namespace ChefDevr
                 l(_l)
         {}
 
+        virtual ~BRDFReconstructor() = default;
+
         /**
          * @brief Reconstructs a BRDF for latent space coordinates
          * @param brdf The brdf data vector to fill
@@ -83,7 +85,7 @@ namespace ChefDevr
         /**
          * @brief Number of BRDFs in Z
          */
-        const unsigned int nb_data;
+        const long nb_data;
         
         /** 
          * @brief Value of the mu constant that helps interpolation source data

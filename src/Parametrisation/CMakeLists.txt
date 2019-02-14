@@ -22,3 +22,5 @@ add_library(Parametrisation
 	${SOURCES}
 	${HEADERS}
 )
+
+set_target_properties(Parametrisation PROPERTIES LINKER_LANGUAGE CXX)

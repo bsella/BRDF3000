@@ -58,7 +58,7 @@ namespace ChefDevr {
         * If the file is not found, returns an error
         */
         template<typename Scalar>
-        RowVector<Scalar> read_brdf(const char *filePath);
+        RowVector<Scalar> read_brdf(unsigned int index_brdf);
 
         /**
          * @brief Extracts a color in a BRDF from a pair of incoming and outgoing angles
@@ -82,12 +82,6 @@ namespace ChefDevr {
             return brdf_filenames;
         }
 
-        /**
-        * @return the list of BRDF filepaths in the order in which they were read
-        */
-        inline const std::vector<std::string>& getBRDFFilePaths () const {
-            return brdf_filePaths;
-        }
 
         class BRDFReaderError : public std::runtime_error {
         public:

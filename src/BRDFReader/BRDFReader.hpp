@@ -16,7 +16,7 @@ namespace ChefDevr {
         Matrix<Scalar> Z{num_brdfs, num_coefficientsBRDF};
 
         for (unsigned int i = 0; i < num_brdfs; ++i) {
-            Z.row(i) = read_brdf<Scalar>(brdf_filePaths[i].c_str());
+            Z.row(i) = read_brdf<Scalar>(i);
         }
 
         return Z;
@@ -31,13 +31,13 @@ namespace ChefDevr {
         meanBRDF.resize(num_coefficientsBRDF);
 
         for (unsigned int i = 0; i < num_brdfs; ++i) {
-            const RowVector<Scalar> brdf_first = read_brdf<Scalar>(brdf_filePaths[i].c_str());
+            const RowVector<Scalar> brdf_first = read_brdf<Scalar>(i);
 
             ZZt_centered(i, i) = brdf_first.dot(brdf_first);
             meanBRDF += brdf_first;
 
             for (unsigned int j = i + 1; j < num_brdfs; ++j) {
-                const RowVector<Scalar> brdf_second = read_brdf<Scalar>(brdf_filePaths[j].c_str());
+                const RowVector<Scalar> brdf_second = read_brdf<Scalar>(j);
                 const Scalar coefficient = brdf_first.dot(brdf_second);
                 ZZt_centered(i, j) = ZZt_centered(j, i) = coefficient;
             }
@@ -47,7 +47,7 @@ namespace ChefDevr {
 
         RowVector<Scalar> brdf_brdfMean{num_brdfs};
         for (unsigned int i = 0; i < num_brdfs; ++i) {
-            const RowVector<Scalar> brdf = read_brdf<Scalar>(brdf_filePaths[i].c_str());
+            const RowVector<Scalar> brdf = read_brdf<Scalar>(i);
             brdf_brdfMean(i) = brdf.dot(meanBRDF);
         }
 
@@ -85,10 +85,10 @@ namespace ChefDevr {
     }
 
     template <typename Scalar>
-    RowVector<Scalar> BRDFReader::read_brdf(const char *filePath) {
-        FILE *file = fopen(filePath, "rb");
+    RowVector<Scalar> BRDFReader::read_brdf(unsigned int index_brdf) {
+        FILE *file = fopen(brdf_filePaths[index_brdf].c_str(), "rb");
         if (!file) {
-            throw BRDFReaderError{string{"The file "} + filePath + " could not have been opened"};
+            throw BRDFReaderError{string{"The file "} + brdf_filePaths[index_brdf] + " could not have been opened"};
         }
 
         unsigned int dims[3];

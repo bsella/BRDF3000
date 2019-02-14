@@ -7,20 +7,19 @@ using Scalar = long double;
 
 
 BRDFReaderTest::BRDFReaderTest(): BaseTest("BRDFReader"){
-    addTest(&readBRDF, "Read BRDF", "../tests/data/BRDFReader/inputBRDF.txt", "../tests/data/BRDFReader/brdf_output.txt");
+    addTest(&readBRDF, "Read BRDF", "../tests/data/BRDFReader/inputSetBRDFs.txt", "../tests/data/BRDFReader/brdf_output.txt");
     addTest(&createZ, "Create Z", "../tests/data/BRDFReader/inputSetBRDFs.txt", "../tests/data/BRDFReader/setBRDF_output.txt");
     addTest(&createZZt_centered, "Create ZZt centered", "../tests/data/BRDFReader/inputSetBRDFs.txt", "../tests/data/BRDFReader/ZZt_centered.txt");
 }
 
 std::istringstream BRDFReaderTest::readBRDF(std::istream& istr){
     ChefDevr::BRDFReader reader;
-    std::string pathFile_brdf;
-    unsigned int num_coefficients;
+    std::string pathBRDFs;
 
-    istr >> pathFile_brdf;
-    istr >> num_coefficients;
+    istr >> pathBRDFs;
 
-    const ChefDevr::RowVector<Scalar> brdf = reader.read_brdf<Scalar>(num_coefficients, pathFile_brdf.c_str());
+    reader.extract_brdfFilePaths(pathBRDFs.c_str());
+    const ChefDevr::RowVector<Scalar> brdf = reader.read_brdf<Scalar>(0);
 
     std::stringstream ret;
     ret.precision(20);
@@ -34,7 +33,6 @@ std::istringstream BRDFReaderTest::createZ(std::istream& istr){
     std::string pathBRDFs;
 
     istr >> pathBRDFs;
-
     const ChefDevr::Matrix<Scalar> Z = reader.createZ<Scalar>(pathBRDFs.c_str());
 
     std::stringstream ret;
@@ -47,11 +45,12 @@ std::istringstream BRDFReaderTest::createZ(std::istream& istr){
 
 std::istringstream BRDFReaderTest::createZZt_centered(std::istream& istr){
     ChefDevr::BRDFReader reader;
+    ChefDevr::RowVector<Scalar> meanBRDF;
     std::string pathBRDFs;
 
     istr >> pathBRDFs;
 
-    const ChefDevr::Matrix<Scalar> ZZt_centered = reader.createZZt_centered<Scalar>(pathBRDFs.c_str());
+    const ChefDevr::Matrix<Scalar> ZZt_centered = reader.createZZt_centered<Scalar>(pathBRDFs.c_str(), meanBRDF);
 
     std::stringstream ret;
     ret.precision(100);

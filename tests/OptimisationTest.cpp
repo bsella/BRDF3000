@@ -28,7 +28,7 @@ std::istringstream OptimisationTest::testShermanMorissonUpdate(std::istream& ist
     unsigned int num_rows, lv_num;
     Scalar detK, new_detK;
     ChefDevr::Matrix<Scalar> dummy{1, 1};
-    ChefDevr::OptimisationSolver<Scalar> optimisation{0.1, dummy, 2};
+    ChefDevr::OptimisationSolver<Scalar> optimisation{1, 0.1, dummy, 2};
 
     istr >> num_rows;
     istr >> lv_num;
@@ -74,8 +74,9 @@ std::istringstream OptimisationTest::testCost(std::istream& istr) {
     istr >> d;
 
     const auto Z = readMatrix(istr, num_rows, d);
+    const auto ZZt = Z * Z.transpose();
 
-    ChefDevr::OptimisationSolver<Scalar> optimisation{0.1, Z, 2};
+    ChefDevr::OptimisationSolver<Scalar> optimisation{d, 0.1, ZZt, 2};
 
     const auto K_minus1 = readMatrix(istr, num_rows, num_rows);
 
@@ -105,13 +106,13 @@ ChefDevr::Matrix<OptimisationTest::Scalar> OptimisationTest::readMatrix(std::ist
 }
 
 std::istringstream OptimisationTest::testInitX(std::istream& istr) {
-    ChefDevr::Matrix<OptimisationTest::Scalar> Z;
+    ChefDevr::Matrix<Scalar> Z;
     uint latentDim;
     //load Z and latentDim
 
-    ChefDevr::OptimisationSolver<OptimisationTest::Scalar> solver(OptimisationTest::Scalar(0), Z, latentDim);
+    ChefDevr::OptimisationSolver<Scalar> solver(1, Scalar(0), Z, latentDim);
 
-    ChefDevr::Matrix<OptimisationTest::Scalar> ZZt;
+    ChefDevr::Matrix<Scalar> ZZt;
     //load ZZt
 
     solver.initX(ZZt);

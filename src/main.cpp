@@ -97,7 +97,7 @@ int main(int numArguments, const char *argv[]) {
         auto ZZt = reader.createZZt_centered<Scalar>(brdfsDir, meanBRDF);
         end = std::chrono::system_clock::now();
         duration = end - start;
-        std::cout << "Loading Z took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
+        std::cout << "Loading ZZt took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
 
         num_brdf = ZZt.rows();
 
@@ -183,7 +183,7 @@ int main(int numArguments, const char *argv[]) {
         optimizer->getInverseMapping(),
         dim);
 
-    free(reconstructor);
-    free(optimizer);
+    delete reconstructor;
+    delete optimizer;
     exit(EXIT_SUCCESS);
 }

@@ -9,6 +9,10 @@
 #include "Optimisation/OptiDataWriter.h"
 #include "Optimisation/Albedo.h"
 
+
+#define WRONG_USAGE 1
+
+
 using namespace ChefDevr;
 using Scalar = long double;
 
@@ -38,10 +42,17 @@ void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
     }
 }
 
+
+static void show_usage(const char *name_program)
+{
+    std::cerr << "Usage: " << name_program << " <option> " << std::endl
+              << "Options:\n"
+              << "\t-h,--help\t\tShow the usage\n"
+              << "\t--smallRam\t\tThe program will keep the Ram storage low but will take longer to execute" << std::endl;
+}
+
+
 int main(int numArguments, const char *argv[]) {
-    // Récupérer les arguments
-    // Afficher le message d'aide si faut
-    
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
     std::chrono::duration<double, std::milli> duration{};
     BRDFReader reader;
@@ -58,7 +69,27 @@ int main(int numArguments, const char *argv[]) {
     ChefDevr::Matrix<Scalar> Z;
     double r, g, b;
     long num_brdf;
-    const bool smallStorage = false;
+    bool smallStorage = false;
+
+
+    if (numArguments > 2) {
+        std::cerr << "Too much arguments" << std::endl;
+        show_usage(argv[0]);
+        exit(WRONG_USAGE);
+    } else if (numArguments == 2) {
+        std::string argument = argv[1];
+
+        if (argument == "-h" || argument == "--help") {
+            show_usage(argv[0]);
+            exit(WRONG_USAGE);
+        } else if (argument == "--smallRam") {
+            smallStorage = true;
+        } else {
+            std::cerr << argument << " is not a valid argument" << std::endl;
+            show_usage(argv[0]);
+            exit(WRONG_USAGE);
+        }
+    }
 
 
     if (smallStorage) {

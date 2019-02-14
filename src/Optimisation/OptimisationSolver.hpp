@@ -9,6 +9,7 @@
 #include <Eigen/LU>
 #include <Eigen/SVD>
 #include <Eigen/Eigenvalues>
+#include <numeric>
 
 namespace ChefDevr
 {

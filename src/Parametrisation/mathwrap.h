@@ -47,11 +47,18 @@ namespace ChefDevr
     }
 } // namespace ChefDevr
 
-namespace Eigen
+#pragma omp declare reduction(+: float128: \
+                            omp_out += omp_in)
+
+// dirty
+/*
+namespace std
 {
-    namespace internal
+    inline bool isfinite(const float128& x)
     {
-        inline bool isfinite(const float128& x) { return boost::math::isfinite(x); }
+        return boost::math::isfinite(x);
     }
 }
+*/
+
 #endif // __MATHWRAP_H

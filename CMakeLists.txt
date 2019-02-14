@@ -32,6 +32,7 @@ target_link_libraries(${APPLICATION}
 	Parametrisation
 	Optimisation
 	stdc++fs
+	quadmath
 	gmp
 )
 

@@ -14,7 +14,7 @@
 
 
 using namespace ChefDevr;
-using Scalar = long double;
+using Scalar = boost::multiprecision::float128;
 
 template <typename Scalar>
 void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
@@ -101,8 +101,8 @@ int main(int numArguments, const char *argv[]) {
 
         num_brdf = ZZt.rows();
 
-        start = std::chrono::system_clock::now();
         optimizer = new OptimisationSolver<Scalar>(meanBRDF.cols(), minStep, ZZt, dim);
+        start = std::chrono::system_clock::now();
         optimizer->optimizeMapping();
         end = std::chrono::system_clock::now();
         duration = end - start;
@@ -124,9 +124,9 @@ int main(int numArguments, const char *argv[]) {
         centerMat(Z, meanBRDF);
         num_brdf = Z.rows();
 
-        start = std::chrono::system_clock::now();
         const auto ZZt = Z * Z.transpose();
         optimizer = new OptimisationSolver<Scalar>(meanBRDF.cols(), minStep, ZZt, dim);
+        start = std::chrono::system_clock::now();
         optimizer->optimizeMapping();
         end = std::chrono::system_clock::now();
         duration = end - start;
@@ -140,6 +140,13 @@ int main(int numArguments, const char *argv[]) {
         std::cout << "Reconstructor creation took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
     }
 
+    writeParametrisationData<Scalar>(
+        optiDataPath,
+        reader.getBRDFFilenames(),
+        optimizer->getLatentVariables(),
+        optimizer->getInverseMapping(),
+        dim);
+    
     RowVector<Scalar> brdf_r(reconstructor->getBRDFCoeffNb());
     
     start = std::chrono::system_clock::now();
@@ -176,12 +183,6 @@ int main(int numArguments, const char *argv[]) {
     duration = end - start;
     std::cout << "Map computing took " << duration.count()*0.001 << " seconds" << std::endl;
 
-    writeParametrisationData<Scalar>(
-        optiDataPath,
-        reader.getBRDFFilenames(),
-        optimizer->getLatentVariables(),
-        optimizer->getInverseMapping(),
-        dim);
 
     delete reconstructor;
     delete optimizer;

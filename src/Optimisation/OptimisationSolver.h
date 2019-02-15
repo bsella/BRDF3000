@@ -25,8 +25,8 @@ namespace ChefDevr
         
         /**
          * @brief Constructor
-         * @param minStep Step below wich solution is considered optimal
-         * @param Z Centered BRDF data matrix (BRDFs stored in row major)
+         * @param minStep Step below which solution is considered optimal
+         * @param ZZt Z * (Z transposed) where Z is the centered BRDF data matrix (BRDFs stored in row major)
          * @param latentDim Dimension of optimised latent space
          */
         OptimisationSolver(

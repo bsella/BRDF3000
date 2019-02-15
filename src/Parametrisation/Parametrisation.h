@@ -52,17 +52,28 @@ namespace ChefDevr
         virtual ~BRDFReconstructor() = default;
 
         /**
-         * @brief Reconstructs a BRDF for latent space coordinates
+         * @brief Reconstructs a BRDF from its latent space coordinates
          * @param brdf The brdf data vector to fill
-         * @param coord Coordinates of the latent space point to recontruct as a BRDF
-         * @return The BRDF data as a column vector
+         * @param coord Coordinates of the latent space point to recontruct a BRDF
+         * @return The BRDF data as a row vector
          */
         virtual void reconstruct (RowVector<Scalar>& brdf, const Vector<Scalar>& coord) const = 0;
-        
+
+        /**
+         * @brief Computes the error between a reference brdf and this brdf reconstructed from its latent coordinates
+         * @param brdfindex : The index of the brdf in the list of brdfs read to construct Z
+         * @return the mean square error between a reference brdf and its reconstruction
+         */
         virtual Scalar reconstructionError (unsigned int brdfindex) const = 0;
-        
+
+        /**
+         * @return The dimension of the latent Space
+         */
         inline unsigned int getLatentDim() const { return latentDim; }
-        
+
+        /**
+         * @return The number of brdf's coefficients
+         */
         inline long getBRDFCoeffNb() const { return meanBRDF.cols(); }
 
     protected:

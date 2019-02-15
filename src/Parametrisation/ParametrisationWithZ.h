@@ -4,6 +4,10 @@
 #include "Parametrisation.h"
 
 
+/**
+ * @file ParametrisationWithZ.h
+ * @brief Does the BRDF space parametrisation
+ */
 namespace ChefDevr {
 
     template <typename Scalar>
@@ -37,13 +41,18 @@ namespace ChefDevr {
 
 
         /**
-         * @brief Reconstructs a BRDF for latent space coordinates
+         * @brief Reconstructs a BRDF from its latent space coordinates
          * @param brdf The brdf data vector to fill
          * @param coord Coordinates of the latent space point to recontruct as a BRDF
-         * @return The BRDF data as a column vector
+         * @return The BRDF data as a row vector
          */
         void reconstruct (RowVector<Scalar>& brdf, const Vector<Scalar>& coord) const override;
 
+        /**
+         * @brief Computes the error between a reference brdf and this brdf reconstructed from its latent coordinates
+         * @param brdfindex : The index of the brdf in the list of brdfs read to construct Z
+         * @return the mean square error between a reference brdf and its reconstruction
+         */
         Scalar reconstructionError (unsigned int brdfindex) const override;
 
     private:

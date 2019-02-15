@@ -31,17 +31,18 @@ namespace ChefDevr {
         * @param fileDirectory the path of the directory where all the BRDFs are stored
         * @return Non-centered Z BRDFs data matrix where each row represents a BRDF
         *
-        * Initializes the list of BRDFs filenames in the order in which they were read.
+        * Initializes the list of BRDFs filePaths and filenames in the order in which they were read.
         */
         template<typename Scalar>
         Matrix<Scalar> createZ(const char *fileDirectory);
 
         /**
         * @brief Creates the centered ZZt matrix
-        * @param fileDirectory the path of the directory where all the BRDFs are stored
+        * @param[in] fileDirectory the path of the directory where all the BRDFs are stored
+        * @param[out] meanBRDF The mean BRDF of the brdfs set
         * @return the centered ZZt matrix
         *
-        * Initializes the list of BRDFs filenames in the order in which they were read.
+        * Initializes the list of BRDFs filePaths and filenames in the order in which they were read.
         *
         * As the set of BRDFs can be heavy, Z is not stored entirely inside the RAM.
         * Thus, a problem is not likely to occur if the RAM is too small compared to the set of BRDFs.
@@ -52,7 +53,7 @@ namespace ChefDevr {
 
         /**
         * @brief Read a BRDF from a file
-        * @param filePath the path of the BRDF's file
+        * @param index_brdf the index of the path of the BRDF's file in brdf_filePaths
         * @return All the coefficients of a BRDF as a vector of scalars
         *
         * If the file is not found, returns an error

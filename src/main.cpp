@@ -110,7 +110,7 @@ int main(int numArguments, const char *argv[]) {
 
         start = std::chrono::system_clock::now();
         reconstructor = new BRDFReconstructorSmallStorage<Scalar>(optimizer->getInverseMapping(),
-                                                                  optimizer->getLatentVariables(), meanBRDF, dim, reader, brdfsDir);
+                                                                  optimizer->getLatentVariables(), meanBRDF, dim, reader);
         end = std::chrono::system_clock::now();
         duration = end - start;
         std::cout << "Reconstructor creation took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;

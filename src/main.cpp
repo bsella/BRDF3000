@@ -14,7 +14,8 @@
 
 
 using namespace ChefDevr;
-using Scalar = boost::multiprecision::float128;
+//using Scalar = boost::multiprecision::float128;
+using Scalar = long double;
 
 template <typename Scalar>
 void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
@@ -26,9 +27,9 @@ void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
     }
     
     int dims[3]{
-        BRDFReader::samplingResolution_thetaH,
-        BRDFReader::samplingResolution_thetaD,
-        BRDFReader::samplingResolution_phiD/2};
+        MERLReader::samplingResolution_thetaH,
+        MERLReader::samplingResolution_thetaD,
+        MERLReader::samplingResolution_phiD/2};
         
     file.write(reinterpret_cast<char*>(&dims[0]), sizeof(int));
     file.write(reinterpret_cast<char*>(&dims[1]), sizeof(int));
@@ -110,7 +111,7 @@ int main(int numArguments, const char *argv[]) {
 
         start = std::chrono::system_clock::now();
         reconstructor = new BRDFReconstructorSmallStorage<Scalar>(optimizer->getInverseMapping(),
-                                                                  optimizer->getLatentVariables(), meanBRDF, dim, reader);
+                                                                  optimizer->getLatentVariables(), meanBRDF, dim, reader.getBRDFFilePaths());
         end = std::chrono::system_clock::now();
         duration = end - start;
         std::cout << "Reconstructor creation took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;

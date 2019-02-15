@@ -3,8 +3,6 @@
 
 #include "Parametrisation.h"
 
-#include <BRDFReader/BRDFReader.h>
-
 
 /**
  * @file ParametrisationSmallStorage.h
@@ -31,12 +29,12 @@ namespace ChefDevr {
                 const Vector<Scalar>& _X,
                 const RowVector<Scalar>& _meanBRDF,
                 const unsigned int _latentDim,
-                BRDFReader &reader,
+                const std::vector<std::string> &brdf_filePaths,
                 const Scalar _mu = MU_DEFAULT,
                 const Scalar _l = L_DEFAULT):
                 BRDFReconstructor<Scalar>(_K_minus1, _X, _meanBRDF, _latentDim, _mu, _l),
                 _K_minus1{_K_minus1},
-                reader{reader}
+                brdf_filePaths{brdf_filePaths}
         {}
 
         ~BRDFReconstructorSmallStorage() = default;
@@ -65,9 +63,9 @@ namespace ChefDevr {
         const Matrix<Scalar>& _K_minus1;
 
         /**
-         * @brief The reader of brdfs
+         * @brief the list of BRDF filePaths in the order in which they were read
          */
-        BRDFReader &reader;
+        const std::vector<std::string> &brdf_filePaths;
 
     };
 

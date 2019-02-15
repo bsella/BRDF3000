@@ -2,6 +2,8 @@
  * @file BRDFReader.hpp
  */
 
+#include "Parametrisation/MERLReader.h"
+
 
 namespace ChefDevr {
     using namespace Eigen;
@@ -13,7 +15,7 @@ namespace ChefDevr {
         extract_brdfFilePaths(fileDirectory);
 
         const auto num_brdfs = brdf_filePaths.size();
-        Matrix<Scalar> Z{num_brdfs, num_coefficientsBRDF};
+        Matrix<Scalar> Z{num_brdfs, MERLReader::num_coefficientsBRDF};
 
 #pragma omp parallel for
         for (unsigned int i = 0; i < num_brdfs; ++i) {
@@ -29,7 +31,7 @@ namespace ChefDevr {
 
         const auto num_brdfs = brdf_filePaths.size();
         Matrix<Scalar> ZZt_centered{num_brdfs, num_brdfs};
-        meanBRDF.resize(num_coefficientsBRDF);
+        meanBRDF.resize(MERLReader::num_coefficientsBRDF);
 
         for (unsigned int i = 0; i < num_brdfs; ++i) {
             const RowVector<Scalar> brdf_first = read_brdf<Scalar>(i);
@@ -62,67 +64,10 @@ namespace ChefDevr {
         return ZZt_centered;
     }
 
-
-    template <typename Scalar>
-    void BRDFReader::lookup_brdf_val(const RowVector<Scalar> &brdf, double theta_in, double phi_in,
-                                     double theta_out, double phi_out, double& red_value, double& green_value, double& blue_value) {
-        // Convert to halfangle / difference angle coordinates
-        double theta_half, phi_half, theta_diff, phi_diff;
-        std_coords_to_half_diff_coords(theta_in, phi_in, theta_out, phi_out, theta_half, phi_half, theta_diff, phi_diff);
-
-        // Find index.
-        // Note that phi_half is ignored, since isotropic BRDFs are assumed
-        const unsigned int index =  phi_diff_index(phi_diff) +
-                                    theta_diff_index(theta_diff) * samplingResolution_phiD / 2 +
-                                    theta_half_index(theta_half) * samplingResolution_phiD / 2 * samplingResolution_thetaD;
-
-        const double stepBlue = samplingResolution_thetaH * samplingResolution_thetaD * samplingResolution_phiD;
-
-        red_value = (double)(brdf[index] * red_scale);
-        green_value = (double)(brdf[index + stepBlue * 0.5] * green_scale);
-        blue_value = (double)(brdf[index + stepBlue] * blue_scale);
-
-        if (red_value < 0.0 || green_value < 0.0 || blue_value < 0.0) {
-            throw BRDFReaderError{"Below horizon."};
-        }
-        
-    }
-
-    template <typename Scalar>
-    RowVector<Scalar> BRDFReader::read_brdf(unsigned int index_brdf) {
-        FILE *file = fopen(brdf_filePaths[index_brdf].c_str(), "rb");
-        if (!file) {
-            throw BRDFReaderError{string{"The file "} + brdf_filePaths[index_brdf] + " could not have been opened"};
-        }
-
-        unsigned int dims[3];
-        auto numElementsRead = fread(dims, sizeof(unsigned int), 3, file);
-        if (numElementsRead < 3) {
-            std::fclose(file);
-            throw BRDFReaderError{"The dimensions of the brdf has not been successfully read"};
-        }
-
-        const unsigned int num_coefficients = dims[0] * dims[1] * dims[2] * 3;
-        if (num_coefficients != num_coefficientsBRDF){
-            std::fclose(file);
-            throw BRDFReaderError{string{"Dimensions don't match : "} + to_string(num_coefficients) +
-                                  " is not equal to " + to_string(num_coefficientsBRDF)};
-        }
-
-        RowVector<double> brdf_double{num_coefficients};
-        numElementsRead = fread(brdf_double.data(), sizeof(double), num_coefficients, file);
-        if (numElementsRead < num_coefficients) {
-            std::fclose(file);
-            throw BRDFReaderError{"The coefficients of the brdf has not been successfully read"};
-        }
-        
-        std::fclose(file);
-
-        // clamp negative values to zero
-        brdf_double = brdf_double.cwiseMax(0.0);
-
-        const RowVector<Scalar> brdf = brdf_double.template cast<Scalar>();
-        return brdf;
+    template<typename Scalar>
+    RowVector <Scalar> BRDFReader::read_brdf(unsigned int index_brdf) {
+        const char* path(brdf_filePaths[index_brdf].c_str());
+        return MERLReader::read_brdf<Scalar>(path);
     }
 
 } // namespace ChefDevr

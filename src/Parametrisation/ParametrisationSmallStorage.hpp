@@ -1,4 +1,5 @@
 #include <experimental/filesystem>
+#include "Parametrisation/MERLReader.h"
 
 
 namespace ChefDevr
@@ -18,7 +19,7 @@ namespace ChefDevr
         brdf_reconstructed = BRDFReconstructor<Scalar>::meanBRDF;
 
         for (unsigned int i = 0; i < num_brdfs; ++i) {
-            const RowVector <Scalar> brdf = reader.read_brdf<Scalar>(i);
+            const RowVector <Scalar> brdf = MERLReader::read_brdf<Scalar>(brdf_filePaths[i].c_str());
             brdf_reconstructed += cov_Kminus1(i) * (brdf - BRDFReconstructor<Scalar>::meanBRDF);
         }
     }
@@ -37,7 +38,7 @@ namespace ChefDevr
         const Vector <Scalar> coord = BRDFReconstructor<Scalar>::X.segment(brdfindex * BRDFReconstructor<Scalar>::latentDim,
                                                                            BRDFReconstructor<Scalar>::latentDim);
         reconstruct(reconstructed, coord);
-        const RowVector <Scalar> brdf_groundTruth = reader.read_brdf<Scalar>(brdfindex);
+        const RowVector <Scalar> brdf_groundTruth = MERLReader::read_brdf<Scalar>(brdf_filePaths[brdfindex].c_str());
 
         const RowVector <Scalar> diff((reconstructed - brdf_groundTruth));
 

@@ -1,7 +1,7 @@
 #include "Albedo.h"
 #include <cmath>
 
-#include "BRDFReader/BRDFReader.h"
+#include "Parametrisation/MERLReader.h"
 
 
 /**
@@ -53,7 +53,7 @@ namespace ChefDevr
                         {
                             pho += phstep;
 
-                            BRDFReader::lookup_brdf_val(brdf, thi, phi, tho, pho, red, green, blue);
+                            MERLReader::lookup_brdf_val(brdf, thi, phi, tho, pho, red, green, blue);
                             r += red*coscos;
                             g += green*coscos;
                             b += blue*coscos;

@@ -50,15 +50,6 @@ namespace ChefDevr {
         void reconstruct (RowVector<RScalar>& brdf, const Vector<Scalar>& coord) const override;
         
         /**
-         * @brief Reconstructs a BRDF from its latent space coordinates
-         * @param[out] brdf The brdf data vector to fill
-         * @param[in] coord Coordinates of the latent space point from which a BRDF is reconstructed
-         * @return The BRDF data as a row vector
-         */
-        void reconstruct (Eigen::Map<RowVector<RScalar>>& brdf, const Vector<Scalar>& coord) const override;
-        
-        
-        /**
          * @brief Computes the error between a reference brdf and this brdf reconstructed from its latent coordinates
          * @param brdfindex : The index of the brdf in the list of brdfs read to construct Z
          * @return the mean square error between a reference brdf and its reconstruction

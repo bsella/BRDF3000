@@ -10,15 +10,6 @@ namespace ChefDevr {
                                  BRDFReconstructor<Scalar, RScalar>::latentDim, BRDFReconstructor<Scalar, RScalar>::nb_data);
         brdf.noalias() = cov_vector * Km1Zc + BRDFReconstructor<Scalar, RScalar>::meanBRDF;
     }
-    
-    template<typename Scalar, typename RScalar>
-    void BRDFReconstructorWithZ<Scalar, RScalar>::reconstruct(Eigen::Map<RowVector<RScalar>> &brdf,
-                                                     const Vector <Scalar> &coord) const {
-        RowVector<Scalar> cov_vector(BRDFReconstructor<Scalar, RScalar>::nb_data);
-        computeCovVector<Scalar>(cov_vector.data(), BRDFReconstructor<Scalar, RScalar>::X, coord,
-                                 BRDFReconstructor<Scalar, RScalar>::latentDim, BRDFReconstructor<Scalar, RScalar>::nb_data);
-        brdf.noalias() = cov_vector * Km1Zc + BRDFReconstructor<Scalar, RScalar>::meanBRDF;
-    }
 
     template<typename Scalar, typename RScalar>
     void BRDFReconstructorWithZ<Scalar, RScalar>::reconstructWithoutMean(RowVector <RScalar> &brdf,

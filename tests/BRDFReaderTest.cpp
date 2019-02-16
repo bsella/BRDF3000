@@ -55,6 +55,7 @@ std::istringstream BRDFReaderTest::createZZt_centered(std::istream& istr){
     std::stringstream ret;
     ret.precision(100);
     ret << ZZt_centered;
+    ret << meanBRDF.leftCols<100>();
 
     return std::istringstream(ret.str());
 }

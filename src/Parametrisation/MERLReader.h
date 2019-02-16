@@ -1,7 +1,7 @@
 #ifndef MERL_READER_H_
 #define MERL_READER_H_
 
-#include "Parametrisation/types.h"
+#include "types.h"
 
 
 namespace ChefDevr {

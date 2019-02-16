@@ -8,7 +8,7 @@
 */
 
 #include "Parametrisation/types.h"
-#include "Optimisation/OptimisationSolver.h"
+#include "OptimisationSolver.h"
 
 #include <string>
 #include <vector>
@@ -54,10 +54,10 @@ namespace ChefDevr
     * @param latentWidth Width of the plotted latent space (centered on 0)
     * @param latentHeight Height of the plotted latent space (centered on 0)
     */
-    template <typename Scalar>
+    template <typename Scalar, typename RScalar>
     void writeAlbedoMap(
         const std::string& path,
-        const BRDFReconstructor<Scalar>* reconstructor,
+        const BRDFReconstructor<Scalar, RScalar>* reconstructor,
         unsigned int albedoSampling = 4,
         unsigned int width = 16,
         unsigned int height = 16,

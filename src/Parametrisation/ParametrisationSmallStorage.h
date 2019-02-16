@@ -10,8 +10,8 @@
  */
 namespace ChefDevr {
 
-    template <typename Scalar>
-    class BRDFReconstructorSmallStorage : public BRDFReconstructor<Scalar>
+    template <typename Scalar, typename RScalar>
+    class BRDFReconstructorSmallStorage : public BRDFReconstructor<Scalar, RScalar>
     {
     public:
         /**
@@ -32,7 +32,8 @@ namespace ChefDevr {
                 const std::vector<std::string> &brdf_filePaths,
                 const Scalar _mu = MU_DEFAULT,
                 const Scalar _l = L_DEFAULT):
-                BRDFReconstructor<Scalar>(_K_minus1, _X, _meanBRDF, _latentDim, _mu, _l),
+                
+                BRDFReconstructor<Scalar, RScalar>(_K_minus1, _X, _meanBRDF, _latentDim, _mu, _l),
                 _K_minus1{_K_minus1},
                 brdf_filePaths{brdf_filePaths}
         {}
@@ -46,8 +47,17 @@ namespace ChefDevr {
          * @param[in] coord Coordinates of the latent space point from which a BRDF is reconstructed
          * @return The BRDF data as a row vector
          */
-        void reconstruct (RowVector<Scalar>& brdf, const Vector<Scalar>& coord) const override;
-
+        void reconstruct (RowVector<RScalar>& brdf, const Vector<Scalar>& coord) const override;
+        
+        /**
+         * @brief Reconstructs a BRDF from its latent space coordinates
+         * @param[out] brdf The brdf data vector to fill
+         * @param[in] coord Coordinates of the latent space point from which a BRDF is reconstructed
+         * @return The BRDF data as a row vector
+         */
+        void reconstruct (Eigen::Map<RowVector<RScalar>>& brdf, const Vector<Scalar>& coord) const override;
+        
+        
         /**
          * @brief Computes the error between a reference brdf and this brdf reconstructed from its latent coordinates
          * @param brdfindex : The index of the brdf in the list of brdfs read to construct Z

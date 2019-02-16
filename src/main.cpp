@@ -16,6 +16,7 @@
 using namespace ChefDevr;
 //using Scalar = boost::multiprecision::float128;
 using Scalar = long double;
+using RScalar = long double;
 
 template <typename Scalar>
 void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
@@ -57,7 +58,7 @@ int main(int numArguments, const char *argv[]) {
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
     std::chrono::duration<double, std::milli> duration{};
     BRDFReader reader;
-    BRDFReconstructor<Scalar> *reconstructor;
+    BRDFReconstructor<Scalar, RScalar> *reconstructor;
     OptimisationSolver<Scalar> *optimizer;
     const unsigned int dim = 2;
     const Scalar minStep = 0.0005;
@@ -110,7 +111,7 @@ int main(int numArguments, const char *argv[]) {
         std::cout << "Optimisation took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
 
         start = std::chrono::system_clock::now();
-        reconstructor = new BRDFReconstructorSmallStorage<Scalar>(optimizer->getInverseMapping(),
+        reconstructor = new BRDFReconstructorSmallStorage<Scalar, RScalar>(optimizer->getInverseMapping(),
                                                                   optimizer->getLatentVariables(), meanBRDF, dim, reader.getBRDFFilePaths());
         end = std::chrono::system_clock::now();
         duration = end - start;
@@ -134,7 +135,7 @@ int main(int numArguments, const char *argv[]) {
         std::cout << "Optimisation took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
 
         start = std::chrono::system_clock::now();
-        reconstructor = new BRDFReconstructorWithZ<Scalar>(Z, optimizer->getInverseMapping(),
+        reconstructor = new BRDFReconstructorWithZ<Scalar, RScalar>(Z, optimizer->getInverseMapping(),
                                                            optimizer->getLatentVariables(), meanBRDF, dim);
         end = std::chrono::system_clock::now();
         duration = end - start;
@@ -148,7 +149,7 @@ int main(int numArguments, const char *argv[]) {
         optimizer->getInverseMapping(),
         dim);
     
-    RowVector<Scalar> brdf_r(reconstructor->getBRDFCoeffNb());
+    RowVector<RScalar> brdf_r(reconstructor->getBRDFCoeffNb());
     
     start = std::chrono::system_clock::now();
     reconstructor->reconstruct(brdf_r, optimizer->getLatentVariables().segment(reconstBRDFindex*dim,dim));
@@ -171,7 +172,7 @@ int main(int numArguments, const char *argv[]) {
     std::cout << "Albedo computing took " << duration.count()*0.001 << " seconds" << std::endl << std::endl;
 
     start = std::chrono::system_clock::now();
-    writeAlbedoMap<Scalar>(
+    writeAlbedoMap<Scalar, RScalar>(
         mapPath,
         reconstructor,
         albedoSampling,

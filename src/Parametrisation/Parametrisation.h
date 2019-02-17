@@ -59,7 +59,6 @@ namespace ChefDevr
          */
         virtual void reconstruct (RowVector<Scalar>& brdf, const Vector<Scalar>& coord) const = 0;
         
-        
         /**
          * @brief Computes the error between a reference brdf and this brdf reconstructed from its latent coordinates
          * @param brdfindex : The index of the brdf in the list of brdfs read to construct Z

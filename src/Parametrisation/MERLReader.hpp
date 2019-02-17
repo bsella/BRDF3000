@@ -40,7 +40,7 @@ namespace ChefDevr {
         brdf_double = brdf_double.cwiseMax(0.0);
 
         const RowVector<Scalar> brdf = brdf_double.template cast<Scalar>();
-        free(brdf_ptr);
+        delete[] brdf_ptr;
         return brdf;
     }
 

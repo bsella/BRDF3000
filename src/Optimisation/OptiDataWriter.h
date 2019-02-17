@@ -54,10 +54,10 @@ namespace ChefDevr
     * @param latentWidth Width of the plotted latent space (centered on 0)
     * @param latentHeight Height of the plotted latent space (centered on 0)
     */
-    template <typename Scalar, typename RScalar>
+    template <typename Scalar>
     void writeAlbedoMap(
         const std::string& path,
-        const BRDFReconstructor<Scalar, RScalar>* reconstructor,
+        const BRDFReconstructor<Scalar>* reconstructor,
         unsigned int albedoSampling = 4,
         unsigned int width = 16,
         unsigned int height = 16,

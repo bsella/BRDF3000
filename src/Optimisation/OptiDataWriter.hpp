@@ -50,10 +50,10 @@ namespace ChefDevr
     }
     */
     
-    template <typename Scalar, typename RScalar>
+    template <typename Scalar>
     void writeAlbedoMap (
         const std::string& path,
-        const BRDFReconstructor<Scalar, RScalar>* reconstructor,
+        const BRDFReconstructor<Scalar>* reconstructor,
         const unsigned int albedoSampling,
         const unsigned int width,
         const unsigned int height,
@@ -68,7 +68,7 @@ namespace ChefDevr
         const double color_max(255);
         double r, g, b;
         Scalar xstep(latentHeight/width), ystep(latentHeight/height);
-        RowVector<RScalar> brdf(reconstructor->getBRDFCoeffNb());
+        RowVector<Scalar> brdf(reconstructor->getBRDFCoeffNb());
         Vector<Scalar> coord(2);
         coord << (xstep-latentWidth)*0.5, (ystep-latentHeight)*0.5;
         std::cout << "Compute albedo map" << std::endl;

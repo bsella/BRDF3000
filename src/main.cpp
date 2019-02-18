@@ -46,38 +46,34 @@ void writeBRDF(const std::string& path, const RowVector<Scalar>& brdf)
 
 static void show_usage(const char *name_program)
 {
-    std::cerr << "Usage: " << name_program << " <option> " << std::endl
+    std::cerr << "Usage: " << name_program << " [<option> [<option> [...]]] " << std::endl
               << "Options:\n"
               << "\t-h,--help\t\tShow the usage\n"
+              << "\t-d <unsigned int>\t\tSpecify the dimention of the result latent space (2 by default)\n"
+              << "\t-m <unsigned int>\t\tSpecify the size of the map (200 by default)\n"
+              << "\t-b <BRDFs folder path>\t\tSpecify the path of the BRDF (\"../data\" by default)\n"
               << "\t--smallRam\t\tThe program will keep the Ram storage low but will take longer to execute" << std::endl;
+
 }
 
+bool is_number(const std::string& s)
+{
+    return !s.empty() && std::find_if(s.begin(),
+        s.end(), [](char c) { return !std::isdigit(c); }) == s.end();
+}
 
-int main(int numArguments, const char *argv[]) {
-    std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
-    std::chrono::duration<double, std::milli> duration{};
-    BRDFReader reader;
-    BRDFReconstructor<Scalar> *reconstructor;
-    OptimisationSolver<Scalar> *optimizer;
-    const unsigned int dim = 2;
-    const Scalar minStep = 0.0005;
-    const char *brdfsDir = "../data";
-    const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
-    const unsigned int mapWidth(200), mapHeight(200), albedoSampling(16);
-    const unsigned int reconstBRDFindex(0);
-    const double latentSize(8.);
-    RowVector<Scalar> meanBRDF;
-    ChefDevr::Matrix<Scalar> Z;
-    double r, g, b;
-    long num_brdf;
+int main(int argc, const char *argv[]) {
+
     bool smallStorage = false;
+    std::string brdfsDir("../data");
+    unsigned int dimension = 2;
+    unsigned int mapSize = 200;
 
-
-    if (numArguments > 2) {
+    /*if (argc > 2) {
         std::cerr << "Too much arguments" << std::endl;
         show_usage(argv[0]);
         exit(WRONG_USAGE);
-    } else if (numArguments == 2) {
+    } else if (argc == 2) {
         std::string argument = argv[1];
 
         if (argument == "-h" || argument == "--help") {
@@ -90,12 +86,78 @@ int main(int numArguments, const char *argv[]) {
             show_usage(argv[0]);
             exit(WRONG_USAGE);
         }
+    }*/
+
+    for (uint i = 1; i < argc; i++) {
+        std::string argument = argv[i];
+        if (argument == "-h" || argument == "--help") {
+            show_usage(argv[0]);
+            exit(WRONG_USAGE);
+        } else if (argument == "--smallRam") {
+            smallStorage = true;
+        } else if (argument == "-d") { // dimension of latent space
+            if (argc < i+1) {
+                std::cerr << "You have to specify an unsigned int after the argument -d" << std::endl;
+                show_usage(argv[0]);
+                exit(WRONG_USAGE);
+            }
+            std::string latentDim(argv[++i]);
+            if (!is_number(latentDim)) {
+                std::cerr << "the argument after -d must be a number" << std::endl;
+                show_usage(argv[0]);
+                exit(WRONG_USAGE);
+            }
+            dimension = std::stoi(latentDim);
+        } else if (argument == "-m") {
+            if (argc < i+1) {
+                std::cerr << "You have to specify an unsigned int after the argument -m" << std::endl;
+                show_usage(argv[0]);
+                exit(WRONG_USAGE);
+            }
+            std::string mapDim(argv[++i]);
+            if (!is_number(mapDim)) {
+                std::cerr << "the argument after -m must be a number" << std::endl;
+                show_usage(argv[0]);
+                exit(WRONG_USAGE);
+            }
+            mapSize = std::stoi(mapDim);
+        } else if (argument == "-b") {
+            if (argc < i+1) {
+                std::cerr << "You have to specify a BRDFs folder path after -b" << std::endl;
+                show_usage(argv[0]);
+                exit(WRONG_USAGE);
+            }
+            brdfsDir = std::string(argv[++i]);
+        } else {
+            std::cerr << argument << " is not a valid argument" << std::endl;
+            show_usage(argv[0]);
+            exit(WRONG_USAGE);
+        }
     }
+
+
+    std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
+    std::chrono::duration<double, std::milli> duration{};
+    BRDFReader reader;
+    BRDFReconstructor<Scalar> *reconstructor;
+    OptimisationSolver<Scalar> *optimizer;
+
+    const Scalar minStep = 0.0005;
+    const std::string mapPath("../map.bmp"), optiDataPath("../paramtrzData");
+    const unsigned int dim = dimension;
+    const unsigned int mapWidth(mapSize), mapHeight(mapSize), albedoSampling(16);
+    const unsigned int reconstBRDFindex(0);
+    const double latentSize(8.);
+    RowVector<Scalar> meanBRDF;
+    ChefDevr::Matrix<Scalar> Z;
+    double r, g, b;
+    long num_brdf;
+
 
 
     if (smallStorage) {
         start = std::chrono::system_clock::now();
-        auto ZZt = reader.createZZt_centered<Scalar>(brdfsDir, meanBRDF);
+        auto ZZt = reader.createZZt_centered<Scalar>(brdfsDir.c_str(), meanBRDF);
         end = std::chrono::system_clock::now();
         duration = end - start;
         std::cout << "Loading ZZt took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
@@ -117,7 +179,7 @@ int main(int numArguments, const char *argv[]) {
         std::cout << "Reconstructor creation took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;
     } else {
         start = std::chrono::system_clock::now();
-        Z = reader.createZ<Scalar>(brdfsDir);
+        Z = reader.createZ<Scalar>(brdfsDir.c_str());
         end = std::chrono::system_clock::now();
         duration = end - start;
         std::cout << "Loading Z took " << duration.count() * 0.001<< " seconds" << std::endl << std::endl;

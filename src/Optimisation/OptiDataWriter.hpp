@@ -108,7 +108,8 @@ namespace ChefDevr
             std::cerr << "Could not create file \"" << path<< "\"" << std::endl;
         }
         unsigned int nbLVars(X.rows()/latentDim);
-        
+
+        file.precision(100);
         file << "# This file contains the results of an optimised parametrisation of the measured materials manifold" << std::endl;
         file << "# " << typeid(Scalar).name() << std::endl;
         file << "# inverse mapping matrix" << std::endl;

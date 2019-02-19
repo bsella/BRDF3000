@@ -1,0 +1,15 @@
+digraph "ChefDevr::writeAlbedoMap"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="ChefDevr::writeAlbedoMap",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="ChefDevr::BRDFReconstructor\l::getBRDFCoeffNb",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#aed45fc52dfeac67acdc51f477970b7c4"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="ChefDevr::BRDFReconstructor\l::getLatentDim",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#abbd815116b4fdb4ebb3809c8ae876b35"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="ChefDevr::progressBar",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a56ec74db19a1d52e3f97aaae2d7bfaea"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="ChefDevr::BRDFReconstructor\l::reconstruct",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reconstructor.html#aa06fb7b33e413342fba43cc9dc8f3b48",tooltip="Reconstructs a BRDF from its latent space coordinates. "];
+}

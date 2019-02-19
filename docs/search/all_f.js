@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['samplingresolution_5fphid',['samplingResolution_phiD',['../class_chef_devr_1_1_b_r_d_f_reader.html#a6efd5635edc306e21d09a8b1212578c9',1,'ChefDevr::BRDFReader']]],
-  ['samplingresolution_5fthetad',['samplingResolution_thetaD',['../class_chef_devr_1_1_b_r_d_f_reader.html#a7d2feb517d6bf8c3e421af75f26452a1',1,'ChefDevr::BRDFReader']]],
-  ['samplingresolution_5fthetah',['samplingResolution_thetaH',['../class_chef_devr_1_1_b_r_d_f_reader.html#a8e38ff91477467b8c15967ff3d7288ff',1,'ChefDevr::BRDFReader']]],
-  ['scalar',['Scalar',['../main_8cpp.html#ae52308b3630bba23d07d4fd32347bbce',1,'main.cpp']]],
-  ['shermanmorissonupdate',['shermanMorissonUpdate',['../class_chef_devr_1_1_optimisation_solver.html#a45cfe6537a5b85d187236619f18ca9a6',1,'ChefDevr::OptimisationSolver']]],
-  ['std_5fcoords_5fto_5fhalf_5fdiff_5fcoords',['std_coords_to_half_diff_coords',['../class_chef_devr_1_1_b_r_d_f_reader.html#ab6a38cb74127f68f8f82bfde7afa9f27',1,'ChefDevr::BRDFReader']]],
-  ['step',['step',['../class_chef_devr_1_1_optimisation_solver.html#acfb3001a33f8199a9f20b1b7dff2ea42',1,'ChefDevr::OptimisationSolver']]]
+  ['read_5fbrdf',['read_brdf',['../class_chef_devr_1_1_m_e_r_l_reader.html#aa3f342bc2b624b2d0af1526b2b07829c',1,'ChefDevr::MERLReader::read_brdf(const char *filePaths, double *&amp;brdf)'],['../class_chef_devr_1_1_m_e_r_l_reader.html#a7a81496ed2122132a914c88c0a4b1704',1,'ChefDevr::MERLReader::read_brdf(const char *filePath)'],['../class_chef_devr_1_1_b_r_d_f_reader.html#aecf822775db4a9f80a50f40cbef84cb4',1,'ChefDevr::BRDFReader::read_brdf()']]],
+  ['reconstruct',['reconstruct',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#aa06fb7b33e413342fba43cc9dc8f3b48',1,'ChefDevr::BRDFReconstructor::reconstruct()'],['../class_chef_devr_1_1_b_r_d_f_reconstructor_small_storage.html#a387b78cb0776a0d22bb0ff72b6181327',1,'ChefDevr::BRDFReconstructorSmallStorage::reconstruct()'],['../class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html#a0553b24d2ff565e0112ab5b366f1809c',1,'ChefDevr::BRDFReconstructorWithZ::reconstruct()']]],
+  ['reconstructionerror',['reconstructionError',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a743ae5821bf5d1f7ec6fa64a60220f15',1,'ChefDevr::BRDFReconstructor::reconstructionError()'],['../class_chef_devr_1_1_b_r_d_f_reconstructor_small_storage.html#a7aa63513c47de46195c42bf7a4c0d5c9',1,'ChefDevr::BRDFReconstructorSmallStorage::reconstructionError()'],['../class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html#ac6b7137cb1ae2446a2918962d1548857',1,'ChefDevr::BRDFReconstructorWithZ::reconstructionError()']]],
+  ['reconstructwithoutmean',['reconstructWithoutMean',['../class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html#a1fde0c8f610cb4b012439865bbbf90c9',1,'ChefDevr::BRDFReconstructorWithZ']]],
+  ['red_5fscale',['red_scale',['../class_chef_devr_1_1_m_e_r_l_reader.html#aa89f9075d17ad76df218fd4b0bbb3399',1,'ChefDevr::MERLReader']]],
+  ['reducestep',['reduceStep',['../class_chef_devr_1_1_optimisation_solver.html#a91bcfbcedaeeb4395898cfdc18f04da9',1,'ChefDevr::OptimisationSolver']]],
+  ['rotate_5fvector',['rotate_vector',['../class_chef_devr_1_1_m_e_r_l_reader.html#a4177fe6763e97dd98572c8bc968c43e4',1,'ChefDevr::MERLReader']]],
+  ['rowvector',['RowVector',['../namespace_chef_devr.html#af9ef85362f7720c992cba629ad782f92',1,'ChefDevr']]]
 ];

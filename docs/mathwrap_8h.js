@@ -1,10 +1,10 @@
 var mathwrap_8h =
 [
-    [ "float128", "mathwrap_8h.html#aa6b4bd15ae22aea6e15fcff6d0ad3d4f", null ],
-    [ "abs", "mathwrap_8h.html#aa7a8df994e75d9f2fd02f0e721807a63", null ],
-    [ "abs< float128 >", "mathwrap_8h.html#a583e675755f61574afd32d44175c9ff3", null ],
-    [ "exp", "mathwrap_8h.html#a32a6050007122653c2126dd432afe13a", null ],
-    [ "exp< float128 >", "mathwrap_8h.html#ad2f8a469d8b715be474dfc05b99a94fe", null ],
-    [ "log", "mathwrap_8h.html#ad15f47e00b7e344d11278197ea23d7d6", null ],
-    [ "log< float128 >", "mathwrap_8h.html#a451e483861f21431240781d6fd690ca5", null ]
+    [ "float128", "mathwrap_8h.html#a76351978daeb40965d8139ce8b02f16f", null ],
+    [ "abs", "mathwrap_8h.html#a9fa0c3feb973c4f41e17ac514659d98b", null ],
+    [ "abs< float128 >", "mathwrap_8h.html#a1633bdef2002dd9661c1aef8b27de716", null ],
+    [ "exp", "mathwrap_8h.html#ab5672e6b4c015af09203cdfc9e902934", null ],
+    [ "exp< float128 >", "mathwrap_8h.html#a468bb61bbc849744995f1982a99bec50", null ],
+    [ "log", "mathwrap_8h.html#aae987c5bdb8fcc5c709ace963c2effef", null ],
+    [ "log< float128 >", "mathwrap_8h.html#a37ed2e22c824da2d8cfb1cf014a1a8c2", null ]
 ];

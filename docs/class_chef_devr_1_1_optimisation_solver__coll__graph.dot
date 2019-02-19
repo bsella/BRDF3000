@@ -1,0 +1,6 @@
+digraph "ChefDevr::OptimisationSolver&lt; Scalar &gt;"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="{ChefDevr::OptimisationSolver\l\< Scalar \>\n|- minStep\l- step\l- nb_data\l- num_BRDFCoefficients\l- ZZt\l- latentDim\l- X\l- X_move\l- K_minus1\l- detK\l- costval\l- OptimisationTest\l- step0\l- reduceStep\l|+ OptimisationSolver()\l+ ~OptimisationSolver()\l+ optimizeMapping()\l+ getInverseMapping()\l+ getLatentVariables()\l+ getCostValue()\l- cost()\l- exploratoryMove()\l- patternMove()\l- shermanMorissonUpdate()\l- initX()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

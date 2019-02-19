@@ -1,14 +1,20 @@
 var searchData=
 [
-  ['centermat',['centerMat',['../namespace_chef_devr.html#a9579ab224f4fc15d1ab2f409d9d8a4c6',1,'ChefDevr']]],
-  ['chefdevr',['ChefDevr',['../namespace_chef_devr.html',1,'']]],
-  ['compute_5fdirection',['compute_direction',['../class_chef_devr_1_1_b_r_d_f_reader.html#afe401d8c485d62681e32db306453d05d',1,'ChefDevr::BRDFReader']]],
-  ['computealbedo',['computeAlbedo',['../class_chef_devr_1_1_albedo.html#af24503fff9a96471454e3ae140c0ddd6',1,'ChefDevr::Albedo']]],
-  ['computealbedocuda',['computeAlbedoCuda',['../class_chef_devr_1_1_albedo.html#a765fc7f90704ebaf8a7070aba0ea0f4c',1,'ChefDevr::Albedo']]],
-  ['computealbedoopenmp',['computeAlbedoOpenMP',['../class_chef_devr_1_1_albedo.html#a9c8b61608c9f08fe9097317915766aa2',1,'ChefDevr::Albedo']]],
-  ['computecovvector',['computeCovVector',['../namespace_chef_devr.html#afae213bbb2131bfed0cbb814a319913c',1,'ChefDevr']]],
-  ['cost',['cost',['../class_chef_devr_1_1_optimisation_solver.html#aa6c2ef443df567988fe35b90263512fa',1,'ChefDevr::OptimisationSolver']]],
-  ['costval',['costval',['../class_chef_devr_1_1_optimisation_solver.html#afc47e7033cb5178d61f3595c82829950',1,'ChefDevr::OptimisationSolver']]],
-  ['covariance',['covariance',['../namespace_chef_devr.html#a6c4d013fb62a0ebda77f459876959b69',1,'ChefDevr']]],
-  ['createz',['createZ',['../class_chef_devr_1_1_b_r_d_f_reader.html#ad3f37fef9fc8e8c11800b2d18f77f14c',1,'ChefDevr::BRDFReader']]]
+  ['blue_5fscale',['blue_scale',['../class_chef_devr_1_1_m_e_r_l_reader.html#abf5ffcd23837085e29d91c0d2922a1c6',1,'ChefDevr::MERLReader']]],
+  ['brdf_5ffilenames',['brdf_filenames',['../class_chef_devr_1_1_b_r_d_f_reader.html#a95b394a235c7bca69a20c9d1f6993aa2',1,'ChefDevr::BRDFReader']]],
+  ['brdf_5ffilepaths',['brdf_filePaths',['../class_chef_devr_1_1_b_r_d_f_reconstructor_small_storage.html#a6b94ff3baaeafbb49a51bc650d80f413',1,'ChefDevr::BRDFReconstructorSmallStorage::brdf_filePaths()'],['../class_chef_devr_1_1_b_r_d_f_reader.html#a2010a1dd2c9a7c815cacdb5b4103c9bb',1,'ChefDevr::BRDFReader::brdf_filePaths()']]],
+  ['brdfreader',['BRDFReader',['../class_chef_devr_1_1_b_r_d_f_reader.html',1,'ChefDevr']]],
+  ['brdfreader',['BRDFReader',['../class_chef_devr_1_1_b_r_d_f_reader.html#ac009f20c7a2a74b2f6b343e06046aa7b',1,'ChefDevr::BRDFReader']]],
+  ['brdfreader_2ecpp',['BRDFReader.cpp',['../_b_r_d_f_reader_8cpp.html',1,'']]],
+  ['brdfreader_2eh',['BRDFReader.h',['../_b_r_d_f_reader_8h.html',1,'']]],
+  ['brdfreader_2ehpp',['BRDFReader.hpp',['../_b_r_d_f_reader_8hpp.html',1,'']]],
+  ['brdfreadererror',['BRDFReaderError',['../class_chef_devr_1_1_b_r_d_f_reader_1_1_b_r_d_f_reader_error.html',1,'ChefDevr::BRDFReader']]],
+  ['brdfreadererror',['BRDFReaderError',['../class_chef_devr_1_1_b_r_d_f_reader_1_1_b_r_d_f_reader_error.html#a47a94a2e8cb4ce3a808452eb333eb62e',1,'ChefDevr::BRDFReader::BRDFReaderError']]],
+  ['brdfreadertest',['BRDFReaderTest',['../class_chef_devr_1_1_b_r_d_f_reader.html#ae9e6b02ade15857b9cb390f5b24c4c75',1,'ChefDevr::BRDFReader']]],
+  ['brdfreconstructor',['BRDFReconstructor',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a343a7aa9fe94c2ec051c68cdff2ac3f0',1,'ChefDevr::BRDFReconstructor']]],
+  ['brdfreconstructor',['BRDFReconstructor',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html',1,'ChefDevr']]],
+  ['brdfreconstructorsmallstorage',['BRDFReconstructorSmallStorage',['../class_chef_devr_1_1_b_r_d_f_reconstructor_small_storage.html#a6deccfb2fa9ffe9c1e2147239d9c1b70',1,'ChefDevr::BRDFReconstructorSmallStorage']]],
+  ['brdfreconstructorsmallstorage',['BRDFReconstructorSmallStorage',['../class_chef_devr_1_1_b_r_d_f_reconstructor_small_storage.html',1,'ChefDevr']]],
+  ['brdfreconstructorwithz',['BRDFReconstructorWithZ',['../class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html',1,'ChefDevr']]],
+  ['brdfreconstructorwithz',['BRDFReconstructorWithZ',['../class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html#aa9be54e6bac11a85571ee034c5a03259',1,'ChefDevr::BRDFReconstructorWithZ']]]
 ];

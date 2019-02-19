@@ -1,0 +1,24 @@
+digraph "ParametrisationSmallStorage.hpp"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="ParametrisationSmallStorage.hpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="experimental/filesystem",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="MERLReader.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_m_e_r_l_reader_8h.html"];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="types.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$types_8h.html"];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="boost/multiprecision\l/float128.hpp",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="boost/multiprecision\l/number.hpp",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="mathwrap.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$mathwrap_8h.html"];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node8 [label="boost/math/special\l_functions/fpclassify.hpp",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node9 [label="Eigen/Core",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node3 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node10 [label="MERLReader.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_m_e_r_l_reader_8hpp.html"];
+}

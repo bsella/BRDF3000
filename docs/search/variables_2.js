@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['detk',['detK',['../class_chef_devr_1_1_optimisation_solver.html#af898f2634a1880a4cbf8105fcf679246',1,'ChefDevr::OptimisationSolver']]]
+  ['costval',['costval',['../class_chef_devr_1_1_optimisation_solver.html#afc47e7033cb5178d61f3595c82829950',1,'ChefDevr::OptimisationSolver']]]
 ];

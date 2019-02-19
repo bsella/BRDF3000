@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['read_5fbrdf',['read_brdf',['../class_chef_devr_1_1_b_r_d_f_reader.html#ab9fe7ed0ac333af857b7dc35c4213c94',1,'ChefDevr::BRDFReader']]],
-  ['reconstruct',['reconstruct',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a677c22bf941bf106748ef713598c05d2',1,'ChefDevr::BRDFReconstructor']]],
-  ['reconstructionerror',['reconstructionError',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a66f97cb245cf1e3d411ac04eb1f968ff',1,'ChefDevr::BRDFReconstructor']]],
-  ['reconstructwithoutmean',['reconstructWithoutMean',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a9e92a4cdb4e52da10155ce03432e42dd',1,'ChefDevr::BRDFReconstructor']]],
-  ['red_5fscale',['red_scale',['../class_chef_devr_1_1_b_r_d_f_reader.html#af5d2e77bd769b2b43cb4672637873c88',1,'ChefDevr::BRDFReader']]],
-  ['reducestep',['reduceStep',['../class_chef_devr_1_1_optimisation_solver.html#a91bcfbcedaeeb4395898cfdc18f04da9',1,'ChefDevr::OptimisationSolver']]],
-  ['rotate_5fvector',['rotate_vector',['../class_chef_devr_1_1_b_r_d_f_reader.html#ac1a007bc9ab8355d71f7a23553b33c40',1,'ChefDevr::BRDFReader']]],
-  ['rowvector',['RowVector',['../namespace_chef_devr.html#af9ef85362f7720c992cba629ad782f92',1,'ChefDevr']]]
+  ['parametrisation_2eh',['Parametrisation.h',['../_parametrisation_8h.html',1,'']]],
+  ['parametrisation_2ehpp',['Parametrisation.hpp',['../_parametrisation_8hpp.html',1,'']]],
+  ['parametrisationsmallstorage_2eh',['ParametrisationSmallStorage.h',['../_parametrisation_small_storage_8h.html',1,'']]],
+  ['parametrisationsmallstorage_2ehpp',['ParametrisationSmallStorage.hpp',['../_parametrisation_small_storage_8hpp.html',1,'']]],
+  ['parametrisationwithz_2eh',['ParametrisationWithZ.h',['../_parametrisation_with_z_8h.html',1,'']]],
+  ['parametrisationwithz_2ehpp',['ParametrisationWithZ.hpp',['../_parametrisation_with_z_8hpp.html',1,'']]],
+  ['patternmove',['patternMove',['../class_chef_devr_1_1_optimisation_solver.html#aeb3f67b0e4fdd5495da1434adec7874a',1,'ChefDevr::OptimisationSolver']]],
+  ['phi_5fdiff_5findex',['phi_diff_index',['../class_chef_devr_1_1_m_e_r_l_reader.html#af6c8e15d4782022d3b40b337a37fb63d',1,'ChefDevr::MERLReader']]],
+  ['progressbar',['progressBar',['../namespace_chef_devr.html#a56ec74db19a1d52e3f97aaae2d7bfaea',1,'ChefDevr']]]
 ];

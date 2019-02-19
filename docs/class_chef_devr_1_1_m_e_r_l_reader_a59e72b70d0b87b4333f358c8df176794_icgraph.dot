@@ -1,0 +1,11 @@
+digraph "ChefDevr::MERLReader::lookup_brdf_val"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="ChefDevr::MERLReader\l::lookup_brdf_val",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="ChefDevr::Albedo::compute\lAlbedoOpenMP",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_albedo.html#a2d991eb69c2b83cbf6904e14fcdea4b3",tooltip="Computes the albedo of a BRDF in parallel with OpenMP. "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="ChefDevr::Albedo::compute\lAlbedo",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_albedo.html#afbce2f5a07ac744cf6f8b024552b9fa0",tooltip="Computes the albedo of a BRDF. "];
+}

@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['x',['X',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#ab9bfd8c7c205aa065bca5019a62f0e7c',1,'ChefDevr::BRDFReconstructor::X()'],['../class_chef_devr_1_1_optimisation_solver.html#ae1607c9470de01dda6cb470cb3ab1a0d',1,'ChefDevr::OptimisationSolver::X()']]],
-  ['x_5fmove',['X_move',['../class_chef_devr_1_1_optimisation_solver.html#af1a17e4611d6ba0ebf1f9a2db18d2ae1',1,'ChefDevr::OptimisationSolver']]]
+  ['samplingresolution_5fphid',['samplingResolution_phiD',['../class_chef_devr_1_1_m_e_r_l_reader.html#aaf4529fbff7cf915f67c0075a8c96b4e',1,'ChefDevr::MERLReader']]],
+  ['samplingresolution_5fthetad',['samplingResolution_thetaD',['../class_chef_devr_1_1_m_e_r_l_reader.html#af28819ab9085bf7d2c4008fe939b3369',1,'ChefDevr::MERLReader']]],
+  ['samplingresolution_5fthetah',['samplingResolution_thetaH',['../class_chef_devr_1_1_m_e_r_l_reader.html#ae52fb00b1cf09b05237a4057207572e6',1,'ChefDevr::MERLReader']]],
+  ['step',['step',['../class_chef_devr_1_1_optimisation_solver.html#acfb3001a33f8199a9f20b1b7dff2ea42',1,'ChefDevr::OptimisationSolver']]],
+  ['step0',['step0',['../class_chef_devr_1_1_optimisation_solver.html#a42d79faad8b315ff778bb1858d832215',1,'ChefDevr::OptimisationSolver']]]
 ];

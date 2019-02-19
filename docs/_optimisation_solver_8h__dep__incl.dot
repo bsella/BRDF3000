@@ -1,22 +1,17 @@
 digraph "OptimisationSolver.h"
 {
- // LATEX_PDF_SIZE
   edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
   node [fontname="FreeSans",fontsize="10",shape=record];
-  Node17 [label="OptimisationSolver.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
-  Node17 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node18 [label="main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip=" "];
-  Node17 -> Node19 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node19 [label="OptimisationSolver.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_optimisation_solver_8hpp.html",tooltip=" "];
-  Node19 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node17 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node20 [label="OptiDataWriter.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_opti_data_writer_8h.html",tooltip="Provides the functions to write latent space data needed for BRDFs reconstruction and latent space vi..."];
-  Node20 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node20 -> Node21 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node21 [label="OptiDataWriter.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_opti_data_writer_8hpp.html",tooltip=" "];
-  Node21 -> Node20 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node20 -> Node22 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node22 [label="OptiDataWriter.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_opti_data_writer_8cpp.html",tooltip=" "];
-  Node17 -> Node23 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
-  Node23 [label="OptimisationSolver.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_optimisation_solver_8cpp.html",tooltip=" "];
+  Node1 [label="OptimisationSolver.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="OptimisationSolver.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_optimisation_solver_8hpp.html"];
+  Node3 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="OptiDataWriter.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_opti_data_writer_8h.html",tooltip="Provides the functions to write latent space data needed for BRDFs reconstruction and latent space vi..."];
+  Node4 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="OptiDataWriter.hpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_opti_data_writer_8hpp.html"];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
 }

@@ -1,6 +1,6 @@
 var class_chef_devr_1_1_albedo =
 [
-    [ "computeAlbedo", "class_chef_devr_1_1_albedo.html#af24503fff9a96471454e3ae140c0ddd6", null ],
-    [ "computeAlbedoCuda", "class_chef_devr_1_1_albedo.html#a765fc7f90704ebaf8a7070aba0ea0f4c", null ],
-    [ "computeAlbedoOpenMP", "class_chef_devr_1_1_albedo.html#a9c8b61608c9f08fe9097317915766aa2", null ]
+    [ "computeAlbedo", "class_chef_devr_1_1_albedo.html#afbce2f5a07ac744cf6f8b024552b9fa0", null ],
+    [ "computeAlbedoCuda", "class_chef_devr_1_1_albedo.html#a0e6a15187e44bf4544f7a5b45feca204", null ],
+    [ "computeAlbedoOpenMP", "class_chef_devr_1_1_albedo.html#a2d991eb69c2b83cbf6904e14fcdea4b3", null ]
 ];

@@ -1,0 +1,13 @@
+digraph "ChefDevr::BRDFReconstructorWithZ::BRDFReconstructorWithZ"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="ChefDevr::BRDFReconstructor\lWithZ::BRDFReconstructorWithZ",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="ChefDevr::BRDFReconstructor\lWithZ::reconstruct",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html#a0553b24d2ff565e0112ab5b366f1809c",tooltip="Reconstructs a BRDF from its latent space coordinates. "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="ChefDevr::BRDFReconstructor\lWithZ::reconstructionError",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html#ac6b7137cb1ae2446a2918962d1548857",tooltip="Computes the error between a reference brdf and this brdf reconstructed from its latent coordinates..."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="ChefDevr::BRDFReconstructor\lWithZ::~BRDFReconstructorWithZ",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html#ac5b991b516409b3ee77f2bb5e81945cf"];
+}

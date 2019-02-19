@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['read_5fbrdf',['read_brdf',['../class_chef_devr_1_1_b_r_d_f_reader.html#ab9fe7ed0ac333af857b7dc35c4213c94',1,'ChefDevr::BRDFReader']]],
-  ['reconstruct',['reconstruct',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a677c22bf941bf106748ef713598c05d2',1,'ChefDevr::BRDFReconstructor']]],
-  ['reconstructionerror',['reconstructionError',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a66f97cb245cf1e3d411ac04eb1f968ff',1,'ChefDevr::BRDFReconstructor']]],
-  ['reconstructwithoutmean',['reconstructWithoutMean',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a9e92a4cdb4e52da10155ce03432e42dd',1,'ChefDevr::BRDFReconstructor']]],
-  ['rotate_5fvector',['rotate_vector',['../class_chef_devr_1_1_b_r_d_f_reader.html#ac1a007bc9ab8355d71f7a23553b33c40',1,'ChefDevr::BRDFReader']]]
+  ['read_5fbrdf',['read_brdf',['../class_chef_devr_1_1_m_e_r_l_reader.html#aa3f342bc2b624b2d0af1526b2b07829c',1,'ChefDevr::MERLReader::read_brdf(const char *filePaths, double *&amp;brdf)'],['../class_chef_devr_1_1_m_e_r_l_reader.html#a7a81496ed2122132a914c88c0a4b1704',1,'ChefDevr::MERLReader::read_brdf(const char *filePath)'],['../class_chef_devr_1_1_b_r_d_f_reader.html#aecf822775db4a9f80a50f40cbef84cb4',1,'ChefDevr::BRDFReader::read_brdf()']]],
+  ['reconstruct',['reconstruct',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#aa06fb7b33e413342fba43cc9dc8f3b48',1,'ChefDevr::BRDFReconstructor::reconstruct()'],['../class_chef_devr_1_1_b_r_d_f_reconstructor_small_storage.html#a387b78cb0776a0d22bb0ff72b6181327',1,'ChefDevr::BRDFReconstructorSmallStorage::reconstruct()'],['../class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html#a0553b24d2ff565e0112ab5b366f1809c',1,'ChefDevr::BRDFReconstructorWithZ::reconstruct()']]],
+  ['reconstructionerror',['reconstructionError',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a743ae5821bf5d1f7ec6fa64a60220f15',1,'ChefDevr::BRDFReconstructor::reconstructionError()'],['../class_chef_devr_1_1_b_r_d_f_reconstructor_small_storage.html#a7aa63513c47de46195c42bf7a4c0d5c9',1,'ChefDevr::BRDFReconstructorSmallStorage::reconstructionError()'],['../class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html#ac6b7137cb1ae2446a2918962d1548857',1,'ChefDevr::BRDFReconstructorWithZ::reconstructionError()']]],
+  ['reconstructwithoutmean',['reconstructWithoutMean',['../class_chef_devr_1_1_b_r_d_f_reconstructor_with_z.html#a1fde0c8f610cb4b012439865bbbf90c9',1,'ChefDevr::BRDFReconstructorWithZ']]],
+  ['rotate_5fvector',['rotate_vector',['../class_chef_devr_1_1_m_e_r_l_reader.html#a4177fe6763e97dd98572c8bc968c43e4',1,'ChefDevr::MERLReader']]]
 ];

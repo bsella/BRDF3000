@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['meanbrdf',['meanBRDF',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#aa6bcfa043dd70a8c58411af3d3ba1920',1,'ChefDevr::BRDFReconstructor']]],
-  ['minstep',['minStep',['../class_chef_devr_1_1_optimisation_solver.html#acef81e212014f5c7cdac3188e52c65af',1,'ChefDevr::OptimisationSolver']]],
-  ['mu',['mu',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a3c62e143ab28b32e7f6c7fed83980f07',1,'ChefDevr::BRDFReconstructor']]]
+  ['l',['l',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a1d8c5a67ec486806ba2e49f09831577c',1,'ChefDevr::BRDFReconstructor']]],
+  ['latentdim',['latentDim',['../class_chef_devr_1_1_b_r_d_f_reconstructor.html#a84c7138f8a5bf6aaae2b0e8ed32bb7b4',1,'ChefDevr::BRDFReconstructor::latentDim()'],['../class_chef_devr_1_1_optimisation_solver.html#a8458296058fd8f1f3cd568e36ddc5486',1,'ChefDevr::OptimisationSolver::latentDim()']]]
 ];

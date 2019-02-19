@@ -1,0 +1,6 @@
+digraph "ChefDevr::BRDFReader"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="{ChefDevr::BRDFReader\n|- brdf_filenames\l- brdf_filePaths\l- BRDFReaderTest\l|+ BRDFReader()\l+ ~BRDFReader()\l+ createZ()\l+ createZZt_centered()\l+ getBRDFFilenames()\l+ getBRDFFilePaths()\l- extract_brdfFilePaths()\l- read_brdf()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+}

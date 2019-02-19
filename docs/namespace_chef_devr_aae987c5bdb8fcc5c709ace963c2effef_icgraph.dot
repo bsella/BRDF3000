@@ -1,0 +1,18 @@
+digraph "ChefDevr::log"
+{
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="ChefDevr::log",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="ChefDevr::log\< float128 \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_chef_devr.html#a37ed2e22c824da2d8cfb1cf014a1a8c2"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="ChefDevr::OptimisationSolver\l::cost",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#aacd50f0bd7f8a0b249bfc7fe670e98c0",tooltip="Computes the cost of the solution defined by K_minus1. "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="ChefDevr::OptimisationSolver\l::optimizeMapping",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#ac071d573e4155176f151f9413ef7b107",tooltip="Computes the optimized parametrisation of the BRDFs manifold. Uses Hook & Jeeves method to solve the ..."];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#ac0f2228420376f4db7e1274f2b41667c"];
+  Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="ChefDevr::OptimisationSolver\l::exploratoryMove",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_chef_devr_1_1_optimisation_solver.html#a8e53a3b232857f165df0a13370bdd404",tooltip="Updates the movement vector of X that improves the solution (X_move) "];
+  Node6 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+}

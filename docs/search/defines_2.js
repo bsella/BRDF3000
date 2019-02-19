@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mu_5fdefault',['MU_DEFAULT',['../_parametrisation_8h.html#ad7004d690712afdecdfe4f48eddcf451',1,'Parametrisation.h']]]
+  ['wrong_5fusage',['WRONG_USAGE',['../main_8cpp.html#aeb4b5980964bcf026f8bfbd3cd2595fb',1,'main.cpp']]]
 ];

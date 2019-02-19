@@ -21,7 +21,7 @@ namespace ChefDevr
      * @tparam Scalar The type of the values used to reconstruct a BRDF.
      * The precision of this type is crucial to reconstruct an accurate BRDF from the latent space.
      */
-    template <typename Scalar, typename RScalar>
+    template <typename Scalar>
     class BRDFReconstructor
     {
     public:
@@ -57,8 +57,7 @@ namespace ChefDevr
          * @param coord Coordinates of the latent space point to recontruct a BRDF
          * @return The BRDF data as a row vector
          */
-        virtual void reconstruct (RowVector<RScalar>& brdf, const Vector<Scalar>& coord) const = 0;
-        
+        virtual void reconstruct (RowVector<Scalar>& brdf, const Vector<Scalar>& coord) const = 0;
         
         /**
          * @brief Computes the error between a reference brdf and this brdf reconstructed from its latent coordinates

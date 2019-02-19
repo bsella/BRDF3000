@@ -10,8 +10,8 @@
  */
 namespace ChefDevr {
 
-    template <typename Scalar, typename RScalar>
-    class BRDFReconstructorSmallStorage : public BRDFReconstructor<Scalar, RScalar>
+    template <typename Scalar>
+    class BRDFReconstructorSmallStorage : public BRDFReconstructor<Scalar>
     {
     public:
         /**
@@ -33,7 +33,7 @@ namespace ChefDevr {
                 const Scalar _mu = MU_DEFAULT,
                 const Scalar _l = L_DEFAULT):
                 
-                BRDFReconstructor<Scalar, RScalar>(_K_minus1, _X, _meanBRDF, _latentDim, _mu, _l),
+                BRDFReconstructor<Scalar>(_K_minus1, _X, _meanBRDF, _latentDim, _mu, _l),
                 _K_minus1{_K_minus1},
                 brdf_filePaths{brdf_filePaths}
         {}
@@ -47,7 +47,7 @@ namespace ChefDevr {
          * @param[in] coord Coordinates of the latent space point from which a BRDF is reconstructed
          * @return The BRDF data as a row vector
          */
-        void reconstruct (RowVector<RScalar>& brdf, const Vector<Scalar>& coord) const override;
+        void reconstruct (RowVector<Scalar>& brdf, const Vector<Scalar>& coord) const override;
         
         /**
          * @brief Computes the error between a reference brdf and this brdf reconstructed from its latent coordinates

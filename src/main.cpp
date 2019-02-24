@@ -220,7 +220,7 @@ int main(int argc, const char *argv[]) {
     
     writeBRDF<Scalar>("../r_" + reader.getBRDFFilenames()[reconstBRDFindex], brdf_r);
     
-    for (unsigned int i(0); i < std::min(static_cast<int>(num_brdf), 5); ++i)
+    for (unsigned int i(0); i < std::min(static_cast<int>(num_brdf), 10); ++i)
     {
         std::cout << "Reconstruction error for " << reader.getBRDFFilenames()[i] <<  " : " << reconstructor->reconstructionError(i) << std::endl;
     }

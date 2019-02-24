@@ -2,6 +2,7 @@
 #define __MATHWRAP_H
 
 #include <boost/math/special_functions/fpclassify.hpp>
+
 /**
  * @file mathwrap.h
  * This file provides wrapper for math functions to work for both boost and standard types
@@ -49,6 +50,22 @@ namespace ChefDevr
 
 #pragma omp declare reduction(+: float128: \
                             omp_out += omp_in)
+
+/*
+namespace Eigen {
+    namespace internal {
+        
+        template<>
+        EIGEN_DEVICE_FUNC
+        typename internal::enable_if<(!internal::is_integral<float128>::value)&&(!NumTraits<float128>::IsComplex),bool>::type
+        isfinite_impl<float128>(const float128& x)
+        {
+            return boost::math::isfinite(x);
+        }
+        
+    }
+}
+*/
 
 // dirty
 /*

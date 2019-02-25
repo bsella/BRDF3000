@@ -30,8 +30,8 @@ add_executable(${APPLICATION}
 target_link_libraries(${APPLICATION}
 	BRDFReader
 	Parametrisation
-	Optimisation
 	stdc++fs
+	Optimisation
 	quadmath
 	gmp
 )
